@@ -11,7 +11,7 @@ public class HitObjet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        fCollapseTime = GameManager.instance.fReactTime;
+        fCollapseTime = GameManager.instance.fReactTime + 1;
     }
 
     public void SetButtonID(int _id)
@@ -21,22 +21,27 @@ public class HitObjet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!bHitCorrectly)
+        if (fCollapseTime > 0)
             fCollapseTime -= Time.deltaTime;
 
-        if (GameManager.instance.GetUnoInput(buttonID))
+        transform.position -= Vector3.right * Time.deltaTime;
+
+        if (!bHitCorrectly && GameManager.instance.GetUnoInput(buttonID))
         {
             // if it is true
             bHitCorrectly = true;
-            if (fCollapseTime > GameManager.instance.fReactTime / 2)
+            if (fCollapseTime > 0.7f && fCollapseTime < 1.3f)
             {
                 // PERFECT
                 Debug.Log("Perfect!");
+                UIController.instance.ShowResult(0);
             }
-            else
+            else if ((fCollapseTime <= 0.7f && fCollapseTime > 0) || (fCollapseTime > 1.3f && fCollapseTime <= 2f))
             {
                 // GOOD
                 Debug.Log("Good!");
+                UIController.instance.ShowResult(1);
+
             }
 
         }
@@ -47,6 +52,8 @@ public class HitObjet : MonoBehaviour
             if (!bHitCorrectly)
             {
                 Debug.Log("Miss!");
+                UIController.instance.ShowResult(2);
+
             }
             Destroy(this.gameObject);
         }

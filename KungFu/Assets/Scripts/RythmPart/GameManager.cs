@@ -88,39 +88,47 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < beatData.Length - 1; i++)
         {
-            if (fCurrentTime >= beatData[i].timeToHit && fCurrentTime < beatData[i + 1].timeToHit)
+            if (Mathf.Abs((beatData[i].timeToHit - 1) - fCurrentTime) <= 0.01f)
             {
-                if (fCurrentTime < beatData[i].timeToHit + fReactTime)
-                {
-                    if (!bInBeat)
-                    {
-                        iCurrentBeat = i;
-                        Debug.Log("Start beat: " + iCurrentBeat);
-                        // go through the hit array
-                        for (int j = 0; j < currentMusicData.hitArray.Length; j++)
-                        {
-                            // compare the beatID with the current beat id
-                            if (currentMusicData.hitArray[j].beatID == iCurrentBeat)
-                            {
-                                // Instantiate hit object
-                                GameObject go = Instantiate(hitObjePrefab, this.transform);
-                                go.GetComponent<HitObjet>().SetButtonID(currentMusicData.hitArray[j].buttonID);
-                            }
-                        }
-                        bInBeat = true;
-                    }
-                }
-                else
-                    bInBeat = false;
+                iCurrentBeat = i;
 
+
+                Debug.Log("Start beat: " + iCurrentBeat);
+                // go through the hit array
+                for (int j = 0; j < currentMusicData.hitArray.Length; j++)
+                {
+                    // compare the beatID with the current beat id
+                    if (currentMusicData.hitArray[j].beatID == iCurrentBeat)
+                    {
+                        // Instantiate hit object
+                        GameObject go = Instantiate(hitObjePrefab, this.transform);
+                        go.GetComponent<HitObjet>().SetButtonID(currentMusicData.hitArray[j].buttonID);
+                    }
+
+                }
                 break;
             }
             else
+            {
                 iCurrentBeat = -1;
+            }
+                
         }
 
 
 
+    }
+
+    public void DebugInput(int _buttonID)
+    {
+        UnoInput[_buttonID] = true;
+
+        StartCoroutine(falseButton(_buttonID));
+    }
+    IEnumerator falseButton(int _buttonID)
+    {
+        yield return new WaitForSeconds(0.1f);
+        UnoInput[_buttonID] = false;
     }
 
 

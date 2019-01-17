@@ -189,49 +189,49 @@ MonoBehaviour:
     hitArray:
     - buttonID: 1
       beatID: 0
-    - buttonID: 2
+    - buttonID: 1
       beatID: 1
     - buttonID: 1
       beatID: 2
-    - buttonID: 2
+    - buttonID: 1
       beatID: 2
     - buttonID: 1
       beatID: 3
-    - buttonID: 2
+    - buttonID: 1
       beatID: 4
     - buttonID: 1
       beatID: 4
-    - buttonID: 2
+    - buttonID: 1
       beatID: 5
     - buttonID: 1
       beatID: 6
-    - buttonID: 2
+    - buttonID: 1
       beatID: 7
     - buttonID: 1
       beatID: 7
-    - buttonID: 2
-      beatID: 8
     - buttonID: 1
       beatID: 8
-    - buttonID: 2
+    - buttonID: 1
+      beatID: 99
+    - buttonID: 1
       beatID: 9
     - buttonID: 1
       beatID: 10
-    - buttonID: 2
+    - buttonID: 1
       beatID: 11
     - buttonID: 1
       beatID: 12
-    - buttonID: 2
+    - buttonID: 1
       beatID: 13
-    - buttonID: 0
+    - buttonID: 1
       beatID: 14
     - buttonID: 1
       beatID: 15
-    - buttonID: 2
+    - buttonID: 1
       beatID: 16
     - buttonID: 1
       beatID: 17
-    - buttonID: 2
+    - buttonID: 1
       beatID: 18
 --- !u!4 &670696493
 Transform:
