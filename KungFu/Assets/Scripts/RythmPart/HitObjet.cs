@@ -35,12 +35,14 @@ public class HitObjet : MonoBehaviour
                 // PERFECT
                 Debug.Log("Perfect!");
                 UIController.instance.ShowResult(0);
+                Destroy(this.gameObject);
             }
             else if ((fCollapseTime <= 0.7f && fCollapseTime > 0) || (fCollapseTime > 1.3f && fCollapseTime <= 2f))
             {
                 // GOOD
                 Debug.Log("Good!");
                 UIController.instance.ShowResult(1);
+                Destroy(this.gameObject);
 
             }
 

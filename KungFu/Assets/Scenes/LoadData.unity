@@ -193,13 +193,13 @@ MonoBehaviour:
       beatID: 1
     - buttonID: 1
       beatID: 2
-    - buttonID: 1
+    - buttonID: 2
       beatID: 2
     - buttonID: 1
       beatID: 3
     - buttonID: 1
       beatID: 4
-    - buttonID: 1
+    - buttonID: 2
       beatID: 4
     - buttonID: 1
       beatID: 5
@@ -207,12 +207,12 @@ MonoBehaviour:
       beatID: 6
     - buttonID: 1
       beatID: 7
-    - buttonID: 1
+    - buttonID: 2
       beatID: 7
     - buttonID: 1
       beatID: 8
-    - buttonID: 1
-      beatID: 99
+    - buttonID: 2
+      beatID: 8
     - buttonID: 1
       beatID: 9
     - buttonID: 1

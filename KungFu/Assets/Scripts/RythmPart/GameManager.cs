@@ -91,7 +91,7 @@ public class GameManager : MonoBehaviour
             if (Mathf.Abs((beatData[i].timeToHit - 1) - fCurrentTime) <= 0.01f)
             {
                 iCurrentBeat = i;
-
+                int repeatHit = 0;
 
                 Debug.Log("Start beat: " + iCurrentBeat);
                 // go through the hit array
@@ -102,6 +102,8 @@ public class GameManager : MonoBehaviour
                     {
                         // Instantiate hit object
                         GameObject go = Instantiate(hitObjePrefab, this.transform);
+                        go.transform.localPosition += repeatHit * Vector3.up;
+                        repeatHit++;
                         go.GetComponent<HitObjet>().SetButtonID(currentMusicData.hitArray[j].buttonID);
                     }
 

@@ -13,13 +13,16 @@ public class UIController : MonoBehaviour
     }
 
     [SerializeField] Sprite[] resultsSprite;
-    Image result;
+    [SerializeField] GameObject resultPrefab;
+    private Image result;
+    private Transform resultParent;
+
+
     
     // Start is called before the first frame update
     void Start()
     {
-        result = transform.GetChild(0).GetComponent<Image>();
-        result.gameObject.SetActive(false);
+        resultParent = transform.GetChild(0);
     }
 
     // Update is called once per frame
@@ -30,15 +33,12 @@ public class UIController : MonoBehaviour
 
     public void ShowResult(int _result)
     {
-        result.gameObject.SetActive(true);
-        result.sprite = resultsSprite[_result];
+        // Instantiate object
+        GameObject go = Instantiate(resultPrefab, resultParent, false);
+       // go.transform.position += (resultParent.childCount-1) * Vector3.up;
+        
+        go.GetComponent<Image>().sprite = resultsSprite[_result];
 
-        StartCoroutine(DelayResultDisappear(1f));
     }
 
-    IEnumerator DelayResultDisappear(float _time)
-    {
-        yield return new WaitForSeconds(_time);
-        result.gameObject.SetActive(false);
-    }
 }
