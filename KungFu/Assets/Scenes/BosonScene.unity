@@ -1187,6 +1187,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UduinoManager
       objectReference: {fileID: 0}
+    - target: {fileID: 1133355224586572, guid: 9482faed2e952e9448efd3215fbd8e6a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4707695332722894, guid: 9482faed2e952e9448efd3215fbd8e6a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
