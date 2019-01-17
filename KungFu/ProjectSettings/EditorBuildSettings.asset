@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Game.unity
     guid: 3ecf9cbcca50a074e985ee12a9fe4fbe
+  - enabled: 1
+    path: Assets/Scenes/BosonScene.unity
+    guid: ecb0eccd7106ca448b7a87aa2cebf35c
   m_configObjects: {}

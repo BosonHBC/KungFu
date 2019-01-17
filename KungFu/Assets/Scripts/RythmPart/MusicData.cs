@@ -8,6 +8,7 @@ public class MusicData {
     public float lengthInSeconds;
     public int numOfBeat;
     public BeatData[] beatArray;
+    public HitData[] hitArray;
 
 
 }

@@ -147,62 +147,92 @@ MonoBehaviour:
     numOfBeat: 19
     beatArray:
     - timeToHit: 4
-      numOfHit: 1
-      hitArray: 
+      beatID: 0
     - timeToHit: 5.7
-      numOfHit: 1
-      hitArray: 
+      beatID: 1
     - timeToHit: 7.5
-      numOfHit: 1
-      hitArray: 
+      beatID: 2
     - timeToHit: 9.3
-      numOfHit: 1
-      hitArray: 
+      beatID: 3
     - timeToHit: 11.2
-      numOfHit: 1
-      hitArray: 
+      beatID: 4
     - timeToHit: 13
-      numOfHit: 1
-      hitArray: 
+      beatID: 5
     - timeToHit: 14.8
-      numOfHit: 1
-      hitArray: 
+      beatID: 6
     - timeToHit: 16.6
-      numOfHit: 1
-      hitArray: 
+      beatID: 7
     - timeToHit: 18.5
-      numOfHit: 1
-      hitArray: 
+      beatID: 8
     - timeToHit: 20.2
-      numOfHit: 1
-      hitArray: 
+      beatID: 9
     - timeToHit: 22
-      numOfHit: 1
-      hitArray: 
+      beatID: 10
     - timeToHit: 23.9
-      numOfHit: 1
-      hitArray: 
+      beatID: 11
     - timeToHit: 25.8
-      numOfHit: 1
-      hitArray: 
+      beatID: 12
     - timeToHit: 27.785
-      numOfHit: 1
-      hitArray: 
+      beatID: 13
     - timeToHit: 29.365
-      numOfHit: 1
-      hitArray: 
+      beatID: 14
     - timeToHit: 31.3
-      numOfHit: 1
-      hitArray: 
+      beatID: 15
     - timeToHit: 33
-      numOfHit: 1
-      hitArray: 
+      beatID: 16
     - timeToHit: 35
-      numOfHit: 1
-      hitArray: 
+      beatID: 17
     - timeToHit: 44.3
-      numOfHit: 1
-      hitArray: 
+      beatID: 18
+    - timeToHit: 52
+      beatID: 19
+    hitArray:
+    - buttonID: 1
+      beatID: 0
+    - buttonID: 2
+      beatID: 1
+    - buttonID: 1
+      beatID: 2
+    - buttonID: 2
+      beatID: 2
+    - buttonID: 1
+      beatID: 3
+    - buttonID: 2
+      beatID: 4
+    - buttonID: 1
+      beatID: 4
+    - buttonID: 2
+      beatID: 5
+    - buttonID: 1
+      beatID: 6
+    - buttonID: 2
+      beatID: 7
+    - buttonID: 1
+      beatID: 7
+    - buttonID: 2
+      beatID: 8
+    - buttonID: 1
+      beatID: 8
+    - buttonID: 2
+      beatID: 9
+    - buttonID: 1
+      beatID: 10
+    - buttonID: 2
+      beatID: 11
+    - buttonID: 1
+      beatID: 12
+    - buttonID: 2
+      beatID: 13
+    - buttonID: 0
+      beatID: 14
+    - buttonID: 1
+      beatID: 15
+    - buttonID: 2
+      beatID: 16
+    - buttonID: 1
+      beatID: 17
+    - buttonID: 2
+      beatID: 18
 --- !u!4 &670696493
 Transform:
   m_ObjectHideFlags: 0
