@@ -49,7 +49,7 @@ void loop() {
   {
     myString += "1";
   }
-  else if(digitalRead(button01) == HIGH)
+  else
   {
     myString += "0";
   }
@@ -58,7 +58,7 @@ void loop() {
  {
     myString += "1";
   }
-  else if(digitalRead(button02) == HIGH)
+  else
   {
     myString += "0";
   }
@@ -67,7 +67,7 @@ void loop() {
   {
     myString += "1";
   }
-  else if(digitalRead(button03) == HIGH)
+  else
   {
     myString += "0";
   }
@@ -76,7 +76,7 @@ void loop() {
   {
     myString += "1";
   }
-  else if(digitalRead(button04) == HIGH)
+  else
   {
     myString += "0";
   }
@@ -85,7 +85,7 @@ void loop() {
   {
     myString += "1";
   }
-  else if(digitalRead(button05) == HIGH)
+  else
   {
     myString += "0";
   }
@@ -94,7 +94,7 @@ void loop() {
  {
     myString += "1";
   }
-  else if(digitalRead(button06) == HIGH)
+  else
   {
     myString += "0";
   }
@@ -103,7 +103,7 @@ void loop() {
  {
     myString += "1";
   }
-  else if(digitalRead(button07) == HIGH)
+  else
   {
     myString += "0";
   }
@@ -112,7 +112,7 @@ void loop() {
   {
     myString += "1";
   }
-  else if(digitalRead(button08) == HIGH)
+  else
   {
     myString += "0";
   }
@@ -121,7 +121,7 @@ void loop() {
   {
     myString += "1";
   }
-  else if(digitalRead(button09) == HIGH)
+  else
   {
     myString += "0";
   }
@@ -130,7 +130,7 @@ void loop() {
   {
     myString += "1";
   }
-  else if(digitalRead(button10) == HIGH)
+  else
   {
     myString += "0";
   }
@@ -139,7 +139,7 @@ void loop() {
  {
     myString += "1";
   }
-  else if(digitalRead(button11) == HIGH)
+  else
   {
     myString += "0";
   }
@@ -148,11 +148,11 @@ void loop() {
   {
     myString += "1";
   }
-  else if(digitalRead(button12) == HIGH)
+  else
   {
     myString += "0";
   }
     Serial.println(myString);
     Serial.flush();
-    delay(250);
+    delay(5);
 }

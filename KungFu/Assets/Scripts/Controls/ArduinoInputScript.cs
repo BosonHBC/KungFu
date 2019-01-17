@@ -16,7 +16,7 @@ public class ArduinoInputScript : MonoBehaviour {
 	void Start () {
         //opens the port and sets the read timeout. The timeout should match the write timeout in the arduino sketch.
         sp.Open();
-        sp.ReadTimeout = 250;
+        sp.ReadTimeout = 5;
 	}
 
     // Update is called once per frame
@@ -40,7 +40,12 @@ public class ArduinoInputScript : MonoBehaviour {
 
     void stringToBoolArray(string input)
     {
-        for(int i = 0; i < NUMBUTTONS; i++)
+        if(input.Length < NUMBUTTONS)
+        {
+            input = "000000000000";
+        }
+
+        for (int i = 0; i < NUMBUTTONS; i++)
         {
             if (input.ToCharArray()[i] == '1')
             {
@@ -51,8 +56,8 @@ public class ArduinoInputScript : MonoBehaviour {
                 buttons[i] = false;
             }
         }
-        Debug.Log(input + "\n");
+        //Debug.Log(input + "\n");
 
-        GameManager.instance.SetUnoInput(buttons);
+       // GameManager.instance.SetUnoInput(buttons);
     }
 }

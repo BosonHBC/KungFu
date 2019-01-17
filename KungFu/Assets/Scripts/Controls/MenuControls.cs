@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class MenuControls : MonoBehaviour
 {
+    private bool canRegister;
     private GameObject input;
     private int currentSelectedID;
     public Button[] buttonObjects;
@@ -16,7 +17,8 @@ public class MenuControls : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        input = GameObject.Find("UdinoManager");
+        canRegister = true;
+        input = GameObject.Find("UduinoManager");
 
         //The starting button should be set as the first gameobject in the array and should be highlighted in the editor as well
         currentSelectedID = 0;
@@ -25,12 +27,33 @@ public class MenuControls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       if(input.GetComponent<ArduinoInputScript>().buttons[upID])
+        if (canRegister)
         {
-            if(currentSelectedID != 0)
+            if (input.GetComponent<ArduinoInputScript>().buttons[upID] && !input.GetComponent<ArduinoInputScript>().buttons[downID])
             {
-                currentSelectedID--;
-                buttonObjects[currentSelectedID].Select();
+                if (currentSelectedID != 0)
+                {
+                    currentSelectedID--;
+                    buttonObjects[currentSelectedID].Select();
+                    canRegister = false;
+                }
+            }
+
+            if (input.GetComponent<ArduinoInputScript>().buttons[downID] && !input.GetComponent<ArduinoInputScript>().buttons[upID])
+            {
+                if (currentSelectedID != buttonObjects.Length - 1)
+                {
+                    currentSelectedID++;
+                    buttonObjects[currentSelectedID].Select();
+                    canRegister = false;
+                }
+            }
+        }
+        else
+        {
+            if (!input.GetComponent<ArduinoInputScript>().buttons[upID] && !input.GetComponent<ArduinoInputScript>().buttons[downID])
+            {
+                canRegister = true;
             }
         }
     }
