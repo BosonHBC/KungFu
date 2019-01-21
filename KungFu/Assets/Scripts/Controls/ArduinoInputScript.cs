@@ -56,7 +56,7 @@ public class ArduinoInputScript : MonoBehaviour {
                 buttons[i] = false;
             }
         }
-        //Debug.Log(input + "\n");
+        Debug.Log(input + "\n");
 
         GameManager.instance.SetUnoInput(buttons);
     }
