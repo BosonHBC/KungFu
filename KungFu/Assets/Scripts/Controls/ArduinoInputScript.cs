@@ -6,8 +6,8 @@ using Uduino;
 
 public class ArduinoInputScript : MonoBehaviour {
 
-    internal bool[] buttons = new bool[12];
-    private int NUMBUTTONS = 12;
+    internal bool[] buttons = new bool[11];
+    private int NUMBUTTONS = 11;
     private string outputString;
     
     SerialPort sp = new SerialPort("COM3",9600); 
@@ -42,7 +42,7 @@ public class ArduinoInputScript : MonoBehaviour {
     {
         if(input.Length < NUMBUTTONS)
         {
-            input = "000000000000";
+            input = "00000000000";
         }
 
         for (int i = 0; i < NUMBUTTONS; i++)

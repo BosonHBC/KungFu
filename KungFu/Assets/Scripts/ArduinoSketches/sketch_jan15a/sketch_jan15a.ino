@@ -9,7 +9,7 @@ const int button08 = 9;
 const int button09 = 10;
 const int button10 = 11;
 const int button11 = 12;
-const int button12 = 13;
+
 
 void setup() {
   // put your setup code here, to run once:
@@ -25,7 +25,6 @@ pinMode(button08, INPUT);
 pinMode(button09, INPUT);
 pinMode(button10, INPUT);
 pinMode(button11, INPUT);
-pinMode(button12, INPUT);
 
 digitalWrite(button01, HIGH);
 digitalWrite(button02, HIGH);
@@ -38,7 +37,6 @@ digitalWrite(button08, HIGH);
 digitalWrite(button09, HIGH);
 digitalWrite(button10, HIGH);
 digitalWrite(button11, HIGH);
-digitalWrite(button12, HIGH);
 }
 
 void loop() {
@@ -137,15 +135,6 @@ void loop() {
 
   if(digitalRead(button11) == LOW)
  {
-    myString += "1";
-  }
-  else
-  {
-    myString += "0";
-  }
-
-  if(digitalRead(button12) == LOW)
-  {
     myString += "1";
   }
   else
