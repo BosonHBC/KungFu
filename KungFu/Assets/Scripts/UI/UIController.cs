@@ -17,18 +17,46 @@ public class UIController : MonoBehaviour
     private Image result;
     private Transform resultParent;
 
-
+    [SerializeField] List<Sprite> imgRef = new List<Sprite>();
+    Transform refParent;
     
     // Start is called before the first frame update
     void Start()
     {
         resultParent = transform.GetChild(0);
+        refParent = transform.GetChild(2);
+        DataController _data = FindObjectOfType<DataController>();
+        if (!_data)
+        {
+            Debug.LogError("No data founded");
+            return;
+        }
+            
+        for (int i = 0; i < _data.GetCurrentMusicData().numOfBeat-1; i++)
+        {
+            imgRef.Add(Resources.Load<Sprite>("Images/HitRef/" + ((i+1 < 10) ? ("0" + (i+1).ToString()) : (i+1).ToString())));
+        }
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void SetReference(int beatID)
+    {
+        refParent.GetComponent<Image>().sprite = imgRef[beatID];
+        refParent.GetComponent<Image>().color = Color.white;
+    }
+
+    public void CleanReference()
+    {
+        Color _color = Color.white;
+        _color.a = 0;
+        refParent.GetComponent<Image>().color = _color;
     }
 
     public void ShowResult(int _result)
