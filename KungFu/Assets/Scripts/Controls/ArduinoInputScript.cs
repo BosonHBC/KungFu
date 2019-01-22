@@ -4,34 +4,38 @@ using System.IO.Ports;
 using UnityEngine;
 using Uduino;
 
-public class ArduinoInputScript : MonoBehaviour {
+public class ArduinoInputScript : MonoBehaviour
+{
 
     internal bool[] buttons = new bool[11];
     private int NUMBUTTONS = 11;
     private string outputString;
 
-    SerialPort sp = new SerialPort("COM3",9600);
+    [SerializeField] bool bDebugPrintInput;
 
-	// Use this for initialization
-	void Start () {
+    SerialPort sp = new SerialPort("COM3", 9600);
+
+    // Use this for initialization
+    void Start()
+    {
         //opens the port and sets the read timeout. The timeout should match the write timeout in the arduino sketch to remove data stream lag.
         sp.Open();
         sp.ReadTimeout = 5;
-	}
+    }
 
     // Update is called once per frame
     void Update()
     {
         //check if port is open and read the string from arduino.
-        if(sp.IsOpen)
+        if (sp.IsOpen)
         {
             try
             {
-               outputString = sp.ReadLine();
+                outputString = sp.ReadLine();
             }
-            catch(System.Exception)
+            catch (System.Exception)
             {
-                Debug.Log("Port Closed");
+                //Debug.Log("Port Closed");
             }
         }
         //Transfers the info sent by arduino to the bool array of button inputs.
@@ -42,7 +46,7 @@ public class ArduinoInputScript : MonoBehaviour {
     void stringToBoolArray(string input)
     {
         //Arduino having issues not sending all 11 buttons sometimes(once every few seconds but sends info every 5 ms shouldnt have any issues in human timescales lol)
-        if(input.Length < NUMBUTTONS)
+        if (input.Length < NUMBUTTONS)
         {
             input = "00000000000";
         }
@@ -58,8 +62,8 @@ public class ArduinoInputScript : MonoBehaviour {
                 buttons[i] = false;
             }
         }
-
-        Debug.Log(input + "\n");
+        if (bDebugPrintInput)
+            Debug.Log(input + "\n");
 
         //Saves input to GameManager
         GameManager.instance.SetUnoInput(buttons);

@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
     private int currentComb;
     private int highestComb;
 
+    public int i_ExistingHitObject = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -67,6 +68,7 @@ public class GameManager : MonoBehaviour
             if (fCurrentTime > currentMusicData.lengthInSeconds)
             {
                 // Game Over
+                UIController.instance.CleanReference();
                 bIsMusicActive = false;
                 bIsGameOver = true;
             }
@@ -78,17 +80,16 @@ public class GameManager : MonoBehaviour
         bIsMusicActive = true;
         audioSource.Play();
         Debug.Log("Game Start!");
-
+        fCurrentTime = 0;
         UnoInput = new bool[11];
     }
 
     // get the current time which beat it is in.
     void CheckBeat()
     {
-
         for (int i = 0; i < beatData.Length - 1; i++)
         {
-            if (Mathf.Abs((beatData[i].timeToHit - 1) - fCurrentTime) <= 0.01f)
+            if (Mathf.Abs((beatData[i].timeToHit - fReactTime) - fCurrentTime) <= 0.01f)
             {
                 iCurrentBeat = i;
                 int repeatHit = 0;
@@ -102,10 +103,11 @@ public class GameManager : MonoBehaviour
                     {
                         // Instantiate hit object
                         GameObject go = Instantiate(hitObjePrefab, UIController.instance.transform.GetChild(2));
-                        UIController.instance.SetReference(iCurrentBeat);
+                        //UIController.instance.SetReference(iCurrentBeat);
                         go.transform.localPosition += repeatHit * Vector3.up;
                         repeatHit++;
-                        go.GetComponent<HitObjet>().SetButtonID(currentMusicData.hitArray[j].buttonID);
+                        go.GetComponent<HitObjet>().SetButtonID(currentMusicData.hitArray[j].buttonID, iCurrentBeat);
+
                     }
 
                 }

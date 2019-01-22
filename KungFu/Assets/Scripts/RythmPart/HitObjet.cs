@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HitObjet : MonoBehaviour
 {
@@ -8,15 +9,22 @@ public class HitObjet : MonoBehaviour
     private float fCollapseTime;
     private int buttonID;
     private bool bHitCorrectly;
+    private RectTransform rect;
+    private float moveSpeed;
     // Start is called before the first frame update
     void Start()
     {
         fCollapseTime = GameManager.instance.fReactTime + 1;
+        GameManager.instance.i_ExistingHitObject++;
+        rect = GetComponent<RectTransform>();
+        Debug.Log(rect.localPosition.x);
+        moveSpeed = rect.localPosition.x / (GameManager.instance.fReactTime) ;
     }
 
-    public void SetButtonID(int _id)
+    public void SetButtonID(int _id, int beatID)
     {
         buttonID = _id;
+        transform.GetChild(0).GetComponent<Image>().sprite = UIController.instance.GetReference(beatID);
     }
     // Update is called once per frame
     void Update()
@@ -24,7 +32,7 @@ public class HitObjet : MonoBehaviour
         if (fCollapseTime > 0)
             fCollapseTime -= Time.deltaTime;
 
-        transform.position -= Vector3.right * Time.deltaTime;
+        rect.localPosition -= Vector3.right * moveSpeed * Time.deltaTime;
 
         if (!bHitCorrectly && GameManager.instance.GetUnoInput(buttonID))
         {
@@ -35,7 +43,8 @@ public class HitObjet : MonoBehaviour
                 // PERFECT
                 Debug.Log("Perfect!");
                 UIController.instance.ShowResult(0);
-                UIController.instance.CleanReference();
+                if (GameManager.instance.i_ExistingHitObject <= 1)
+                    UIController.instance.CleanReference();
 
                 Destroy(this.gameObject);
             }
@@ -44,7 +53,8 @@ public class HitObjet : MonoBehaviour
                 // GOOD
                 Debug.Log("Good!");
                 UIController.instance.ShowResult(1);
-                UIController.instance.CleanReference();
+                if (GameManager.instance.i_ExistingHitObject <= 1)
+                    UIController.instance.CleanReference();
                 Destroy(this.gameObject);
 
             }
@@ -58,10 +68,15 @@ public class HitObjet : MonoBehaviour
             {
                 Debug.Log("Miss!");
                 UIController.instance.ShowResult(2);
-
-                UIController.instance.CleanReference();
+                if (GameManager.instance.i_ExistingHitObject <= 1)
+                    UIController.instance.CleanReference();
             }
             Destroy(this.gameObject);
         }
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.instance.i_ExistingHitObject--;
     }
 }
