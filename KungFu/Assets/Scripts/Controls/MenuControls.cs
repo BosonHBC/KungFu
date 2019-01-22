@@ -30,26 +30,34 @@ public class MenuControls : MonoBehaviour
         //Stops multiple input from registering
         if (canRegister)
         {
-            //Select above button trigger
+            //Select above button trigger with wrap around
             if (input.GetComponent<ArduinoInputScript>().buttons[upID] && !input.GetComponent<ArduinoInputScript>().buttons[downID])
             {
                 if (currentSelectedID != 0)
                 {
                     currentSelectedID--;
+                }
+                else
+                {
+                    currentSelectedID = buttonObjects.Length - 1;
+                }
                     buttonObjects[currentSelectedID].Select();
                     canRegister = false;
-                }
             }
 
-            //Select below button trigger
+            //Select below button trigger with wrap around
             if (input.GetComponent<ArduinoInputScript>().buttons[downID] && !input.GetComponent<ArduinoInputScript>().buttons[upID])
             {
                 if (currentSelectedID != buttonObjects.Length - 1)
                 {
                     currentSelectedID++;
+                }
+                else
+                {
+                    currentSelectedID = 0;
+                }
                     buttonObjects[currentSelectedID].Select();
                     canRegister = false;
-                }
             }
 
             //Submit trigger
