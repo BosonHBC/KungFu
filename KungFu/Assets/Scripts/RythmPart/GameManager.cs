@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
         audioSource.Play();
         Debug.Log("Game Start!");
 
-        UnoInput = new bool[12];
+        UnoInput = new bool[11];
     }
 
     // get the current time which beat it is in.
@@ -101,7 +101,7 @@ public class GameManager : MonoBehaviour
                     if (currentMusicData.hitArray[j].beatID == iCurrentBeat)
                     {
                         // Instantiate hit object
-                        GameObject go = Instantiate(hitObjePrefab, this.transform);
+                        GameObject go = Instantiate(hitObjePrefab, UIController.instance.transform.GetChild(2));
                         go.transform.localPosition += repeatHit * Vector3.up;
                         repeatHit++;
                         go.GetComponent<HitObjet>().SetButtonID(currentMusicData.hitArray[j].buttonID);
@@ -141,5 +141,9 @@ public class GameManager : MonoBehaviour
     public bool GetUnoInput(int _buttonID)
     {
         return UnoInput[_buttonID];
+    }
+    public bool[] GetUnoInputs()
+    {
+        return UnoInput;
     }
 }
