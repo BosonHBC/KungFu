@@ -35,6 +35,8 @@ public class HitObjet : MonoBehaviour
                 // PERFECT
                 Debug.Log("Perfect!");
                 UIController.instance.ShowResult(0);
+                UIController.instance.CleanReference();
+
                 Destroy(this.gameObject);
             }
             else if ((fCollapseTime <= 0.7f && fCollapseTime > 0) || (fCollapseTime > 1.3f && fCollapseTime <= 2f))
@@ -42,6 +44,7 @@ public class HitObjet : MonoBehaviour
                 // GOOD
                 Debug.Log("Good!");
                 UIController.instance.ShowResult(1);
+                UIController.instance.CleanReference();
                 Destroy(this.gameObject);
 
             }
@@ -56,6 +59,7 @@ public class HitObjet : MonoBehaviour
                 Debug.Log("Miss!");
                 UIController.instance.ShowResult(2);
 
+                UIController.instance.CleanReference();
             }
             Destroy(this.gameObject);
         }

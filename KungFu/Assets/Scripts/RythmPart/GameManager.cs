@@ -102,6 +102,7 @@ public class GameManager : MonoBehaviour
                     {
                         // Instantiate hit object
                         GameObject go = Instantiate(hitObjePrefab, UIController.instance.transform.GetChild(2));
+                        UIController.instance.SetReference(iCurrentBeat);
                         go.transform.localPosition += repeatHit * Vector3.up;
                         repeatHit++;
                         go.GetComponent<HitObjet>().SetButtonID(currentMusicData.hitArray[j].buttonID);

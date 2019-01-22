@@ -323,14 +323,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 681afc67d8c5ff84995b22949c27346a, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -629,6 +629,7 @@ MonoBehaviour:
   - {fileID: 21300004, guid: 704f3d808fb84374fb3d43a62d3201ff, type: 3}
   resultPrefab: {fileID: 8561992223461113892, guid: 5efa4269269e9ea4e8f8a3dee805e040,
     type: 3}
+  imgRef: []
 --- !u!1 &1570158755
 GameObject:
   m_ObjectHideFlags: 0
