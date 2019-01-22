@@ -27,8 +27,10 @@ public class MenuControls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Stops multiple input from registering
         if (canRegister)
         {
+            //Select above button trigger
             if (input.GetComponent<ArduinoInputScript>().buttons[upID] && !input.GetComponent<ArduinoInputScript>().buttons[downID])
             {
                 if (currentSelectedID != 0)
@@ -39,6 +41,7 @@ public class MenuControls : MonoBehaviour
                 }
             }
 
+            //Select below button trigger
             if (input.GetComponent<ArduinoInputScript>().buttons[downID] && !input.GetComponent<ArduinoInputScript>().buttons[upID])
             {
                 if (currentSelectedID != buttonObjects.Length - 1)
@@ -48,9 +51,22 @@ public class MenuControls : MonoBehaviour
                     canRegister = false;
                 }
             }
+
+            //Submit trigger
+            if (input.GetComponent<ArduinoInputScript>().buttons[enterID]  && !input.GetComponent<ArduinoInputScript>().buttons[downID] && !input.GetComponent<ArduinoInputScript>().buttons[upID])
+            {
+                buttonObjects[currentSelectedID].onClick.Invoke();
+            }
+
+            //Close menu trigger
+            if (input.GetComponent<ArduinoInputScript>().buttons[backID] && !input.GetComponent<ArduinoInputScript>().buttons[downID] && !input.GetComponent<ArduinoInputScript>().buttons[upID])
+            {
+                this.gameObject.SetActive(false);
+            }
         }
         else
         {
+            //Allows input to register after no buttons are pressed down.
             if (!input.GetComponent<ArduinoInputScript>().buttons[upID] && !input.GetComponent<ArduinoInputScript>().buttons[downID])
             {
                 canRegister = true;

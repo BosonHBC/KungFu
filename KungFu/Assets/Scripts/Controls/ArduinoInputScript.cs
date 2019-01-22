@@ -14,7 +14,7 @@ public class ArduinoInputScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        //opens the port and sets the read timeout. The timeout should match the write timeout in the arduino sketch.
+        //opens the port and sets the read timeout. The timeout should match the write timeout in the arduino sketch to remove data stream lag.
         sp.Open();
         sp.ReadTimeout = 5;
 	}
@@ -31,15 +31,17 @@ public class ArduinoInputScript : MonoBehaviour {
             }
             catch(System.Exception)
             {
-                
+                Debug.Log("Port Closed");
             }
         }
         //Transfers the info sent by arduino to the bool array of button inputs.
         stringToBoolArray(outputString);
     }
 
+    //Saves button input
     void stringToBoolArray(string input)
     {
+        //Arduino having issues not sending all 11 buttons sometimes(once every few seconds but sends info every 5 ms shouldnt have any issues in human timescales lol)
         if(input.Length < NUMBUTTONS)
         {
             input = "00000000000";
@@ -56,8 +58,10 @@ public class ArduinoInputScript : MonoBehaviour {
                 buttons[i] = false;
             }
         }
+
         Debug.Log(input + "\n");
 
+        //Saves input to GameManager
         GameManager.instance.SetUnoInput(buttons);
     }
 }
