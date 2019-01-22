@@ -9,7 +9,10 @@ public class MenuControls : MonoBehaviour
     private bool canRegister;
     private GameObject input;
     private int currentSelectedID;
+
+
     public Button[] buttonObjects;
+    public GameObject creditsScreen;
     public int enterID;
     public int backID;
     public int upID;
@@ -20,6 +23,7 @@ public class MenuControls : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        creditsScreen.SetActive(false);
         canRegister = true;
         input = GameObject.Find("UduinoManager");
         source = gameObject.GetComponent<AudioSource>();
@@ -76,6 +80,7 @@ public class MenuControls : MonoBehaviour
             if (input.GetComponent<ArduinoInputScript>().buttons[backID] && !input.GetComponent<ArduinoInputScript>().buttons[downID] && !input.GetComponent<ArduinoInputScript>().buttons[upID])
             {
                 source.PlayOneShot(gong);
+                creditsScreen.SetActive(false);
                 this.gameObject.SetActive(false);
             }
         }
@@ -87,5 +92,10 @@ public class MenuControls : MonoBehaviour
                 canRegister = true;
             }
         }
+    }
+
+    public void DisplayCredits()
+    {
+        creditsScreen.SetActive(true);
     }
 }
