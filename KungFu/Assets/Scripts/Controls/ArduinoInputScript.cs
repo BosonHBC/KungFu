@@ -9,8 +9,8 @@ public class ArduinoInputScript : MonoBehaviour {
     internal bool[] buttons = new bool[11];
     private int NUMBUTTONS = 11;
     private string outputString;
-    
-    SerialPort sp = new SerialPort("COM3",9600); 
+
+    SerialPort sp = new SerialPort("COM3",9600);
 
 	// Use this for initialization
 	void Start () {
