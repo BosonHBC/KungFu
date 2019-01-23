@@ -17,6 +17,7 @@ public class WoodManAnimation : MonoBehaviour
             handAnims.Add(transform.GetChild(i).GetComponent<Animator>());
         }
         isPlaying = new bool[3];
+
     }
 
     // Update is called once per frame
@@ -26,20 +27,23 @@ public class WoodManAnimation : MonoBehaviour
 
         if((_bool[1] || _bool[2] || _bool[3]) && !isPlaying[0])
         {
+            Debug.Log("Arm 0");
             isPlaying[0] = true;
-            handAnims[0].Play("HandShake0");
+            handAnims[0].Play("ArmShake0");
             StartCoroutine(CancelPlay(0));
         }
         if ((_bool[5] || _bool[6] || _bool[7]) && !isPlaying[1])
         {
+            Debug.Log("Arm 1");
             isPlaying[1] = true;
-            handAnims[1].Play("HandShake1");
+            handAnims[1].Play("ArmShake1");
             StartCoroutine(CancelPlay(1));
         }
         if ((_bool[8] || _bool[9] || _bool[10]) && !isPlaying[2])
         {
+            Debug.Log("Arm 2");
             isPlaying[2] = true;
-            handAnims[2].Play("HandShake2");
+            handAnims[2].Play("ArmShake2");
             StartCoroutine(CancelPlay(2));
         }
 
@@ -47,8 +51,8 @@ public class WoodManAnimation : MonoBehaviour
 
     IEnumerator CancelPlay(int _i)
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         isPlaying[_i] = false;
-        handAnims[_i].StopPlayback();
+       
     }
 }

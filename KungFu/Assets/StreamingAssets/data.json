@@ -31,17 +31,17 @@
             "hitArray":
             [
                 {"buttonID":3,"beatID":0},
-                {"buttonID":4,"beatID":1},
+                {"buttonID":5,"beatID":1},
                 {"buttonID":3,"beatID":2},
                 {"buttonID":0,"beatID":3},
                 {"buttonID":3,"beatID":3},
                 {"buttonID":0,"beatID":4},
                 {"buttonID":0,"beatID":5},
-                {"buttonID":4,"beatID":5},
-                {"buttonID":4,"beatID":6},
+                {"buttonID":5,"beatID":5},
                 {"buttonID":0,"beatID":6},
+                {"buttonID":5,"beatID":6},
+                {"buttonID":7,"beatID":7},
                 {"buttonID":10,"beatID":7},
-                {"buttonID":5,"beatID":7},
                 {"buttonID":3,"beatID":8},
                 {"buttonID":3,"beatID":9},
                 {"buttonID":1,"beatID":10},
@@ -49,16 +49,16 @@
                 {"buttonID":0,"beatID":11},
                 {"buttonID":1,"beatID":12},
                 {"buttonID":10,"beatID":12},
+                {"buttonID":7,"beatID":13},
                 {"buttonID":8,"beatID":13},
-                {"buttonID":6,"beatID":13},
                 {"buttonID":2,"beatID":14},
-                {"buttonID":5,"beatID":14},
+                {"buttonID":6,"beatID":14},
                 {"buttonID":1,"beatID":15},
-                {"buttonID":6,"beatID":15},
+                {"buttonID":7,"beatID":15},
                 {"buttonID":3,"beatID":16},
-                {"buttonID":4,"beatID":16},
+                {"buttonID":5,"beatID":16},
                 {"buttonID":0,"beatID":17},
-                {"buttonID":9,"beatID":17}
+                {"buttonID":4,"beatID":17}
             ]
         } 
     ]

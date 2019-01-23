@@ -56,6 +56,8 @@ public class ArduinoInputScript : MonoBehaviour
             if (input.ToCharArray()[i] == '1')
             {
                 buttons[i] = true;
+                if (bDebugPrintInput)
+                    Debug.Log("Pressing Button:" + i);
             }
             else
             {
@@ -64,6 +66,12 @@ public class ArduinoInputScript : MonoBehaviour
         }
         if (bDebugPrintInput)
             Debug.Log(input + "\n");
+
+        //for (int i = 0; i < buttons.Length; i++)
+        //{
+        //    if (buttons[i])
+        //        Debug.Log("Button " + i + "is pressed");
+        //}
 
         //Saves input to GameManager
         GameManager.instance.SetUnoInput(buttons);

@@ -20,7 +20,7 @@ public class FadeImage : MonoBehaviour
     {
         Color curColor = Img.color;
         float alphaDiff = Mathf.Abs(fTargetAlpha - curColor.a);
-        if (alphaDiff > 0.1f)
+        if (alphaDiff > 0.2f)
         {
             transform.position += 0.5f*Vector3.up*Time.deltaTime;
             curColor.a = Mathf.Lerp(curColor.a, fTargetAlpha, fFadeRate * Time.deltaTime);

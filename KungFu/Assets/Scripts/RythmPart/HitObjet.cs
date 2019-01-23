@@ -17,13 +17,13 @@ public class HitObjet : MonoBehaviour
         fCollapseTime = GameManager.instance.fReactTime + 1;
         GameManager.instance.i_ExistingHitObject++;
         rect = GetComponent<RectTransform>();
-        Debug.Log(rect.localPosition.x);
         moveSpeed = rect.localPosition.x / (GameManager.instance.fReactTime) ;
     }
 
     public void SetButtonID(int _id, int beatID)
     {
         buttonID = _id;
+        Debug.Log("Now ButtonID to press:" + buttonID);
         transform.GetChild(0).GetComponent<Image>().sprite = UIController.instance.GetReference(beatID);
     }
     // Update is called once per frame
@@ -34,7 +34,7 @@ public class HitObjet : MonoBehaviour
 
         rect.localPosition -= Vector3.right * moveSpeed * Time.deltaTime;
 
-        if (!bHitCorrectly && GameManager.instance.GetUnoInput(buttonID))
+        if (!bHitCorrectly && GameManager.instance.GetUnoInput(buttonID) && fCollapseTime <= 2f)
         {
             // if it is true
             bHitCorrectly = true;
@@ -43,19 +43,17 @@ public class HitObjet : MonoBehaviour
                 // PERFECT
                 Debug.Log("Perfect!");
                 UIController.instance.ShowResult(0);
-                if (GameManager.instance.i_ExistingHitObject <= 1)
-                    UIController.instance.CleanReference();
-
-                Destroy(this.gameObject);
+                GameManager.instance.HitResult(0);
+                FadeOutAndDestroy();
             }
             else if ((fCollapseTime <= 0.7f && fCollapseTime > 0) || (fCollapseTime > 1.3f && fCollapseTime <= 2f))
             {
                 // GOOD
                 Debug.Log("Good!");
                 UIController.instance.ShowResult(1);
-                if (GameManager.instance.i_ExistingHitObject <= 1)
-                    UIController.instance.CleanReference();
-                Destroy(this.gameObject);
+                GameManager.instance.HitResult(1);
+
+                FadeOutAndDestroy();
 
             }
 
@@ -68,11 +66,16 @@ public class HitObjet : MonoBehaviour
             {
                 Debug.Log("Miss!");
                 UIController.instance.ShowResult(2);
-                if (GameManager.instance.i_ExistingHitObject <= 1)
-                    UIController.instance.CleanReference();
+                GameManager.instance.HitResult(2);
+
             }
-            Destroy(this.gameObject);
+            FadeOutAndDestroy();
         }
+    }
+
+    public void FadeOutAndDestroy()
+    {
+        Destroy(this.gameObject);
     }
 
     private void OnDestroy()
