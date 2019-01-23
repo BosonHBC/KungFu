@@ -1,0 +1,54 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class WoodManAnimation : MonoBehaviour
+{
+    Animator anim;
+    List<Animator> handAnims = new List<Animator>();
+    bool[] _bool;
+    bool[] isPlaying;
+    // Start is called before the first frame update
+    void Start()
+    {
+        anim = GetComponent<Animator>();
+        for (int i = 1; i < transform.childCount; i++)
+        {
+            handAnims.Add(transform.GetChild(i).GetComponent<Animator>());
+        }
+        isPlaying = new bool[3];
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        _bool = GameManager.instance.GetUnoInputs();
+
+        if((_bool[1] || _bool[2] || _bool[3]) && !isPlaying[0])
+        {
+            isPlaying[0] = true;
+            handAnims[0].Play("HandShake0");
+            StartCoroutine(CancelPlay(0));
+        }
+        if ((_bool[5] || _bool[6] || _bool[7]) && !isPlaying[1])
+        {
+            isPlaying[1] = true;
+            handAnims[1].Play("HandShake1");
+            StartCoroutine(CancelPlay(1));
+        }
+        if ((_bool[8] || _bool[9] || _bool[10]) && !isPlaying[2])
+        {
+            isPlaying[2] = true;
+            handAnims[2].Play("HandShake2");
+            StartCoroutine(CancelPlay(2));
+        }
+
+    }
+
+    IEnumerator CancelPlay(int _i)
+    {
+        yield return new WaitForSeconds(0.5f);
+        isPlaying[_i] = false;
+        handAnims[_i].StopPlayback();
+    }
+}
