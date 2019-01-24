@@ -13,6 +13,7 @@ public class MenuControls : MonoBehaviour
 
     public Button[] buttonObjects;
     public GameObject creditsScreen;
+    public GameObject titleScreen;
     public int enterID;
     public int backID;
     public int upID;
@@ -77,11 +78,11 @@ public class MenuControls : MonoBehaviour
             }
 
             //Close menu trigger
-            if (input.GetComponent<ArduinoInputScript>().buttons[backID] && !input.GetComponent<ArduinoInputScript>().buttons[downID] && !input.GetComponent<ArduinoInputScript>().buttons[upID])
+            if (input.GetComponent<ArduinoInputScript>().buttons[backID] && !input.GetComponent<ArduinoInputScript>().buttons[downID] && !input.GetComponent<ArduinoInputScript>().buttons[upID] && !titleScreen.activeSelf)
             {
                 source.PlayOneShot(gong);
                 creditsScreen.SetActive(false);
-                this.gameObject.SetActive(false);
+                titleScreen.SetActive(true);               
             }
         }
         else
@@ -97,5 +98,17 @@ public class MenuControls : MonoBehaviour
     public void DisplayCredits()
     {
         creditsScreen.SetActive(true);
+        titleScreen.SetActive(false);      
+    }
+
+    public void DisplayScore()
+    {
+        //To Do
+        //titleScreen.SetActive(false);
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
 }

@@ -66,6 +66,9 @@ public class ArduinoInputScript : MonoBehaviour
             Debug.Log(input + "\n");
 
         //Saves input to GameManager
-        GameManager.instance.SetUnoInput(buttons);
+        if (GameObject.Find("GameManager") != null)
+        {
+            GameManager.instance.SetUnoInput(buttons);
+        }
     }
 }
