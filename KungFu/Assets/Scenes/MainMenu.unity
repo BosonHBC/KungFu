@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -729,8 +729,8 @@ MonoBehaviour:
   buttonSize: 0.5
   maxButtonSize: 1
   expandRate: 0.1
-  quitDelay: 3
-  soundVol: 2
+  quitDelay: 2
+  soundVol: 2.5
 --- !u!82 &807484398
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1379,7 +1379,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c96b35397fb79e244a18d144798b31cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 3
+  delay: 2
 --- !u!4 &1466583442
 Transform:
   m_ObjectHideFlags: 0
@@ -1665,7 +1665,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 1d523baa3032a854bbc827496d256a66, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 57d3208829cb7914f9de22e11fccc97d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1691,7 +1691,7 @@ RectTransform:
   m_GameObject: {fileID: 1642583388}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7884404, y: 0.7087076, z: 0.7087076}
+  m_LocalScale: {x: 0.8, y: 0.7, z: 1}
   m_Children:
   - {fileID: 843073208}
   - {fileID: 1777146758}

@@ -57,11 +57,12 @@ public class MenuControls : MonoBehaviour
 
     private void MakeSpace()
     {
+        int i = currentSelectedID;
         Vector3 pos;
-        Vector3 prevPos = new Vector3(startButtonPos.x, startButtonPos.y, 1f);
+        Vector3 prevPos = new Vector3(buttonObjects[i].transform.position.x, startButtonPos.y, 1f);
 
         //move buttons to the right
-        for (int i = currentSelectedID+1; i < buttonObjects.Length; i++)
+        for (i = currentSelectedID+1; i < buttonObjects.Length; i++)
         {
                 pos = buttonObjects[i].image.rectTransform.position;
 
@@ -78,9 +79,10 @@ public class MenuControls : MonoBehaviour
         }
 
         //move buttons to the left
-        prevPos = new Vector3(startButtonPos.x, startButtonPos.y, 1f);
+        i = currentSelectedID;
+        prevPos = new Vector3(buttonObjects[i].transform.position.x, startButtonPos.y, 1f);
 
-        for (int i = currentSelectedID - 1; i >= 0; i--)
+        for (i = currentSelectedID - 1; i >= 0; i--)
         {
             pos = buttonObjects[i].image.rectTransform.position;
 
@@ -180,14 +182,14 @@ public class MenuControls : MonoBehaviour
             //Submit trigger
             if (input.GetComponent<ArduinoInputScript>().buttons[enterID] && !input.GetComponent<ArduinoInputScript>().buttons[downID] && !input.GetComponent<ArduinoInputScript>().buttons[upID])
             {
-                source.PlayOneShot(gong, soundVol);
+                source.PlayOneShot(gong, .25f);
                 buttonObjects[currentSelectedID].onClick.Invoke();
             }
 
             //Close menu trigger
             if (input.GetComponent<ArduinoInputScript>().buttons[backID] && !input.GetComponent<ArduinoInputScript>().buttons[downID] && !input.GetComponent<ArduinoInputScript>().buttons[upID] && !titleScreen.activeSelf)
             {
-                source.PlayOneShot(gong, soundVol);
+                source.PlayOneShot(gong, .75f);
                 creditsScreen.SetActive(false);
                 titleScreen.SetActive(true);
             }
