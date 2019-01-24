@@ -32,7 +32,11 @@ public class GameManager : MonoBehaviour
 
     private BeatData[] beatData;
     private AudioClip musicClip;
-    [SerializeField] private AudioSource audioSource;
+    [SerializeField]
+    private AudioSource audioSource;
+    [SerializeField]
+    private AudioSource SFXSource;
+    private List<AudioClip> SFXclips = new List<AudioClip>();
 
     public int i_ExistingHitObject = 0;
 
@@ -43,8 +47,8 @@ public class GameManager : MonoBehaviour
     private float combScore;
 
     private int maxComb;
-    private int basicPerfectScore = 1000;
-    private int basicGoodScore = 500;
+    private int basicPerfectScore = 3000;
+    private int basicGoodScore = 1500;
 
     // Start is called before the first frame update
     void Start()
@@ -52,6 +56,18 @@ public class GameManager : MonoBehaviour
         _dataController = FindObjectOfType<DataController>();
         currentMusicData = _dataController.GetCurrentMusicData();
         musicClip = Resources.Load<AudioClip>("BGM/" + currentMusicData.name);
+        for (int i = 1; i < 10; i++)
+        {
+            string path = "SoundEffects/SoundEffect" + i.ToString();
+            AudioClip temp = Resources.Load<AudioClip>(path);
+
+            if (temp)
+                SFXclips.Add(temp);
+            else
+                break;
+        }
+
+        Debug.Log("SFX count:" + SFXclips.Count);
 
         maxComb = currentMusicData.hitArray.Length;
         Debug.Log("Total Hit: " +maxComb);
@@ -69,6 +85,13 @@ public class GameManager : MonoBehaviour
         fCurrentTime = 0;
 
         Invoke("StartGame", 1f);
+    }
+
+    public void PlaySoundEffectRandomly()
+    {
+        SFXSource.Stop();
+        SFXSource.clip = SFXclips[Random.Range(0, SFXclips.Count)];
+        SFXSource.Play();
     }
 
     // Update is called once per frame

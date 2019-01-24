@@ -960,6 +960,8 @@ MonoBehaviour:
   - {fileID: 348321883}
   - {fileID: 406207813}
   - {fileID: 1429582160}
+  creditsScreen: {fileID: 0}
+  titleScreen: {fileID: 0}
   enterID: 0
   backID: 4
   upID: 5
@@ -981,7 +983,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.476
   m_Pitch: 1
   Loop: 0
   Mute: 0

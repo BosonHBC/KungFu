@@ -15,7 +15,7 @@ public class DataController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         //SceneManager.LoadScene("MainMenu");
         LoadGameData();
-        SceneManager.LoadScene("BosonScene");
+        SceneManager.LoadScene("MainMenu");
     }
 
     public MusicData GetCurrentMusicData()

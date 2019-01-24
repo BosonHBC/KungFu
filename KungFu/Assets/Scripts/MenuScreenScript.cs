@@ -8,7 +8,7 @@ public class MenuScreenScript : MonoBehaviour
     // Start is called before the first frame update
     public void StartGame()
     {
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("BosonScene");
     }
 
 }
