@@ -24,6 +24,8 @@ public class MenuControls : MonoBehaviour
     public float buttonSize;
     public float maxButtonSize;
     public float expandRate;
+    public float quitDelay;
+    public float soundVol;
 
     // Start is called before the first frame update
     void Start()
@@ -55,22 +57,43 @@ public class MenuControls : MonoBehaviour
 
     private void MakeSpace()
     {
-        for (int i = 0; i < buttonObjects.Length; i++)
+        Vector3 pos;
+        Vector3 prevPos = new Vector3(startButtonPos.x, startButtonPos.y, 1f);
+
+        //move buttons to the right
+        for (int i = currentSelectedID+1; i < buttonObjects.Length; i++)
         {
-            if (currentSelectedID != i) {
-                Vector3 pos = buttonObjects[i].image.rectTransform.position;
+                pos = buttonObjects[i].image.rectTransform.position;
 
-                if (buttonObjects[i].image.rectTransform.position.x < buttonObjects[currentSelectedID].image.rectTransform.position.x)
-                {
-                    pos = Vector3.MoveTowards(pos, new Vector3(startButtonPos.x - (100 * i + 50), startButtonPos.y, 1f), 5f);
-                }
-                else
-                {
-                    pos = Vector3.MoveTowards(pos, new Vector3(startButtonPos.x + (100 * i + 50), startButtonPos.y, 1f), 5f);
-                }
-
-                buttonObjects[i].image.rectTransform.position = pos;
+            if(i == currentSelectedID + 1)
+            {
+                pos = Vector3.MoveTowards(pos, new Vector3(prevPos.x + 250, startButtonPos.y, 1f), 10f);
             }
+            else
+            { 
+                pos = Vector3.MoveTowards(pos, new Vector3(prevPos.x + 150, startButtonPos.y, 1f), 10f);
+            }                
+                buttonObjects[i].image.rectTransform.position = pos;
+                prevPos = pos;
+        }
+
+        //move buttons to the left
+        prevPos = new Vector3(startButtonPos.x, startButtonPos.y, 1f);
+
+        for (int i = currentSelectedID - 1; i >= 0; i--)
+        {
+            pos = buttonObjects[i].image.rectTransform.position;
+
+            if (i == currentSelectedID - 1)
+            {
+                pos = Vector3.MoveTowards(pos, new Vector3(prevPos.x - 250, startButtonPos.y, 1f), 10f);
+            }
+            else
+            {
+                pos = Vector3.MoveTowards(pos, new Vector3(prevPos.x - 150, startButtonPos.y, 1f), 10f);
+            }
+            buttonObjects[i].image.rectTransform.position = pos;
+            prevPos = pos;
         }
     }
 
@@ -102,7 +125,7 @@ public class MenuControls : MonoBehaviour
     //Quit with delay
     public void Quit()
     {
-        Invoke("ShutDown",2.0f);
+        Invoke("ShutDown",quitDelay);
     }
     private void ShutDown()
     {
@@ -117,7 +140,7 @@ public class MenuControls : MonoBehaviour
             //Select above button trigger with wrap around
             if (input.GetComponent<ArduinoInputScript>().buttons[upID] && !input.GetComponent<ArduinoInputScript>().buttons[downID])
             {
-                source.PlayOneShot(whoosh[Random.Range(0, whoosh.Length)]);
+                source.PlayOneShot(whoosh[Random.Range(0, whoosh.Length)],soundVol);
 
                 ShrinkButton();
                 PutBack();
@@ -137,7 +160,7 @@ public class MenuControls : MonoBehaviour
             //Select below button trigger with wrap around
             if (input.GetComponent<ArduinoInputScript>().buttons[downID] && !input.GetComponent<ArduinoInputScript>().buttons[upID])
             {
-                source.PlayOneShot(whoosh[Random.Range(0, whoosh.Length)]);
+                source.PlayOneShot(whoosh[Random.Range(0, whoosh.Length)], soundVol);
 
                 ShrinkButton();
                 PutBack();
@@ -157,14 +180,14 @@ public class MenuControls : MonoBehaviour
             //Submit trigger
             if (input.GetComponent<ArduinoInputScript>().buttons[enterID] && !input.GetComponent<ArduinoInputScript>().buttons[downID] && !input.GetComponent<ArduinoInputScript>().buttons[upID])
             {
-                source.PlayOneShot(gong);
+                source.PlayOneShot(gong, soundVol);
                 buttonObjects[currentSelectedID].onClick.Invoke();
             }
 
             //Close menu trigger
             if (input.GetComponent<ArduinoInputScript>().buttons[backID] && !input.GetComponent<ArduinoInputScript>().buttons[downID] && !input.GetComponent<ArduinoInputScript>().buttons[upID] && !titleScreen.activeSelf)
             {
-                source.PlayOneShot(gong);
+                source.PlayOneShot(gong, soundVol);
                 creditsScreen.SetActive(false);
                 titleScreen.SetActive(true);
             }
