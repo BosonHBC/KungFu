@@ -16,16 +16,23 @@ public class UIController : MonoBehaviour
     [SerializeField] GameObject resultPrefab;
     private Image result;
     private Transform resultParent;
+    private Image fillBar;
+    private RectTransform fillIndicator;
+    private Text scoreText;
 
-    [SerializeField] List<Sprite> imgRef = new List<Sprite>();
-    Transform refParent;
+    private List<Sprite> imgRef = new List<Sprite>();
+    [HideInInspector]
+    public Transform refParent;
     private int numOfBeat;
     
     // Start is called before the first frame update
     void Start()
     {
-        resultParent = transform.GetChild(0);
-        refParent = transform.GetChild(2);
+        resultParent = transform.Find("ResultParent");
+        refParent = transform.Find("CurrentPoseParent");
+        fillBar = transform.Find("Background").Find("FillBar").GetComponent<Image>();
+        fillIndicator = fillBar.transform.GetChild(0).GetComponent<RectTransform>();
+        scoreText = transform.Find("Background").Find("Score").GetComponent<Text>();
         DataController _data = FindObjectOfType<DataController>();
         if (!_data)
         {
@@ -44,7 +51,11 @@ public class UIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        float percentage = GameManager.instance.GetPercentage();
+        fillBar.fillAmount = percentage;
+        fillIndicator.localPosition = new Vector3(-400 + percentage * 800, 0,0);
+
+        scoreText.text = GameManager.instance.GetCurrentScore().ToString();
     }
 
     public void SetReference(int beatID)
@@ -55,11 +66,7 @@ public class UIController : MonoBehaviour
             refParent.GetComponent<Image>().sprite = imgRef[beatID];
             refParent.GetComponent<Image>().color = Color.white;
         }
-        else
-        {
-            // end
-            CleanReference();
-        }
+
     }
 
     public Sprite GetReference(int beatID)
@@ -67,18 +74,12 @@ public class UIController : MonoBehaviour
         return imgRef[beatID];
     }
 
-    public void CleanReference()
-    {
-        Color _color = Color.white;
-        _color.a = 0;
-        refParent.GetComponent<Image>().color = _color;
-    }
 
     public void ShowResult(int _result)
     {
         // Instantiate object
         GameObject go = Instantiate(resultPrefab, resultParent, false);
-       // go.transform.position += (resultParent.childCount-1) * Vector3.up;
+        go.transform.position += (resultParent.childCount-1) * 2.5f* Vector3.right;
         
         go.GetComponent<Image>().sprite = resultsSprite[_result];
 

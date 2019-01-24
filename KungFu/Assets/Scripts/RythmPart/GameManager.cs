@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     private float fCurrentTime;
     private int iCurrentBeat = -1;
     private bool[] UnoInput;
+    private bool[] beatPlayed;
     private bool bInBeat;
 
 
@@ -33,11 +34,17 @@ public class GameManager : MonoBehaviour
     private AudioClip musicClip;
     [SerializeField] private AudioSource audioSource;
 
-    private int score;
-    private int currentComb;
-    private int highestComb;
-
     public int i_ExistingHitObject = 0;
+
+    private float currentScore;
+    private float totalScore = 100000;
+    private int highComb;
+    private int currentComb;
+    private float combScore;
+
+    private int maxComb;
+    private int basicPerfectScore = 1000;
+    private int basicGoodScore = 500;
 
     // Start is called before the first frame update
     void Start()
@@ -45,6 +52,12 @@ public class GameManager : MonoBehaviour
         _dataController = FindObjectOfType<DataController>();
         currentMusicData = _dataController.GetCurrentMusicData();
         musicClip = Resources.Load<AudioClip>("BGM/" + currentMusicData.name);
+
+        maxComb = currentMusicData.hitArray.Length;
+        Debug.Log("Total Hit: " +maxComb);
+        combScore = (totalScore - maxComb * basicPerfectScore) / ((1 + maxComb) * maxComb * 0.5f);
+        Debug.Log("Basic Comb Score: " + combScore);
+        beatPlayed = new bool[currentMusicData.numOfBeat - 1];
         if (!musicClip)
         {
             Debug.LogError("No certain music is found!");
@@ -54,6 +67,8 @@ public class GameManager : MonoBehaviour
 
         beatData = currentMusicData.beatArray;
         fCurrentTime = 0;
+
+        Invoke("StartGame", 1f);
     }
 
     // Update is called once per frame
@@ -68,10 +83,45 @@ public class GameManager : MonoBehaviour
             if (fCurrentTime > currentMusicData.lengthInSeconds)
             {
                 // Game Over
-                UIController.instance.CleanReference();
                 bIsMusicActive = false;
                 bIsGameOver = true;
             }
+        }
+    }
+
+    public void HitResult(int _result)
+    {
+        switch (_result)
+        {
+            // perfect
+            case 0:
+                {
+                    currentComb++;
+                    if (currentComb >= highComb)
+                        highComb = currentComb;
+
+                    currentScore += (currentComb * combScore + basicPerfectScore);
+                    break;
+                }
+           // good
+            case 1:
+                {
+                    currentComb++;
+                    if (currentComb >= highComb)
+                        highComb = currentComb;
+
+                    currentScore += (currentComb * combScore + basicGoodScore);
+                    break;
+                }
+            // miss
+            case 2:
+                {
+                    currentComb = 0;
+                    break;
+                }
+
+            default:
+                break;
         }
     }
 
@@ -81,7 +131,22 @@ public class GameManager : MonoBehaviour
         audioSource.Play();
         Debug.Log("Game Start!");
         fCurrentTime = 0;
-        UnoInput = new bool[11];
+        UnoInput = new bool[currentMusicData.numOfBeat - 1];
+    }
+
+    public float GetPercentage()
+    {
+        float percent = 0;
+        if (currentMusicData != null)
+            percent = fCurrentTime / currentMusicData.lengthInSeconds;
+        else
+            percent = 0;
+        return percent;
+    }
+
+    public int GetCurrentScore()
+    {
+        return (int)currentScore;
     }
 
     // get the current time which beat it is in.
@@ -89,8 +154,11 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < beatData.Length - 1; i++)
         {
+            if (beatPlayed[i])
+                continue;
             if (Mathf.Abs((beatData[i].timeToHit - fReactTime) - fCurrentTime) <= 0.01f)
             {
+                beatPlayed[i] = true;
                 iCurrentBeat = i;
                 int repeatHit = 0;
 
@@ -102,7 +170,7 @@ public class GameManager : MonoBehaviour
                     if (currentMusicData.hitArray[j].beatID == iCurrentBeat)
                     {
                         // Instantiate hit object
-                        GameObject go = Instantiate(hitObjePrefab, UIController.instance.transform.GetChild(2));
+                        GameObject go = Instantiate(hitObjePrefab, UIController.instance.refParent);
                         //UIController.instance.SetReference(iCurrentBeat);
                         go.transform.localPosition += repeatHit * Vector3.up;
                         repeatHit++;
@@ -117,11 +185,7 @@ public class GameManager : MonoBehaviour
             {
                 iCurrentBeat = -1;
             }
-                
         }
-
-
-
     }
 
     public void DebugInput(int _buttonID)
