@@ -204,6 +204,8 @@ public class GameManager : MonoBehaviour
                 int repeatHit = 0;
 
                 Debug.Log("Start beat: " + iCurrentBeat);
+                XiaohongController.instance.NextPose(iCurrentBeat);
+
                 // go through the hit array
                 for (int j = 0; j < currentMusicData.hitArray.Length; j++)
                 {
