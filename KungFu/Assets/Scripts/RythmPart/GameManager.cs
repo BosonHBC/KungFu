@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
@@ -36,6 +36,10 @@ public class GameManager : MonoBehaviour
     private AudioSource audioSource;
     [SerializeField]
     private AudioSource SFXSource;
+    [SerializeField]
+    private Text titleText;
+    [SerializeField]
+    private EndGame endGame;
     private List<AudioClip> SFXclips = new List<AudioClip>();
 
     public int i_ExistingHitObject = 0;
@@ -50,12 +54,17 @@ public class GameManager : MonoBehaviour
     private int basicPerfectScore = 3000;
     private int basicGoodScore = 1500;
 
+    private int perfectCount;
+    private int okCount;
+    private int missCount;
+
     // Start is called before the first frame update
     void Start()
     {
         _dataController = FindObjectOfType<DataController>();
         currentMusicData = _dataController.GetCurrentMusicData();
         musicClip = Resources.Load<AudioClip>("BGM/" + currentMusicData.name);
+        titleText.text = currentMusicData.name;
         for (int i = 1; i < 10; i++)
         {
             string path = "SoundEffects/SoundEffect" + i.ToString();
@@ -94,6 +103,11 @@ public class GameManager : MonoBehaviour
         SFXSource.Play();
     }
 
+    public int GetCurrentCombo()
+    {
+        return currentComb;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -108,6 +122,7 @@ public class GameManager : MonoBehaviour
                 // Game Over
                 bIsMusicActive = false;
                 bIsGameOver = true;
+                endGame.SetEndData((int)currentScore, highComb, perfectCount, okCount, missCount, currentMusicData.name);
             }
         }
     }
@@ -119,6 +134,7 @@ public class GameManager : MonoBehaviour
             // perfect
             case 0:
                 {
+                    perfectCount++;
                     currentComb++;
                     if (currentComb >= highComb)
                         highComb = currentComb;
@@ -129,6 +145,7 @@ public class GameManager : MonoBehaviour
            // good
             case 1:
                 {
+                    okCount++;
                     currentComb++;
                     if (currentComb >= highComb)
                         highComb = currentComb;
@@ -139,6 +156,7 @@ public class GameManager : MonoBehaviour
             // miss
             case 2:
                 {
+                    missCount++;
                     currentComb = 0;
                     break;
                 }

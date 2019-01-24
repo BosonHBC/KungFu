@@ -44,6 +44,7 @@ public class HitObjet : MonoBehaviour
                 Debug.Log("Perfect!");
                 UIController.instance.ShowResult(0);
                 GameManager.instance.HitResult(0);
+                UIController.instance.PlayPandaNodHead();
                 FadeOutAndDestroy();
             }
             else if ((fCollapseTime <= 0.7f && fCollapseTime > 0) || (fCollapseTime > 1.3f && fCollapseTime <= 2f))
@@ -52,6 +53,7 @@ public class HitObjet : MonoBehaviour
                 Debug.Log("Good!");
                 UIController.instance.ShowResult(1);
                 GameManager.instance.HitResult(1);
+                UIController.instance.PlayPandaNodHead();
 
                 FadeOutAndDestroy();
 

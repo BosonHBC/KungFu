@@ -719,8 +719,8 @@ MonoBehaviour:
   titleScreen: {fileID: 1524572012}
   enterID: 0
   backID: 4
-  upID: 5
-  downID: 3
+  upID: 3
+  downID: 5
   gong: {fileID: 8300000, guid: 3067300d88eb6b84888f77a3f06d0eeb, type: 3}
   whoosh:
   - {fileID: 8300000, guid: d1abc9cb2db01c349a33b07d17ad3bee, type: 3}
@@ -738,7 +738,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f5932324113a0c147a1908176cf4f5e9, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.462
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1604,7 +1604,7 @@ MonoBehaviour:
   m_Script: {fileID: -619905303, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 645626416}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &1552840552

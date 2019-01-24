@@ -19,6 +19,8 @@ public class UIController : MonoBehaviour
     private Image fillBar;
     private RectTransform fillIndicator;
     private Text scoreText;
+    private Text comboText;
+    private Animator pandaAnim;
 
     private List<Sprite> imgRef = new List<Sprite>();
     [HideInInspector]
@@ -28,11 +30,14 @@ public class UIController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Transform background = transform.Find("Background");
         resultParent = transform.Find("ResultParent");
         refParent = transform.Find("CurrentPoseParent");
-        fillBar = transform.Find("Background").Find("FillBar").GetComponent<Image>();
+        fillBar = background.Find("FillBar").GetComponent<Image>();
         fillIndicator = fillBar.transform.GetChild(0).GetComponent<RectTransform>();
-        scoreText = transform.Find("Background").Find("Score").GetComponent<Text>();
+        scoreText = background.Find("Score").GetComponent<Text>();
+        comboText = background.Find("Combo").GetChild(0).GetComponent<Text>();
+        pandaAnim = background.Find("Panda").GetChild(0).GetComponent<Animator>();
         DataController _data = FindObjectOfType<DataController>();
         if (!_data)
         {
@@ -56,7 +61,10 @@ public class UIController : MonoBehaviour
         fillIndicator.localPosition = new Vector3(-400 + percentage * 800, 0,0);
 
         scoreText.text = GameManager.instance.GetCurrentScore().ToString();
+
+        comboText.text = GameManager.instance.GetCurrentCombo().ToString();
     }
+
 
     public void SetReference(int beatID)
     {
@@ -69,6 +77,10 @@ public class UIController : MonoBehaviour
 
     }
 
+    public void PlayPandaNodHead()
+    {
+        pandaAnim.Play("PandaNode");
+    }
     public Sprite GetReference(int beatID)
     {
         return imgRef[beatID];
