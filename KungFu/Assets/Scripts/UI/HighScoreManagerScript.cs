@@ -15,7 +15,8 @@ public class HighScoreManager : MonoBehaviour
 {
 
     private static HighScoreManager m_instance;
-    private const int LeaderboardLength = 6;
+    private bool isLarger;
+    private const int LeaderboardLength = 5;
 
     public static HighScoreManager _instance
     {
@@ -24,6 +25,7 @@ public class HighScoreManager : MonoBehaviour
             if (m_instance == null)
             {
                 m_instance = new GameObject("HighScoreManager").AddComponent<HighScoreManager>();
+                m_instance.gameObject.AddComponent<GetPlayerNameScript>().enabled = false;
             }
             return m_instance;
         }
@@ -39,6 +41,8 @@ public class HighScoreManager : MonoBehaviour
             Destroy(gameObject);
 
         DontDestroyOnLoad(gameObject);
+
+        isLarger = false;
     }
 
     public void SaveHighScore(string name, int score)
@@ -126,6 +130,24 @@ public class HighScoreManager : MonoBehaviour
     void OnApplicationQuit()
     {
         PlayerPrefs.Save();
+    }
+
+    public void CheckIfHighScore(int score)
+    {
+        foreach (Scores highScore in GetHighScore())
+        {
+             if (score >= highScore.score)
+            {
+              isLarger = true;
+              break;
+            }
+        }
+
+        if (isLarger)
+        {
+           gameObject.GetComponent<GetPlayerNameScript>().enabled = true;
+           gameObject.GetComponent<GetPlayerNameScript>().ReceiveScore(score);
+        }
     }
 }
 

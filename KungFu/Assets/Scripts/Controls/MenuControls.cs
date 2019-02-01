@@ -15,6 +15,7 @@ public class MenuControls : MonoBehaviour
     public Button[] buttonObjects;
     public GameObject creditsScreen;
     public GameObject titleScreen;
+    public GameObject scoreScreen;
     public int enterID;
     public int backID;
     public int upID;
@@ -120,8 +121,8 @@ public class MenuControls : MonoBehaviour
 
     public void DisplayScore()
     {
-        //To Do
-        //titleScreen.SetActive(false);
+        scoreScreen.SetActive(true);
+        titleScreen.SetActive(false);
     }
 
     //Quit with delay
@@ -191,6 +192,7 @@ public class MenuControls : MonoBehaviour
             {
                 source.PlayOneShot(gong, .75f);
                 creditsScreen.SetActive(false);
+                scoreScreen.SetActive(false);
                 titleScreen.SetActive(true);
             }
         }

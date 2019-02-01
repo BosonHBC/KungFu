@@ -4,19 +4,38 @@ using UnityEngine;
 
 public class GetPlayerNameScript : MonoBehaviour {
 
-    internal string stringToEdit;
-    private AudioSource audioSource;
-    public AudioClip highScoreSound;
+    private string stringToEdit;
 
-    private void Awake()
-    {     
-        audioSource = gameObject.GetComponent<AudioSource>();
+    public int enterID;
+    public int prevID;
+    public int nextID;
+
+    private GameObject input;
+    private int score;
+
+    private void Update()
+    {
+        ReceiveInput();
     }
 
     private void OnEnable()
     {
+        score = 0;
         stringToEdit = " HighScore!!! Please Enter Your Name";
-        audioSource.PlayOneShot(highScoreSound);
+    }
+
+    private void ReceiveInput()
+    {
+        if (input.GetComponent<ArduinoInputScript>().buttons[enterID])
+        {
+            HighScoreManager._instance.SaveHighScore(stringToEdit, score);
+            this.enabled = false;
+        }
+    }
+
+    public void ReceiveScore(int score)
+    {
+        this.score = score;
     }
 
     void OnGUI()
