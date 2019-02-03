@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// High score manager.
@@ -15,6 +16,7 @@ public class HighScoreManager : MonoBehaviour
 {
 
     private static HighScoreManager m_instance;
+    private static Text text;
     private bool isLarger;
     private const int LeaderboardLength = 5;
 
@@ -26,6 +28,9 @@ public class HighScoreManager : MonoBehaviour
             {
                 m_instance = new GameObject("HighScoreManager").AddComponent<HighScoreManager>();
                 m_instance.gameObject.AddComponent<GetPlayerNameScript>().enabled = false;
+                text = m_instance.gameObject.AddComponent<Text>();
+                text.fontSize = 40;
+                text.enabled = false;
             }
             return m_instance;
         }
@@ -130,6 +135,16 @@ public class HighScoreManager : MonoBehaviour
     void OnApplicationQuit()
     {
         PlayerPrefs.Save();
+    }
+
+    public void SetText(string name)
+    {
+        text.text = name;
+    }
+
+    public void DisableText()
+    {
+        text.enabled = false;
     }
 
     public void CheckIfHighScore(int score)
