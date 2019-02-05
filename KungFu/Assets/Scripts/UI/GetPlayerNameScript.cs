@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GetPlayerNameScript : MonoBehaviour {
-    public int enterID;
-    public int backID;
-    public int prevID;
-    public int nextID;
-
+    private int enterID = 0;
+    private int backID = 4;
+    private int prevID = 3;
+    private int nextID = 5;
     private GameObject input;
     private int score;
     private string stringToEdit;
@@ -16,9 +15,14 @@ public class GetPlayerNameScript : MonoBehaviour {
     private int currentChar;
     private char[] letters;
     private bool canRegister;
+    private float inputDelay;
+    private float delayTime;
 
     private void Awake()
     {
+        inputDelay= 0;
+        delayTime = 0.5f;
+        currentChar = 0;
         charCounter = 0;
         input = GameObject.Find("UduinoManager");
         stringToEdit = "";
@@ -30,9 +34,18 @@ public class GetPlayerNameScript : MonoBehaviour {
 
     private void Update()
     {
-        canRegister = true;
-        UpdateText();
         ReceiveInput();
+        UpdateText();
+
+        if(inputDelay < delayTime)
+        {
+            inputDelay += Time.deltaTime;
+        }
+        else
+        {
+        inputDelay = 0;
+        canRegister = true;
+        }
     }
 
     private void ReceiveInput()
@@ -43,7 +56,8 @@ public class GetPlayerNameScript : MonoBehaviour {
             //Select above button trigger with wrap around
             if (input.GetComponent<ArduinoInputScript>().buttons[prevID] && !input.GetComponent<ArduinoInputScript>().buttons[nextID])
             {
-                if (charCounter != 0)
+                canRegister = false;
+                if (currentChar > 0)
                 {
                     currentChar--;
                 }
@@ -51,15 +65,15 @@ public class GetPlayerNameScript : MonoBehaviour {
                 {
                     currentChar = letters.Length - 1;
                 }
-                chars[charCounter] = letters[currentChar];
-                charCounter++;
-                canRegister = false;
+
+                chars[charCounter] = letters[currentChar];                
             }
 
             //Select below button trigger with wrap around
             if (input.GetComponent<ArduinoInputScript>().buttons[nextID] && !input.GetComponent<ArduinoInputScript>().buttons[prevID])
             {
-                if (charCounter != letters.Length - 1)
+                canRegister = false;
+                if (currentChar < letters.Length - 1)
                 {
                     currentChar++;
                 }
@@ -67,23 +81,31 @@ public class GetPlayerNameScript : MonoBehaviour {
                 {
                     currentChar = 0;
                 }
-                chars[charCounter] = letters[currentChar];
-                charCounter++;
-                canRegister = false;
-            }
 
-            if (input.GetComponent<ArduinoInputScript>().buttons[enterID] && charCounter == 3)
+                chars[charCounter] = letters[currentChar];
+            }
+           
+            if (input.GetComponent<ArduinoInputScript>().buttons[enterID] && charCounter < 3)
             {
-                HighScoreManager._instance.SaveHighScore(stringToEdit, score);
-                gameObject.GetComponent<HighScoreManager>().DisableText();
                 canRegister = false;
-                this.enabled = false;
+                charCounter++;
+                currentChar = 0;
             }
 
             if (input.GetComponent<ArduinoInputScript>().buttons[backID] && charCounter != 0)
             {
+                canRegister = false;
                 charCounter--;
                 currentChar = 0;
+            }
+
+            if (input.GetComponent<ArduinoInputScript>().buttons[enterID] && charCounter >= 3)
+            {
+                canRegister = false;
+                HighScoreManager._instance.SaveHighScore(stringToEdit, score);
+                gameObject.GetComponent<HighScoreManager>().DisableText();
+                canRegister = false;
+                this.enabled = false;
             }
         }
     }
