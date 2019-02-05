@@ -58,6 +58,7 @@ public class EndGame : MonoBehaviour
             _id = 2;
         result.sprite = ABS[_id];
 
+        HighScoreManager._instance.CheckIfHighScore(_score);
     }
 
     IEnumerator DelayShow()
