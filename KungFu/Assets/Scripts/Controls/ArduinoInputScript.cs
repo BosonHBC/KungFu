@@ -57,10 +57,7 @@ public class ArduinoInputScript : MonoBehaviour
             {
                 buttons[i] = true;
                 if (bDebugPrintInput)
-                    Debug.Log("Pressing Button:" + i);
-
-                if (buttons[0] || buttons[4])
-                    GameManager.instance.PlaySoundEffectRandomly();
+                    Debug.Log("Pressing Button:" + i);            
             }
             else
             {

@@ -30,7 +30,6 @@ public class HighScoreManager : MonoBehaviour
                 m_instance.gameObject.AddComponent<GetPlayerNameScript>().enabled = false;
                 text = m_instance.gameObject.AddComponent<Text>();
                 text.fontSize = 40;
-                text.enabled = false;
             }
             return m_instance;
         }
@@ -160,11 +159,13 @@ public class HighScoreManager : MonoBehaviour
 
         if (isLarger)
         {
-           gameObject.GetComponent<GetPlayerNameScript>().enabled = true;
-           gameObject.GetComponent<GetPlayerNameScript>().ReceiveScore(score);
+            GameObject.Find("Canvas").GetComponent<GetNameTextScript>().SetTextRef(text, score.ToString());
+            gameObject.GetComponent<GetPlayerNameScript>().enabled = true;
+            gameObject.GetComponent<GetPlayerNameScript>().ReceiveScore(score);
         }
     }
 }
+
 
 public class Scores
 {
