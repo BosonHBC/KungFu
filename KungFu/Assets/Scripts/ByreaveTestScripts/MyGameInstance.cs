@@ -35,9 +35,9 @@ public class MyGameInstance : MonoBehaviour
         ScoreText.text = "Score: " + scores.ToString();
     }
 
-    public void Miss()
+    public void Miss(int number)
     {
-        misses++;
+        misses += number;
         MissText.text = "Miss: " + misses.ToString();
     }
 }
