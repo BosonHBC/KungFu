@@ -17,6 +17,7 @@ public class GetPlayerNameScript : MonoBehaviour {
     private bool canRegister;
     private float inputDelay;
     private float delayTime;
+    private string song;
 
     private void Awake()
     {
@@ -102,7 +103,7 @@ public class GetPlayerNameScript : MonoBehaviour {
             if (input.GetComponent<ArduinoInputScript>().buttons[enterID] && charCounter >= 3)
             {
                 canRegister = false;
-                HighScoreManager._instance.SaveHighScore(stringToEdit, score);
+                HighScoreManager._instance.SaveHighScore(stringToEdit, score, song);
                 gameObject.GetComponent<HighScoreManager>().DisableText();
                 canRegister = false;
                 this.enabled = false;
@@ -110,9 +111,10 @@ public class GetPlayerNameScript : MonoBehaviour {
         }
     }
 
-    public void ReceiveScore(int score)
+    public void ReceiveScore(int score, string song)
     {
         this.score = score;
+        this.song = song;
     }
 
     private void UpdateText()

@@ -49,16 +49,16 @@ public class HighScoreManager : MonoBehaviour
         isLarger = false;
     }
 
-    public void SaveHighScore(string name, int score)
+    public void SaveHighScore(string name, int score, string song)
     {
         List<Scores> HighScores = new List<Scores>();
 
         int i = 1;
-        while (i <= LeaderboardLength && PlayerPrefs.HasKey("HighScore" + i + "score"))
+        while (i <= LeaderboardLength && PlayerPrefs.HasKey(song + i + "score"))
         {
             Scores temp = new Scores();
-            temp.score = PlayerPrefs.GetInt("HighScore" + i + "score");
-            temp.name = PlayerPrefs.GetString("HighScore" + i + "name");
+            temp.score = PlayerPrefs.GetInt(song + i + "score");
+            temp.name = PlayerPrefs.GetString(song + i + "name");
             HighScores.Add(temp);
             i++;
         }
@@ -95,23 +95,23 @@ public class HighScoreManager : MonoBehaviour
         i = 1;
         while (i <= LeaderboardLength && i <= HighScores.Count)
         {
-            PlayerPrefs.SetString("HighScore" + i + "name", HighScores[i - 1].name);
-            PlayerPrefs.SetInt("HighScore" + i + "score", HighScores[i - 1].score);
+            PlayerPrefs.SetString(song + i + "name", HighScores[i - 1].name);
+            PlayerPrefs.SetInt(song + i + "score", HighScores[i - 1].score);
             i++;
         }
 
     }
 
-    public List<Scores> GetHighScore()
+    public List<Scores> GetHighScore(string song)
     {
         List<Scores> HighScores = new List<Scores>();
 
         int i = 1;
-        while (i <= LeaderboardLength && PlayerPrefs.HasKey("HighScore" + i + "score"))
+        while (i <= LeaderboardLength && PlayerPrefs.HasKey(song + i + "score"))
         {
             Scores temp = new Scores();
-            temp.score = PlayerPrefs.GetInt("HighScore" + i + "score");
-            temp.name = PlayerPrefs.GetString("HighScore" + i + "name");
+            temp.score = PlayerPrefs.GetInt(song + i + "score");
+            temp.name = PlayerPrefs.GetString(song + i + "name");
             HighScores.Add(temp);
             i++;
         }
@@ -119,15 +119,15 @@ public class HighScoreManager : MonoBehaviour
         return HighScores;
     }
 
-    public void ClearLeaderBoard()
+    public void ClearLeaderBoard(string song)
     {
 
-        List<Scores> HighScores = GetHighScore();
+        List<Scores> HighScores = GetHighScore(song);
 
         for (int i = 1; i <= HighScores.Count; i++)
         {
-            PlayerPrefs.DeleteKey("HighScore" + i + "name");
-            PlayerPrefs.DeleteKey("HighScore" + i + "score");
+            PlayerPrefs.DeleteKey(song + i + "name");
+            PlayerPrefs.DeleteKey(song + i + "score");
         }
     }
 
@@ -146,9 +146,9 @@ public class HighScoreManager : MonoBehaviour
         text.enabled = false;
     }
 
-    public void CheckIfHighScore(int score)
+    public void CheckIfHighScore(int score, string song)
     {
-        foreach (Scores highScore in GetHighScore())
+        foreach (Scores highScore in GetHighScore(song))
         {
              if (score >= highScore.score)
             {
@@ -161,7 +161,7 @@ public class HighScoreManager : MonoBehaviour
         {
             GameObject.Find("Canvas").GetComponent<GetNameTextScript>().SetTextRef(text, score.ToString());
             gameObject.GetComponent<GetPlayerNameScript>().enabled = true;
-            gameObject.GetComponent<GetPlayerNameScript>().ReceiveScore(score);
+            gameObject.GetComponent<GetPlayerNameScript>().ReceiveScore(score, song);
         }
     }
 }
