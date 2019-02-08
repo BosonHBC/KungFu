@@ -2,12 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+public enum HitResult
+{
+    Perfect,
+    Good,
+    Miss
+}
 public class MyGameInstance : MonoBehaviour
 {
     public static MyGameInstance instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
     public Text ScoreText;
     public Text MissText;
+    public GameObject ResultImageShow;
     int scores = 0, misses = 0;
     //Awake is always called before any Start functions
     void Awake()
@@ -39,5 +45,11 @@ public class MyGameInstance : MonoBehaviour
     {
         misses += number;
         MissText.text = "Miss: " + misses.ToString();
+    }
+
+    public void ShowResultAt(Transform locTrans, HitResult hitResult)
+    {
+        GameObject ri = Instantiate(ResultImageShow, locTrans.position, Quaternion.identity);
+        ri.GetComponent<ResultImageControl>().ShowResult(hitResult);
     }
 }

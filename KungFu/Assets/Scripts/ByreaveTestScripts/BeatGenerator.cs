@@ -51,13 +51,15 @@ public class BeatGenerator : MonoBehaviour
         {
             //Debug.Log(BeatData[currentBeatIndex]["timeToHit"].AsFloat);
             activeButtons = getIntArrayFromJSONNode(BeatData[currentBeatIndex]["buttonID"]);
-            Debug.Log(activeButtons);
             matchedButtons.Clear();//make sure matched buttons is clear
             foreach(int i in activeButtons)
             {
                 matchedButtons.Add(i, false);
             }
             activateButton(activeButtons);
+
+            GetComponentInChildren<EnemyAnimationControl>().PlayAnim(BeatData[currentBeatIndex]["AnimationID"].AsInt);
+
             currentBeatIndex++;
             isInBeat = true;
             StartCoroutine( deactivateButtonInSecs(activeButtons, ReactionTime));
@@ -87,6 +89,9 @@ public class BeatGenerator : MonoBehaviour
                 ChildBodyParts[buttonID].GetComponent<MeshRenderer>().material = matchMat;
                 //we can calculate the reacting time to give different scores (as a parameter to Score() function) here
                 MyGameInstance.instance.Score();
+                HitResult hr = GetComponentInChildren<EnemyAnimationControl>().CheckHit(BeatData[currentBeatIndex]["AnimationID"].AsInt, reactionTimer);
+                MyGameInstance.instance.ShowResultAt(ChildBodyParts[buttonID].transform, hr);
+
                 matchedButtons[buttonID] = true;
             }
         }
@@ -103,6 +108,20 @@ public class BeatGenerator : MonoBehaviour
     {
         ChildBodyParts[buttonID].GetComponent<MeshRenderer>().material = deactivateMat;
     }
+
+    void missCheck()
+    {
+        foreach (var matched in matchedButtons)
+        {
+            if (!matched.Value)
+            {
+                MyGameInstance.instance.Miss(1);
+                //show miss image
+                MyGameInstance.instance.ShowResultAt(ChildBodyParts[matched.Key].transform, HitResult.Miss);
+            }
+        }
+    }
+
     //end of this beat, reset all, can be improved
     IEnumerator deactivateButtonInSecs(int[] ButtonIDs, float delay)
     {
@@ -113,11 +132,7 @@ public class BeatGenerator : MonoBehaviour
         }
         isInBeat = false;
         reactionTimer = 0.0f;
-        foreach(bool matched in matchedButtons.Values)
-        {
-            if (!matched)
-                MyGameInstance.instance.Miss(1);
-        }
+        missCheck();
         matchedButtons.Clear();
     }
 

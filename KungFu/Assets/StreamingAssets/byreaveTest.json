@@ -145,8 +145,7 @@
                 {
                     "timeToHit": 72.000,
                     "beatID": 18,
-                    "buttonID": [
-                    ]
+                    "buttonID": []
                 }
             ]
         }

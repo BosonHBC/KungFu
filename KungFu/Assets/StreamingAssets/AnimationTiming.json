@@ -1,0 +1,36 @@
+{
+    "Animations": [
+        {
+            "AnimationID": 0,
+            "AnimationName": "Hook",
+            "OKStart": 0.0,
+            "OKDuration": 1.0,
+            "PerfectStart": 0.4,
+            "PerfectDuration": 0.4
+        },
+        {
+            "AnimationID": 1,
+            "AnimationName": "Hammer",
+            "OKStart": 0.0,
+            "OKDuration": 1.0,
+            "PerfectStart": 0.4,
+            "PerfectDuration": 0.4
+        },
+        {
+            "AnimationID": 2,
+            "AnimationName": "Uppercut",
+            "OKStart": 0.0,
+            "OKDuration": 1.0,
+            "PerfectStart": 0.4,
+            "PerfectDuration": 0.4
+        },
+        {
+            "AnimationID": 3,
+            "AnimationName": "handssors",
+            "OKStart": 0.0,
+            "OKDuration": 1.0,
+            "PerfectStart": 0.4,
+            "PerfectDuration": 0.4
+        }
+    ]
+}

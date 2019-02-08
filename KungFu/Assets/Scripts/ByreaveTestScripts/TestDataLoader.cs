@@ -9,7 +9,9 @@ public class TestDataLoader : MonoBehaviour
     // currently will be only one data
     //private MusicData[] allMusicData;
     JSONNode musicData;
-    private string gameDataFileName = "byreaveTest.json";
+    JSONNode animationData;
+    private string gameDataFileName = "AnimationTest.json";
+    string animTimingFileName = "AnimationTiming.json";
 
     private void Awake()
     {
@@ -37,12 +39,25 @@ public class TestDataLoader : MonoBehaviour
             //GameData loadedData = JsonUtility.FromJson<GameData>(dataJson);
             var loadedData = JSON.Parse(dataJson);
             musicData = loadedData["allMusicData"];
-            Debug.Log(musicData[0]["name"]);
-            //allMusicData = loadedData.allMusicData;
+
         }
         else
         {
             Debug.LogError("Cannot load game data!");
+        }
+
+        filePath = Path.Combine(Application.streamingAssetsPath, animTimingFileName);
+        if (File.Exists(filePath))
+        {
+            string dataJson = File.ReadAllText(filePath);
+
+            //GameData loadedData = JsonUtility.FromJson<GameData>(dataJson);
+            var loadedData = JSON.Parse(dataJson);
+            animationData = loadedData["Animations"];
+        }
+        else
+        {
+            Debug.LogError("Cannot load animation data!");
         }
     }
     public JSONNode GetBeatDataByName(string name)
@@ -58,5 +73,10 @@ public class TestDataLoader : MonoBehaviour
         }
 
         return retBeat;
+    }
+
+    public JSONNode GetAnimationData()
+    {
+        return animationData;
     }
 }
