@@ -22,6 +22,7 @@ public class BeatGenerator : MonoBehaviour
     bool isInBeat = false;
     float reactionTimer = 0.0f;
     int[] activeButtons;
+    bool showIndicator = true;
 
     //tmp way to check which beat is matched
     Dictionary<int, bool> matchedButtons;
@@ -57,16 +58,19 @@ public class BeatGenerator : MonoBehaviour
                 matchedButtons.Add(i, false);
             }
             activateButton(activeButtons);
+            StartCoroutine(deactivateButtonInSecs(activeButtons, ReactionTime));
 
             GetComponentInChildren<EnemyAnimationControl>().PlayAnim(BeatData[currentBeatIndex]["AnimationID"].AsInt);
-
             currentBeatIndex++;
             isInBeat = true;
-            StartCoroutine( deactivateButtonInSecs(activeButtons, ReactionTime));
         }
         checkInput(activeButtons, isInBeat);
         if (isInBeat)
             reactionTimer += Time.deltaTime;
+
+        //Toggle Indicator
+        if (Input.GetKeyDown(KeyCode.I))
+            ToggleIndicator();
     }
 
     //hightlight the parts to hit
@@ -74,6 +78,7 @@ public class BeatGenerator : MonoBehaviour
     {
         foreach(int i in ButtonIDs)
         {
+            Debug.Log(i);
             ChildBodyParts[i].GetComponent<MeshRenderer>().material = activateMat;
         }
     }
@@ -86,7 +91,8 @@ public class BeatGenerator : MonoBehaviour
             //if is not already matched
             if(!matchedButtons[buttonID])
             {
-                ChildBodyParts[buttonID].GetComponent<MeshRenderer>().material = matchMat;
+                if (showIndicator)
+                    ChildBodyParts[buttonID].GetComponent<MeshRenderer>().material = matchMat;
                 //we can calculate the reacting time to give different scores (as a parameter to Score() function) here
                 MyGameInstance.instance.Score();
                 HitResult hr = GetComponentInChildren<EnemyAnimationControl>().CheckHit(BeatData[currentBeatIndex]["AnimationID"].AsInt, reactionTimer);
@@ -101,12 +107,17 @@ public class BeatGenerator : MonoBehaviour
     //there is a hit
     void hitButton(int buttonID)
     {
-        ChildBodyParts[buttonID].GetComponent<MeshRenderer>().material = hitMat;
+        if (showIndicator)
+        {
+            Debug.Log("Hit");
+            ChildBodyParts[buttonID].GetComponent<MeshRenderer>().material = hitMat;
+        }
     }
     //hit released
     void deactivateButton(int buttonID)
     {
-        ChildBodyParts[buttonID].GetComponent<MeshRenderer>().material = deactivateMat;
+        if (showIndicator)
+            ChildBodyParts[buttonID].GetComponent<MeshRenderer>().material = deactivateMat;
     }
 
     void missCheck()
@@ -188,5 +199,10 @@ public class BeatGenerator : MonoBehaviour
                 }
             }
         }
+    }
+
+    void ToggleIndicator()
+    {
+        showIndicator = !showIndicator;
     }
 }
