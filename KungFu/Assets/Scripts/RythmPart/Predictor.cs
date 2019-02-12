@@ -19,7 +19,7 @@ public class Predictor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UnoInput = GameManager.instance.GetUnoInputs();
+        UnoInput = MyGameInstance.instance.GetArduinoInput();
 
         for (int i = 0; i < UnoInput.Length; i++)
         {
