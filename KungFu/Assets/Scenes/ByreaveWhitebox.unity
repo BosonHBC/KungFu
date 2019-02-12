@@ -2217,6 +2217,7 @@ MonoBehaviour:
   - {fileID: 910940298}
   - {fileID: 1929498102}
   - {fileID: 2081591717}
+  Indicator: {fileID: 212573572}
 --- !u!82 &867683967
 AudioSource:
   m_ObjectHideFlags: 0
