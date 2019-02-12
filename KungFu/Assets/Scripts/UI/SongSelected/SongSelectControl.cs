@@ -17,6 +17,7 @@ public class SongSelectControl : MonoBehaviour
     private List<SongPannel> pannels = new List<SongPannel>();
     private int targetSongIndex;
     private UIMover moveTo;
+    // move to another song
     private bool bCanMove = true;
     private bool bSelecting;
     private float fExpandWidth = 500;
@@ -74,11 +75,14 @@ public class SongSelectControl : MonoBehaviour
         {
             SelectSong();
         }
+
+
+        Debug.Log(bCanMove);
     }
 
     public void SelectSong()
     {
-        if (!bSelecting)
+        if (!bSelecting && bCanMove)
         {
             bSelecting = true;
             StartCoroutine(ExpandTargetPannel(targetSongIndex, fExpandWidth, delegate { }, fUIExpandTime));
@@ -109,7 +113,7 @@ public class SongSelectControl : MonoBehaviour
                         float d_destPos = (int)Mathf.Abs(d_rect.localPosition.x + trRect.anchoredPosition.x);
                         moveTo.UIMoveToPosition(Vector3.left, d_destPos, fUIMoveSpeed, delegate { targetSongIndex++; Debug.Log("Current: " + targetSongIndex); bCanMove = true;/*SelectSong();*/ });
                     }, fUIExpandTime));
-                    bSelecting = false;
+                    
                     return;
                     
                 }
@@ -124,7 +128,7 @@ public class SongSelectControl : MonoBehaviour
             {
                 if (bSelecting)
                 {
-                    bSelecting = false;
+                    
                     StartCoroutine(ExpandTargetPannel(pannels.Count - 1, -fExpandWidth, delegate {
                         downPointer.FadeOut();
                         moveTo.UIMoveToPosition(Vector3.left, 1000f, fUIMoveSpeed, delegate { Debug.Log("Go to right boundary"); bCanMove = true; });
@@ -156,7 +160,7 @@ public class SongSelectControl : MonoBehaviour
                         moveTo.UIMoveToPosition(Vector3.right, d_destPos, fUIMoveSpeed, delegate { targetSongIndex--; Debug.Log("Current: " + targetSongIndex); bCanMove = true;/*SelectSong();*/ });
 
                     }, fUIExpandTime));
-                    bSelecting = false;
+                    
                     return;
                 }
                 RectTransform _rect = pannels[targetSongIndex - 1].GetComponent<RectTransform>();
@@ -167,7 +171,7 @@ public class SongSelectControl : MonoBehaviour
             {
                 if (bSelecting)
                 {
-                    bSelecting = false;
+                    
                     StartCoroutine(ExpandTargetPannel(0, -fExpandWidth, delegate {
                         downPointer.FadeOut();
                         moveTo.UIMoveToPosition(Vector3.right, 1000f, fUIMoveSpeed, delegate { Debug.Log("Go to left boundary"); bCanMove = true; });
@@ -184,6 +188,16 @@ public class SongSelectControl : MonoBehaviour
 
     IEnumerator ExpandTargetPannel(int _id, float _delta, UnityAction _onFinishExpand, float _fadeTime = 0.5f)
     {
+        bSelecting = true;
+        if(_id >=0 && _id < pannels.Count)
+        {
+            if (_delta > 0)
+                pannels[_id].ExpandPannel();
+            else if (_delta < 0)
+                pannels[_id].FoldPannel();
+        }
+
+
         float _timeStartFade = Time.time;
         float _timeSinceStart = Time.time - _timeStartFade;
         float _lerpPercentage = _timeSinceStart / _fadeTime;
@@ -193,6 +207,21 @@ public class SongSelectControl : MonoBehaviour
 
         float parent_Start = trRect.sizeDelta.x;
         float parent_Dest = parent_Start + 2 * _delta;
+        float parentX_Start = 0;
+        float parentX_Dest = 0;
+
+        int _preNextOffset = 0;
+        if (targetSongIndex == 0)
+            _preNextOffset = 1;
+        if (targetSongIndex == 2)
+            _preNextOffset = -1;
+
+        if (targetSongIndex == 0 || targetSongIndex ==2)
+        {
+           parentX_Start = trRect.anchoredPosition.x;
+            parentX_Dest = trRect.anchoredPosition.x + _preNextOffset * 90;
+        }
+
         while (true)
         {
             _timeSinceStart = Time.time - _timeStartFade;
@@ -200,21 +229,29 @@ public class SongSelectControl : MonoBehaviour
 
             float pannel_Current = Mathf.Lerp(pannel_Start, pannel_Dest, _lerpPercentage);
             float parent_Current = Mathf.Lerp(parent_Start, parent_Dest, _lerpPercentage);
-
-            // pannel width increase 200
-            // parent size increase 400
+            
             RectTransform _rect = pannels[_id].GetComponent<RectTransform>();
             _rect.sizeDelta = new Vector2(pannel_Current, _rect.sizeDelta.y);
             trRect.sizeDelta = new Vector2(parent_Current, trRect.sizeDelta.y);
+            if (targetSongIndex == 0 || targetSongIndex == 2)
+            {
+                float trX_Current = Mathf.Lerp(parentX_Start, parentX_Dest, _lerpPercentage);
 
+                trRect.anchoredPosition = new Vector2(trX_Current, trRect.anchoredPosition.y);
+            }
             if (_lerpPercentage >= 1) break;
 
 
             yield return new WaitForEndOfFrame();
         }
+        if (_delta < 0)
+            bSelecting = false;
+        else
+            bSelecting = true;
+
         if (_onFinishExpand != null)
             _onFinishExpand.Invoke();
-        bCanMove = true;
+       
     }
 
 }
