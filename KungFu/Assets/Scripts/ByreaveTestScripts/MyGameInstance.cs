@@ -12,9 +12,8 @@ public enum HitResult
 public class MyGameInstance : MonoBehaviour
 {
     public static MyGameInstance instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
-    public Text ScoreText;
-    public Text MissText;
     public GameObject ResultImageShow;
+    
     int scores = 0, misses = 0;
     bool [] buttonInput;
     //Awake is always called before any Start functions
@@ -40,13 +39,17 @@ public class MyGameInstance : MonoBehaviour
     public void Score()
     {
         scores++;
-        ScoreText.text = "Score: " + scores.ToString();
+        Canvas canvas = GameObject.FindObjectOfType<Canvas>();
+        if(canvas != null)
+            canvas.gameObject.GetComponent<ScoreTextControl>().SetScore("Score: " + scores.ToString());
     }
 
     public void Miss(int number)
     {
         misses += number;
-        MissText.text = "Miss: " + misses.ToString();
+        Canvas canvas = GameObject.FindObjectOfType<Canvas>();
+        if (canvas != null)
+            canvas.gameObject.GetComponent<ScoreTextControl>().SetMiss("Miss: " + misses.ToString());
     }
 
     public void ShowResultAt(Transform locTrans, HitResult hitResult)
@@ -68,8 +71,6 @@ public class MyGameInstance : MonoBehaviour
     {
         scores = 0;
         misses = 0;
-        MissText.text = "Miss: " + misses.ToString();
-        ScoreText.text = "Score: " + scores.ToString();
         SceneManager.LoadScene("ByreaveLoadingScene");
         Invoke("StartGame", 2.0f);
     }

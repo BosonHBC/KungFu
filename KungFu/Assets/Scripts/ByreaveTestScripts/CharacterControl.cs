@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class CharacterControl : MonoBehaviour
 {
-    public Camera FirstPersonCam, ThirdPersonCam;
+    public GameObject [] Perspectives;
 
+    int currentIndex = 0;
     bool switchCam = false;
     // Start is called before the first frame update
     void Start()
@@ -22,8 +23,9 @@ public class CharacterControl : MonoBehaviour
 
     void SwitchPerspective()
     {
-        switchCam = !switchCam;
-        FirstPersonCam.gameObject.SetActive(!switchCam);
-        ThirdPersonCam.gameObject.SetActive(switchCam);
+        Perspectives[currentIndex].SetActive(false);
+        if (++currentIndex == Perspectives.Length)
+            currentIndex = 0;
+        Perspectives[currentIndex].SetActive(true);
     }
 }
