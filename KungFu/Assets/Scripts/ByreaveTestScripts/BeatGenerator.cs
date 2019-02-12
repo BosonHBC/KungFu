@@ -32,14 +32,14 @@ public class BeatGenerator : MonoBehaviour
         BeatData = MyGameInstance.instance.GetComponent<TestDataLoader>().GetBeatDataByName("Kungfu");
         buttonMapping = new Dictionary<int, KeyCode>()
         {
-            {0, KeyCode.Q },
-            {1, KeyCode.A },
-            {2, KeyCode.Z },
+            {0, KeyCode.Y },
+            {1, KeyCode.Q },
+            {2, KeyCode.S },
             {3, KeyCode.E },
-            {4, KeyCode.D },
-            {5, KeyCode.C },
-            {6, KeyCode.W },
-            {7, KeyCode.S }
+            {4, KeyCode.N },
+            {5, KeyCode.U },
+            {6, KeyCode.K },
+            {7, KeyCode.O }
         };
         matchedButtons = new Dictionary<int, bool>();
     }
@@ -64,7 +64,8 @@ public class BeatGenerator : MonoBehaviour
             currentBeatIndex++;
             isInBeat = true;
         }
-        checkInput(activeButtons, isInBeat);
+        checkInputFromKeyboard(activeButtons, isInBeat);
+        checkInputFromArduino(activeButtons, isInBeat);
         if (isInBeat)
             reactionTimer += Time.deltaTime;
 
@@ -168,7 +169,7 @@ public class BeatGenerator : MonoBehaviour
         }
         return false;
     }
-    void checkInput(int [] aButtons, bool inBeat)
+    void checkInputFromKeyboard(int [] aButtons, bool inBeat)
     {
         foreach(var k in buttonMapping)
         {
@@ -201,6 +202,42 @@ public class BeatGenerator : MonoBehaviour
         }
     }
 
+    void checkInputFromArduino(int []aButtons, bool inBeat)
+    {
+        bool[] arduinoInput = MyGameInstance.instance.GetArduinoInput();
+        for(int i = 0; i < arduinoInput.Length; ++ i)
+        {
+            //More arduino inputs
+            if (i >= buttonMapping.Count)
+                continue;
+            if (!inBeat)
+            {
+                if (arduinoInput[i])
+                    hitButton(i);
+                else if (!arduinoInput[i])
+                    deactivateButton(i);
+            }
+            else
+            {
+                //the buttons to be pressed in this beat
+                if (hasElement(aButtons, i))
+                {
+                    if (arduinoInput[i])
+                    {
+                        matchButton(i);
+                    }
+                }
+                //other buttons
+                else
+                {
+                    if (arduinoInput[i])
+                        hitButton(i);
+                    else if (!arduinoInput[i])
+                        deactivateButton(i);
+                }
+            }
+        }
+    }
     void ToggleIndicator()
     {
         showIndicator = !showIndicator;

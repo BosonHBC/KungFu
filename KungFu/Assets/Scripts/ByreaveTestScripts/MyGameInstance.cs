@@ -15,6 +15,7 @@ public class MyGameInstance : MonoBehaviour
     public Text MissText;
     public GameObject ResultImageShow;
     int scores = 0, misses = 0;
+    bool [] buttonInput;
     //Awake is always called before any Start functions
     void Awake()
     {
@@ -51,5 +52,14 @@ public class MyGameInstance : MonoBehaviour
     {
         GameObject ri = Instantiate(ResultImageShow, locTrans.position, Quaternion.identity);
         ri.GetComponent<ResultImageControl>().ShowResult(hitResult);
+    }
+
+    public void SetArduinoInput(bool[] arduinoInput)
+    {
+        buttonInput = arduinoInput;
+    }
+    public bool[] GetArduinoInput()
+    {
+        return buttonInput;
     }
 }
