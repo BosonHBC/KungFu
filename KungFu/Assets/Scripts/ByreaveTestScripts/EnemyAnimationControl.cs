@@ -35,14 +35,10 @@ public class EnemyAnimationControl : MonoBehaviour
         {
             if(anim["AnimationID"].AsInt == AnimationID)
             {
-
-                Debug.Log(AnimationID);
-                Debug.Log(anim["AnimationName"].Value);
                 enemyAnimator.Play(anim["AnimationName"].Value);
                 return;
             }
         }
-        Debug.Log("No such Animation!");
     }
 
     public HitResult CheckHit(int AnimationID, float ReactTime)

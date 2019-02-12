@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public enum HitResult
 {
     Perfect,
@@ -61,5 +62,19 @@ public class MyGameInstance : MonoBehaviour
     public bool[] GetArduinoInput()
     {
         return buttonInput;
+    }
+
+    public void RestartGame()
+    {
+        scores = 0;
+        misses = 0;
+        MissText.text = "Miss: " + misses.ToString();
+        ScoreText.text = "Score: " + scores.ToString();
+        SceneManager.LoadScene("ByreaveLoadingScene");
+        Invoke("StartGame", 2.0f);
+    }
+    public void StartGame()
+    {
+        SceneManager.LoadScene("ByreaveWhitebox");
     }
 }

@@ -10,9 +10,13 @@ public class BeatGenerator : MonoBehaviour
     public Material matchMat;
     public Material hitMat;
 
+    public AudioClip[] MissSFXs;
+    public AudioClip[] MatchSFXs;
     //The order in the children is important, should be the same with button mapping
     [SerializeField]
     private GameObject[] ChildBodyParts;
+    [SerializeField]
+    GameObject Indicator;
 
     JSONNode BeatData;
     
@@ -52,6 +56,9 @@ public class BeatGenerator : MonoBehaviour
         {
             //Debug.Log(BeatData[currentBeatIndex]["timeToHit"].AsFloat);
             activeButtons = getIntArrayFromJSONNode(BeatData[currentBeatIndex]["buttonID"]);
+            //No active buttons, song ends restart
+            if (activeButtons == null)
+                MyGameInstance.instance.RestartGame();
             matchedButtons.Clear();//make sure matched buttons is clear
             foreach(int i in activeButtons)
             {
@@ -70,8 +77,7 @@ public class BeatGenerator : MonoBehaviour
             reactionTimer += Time.deltaTime;
 
         //Toggle Indicator
-        if (Input.GetKeyDown(KeyCode.I))
-            ToggleIndicator();
+        
     }
 
     //hightlight the parts to hit
@@ -79,7 +85,7 @@ public class BeatGenerator : MonoBehaviour
     {
         foreach(int i in ButtonIDs)
         {
-            Debug.Log(i);
+            //Debug.Log(i);
             ChildBodyParts[i].GetComponent<MeshRenderer>().material = activateMat;
         }
     }
@@ -92,6 +98,7 @@ public class BeatGenerator : MonoBehaviour
             //if is not already matched
             if(!matchedButtons[buttonID])
             {
+                PlayRandomMatchSFX();
                 if (showIndicator)
                     ChildBodyParts[buttonID].GetComponent<MeshRenderer>().material = matchMat;
                 //we can calculate the reacting time to give different scores (as a parameter to Score() function) here
@@ -108,6 +115,7 @@ public class BeatGenerator : MonoBehaviour
     //there is a hit
     void hitButton(int buttonID)
     {
+        PlayRandomMissSFX();
         if (showIndicator)
         {
             Debug.Log("Hit");
@@ -171,7 +179,11 @@ public class BeatGenerator : MonoBehaviour
     }
     void checkInputFromKeyboard(int [] aButtons, bool inBeat)
     {
-        foreach(var k in buttonMapping)
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            ToggleIndicator();
+        }
+        foreach (var k in buttonMapping)
         {
             if(!inBeat)
             {
@@ -241,5 +253,17 @@ public class BeatGenerator : MonoBehaviour
     void ToggleIndicator()
     {
         showIndicator = !showIndicator;
+        Indicator.transform.localScale = showIndicator ? Vector3.one : Vector3.zero;
+    }
+
+    void PlayRandomMissSFX()
+    {
+        GetComponent<AudioSource>().PlayOneShot(MissSFXs[Random.Range(0, MissSFXs.Length)]);
+    }
+
+    void PlayRandomMatchSFX()
+    {
+        GetComponent<AudioSource>().PlayOneShot(MatchSFXs[Random.Range(0, MatchSFXs.Length)]);
+        
     }
 }

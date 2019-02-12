@@ -46,7 +46,7 @@ public class GetArduinoInput : MonoBehaviour
     void stringToBoolArray(string input)
     {
         //Arduino having issues not sending all 11 buttons sometimes(once every few seconds but sends info every 5 ms shouldnt have any issues in human timescales lol)
-        if (input.Length < NUMBUTTONS)
+        if (input == null || input.Length < NUMBUTTONS)
         {
             input = "00000000000";
         }
