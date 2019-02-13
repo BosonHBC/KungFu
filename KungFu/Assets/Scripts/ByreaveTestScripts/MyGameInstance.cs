@@ -12,8 +12,6 @@ public enum HitResult
 public class MyGameInstance : MonoBehaviour
 {
     public static MyGameInstance instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
-    public GameObject ResultImageShow;
-    
     int scores = 0, misses = 0;
     bool [] buttonInput;
     //Awake is always called before any Start functions
@@ -50,12 +48,6 @@ public class MyGameInstance : MonoBehaviour
         Canvas canvas = GameObject.FindObjectOfType<Canvas>();
         if (canvas != null)
             canvas.gameObject.GetComponent<ScoreTextControl>().SetMiss("Miss: " + misses.ToString());
-    }
-
-    public void ShowResultAt(Transform locTrans, HitResult hitResult)
-    {
-        GameObject ri = Instantiate(ResultImageShow, locTrans.position, Quaternion.identity);
-        ri.GetComponent<ResultImageControl>().ShowResult(hitResult);
     }
 
     public void SetArduinoInput(bool[] arduinoInput)

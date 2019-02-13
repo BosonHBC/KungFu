@@ -23,9 +23,8 @@ public class CharacterControl : MonoBehaviour
 
     void SwitchPerspective()
     {
-        Perspectives[currentIndex].SetActive(false);
         if (++currentIndex == Perspectives.Length)
             currentIndex = 0;
-        Perspectives[currentIndex].SetActive(true);
+        Camera.main.transform.SetPositionAndRotation(Perspectives[currentIndex].transform.position, Perspectives[currentIndex].transform.rotation);
     }
 }
