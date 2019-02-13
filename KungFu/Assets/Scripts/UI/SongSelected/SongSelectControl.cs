@@ -76,8 +76,6 @@ public class SongSelectControl : MonoBehaviour
             SelectSong();
         }
 
-
-        Debug.Log(bCanMove);
     }
 
     public void SelectSong()
