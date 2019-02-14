@@ -4,12 +4,14 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
+
 public class SongSelectControl : MonoBehaviour
 {
     // public and Serilizable
     [SerializeField] GameObject songPannelPrefab;
     [SerializeField] UIFader downPointer;
     // private
+    private Material blurMat;
     private RectTransform trRect;
     private HorizontalLayoutGroup horiLayout;
     private int fPannelWidth;
@@ -32,6 +34,9 @@ public class SongSelectControl : MonoBehaviour
     [SerializeField] private int DebugSongCount = 3;
     void Start()
     {
+        // Set blur mask
+        blurMat = transform.parent.parent.GetChild(0).GetComponent<Image>().material;
+        blurMat.SetFloat("_Size", 5.5f);
         moveTo = GetComponent<UIMover>();
         trRect = GetComponent<RectTransform>();
         horiLayout = GetComponent<HorizontalLayoutGroup>();
@@ -40,33 +45,36 @@ public class SongSelectControl : MonoBehaviour
         Debug.Log("CurrentIndex: " + targetSongIndex);
 
         // Debug High Score
-        HighScoreManager._instance.ClearLeaderBoard("Kung Fu");
-        HighScoreManager._instance.SaveHighScore("AEA", Random.Range(80000,100000), "Kung Fu");
+        TestDataLoader loader = GetComponent<TestDataLoader>();
+        SimpleJSON.JSONNode allMusicData = loader.GetMusicData();
 
         // Create game object
-        for (int i = 0; i < DebugSongCount; i++)
+        for (int i = 0; i < allMusicData.Count; i++)
         {
+            // Debug High Score
+            HighScoreManager._instance.ClearLeaderBoard(allMusicData[i]["name"]);
+            HighScoreManager._instance.SaveHighScore(RandomString(3), Random.Range(80000, 100000), allMusicData[i]["name"]);
             GameObject go = Instantiate(songPannelPrefab);
 
             go.name = "SongPannel_" + (DebugSongCount - 1 - i).ToString();
+            //go.transform.localRotation = Quaternion.identity;
             // Transform
             go.transform.SetParent(transform);
             go.transform.SetSiblingIndex(1);
             RectTransform _trRect = go.GetComponent<RectTransform>();
             _trRect.localScale = Vector3.one;
+            _trRect.localEulerAngles = Vector3.zero;
             _trRect.localPosition = new Vector3(_trRect.position.x, _trRect.position.y, 0);
             // List
             pannels.Add(go.GetComponent<SongPannel>());
             pannels[i].iSongID = i;
-            pannels[i].SetData("Player" + i, "Kung Fu", 50 + i * 20);
+            pannels[i].SetData(allMusicData[i]["charName"], allMusicData[i]["name"], allMusicData[i]["lengthInSeconds"]);
         }
         pannels.Reverse();
 
         // set transform width
         trRect.sizeDelta = new Vector2(trRect.sizeDelta.x + DebugSongCount * fPannelWidth, trRect.sizeDelta.y);
-
         Invoke("SetData", 0.1f);
-
 
     }
 
@@ -105,7 +113,7 @@ public class SongSelectControl : MonoBehaviour
     public void SelectSong()
     {
         bCanRegister = false;
-        if (!bSelecting && bCanMove)
+        if (!bSelecting && bCanMove && targetSongIndex >= 0 && targetSongIndex < pannels.Count)
         {
             bSelecting = true;
             bCanMove = false;
@@ -116,7 +124,7 @@ public class SongSelectControl : MonoBehaviour
     {
         bCanRegister = false;
 
-        if (bCanMove && bSelecting)
+        if (bCanMove && bSelecting && targetSongIndex >= 0 && targetSongIndex < pannels.Count)
         {
 
             bCanMove = false;
@@ -275,4 +283,23 @@ public class SongSelectControl : MonoBehaviour
 
     }
 
+    private void OnDestroy()
+    {
+        blurMat.SetFloat("_Size", 0f);
+
+    }
+
+    public string RandomString(int length)
+    {
+        char[] stringChars = new char[length];
+        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        
+        for (int i = 0; i < length; i++)
+        {
+            Random.InitState(i);
+            stringChars[i] = chars[Random.Range(0, length)];
+        }
+
+        return stringChars.ToString();
+    }
 }

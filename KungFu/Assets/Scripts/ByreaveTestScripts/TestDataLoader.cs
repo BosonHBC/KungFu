@@ -15,9 +15,10 @@ public class TestDataLoader : MonoBehaviour
 
     private void Awake()
     {
+       
         //just for testing, this is supposed to be in the loading scene
         LoadGameData();
-
+        
     }
     // Start is called before the first frame update
     void Start()
@@ -78,5 +79,9 @@ public class TestDataLoader : MonoBehaviour
     public JSONNode GetAnimationData()
     {
         return animationData;
+    }
+    public JSONNode GetMusicData()
+    {
+        return musicData;
     }
 }
