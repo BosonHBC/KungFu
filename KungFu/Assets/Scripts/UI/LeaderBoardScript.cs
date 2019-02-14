@@ -38,7 +38,7 @@ public class LeaderBoardScript : MonoBehaviour
 
     private void OnEnable()
     {
-        songs = new string[] { "XiaoHong", "Test"};
+        songs = new string[] { "XiaoHong", "Test", "Kung Fu"};
     }
 
     // Update is called once per frame

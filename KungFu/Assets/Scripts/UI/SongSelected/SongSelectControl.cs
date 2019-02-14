@@ -24,6 +24,10 @@ public class SongSelectControl : MonoBehaviour
     private float fUIMoveSpeed = 0.1f;
     private float fUIExpandTime = 0.5f;
 
+    private bool bCanRegister;
+    private float fRegisterDelayTime = 0.2f;
+    private float fDelayCollpaseTime;
+
     [Header("Debug")]
     [SerializeField] private int DebugSongCount = 3;
     void Start()
@@ -34,6 +38,10 @@ public class SongSelectControl : MonoBehaviour
         fPannelWidth = (int)songPannelPrefab.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite.rect.width;
         targetSongIndex = (DebugSongCount - 1) / 2;
         Debug.Log("CurrentIndex: " + targetSongIndex);
+
+        // Debug High Score
+        HighScoreManager._instance.ClearLeaderBoard("Kung Fu");
+        HighScoreManager._instance.SaveHighScore("AEA", Random.Range(80000,100000), "Kung Fu");
 
         // Create game object
         for (int i = 0; i < DebugSongCount; i++)
@@ -49,6 +57,8 @@ public class SongSelectControl : MonoBehaviour
             _trRect.localPosition = new Vector3(_trRect.position.x, _trRect.position.y, 0);
             // List
             pannels.Add(go.GetComponent<SongPannel>());
+            pannels[i].iSongID = i;
+            pannels[i].SetData("Player" + i, "Kung Fu", 50 + i * 20);
         }
         pannels.Reverse();
 
@@ -56,35 +66,74 @@ public class SongSelectControl : MonoBehaviour
         trRect.sizeDelta = new Vector2(trRect.sizeDelta.x + DebugSongCount * fPannelWidth, trRect.sizeDelta.y);
 
         Invoke("SetData", 0.1f);
-       
-        
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKey(KeyCode.D) && bCanRegister)
         {
             NextSong();
         }
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) && bCanRegister)
         {
             PreviousSong();
         }
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKey(KeyCode.E) && bCanRegister)
         {
             SelectSong();
+        }
+        if (Input.GetKey(KeyCode.Q) && bCanRegister)
+        {
+            GoBack();
+        }
+
+        if (!bCanRegister)
+        {
+            fDelayCollpaseTime += Time.deltaTime;
+            if (fDelayCollpaseTime >= fRegisterDelayTime)
+            {
+                fDelayCollpaseTime = 0;
+                bCanRegister = true;
+            }
         }
 
     }
 
     public void SelectSong()
     {
+        bCanRegister = false;
         if (!bSelecting && bCanMove)
         {
             bSelecting = true;
-            StartCoroutine(ExpandTargetPannel(targetSongIndex, fExpandWidth, delegate { }, fUIExpandTime));
+            bCanMove = false;
+            StartCoroutine(ExpandTargetPannel(targetSongIndex, fExpandWidth, delegate { bCanMove = true; }, fUIExpandTime));
         }
+    }
+    public void GoBack()
+    {
+        bCanRegister = false;
+
+        if (bCanMove && bSelecting)
+        {
+
+            bCanMove = false;
+            bSelecting = false;
+            StartCoroutine(ExpandTargetPannel(targetSongIndex, -fExpandWidth, delegate
+            {
+                // Recover offset of the tr Rect
+                RectTransform _rect = pannels[targetSongIndex].GetComponent<RectTransform>();
+                // final moving distance
+                float destPos = (int)(_rect.localPosition.x + trRect.anchoredPosition.x);
+                moveTo.UIMoveToPosition(Vector3.right, -destPos, fUIMoveSpeed, delegate { Debug.Log("Current: " + targetSongIndex); bCanMove = true; });
+
+            }, fUIExpandTime));
+
+
+        }
+
     }
 
     void SetData()
@@ -95,26 +144,15 @@ public class SongSelectControl : MonoBehaviour
     }
     public void NextSong()
     {
-        if (bCanMove)
+        bCanRegister = false;
+
+        if (bCanMove && !bSelecting)
         {
             bCanMove = false;
 
             if (targetSongIndex < pannels.Count - 1)
             {
                 downPointer.FadeIn();
-                if (targetSongIndex >= 0 && bSelecting)
-                {
-                    // fade in previous one
-                    StartCoroutine(ExpandTargetPannel(targetSongIndex, -fExpandWidth, delegate { // next rect transform
-                        RectTransform d_rect = pannels[targetSongIndex + 1].GetComponent<RectTransform>();
-                        // final moving distance
-                        float d_destPos = (int)Mathf.Abs(d_rect.localPosition.x + trRect.anchoredPosition.x);
-                        moveTo.UIMoveToPosition(Vector3.left, d_destPos, fUIMoveSpeed, delegate { targetSongIndex++; Debug.Log("Current: " + targetSongIndex); bCanMove = true;/*SelectSong();*/ });
-                    }, fUIExpandTime));
-                    
-                    return;
-                    
-                }
                 // next rect transform
                 RectTransform _rect = pannels[targetSongIndex + 1].GetComponent<RectTransform>();
                 // final moving distance
@@ -122,77 +160,62 @@ public class SongSelectControl : MonoBehaviour
                 moveTo.UIMoveToPosition(Vector3.left, destPos, fUIMoveSpeed, delegate { targetSongIndex++; Debug.Log("Current: " + targetSongIndex); bCanMove = true;/*SelectSong();*/ });
 
             }
-            else
+            else// Go to border
             {
-                if (bSelecting)
-                {
-                    
-                    StartCoroutine(ExpandTargetPannel(pannels.Count - 1, -fExpandWidth, delegate {
-                        downPointer.FadeOut();
-                        moveTo.UIMoveToPosition(Vector3.left, 1000f, fUIMoveSpeed, delegate { Debug.Log("Go to right boundary"); bCanMove = true; });
-                        targetSongIndex = pannels.Count;
-                    }, fUIExpandTime));
-                    return;
-                }
                 downPointer.FadeOut();
                 moveTo.UIMoveToPosition(Vector3.left, 1000f, fUIMoveSpeed, delegate { Debug.Log("Go to right boundary"); bCanMove = true; });
                 targetSongIndex = pannels.Count;
             }
         }
+
+        if (bSelecting)
+        {
+            pannels[targetSongIndex].SwitchDifficult(1);
+        }
     }
 
     public void PreviousSong()
     {
-        if (bCanMove)
+        bCanRegister = false;
+
+        if (bCanMove && !bSelecting)
         {
             bCanMove = false;
             if (targetSongIndex > 0)
             {
                 downPointer.FadeIn();
-                if (targetSongIndex >= 0 && bSelecting)
-                {
-                    // fade in previous one
-                    StartCoroutine(ExpandTargetPannel(targetSongIndex, -fExpandWidth, delegate {
-                        RectTransform d_rect = pannels[targetSongIndex - 1].GetComponent<RectTransform>();
-                        float d_destPos = (int)Mathf.Abs(d_rect.localPosition.x + trRect.anchoredPosition.x);
-                        moveTo.UIMoveToPosition(Vector3.right, d_destPos, fUIMoveSpeed, delegate { targetSongIndex--; Debug.Log("Current: " + targetSongIndex); bCanMove = true;/*SelectSong();*/ });
-
-                    }, fUIExpandTime));
-                    
-                    return;
-                }
                 RectTransform _rect = pannels[targetSongIndex - 1].GetComponent<RectTransform>();
                 float destPos = (int)Mathf.Abs(_rect.localPosition.x + trRect.anchoredPosition.x);
                 moveTo.UIMoveToPosition(Vector3.right, destPos, fUIMoveSpeed, delegate { targetSongIndex--; Debug.Log("Current: " + targetSongIndex); bCanMove = true;/*SelectSong();*/ });
             }
-            else
+            else// Go to border
             {
-                if (bSelecting)
-                {
-                    
-                    StartCoroutine(ExpandTargetPannel(0, -fExpandWidth, delegate {
-                        downPointer.FadeOut();
-                        moveTo.UIMoveToPosition(Vector3.right, 1000f, fUIMoveSpeed, delegate { Debug.Log("Go to left boundary"); bCanMove = true; });
-                        targetSongIndex = -1;
-                    }, fUIExpandTime));
-                    return;
-                }
                 downPointer.FadeOut();
                 moveTo.UIMoveToPosition(Vector3.right, 1000f, fUIMoveSpeed, delegate { Debug.Log("Go to left boundary"); bCanMove = true; });
                 targetSongIndex = -1;
             }
+        }
+        if (bSelecting)
+        {
+            pannels[targetSongIndex].SwitchDifficult(0);
         }
     }
 
     IEnumerator ExpandTargetPannel(int _id, float _delta, UnityAction _onFinishExpand, float _fadeTime = 0.5f)
     {
         bSelecting = true;
-        if(_id >=0 && _id < pannels.Count)
+        if (_id >= 0 && _id < pannels.Count)
         {
             if (_delta > 0)
+            {
+                pannels[_id].bSelecting = true;
                 pannels[_id].ExpandPannel();
+            }
             else if (_delta < 0)
+            {
+                pannels[_id].bSelecting = false;
                 pannels[_id].FoldPannel();
+            }
         }
 
 
@@ -214,9 +237,9 @@ public class SongSelectControl : MonoBehaviour
         if (targetSongIndex == 2)
             _preNextOffset = -1;
 
-        if (targetSongIndex == 0 || targetSongIndex ==2)
+        if (targetSongIndex == 0 || targetSongIndex == 2)
         {
-           parentX_Start = trRect.anchoredPosition.x;
+            parentX_Start = trRect.anchoredPosition.x;
             parentX_Dest = trRect.anchoredPosition.x + _preNextOffset * 90;
         }
 
@@ -227,7 +250,7 @@ public class SongSelectControl : MonoBehaviour
 
             float pannel_Current = Mathf.Lerp(pannel_Start, pannel_Dest, _lerpPercentage);
             float parent_Current = Mathf.Lerp(parent_Start, parent_Dest, _lerpPercentage);
-            
+
             RectTransform _rect = pannels[_id].GetComponent<RectTransform>();
             _rect.sizeDelta = new Vector2(pannel_Current, _rect.sizeDelta.y);
             trRect.sizeDelta = new Vector2(parent_Current, trRect.sizeDelta.y);
@@ -249,7 +272,7 @@ public class SongSelectControl : MonoBehaviour
 
         if (_onFinishExpand != null)
             _onFinishExpand.Invoke();
-       
+
     }
 
 }
