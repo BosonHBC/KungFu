@@ -11,17 +11,12 @@ public class HintTrackControl : MonoBehaviour
     [SerializeField]
     Color PerfectColor;
 
-    enum HintState
-    {
-        Perfect,
-        OK,
-        Normal
-    }
-    float OKStart, OKDuration, PerfectStart, PerfectDuration;
+    public BeatAnimation beatTiming;
+    public HitResult hintState = HitResult.Miss;
+
     float MoveSpeed, timer = 0.0f;
     bool isMoving = false;
     int[] buttonIDs;
-    HintState hintState = HintState.Normal;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,17 +36,13 @@ public class HintTrackControl : MonoBehaviour
             transform.Translate(Vector3.left * MoveSpeed * Time.deltaTime);
             switch(hintState)
             {
-                case HintState.Normal:
-                    if (timer >= OKStart)
+                case HitResult.Miss:
+                    if (timer >= beatTiming.OKStart)
                         ChangeToOK(buttonIDs);
                     break;
-                case HintState.OK:
-                    if (timer >= PerfectStart)
+                case HitResult.Good:
+                    if (timer >= beatTiming.PerfectStart)
                         ChangeToPerfect(buttonIDs);
-                    break;
-                case HintState.Perfect:
-                    if (timer >= PerfectStart + PerfectDuration)
-                        ChangeBack(buttonIDs);
                     break;
                 default:
                     break;
@@ -69,7 +60,7 @@ public class HintTrackControl : MonoBehaviour
                 ChildBodyParts[nodes[i]].GetComponent<Image>().color = OKColor;
             }
         }
-        hintState = HintState.OK;
+        hintState = HitResult.Good;
     }
 
     void ChangeToPerfect(int[] nodes)
@@ -81,7 +72,7 @@ public class HintTrackControl : MonoBehaviour
                 ChildBodyParts[nodes[i]].GetComponent<Image>().color = PerfectColor;
             }
         }
-        hintState = HintState.Perfect;
+        hintState = HitResult.Perfect;
     }
 
     void ChangeBack(int[] nodes)
@@ -93,9 +84,16 @@ public class HintTrackControl : MonoBehaviour
                 ChildBodyParts[nodes[i]].GetComponent<Image>().color = Color.white;
             }
         }
-        hintState = HintState.Normal;
+        hintState = HitResult.Miss;
     }
 
+    public void MatchButton(int butID)
+    {
+        if(butID < ChildBodyParts.Count)
+        {
+            ChildBodyParts[butID].GetComponent<Image>().color = Color.white;
+        }
+    }
     void ActivateButtons(int[] nodes)
     {
         for(int i = 0; i < nodes.Length; ++ i)
@@ -104,13 +102,10 @@ public class HintTrackControl : MonoBehaviour
         }
     }
 
-    public void StartMoving(float speed, float okStart, float okDuration, float perStart, float perDuration, int[] butIDs)
+    public void StartMoving(float speed, BeatAnimation beatTime, int[] butIDs)
     {
+        beatTiming = beatTime;
         MoveSpeed = speed;
-        OKStart = okStart;
-        OKDuration = okDuration;
-        PerfectStart = perStart;
-        PerfectDuration = perDuration;
         buttonIDs = butIDs;
 
         isMoving = true;
@@ -119,7 +114,21 @@ public class HintTrackControl : MonoBehaviour
 
     IEnumerator FadeOut(float time = 1.0f)
     {
-        while(ChildBodyParts[0].GetComponent<Image>().color)
-        yield return new WaitForSeconds(Time.deltaTime);
+        isMoving = false;
+        while(ChildBodyParts[0].GetComponent<Image>().color.a >= 0)
+        {
+            for(int i = 0; i < ChildBodyParts.Count; ++ i)
+            {
+                Color tmp = ChildBodyParts[0].GetComponent<Image>().color;
+                ChildBodyParts[0].GetComponent<Image>().color = new Color(tmp.r, tmp.g, tmp.b, tmp.a - Time.deltaTime / time);
+            }
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+        Destroy(gameObject);
+    }
+
+    public void RemoveDDR(float fadingTime = 1.0f)
+    {
+        StartCoroutine(FadeOut(fadingTime));
     }
 }

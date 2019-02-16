@@ -782,6 +782,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OKColor: {r: 0.882353, g: 0.627451, b: 0.18431373, a: 1}
   PerfectColor: {r: 0.19215688, g: 0.909804, b: 0.32156864, a: 0}
+  OKStart: 0
+  OKDuration: 0
+  PerfectStart: 0
+  PerfectDuration: 0
 --- !u!1 &1423767979
 GameObject:
   m_ObjectHideFlags: 0
