@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class HintTrackControl : MonoBehaviour
 {
-    List<GameObject> ChildBodyParts;
+    [SerializeField]
+    GameObject[] ChildBodyParts;
     [SerializeField]
     Color OKColor;
     [SerializeField]
@@ -15,16 +16,13 @@ public class HintTrackControl : MonoBehaviour
     public HitResult hintState = HitResult.Miss;
 
     float MoveSpeed, timer = 0.0f;
+    float TimeBeforeHit;
     bool isMoving = false;
     int[] buttonIDs;
     // Start is called before the first frame update
     void Start()
     {
-        ChildBodyParts = new List<GameObject>();
-        for(int i = 0; i < transform.childCount; ++ i)
-        {
-            ChildBodyParts.Add(transform.GetChild(i).gameObject);
-        }
+
     }
 
     // Update is called once per frame
@@ -33,15 +31,16 @@ public class HintTrackControl : MonoBehaviour
         if(isMoving)
         {
             timer += Time.deltaTime;
-            transform.Translate(Vector3.left * MoveSpeed * Time.deltaTime);
+            transform.localPosition += Vector3.left * MoveSpeed * Time.deltaTime;
+            //transform.Translate(Vector3.left * MoveSpeed * Time.deltaTime);
             switch(hintState)
             {
                 case HitResult.Miss:
-                    if (timer >= beatTiming.OKStart)
+                    if (timer >= beatTiming.OKStart + TimeBeforeHit)
                         ChangeToOK(buttonIDs);
                     break;
                 case HitResult.Good:
-                    if (timer >= beatTiming.PerfectStart)
+                    if (timer >= beatTiming.PerfectStart + TimeBeforeHit)
                         ChangeToPerfect(buttonIDs);
                     break;
                 default:
@@ -55,7 +54,7 @@ public class HintTrackControl : MonoBehaviour
     {
         for (int i = 0; i < nodes.Length; ++ i)
         {
-            if(nodes[i] < ChildBodyParts.Count)
+            if(nodes[i] < ChildBodyParts.Length)
             {
                 ChildBodyParts[nodes[i]].GetComponent<Image>().color = OKColor;
             }
@@ -67,7 +66,7 @@ public class HintTrackControl : MonoBehaviour
     {
         for (int i = 0; i < nodes.Length; ++i)
         {
-            if (nodes[i] < ChildBodyParts.Count)
+            if (nodes[i] < ChildBodyParts.Length)
             {
                 ChildBodyParts[nodes[i]].GetComponent<Image>().color = PerfectColor;
             }
@@ -79,7 +78,7 @@ public class HintTrackControl : MonoBehaviour
     {
         for (int i = 0; i < nodes.Length; ++i)
         {
-            if (nodes[i] < ChildBodyParts.Count)
+            if (nodes[i] < ChildBodyParts.Length)
             {
                 ChildBodyParts[nodes[i]].GetComponent<Image>().color = Color.white;
             }
@@ -89,8 +88,9 @@ public class HintTrackControl : MonoBehaviour
 
     public void MatchButton(int butID)
     {
-        if(butID < ChildBodyParts.Count)
+        if(butID < ChildBodyParts.Length)
         {
+            Debug.Log("asdsad");
             ChildBodyParts[butID].GetComponent<Image>().color = Color.white;
         }
     }
@@ -98,16 +98,16 @@ public class HintTrackControl : MonoBehaviour
     {
         for(int i = 0; i < nodes.Length; ++ i)
         {
-            ChildBodyParts[i].SetActive(true);
+            ChildBodyParts[nodes[i]].SetActive(true);
         }
     }
 
-    public void StartMoving(float speed, BeatAnimation beatTime, int[] butIDs)
+    public void StartMoving(float speed, BeatAnimation beatTime, int[] butIDs, float timeBeforeBeat)
     {
         beatTiming = beatTime;
         MoveSpeed = speed;
         buttonIDs = butIDs;
-
+        TimeBeforeHit = timeBeforeBeat;
         isMoving = true;
         ActivateButtons(buttonIDs);
     }
@@ -117,7 +117,7 @@ public class HintTrackControl : MonoBehaviour
         isMoving = false;
         while(ChildBodyParts[0].GetComponent<Image>().color.a >= 0)
         {
-            for(int i = 0; i < ChildBodyParts.Count; ++ i)
+            for(int i = 0; i < ChildBodyParts.Length; ++ i)
             {
                 Color tmp = ChildBodyParts[0].GetComponent<Image>().color;
                 ChildBodyParts[0].GetComponent<Image>().color = new Color(tmp.r, tmp.g, tmp.b, tmp.a - Time.deltaTime / time);
