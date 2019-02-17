@@ -24,15 +24,13 @@ public class HintGenerator : MonoBehaviour
 
     public void NewHint(BeatAnimation beatTiming, int[] ButtonIDs)
     {
-        GameObject tmpGO = Instantiate(HintObject, transform.position, Quaternion.identity);
-        tmpGO.GetComponentInChildren<HintTrackControl>().StartMoving(HintObjectSpeed, beatTiming, ButtonIDs);
+        GameObject tmpGO = Instantiate(HintObject, transform.position, Quaternion.identity, transform);
+        tmpGO.GetComponent<HintTrackControl>().StartMoving(HintObjectSpeed, beatTiming, ButtonIDs, HintTimeBeforeHit);
         hintsQueue.Enqueue(tmpGO);
-        Debug.Log("asdsda");
         if(!hasAreaPlaced)
         {
             PlaceOKAndPerfect(beatTiming);
             hasAreaPlaced = true;
-            Debug.Log("asdsdasss");
         }
     }
 
@@ -41,7 +39,7 @@ public class HintGenerator : MonoBehaviour
     {
         OKArea.rectTransform.localPosition = new Vector3(-(HintTimeBeforeHit + beatTiming.OKStart) * HintObjectSpeed, 0.0f, 0.0f);
         OKArea.rectTransform.sizeDelta = new Vector2(beatTiming.OKDuration * 100.0f, 100.0f);
-        PerfectArea.rectTransform.position = new Vector3(-(HintTimeBeforeHit + beatTiming.PerfectStart) * HintObjectSpeed, 0.0f, 0.0f);
+        PerfectArea.rectTransform.localPosition = new Vector3(-(HintTimeBeforeHit + beatTiming.PerfectStart) * HintObjectSpeed, 0.0f, 0.0f);
         PerfectArea.rectTransform.sizeDelta = new Vector2(beatTiming.PerfectDuration * 100.0f, 100.0f);
     }
 
@@ -52,12 +50,12 @@ public class HintGenerator : MonoBehaviour
             GameObject tmpGO = hintsQueue.Peek();
             //ShowResultAt(hitResult, tmpGO.transform);
             hintsQueue.Dequeue();
-            tmpGO.GetComponentInChildren<HintTrackControl>().RemoveDDR();
+            tmpGO.GetComponent<HintTrackControl>().RemoveDDR();
             if(hintsQueue.Count != 0)
             {
                 //Change the perfect and OK area to the most current one
                 tmpGO = hintsQueue.Peek();
-                HintTrackControl tmpHTC = tmpGO.GetComponentInChildren<HintTrackControl>();
+                HintTrackControl tmpHTC = tmpGO.GetComponent<HintTrackControl>();
                 PlaceOKAndPerfect(tmpHTC.beatTiming);
             }
             else
@@ -72,13 +70,15 @@ public class HintGenerator : MonoBehaviour
         if (hintsQueue.Count != 0)
         {
             GameObject tmpGO = hintsQueue.Peek();
-            tmpGO.GetComponentInChildren<HintTrackControl>().MatchButton(ButID);
+            tmpGO.GetComponent<HintTrackControl>().MatchButton(ButID);
         }
     }
 
     void ShowResultAt(HitResult hitResult, Transform locTrans)
     {
         GameObject ri = Instantiate(ResultImageShow, locTrans.position, transform.rotation);
+        //scale a bit
+        ri.transform.localScale = ri.transform.localScale / 2;
         ri.GetComponent<ResultImageControl>().ShowResult(hitResult);
     }
 

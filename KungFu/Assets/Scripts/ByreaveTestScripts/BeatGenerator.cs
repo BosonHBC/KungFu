@@ -50,15 +50,15 @@ public class BeatGenerator : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        if (BeatData[currentHintIndex]["timeToHit"].AsFloat <= timer - hintGenerator.HintTimeBeforeHit)
+        //hint indicator
+        if (BeatData[currentHintIndex]["timeToHit"].AsFloat <= timer + hintGenerator.HintTimeBeforeHit)
         {
             int[] tmpButtons = getIntArrayFromJSONNode(BeatData[currentHintIndex]["buttonID"]);
-            
+
             //No active buttons, song ends restart
             if (tmpButtons == null)
                 MyGameInstance.instance.RestartGame();
             BeatAnimation ba = getBeatAnimationFromAnimID(BeatData[currentHintIndex]["AnimationID"].AsInt);
-            Debug.Log(ba.Name);
             hintGenerator.NewHint(ba, tmpButtons);
             currentHintIndex++;
         }
