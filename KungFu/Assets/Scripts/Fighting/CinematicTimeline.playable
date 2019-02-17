@@ -796,6 +796,21 @@ MonoBehaviour:
   m_OpenClipOffsetRotation: {x: 0, y: 0, z: 0, w: 1}
   m_Rotation: {x: 0, y: 0, z: 0, w: 1}
   m_ApplyOffsets: 0
+--- !u!114 &114289645646943416
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90fb794a295e73545af71bcdb7375791, type: 3}
+  m_Name: CinemachineShot
+  m_EditorClassIdentifier: 
+  VirtualCamera:
+    exposedName: 7ebe8b9aaac17c548a535752b9abc5a5
+    defaultValue: {fileID: 0}
 --- !u!114 &114428786776851224
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -833,13 +848,13 @@ MonoBehaviour:
   - m_Start: 0
     m_ClipIn: 0
     m_Asset: {fileID: 114189294889262944}
-    m_Duration: 9.766666666666667
+    m_Duration: 10
     m_TimeScale: 1
     m_ParentTrack: {fileID: 114495480451188178}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
     m_BlendInDuration: -1
-    m_BlendOutDuration: 2.3166666666666673
+    m_BlendOutDuration: 2.55
     m_MixInCurve:
       serializedVersion: 2
       m_Curve:
@@ -879,17 +894,50 @@ MonoBehaviour:
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: CM vcam1
+    m_DisplayName: vCamLookingAround
     m_Version: 1
   - m_Start: 7.45
     m_ClipIn: 0
     m_Asset: {fileID: 114428786776851224}
-    m_Duration: 3.05
+    m_Duration: 6.6000000000000005
     m_TimeScale: 1
     m_ParentTrack: {fileID: 114495480451188178}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
-    m_BlendInDuration: 2.3166666666666673
+    m_BlendInDuration: 2.55
+    m_BlendOutDuration: 0.43333333333333357
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 0
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 0}
+    m_Recordable: 0
+    m_PostExtrapolationMode: 0
+    m_PreExtrapolationMode: 0
+    m_PostExtrapolationTime: 0
+    m_PreExtrapolationTime: 0
+    m_DisplayName: vCamSideView
+    m_Version: 1
+  - m_Start: 13.616666666666667
+    m_ClipIn: 0
+    m_Asset: {fileID: 114289645646943416}
+    m_Duration: 5
+    m_TimeScale: 1
+    m_ParentTrack: {fileID: 114495480451188178}
+    m_EaseInDuration: 0
+    m_EaseOutDuration: 0
+    m_BlendInDuration: 0.43333333333333357
     m_BlendOutDuration: -1
     m_MixInCurve:
       serializedVersion: 2
@@ -948,7 +996,7 @@ MonoBehaviour:
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: CM vcam2
+    m_DisplayName: PlayerCamera
     m_Version: 1
   m_Version: 2
 --- !u!114 &114792546542368190
