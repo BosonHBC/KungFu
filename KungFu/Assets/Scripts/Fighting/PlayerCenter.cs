@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerCenter : MonoBehaviour
 {
-    [SerializeField] Transform trP1;
-    [SerializeField] Transform trP2;
+    public Transform trP1;
+    public Transform trP2;
 
     [SerializeField] float fLerpTime;
     [SerializeField] float fYOffset; 

@@ -101,5 +101,15 @@ public class Player : Character
         {
             anim.Play("handssors");
         }
+
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            GetDamage(20);
+        }
+    }
+
+    public void SetLookAt(Transform _lookAt)
+    {
+        myCamera.m_LookAt = _lookAt;
     }
 }
