@@ -10411,7 +10411,7 @@ MonoBehaviour:
   kernelSize: 2
   interpolation: 1
   downsample: 0
-  iterations: 4
+  iterations: 3
   gammaCorrection: 1
   blurMaterial: {fileID: 2100000, guid: 46338be4b5242ca4693ba6eda3416e0c, type: 2}
   UIMaterial: {fileID: 2100000, guid: 97f1a6341d46c2a44918c513e84802d4, type: 2}
