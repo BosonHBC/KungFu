@@ -216,6 +216,24 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 8310223325196156328}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &33895120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 33895118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4814be2455df5c4489d37fb4691ad6eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LeftWrist: {fileID: 1675006478}
+  RightWrist: {fileID: 731077594}
+  RingIndicator: {fileID: 924977352302758509, guid: 8faa41598f515e44f93f4ebc7d61f09c,
+    type: 3}
+  PerfectColor: {r: 1, g: 0, b: 0, a: 1}
+  OKColor: {r: 0, g: 1, b: 0, a: 1}
 --- !u!1 &92625606
 GameObject:
   m_ObjectHideFlags: 0
@@ -715,6 +733,12 @@ Transform:
   m_Father: {fileID: 1896017132}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: -89.04, z: 0}
+--- !u!4 &731077594 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 61861568, guid: 35f5e2e1d0018f5449336dd61bf57e04,
+    type: 3}
+  m_PrefabInstance: {fileID: 455544158}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &790943214
 GameObject:
   m_ObjectHideFlags: 0
@@ -1149,6 +1173,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f097a77dcd005964a83a810ab370d83b, type: 3}
+--- !u!4 &1675006478 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1650540164, guid: 35f5e2e1d0018f5449336dd61bf57e04,
+    type: 3}
+  m_PrefabInstance: {fileID: 455544158}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1810998276
 GameObject:
   m_ObjectHideFlags: 0

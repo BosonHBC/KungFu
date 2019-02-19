@@ -20,12 +20,15 @@ public class HintGenerator : MonoBehaviour
     BeatGenerator beatGenerator;
     JSONNode beatData;
     int currentHintIndex = 0;
+    //Ring Indicator
+    RingIndicatorControl ringIndicator;
     // Start is called before the first frame update
     void Start()
     {
         beatData = MyGameInstance.instance.GetComponent<TestDataLoader>().GetBeatDataByName("Kungfu");
         beatGenerator = FindObjectOfType<BeatGenerator>();
         hintsQueue = new Queue<GameObject>();
+        ringIndicator = GetComponent<RingIndicatorControl>();
     }
     private void Update()
     {
@@ -38,6 +41,7 @@ public class HintGenerator : MonoBehaviour
                 return;
             BeatAnimation ba = MyGameInstance.instance.GetComponent<TestDataLoader>().GetBeatAnimationDataByID(beatData[currentHintIndex]["AnimationID"].AsInt);
             GenerateHint(ba, activeButtons);
+            StartCoroutine(ShowRingIndicatorInSecs(ba, HintTimeBeforeHit));
             currentHintIndex++;
         }
     }
@@ -90,5 +94,11 @@ public class HintGenerator : MonoBehaviour
             GameObject tmpGO = hintsQueue.Peek();
             tmpGO.GetComponent<HintTrackControl>().MatchButton(ButID);
         }
+    }
+
+    IEnumerator ShowRingIndicatorInSecs(BeatAnimation ba, float secs)
+    {
+        yield return new WaitForSeconds(secs);
+        ringIndicator.ShowRingIndicator(ba);
     }
 }

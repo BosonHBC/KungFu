@@ -1047,6 +1047,6 @@ MonoBehaviour:
   - {fileID: 1848422841}
   - {fileID: 995946067}
   OKColor: {r: 0, g: 1, b: 0, a: 1}
-  PerfectColor: {r: 1, g: 0.15294118, b: 0.32156864, a: 0}
+  PerfectColor: {r: 0.8962264, g: 0.10568706, b: 0.10568706, a: 1}
   NormalColor: {r: 1, g: 1, b: 1, a: 1}
   ActiveColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}

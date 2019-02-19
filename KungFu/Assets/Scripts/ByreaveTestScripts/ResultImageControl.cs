@@ -37,7 +37,7 @@ public class ResultImageControl : MonoBehaviour
         while (imageToShow.color.a >= 0.0f)
         {
             imageToShow.color = new Color(imageToShow.color.r, imageToShow.color.g, imageToShow.color.b, imageToShow.color.a - Time.deltaTime);
-            imageToShow.gameObject.transform.Translate(Vector3.up * Time.deltaTime);
+            imageToShow.gameObject.transform.Translate(Vector3.up * Time.deltaTime / 3.0f);
             yield return new WaitForSeconds(Time.deltaTime * timeToShow);
         }
         imageToShow.color = new Color(imageToShow.color.r, imageToShow.color.g, imageToShow.color.b, 0.0f);

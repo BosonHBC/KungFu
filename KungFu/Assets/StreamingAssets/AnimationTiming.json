@@ -6,7 +6,7 @@
             "OKStart": 0.0,
             "OKDuration": 1.0,
             "PerfectStart": 0.4,
-            "PerfectDuration": 0.4
+            "PerfectDuration": 0.6
         },
         {
             "AnimationID": 1,
@@ -14,7 +14,7 @@
             "OKStart": 0.0,
             "OKDuration": 1.0,
             "PerfectStart": 0.4,
-            "PerfectDuration": 0.4
+            "PerfectDuration": 0.6
         },
         {
             "AnimationID": 2,
@@ -22,7 +22,7 @@
             "OKStart": 0.0,
             "OKDuration": 1.0,
             "PerfectStart": 0.4,
-            "PerfectDuration": 0.4
+            "PerfectDuration": 0.6
         },
         {
             "AnimationID": 3,
@@ -30,7 +30,7 @@
             "OKStart": 0.0,
             "OKDuration": 1.0,
             "PerfectStart": 0.4,
-            "PerfectDuration": 0.4
+            "PerfectDuration": 0.6
         }
     ]
 }
