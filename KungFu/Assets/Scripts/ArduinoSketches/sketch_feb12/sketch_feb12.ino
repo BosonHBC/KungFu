@@ -6,12 +6,7 @@ const int button02 = 1;
 const int button03 = 2;
 const int button04 = 3;
 const int button05 = 4;
-const int button06 = 5;
-const int button07 = 6;
-const int button08 = 7;
-const int button09 = 8;
-const int button10 = 9;
-const int button11 = 10;
+
 const int ThreshHold = 600;
  
 void setup(void) {
@@ -61,47 +56,7 @@ void loop(void) {
   {
     myString += "0";
   }
-
-  if (analogRead(button06) >= ThreshHold) {  
-    myString += "1";
-  }
-  else
-  {
-    myString += "0";
-  }
-
-  if (analogRead(button07) >= ThreshHold) {  
-    myString += "1";
-  }
-  else
-  {
-    myString += "0";
-  }
-
-  if (analogRead(button08) >= ThreshHold) {  
-    myString += "1";
-  }
-  else
-  {
-    myString += "0";
-  }
-
-  if (analogRead(button09) >= ThreshHold) {  
-    myString += "1";
-  }
-  else
-  {
-    myString += "0";
-  }
-
-  if (analogRead(button10) >= ThreshHold) {  
-    myString += "1";
-  }
-  else
-  {
-    myString += "0";
-  }
-  
+ 
   Serial.println(myString);
   Serial.flush();
   delay(5);
