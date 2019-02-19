@@ -4,10 +4,11 @@
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: SuperBlurUI
-  m_Shader: {fileID: 4800000, guid: e327bdff86fb269408c272b0c88f1ef9, type: 3}
+  m_Shader: {fileID: 4800000, guid: 0425cd536865cab4d93d3c2e53c520fc, type: 3}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0

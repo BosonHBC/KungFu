@@ -11,8 +11,8 @@ public class SongSelectControl : MonoBehaviour
     // public and Serilizable
     [SerializeField] GameObject songPannelPrefab;
     [SerializeField] UIFader downPointer;
+    [SerializeField] private LevelLoader levelLoader;
     // private
-    private Material blurMat;
     private RectTransform trRect;
     private HorizontalLayoutGroup horiLayout;
     private int fPannelWidth;
@@ -31,13 +31,12 @@ public class SongSelectControl : MonoBehaviour
     private float fRegisterDelayTime = 0.2f;
     private float fDelayCollpaseTime;
 
+
     [Header("Debug")]
     [SerializeField] private int DebugSongCount = 3;
     void Start()
     {
         // Set blur mask
-        blurMat = transform.parent.parent.GetChild(0).GetComponent<Image>().material;
-        blurMat.SetFloat("_Size", 5.5f);
         moveTo = GetComponent<UIMover>();
         trRect = GetComponent<RectTransform>();
         horiLayout = GetComponent<HorizontalLayoutGroup>();
@@ -98,12 +97,10 @@ public class SongSelectControl : MonoBehaviour
             }
             else
             {
+                bCanRegister = false;
                 // Go to fighting scene
                 string _sceneName = "FightingScene_" + pannels[targetSongIndex].iSongID;
-                if (SceneManager.GetSceneByName(_sceneName) != null)
-                    SceneManager.LoadScene(_sceneName);
-                else
-                    Debug.LogError("No such scene called " + _sceneName);
+                levelLoader.LoadScene(_sceneName);
             }
 
         }
@@ -297,11 +294,6 @@ public class SongSelectControl : MonoBehaviour
 
     }
 
-    private void OnDestroy()
-    {
-        blurMat.SetFloat("_Size", 0f);
-
-    }
 
     public string RandomString(int length)
     {

@@ -4,10 +4,11 @@
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: SuperBlurPostEffect
-  m_Shader: {fileID: 4800000, guid: e51aad0af09c62648a22edda7d323e01, type: 3}
+  m_Shader: {fileID: 4800000, guid: 2885b772bb2ecf3499bfb57dbdb0c903, type: 3}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
