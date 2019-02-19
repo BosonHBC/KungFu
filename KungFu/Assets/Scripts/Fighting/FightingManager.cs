@@ -26,8 +26,9 @@ public class FightingManager : MonoBehaviour
     [SerializeField] PlayableDirector director;
     [SerializeField] TimelineAsset timelines;
 
-
-    Character[] characters = new Character[2];
+    [Header("Parameter")]
+    public int iFightingSceneID;
+    private Character[] characters = new Character[2];
     // Start is called before the first frame update
     void Start()
     {

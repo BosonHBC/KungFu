@@ -23,4 +23,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ByreaveLoadingScene.unity
     guid: f8206a22d44350e439b67a93efd9ad00
+  - enabled: 1
+    path: Assets/Scenes/SongSelection.unity
+    guid: 3309089a9b7896e459eac1d43c2c6be3
+  - enabled: 1
+    path: Assets/Scenes/FightingScene_0.unity
+    guid: 69619c5b22ecc5d4791300148e29b519
   m_configObjects: {}

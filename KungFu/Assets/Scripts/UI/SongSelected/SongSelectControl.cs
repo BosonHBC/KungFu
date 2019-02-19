@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
@@ -91,7 +92,20 @@ public class SongSelectControl : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.E) && bCanRegister)
         {
-            SelectSong();
+            if (!bSelecting)
+            {
+                SelectSong();
+            }
+            else
+            {
+                // Go to fighting scene
+                string _sceneName = "FightingScene_" + pannels[targetSongIndex].iSongID;
+                if (SceneManager.GetSceneByName(_sceneName) != null)
+                    SceneManager.LoadScene(_sceneName);
+                else
+                    Debug.LogError("No such scene called " + _sceneName);
+            }
+
         }
         if (Input.GetKey(KeyCode.Q) && bCanRegister)
         {
@@ -293,7 +307,7 @@ public class SongSelectControl : MonoBehaviour
     {
         char[] stringChars = new char[length];
         const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        
+
         for (int i = 0; i < length; i++)
         {
             Random.InitState(i);
