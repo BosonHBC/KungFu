@@ -4,26 +4,30 @@ using UnityEngine;
 using SimpleJSON;
 public class BeatGenerator : MonoBehaviour
 {
-    public float ReactionTime = 1.0f;
 
-    public AudioClip[] MissSFXs;
-    public AudioClip[] MatchSFXs;
     //The order in the children is important, should be the same with button mapping
     [SerializeField]
     GameObject Indicator;
-
     JSONNode BeatData;
-    
     Dictionary<int, KeyCode> buttonMapping;
-    float timer = 0.0f;
+    //Timer for beats
+    public float beatTimer = 0.0f;
+    //current beat that is or will be played
     int currentBeatIndex = 0;
-    int currentHintIndex = 0;
+    //current beat's start time and perfect timing etc.
+    BeatAnimation currentBeatInfo;
+    //if a beat is played
     bool isInBeat = false;
+    //the timer to get the result of the beat
     float reactionTimer = 0.0f;
+    //Buttons in this beat that are supposed to be hit
     int[] activeButtons;
-    bool showIndicator = true;
-    //IndicatorControl indicatorControl;
+    //Hint Generator
     HintGenerator hintGenerator;
+    //Result Control
+    ResultControl resultControl;
+    //SFX Control
+    SFXControl sfxControl;
     //tmp way to check which beat is matched
     Dictionary<int, bool> matchedButtons;
     // Start is called before the first frame update
@@ -44,65 +48,66 @@ public class BeatGenerator : MonoBehaviour
         matchedButtons = new Dictionary<int, bool>();
         //indicatorControl = Indicator.GetComponent<IndicatorControl>();
         hintGenerator = Indicator.GetComponent<HintGenerator>();
+        resultControl = FindObjectOfType<ResultControl>();
+        sfxControl = GetComponent<SFXControl>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
-        //hint indicator
-        if (BeatData[currentHintIndex]["timeToHit"].AsFloat <= timer + hintGenerator.HintTimeBeforeHit)
+        
+        if (BeatData[currentBeatIndex]["timeToHit"].AsFloat <= beatTimer)
         {
-            int[] tmpButtons = getIntArrayFromJSONNode(BeatData[currentHintIndex]["buttonID"]);
-
-            //No active buttons, song ends restart
-            if (tmpButtons == null)
-                MyGameInstance.instance.RestartGame();
-            BeatAnimation ba = getBeatAnimationFromAnimID(BeatData[currentHintIndex]["AnimationID"].AsInt);
-            hintGenerator.NewHint(ba, tmpButtons);
-            currentHintIndex++;
-        }
-        if (BeatData[currentBeatIndex]["timeToHit"].AsFloat <= timer)
-        {
-            activeButtons = getIntArrayFromJSONNode(BeatData[currentBeatIndex]["buttonID"]);
+            //get beat infos
+            activeButtons = DataUtility.GetIntArrayFromJSONNode(BeatData[currentBeatIndex]["buttonID"]);
             //No active buttons, song ends restart
             if (activeButtons == null)
                 MyGameInstance.instance.RestartGame();
-            matchedButtons.Clear();//make sure matched buttons is clear
+            currentBeatInfo = getBeatAnimationFromAnimID(BeatData[currentBeatIndex]["AnimationID"].AsInt);
+            if (currentBeatInfo == null)
+                Debug.Log("Error when getting beat info");
+            
+            //make sure matched buttons is clear
+            matchedButtons.Clear();
+            //Add active buttons to matched buttons for miss check
             foreach(int i in activeButtons)
             {
                 matchedButtons.Add(i, false);
             }
-            //indicatorControl.ActivateButton(activeButtons);
-            StartCoroutine(deactivateButtonInSecs(activeButtons, ReactionTime));
+            //Beat ends
+            StartCoroutine(beatEndInSecs(activeButtons, currentBeatInfo.OKStart + currentBeatInfo.OKDuration));
 
-            GetComponentInChildren<EnemyAnimationControl>().PlayAnim(BeatData[currentBeatIndex]["AnimationID"].AsInt);
+            GetComponentInChildren<EnemyAnimationControl>().PlayAnim(currentBeatInfo.ID);
             currentBeatIndex++;
             isInBeat = true;
         }
         checkInputFromKeyboard(activeButtons, isInBeat);
-        checkInputFromArduino(activeButtons, isInBeat);
+        //checkInputFromArduino(activeButtons, isInBeat);
         if (isInBeat)
             reactionTimer += Time.deltaTime;
+        beatTimer += Time.deltaTime;
     }
 
     //there is a match hit
     void matchButton(int buttonID)
     {
-        
         if(matchedButtons.ContainsKey(buttonID))
         {
             //if is not already matched
             if(!matchedButtons[buttonID])
             {
-                PlayRandomMatchSFX();
+                sfxControl.PlayRandomMatchSFX();
+                HitResult hr = GetResultFromInput(reactionTimer);
+
                 hintGenerator.MatchButton(buttonID);
                 //indicatorControl.MatchButton(buttonID);
                 //we can calculate the reacting time to give different scores (as a parameter to Score() function) here
-                MyGameInstance.instance.Score();
-                HitResult hr = GetComponentInChildren<EnemyAnimationControl>().CheckHit(BeatData[currentBeatIndex]["AnimationID"].AsInt, reactionTimer);
+                if (hr != HitResult.Miss)
+                    MyGameInstance.instance.Score();
+                else
+                    MyGameInstance.instance.Miss(1);
                 //indicatorControl.ShowResultAt(buttonID, hr);
-                hintGenerator.ShowResultAtFirstHint(hr);
+                resultControl.ShowResult(hr);
                 matchedButtons[buttonID] = true;
             }
         }
@@ -118,15 +123,16 @@ public class BeatGenerator : MonoBehaviour
             {
                 MyGameInstance.instance.Miss(1);
                 //show miss image
-                hintGenerator.ShowResultAtFirstHint(HitResult.Miss); //ShowResultAt(matched.Key, HitResult.Miss);
+                resultControl.ShowResult(HitResult.Miss); 
                 //MyGameInstance.instance.ShowResultAt(ChildBodyParts[matched.Key].transform, HitResult.Miss);
-                PlayRandomMissSFX();
+                sfxControl.PlayRandomMissSFX();
             }
         }
     }
 
     //end of this beat, reset all, can be improved
-    IEnumerator deactivateButtonInSecs(int[] ButtonIDs, float delay)
+    //Improved a little, need to add the check if the next beat comes before this beat ends
+    IEnumerator beatEndInSecs(int[] ButtonIDs, float delay)
     {
         yield return new WaitForSeconds(delay);
         //indicatorControl.DeactivateButtons(ButtonIDs);
@@ -134,40 +140,21 @@ public class BeatGenerator : MonoBehaviour
         reactionTimer = 0.0f;
         missCheck();
         matchedButtons.Clear();
-        hintGenerator.RemoveFirstHint();
     }
 
-    int[] getIntArrayFromJSONNode(JSONNode node)
-    {
-        if (node.Count == 0)
-            return null;
-        int[] retArr = new int[node.Count];
-        for(int i = 0; i < node.Count; ++ i)
-        {
-            retArr[i] = node[i].AsInt;
-        }
-        return retArr;
-    }
+    
 
     BeatAnimation getBeatAnimationFromAnimID(int AnimID)
     {
         return MyGameInstance.instance.GetComponent<TestDataLoader>().GetBeatAnimationDataByID(AnimID);
     }
-    bool hasElement(int[] array, int element)
-    {
-        foreach(int i in array)
-        {
-            if (i == element)
-                return true;
-        }
-        return false;
-    }
+
     void checkInputFromKeyboard(int [] aButtons, bool inBeat)
     {
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            ToggleIndicator();
-        }
+        //if (Input.GetKeyDown(KeyCode.I))
+        //{
+        //    ToggleIndicator();
+        //}
         foreach (var k in buttonMapping)
         {
             if(!inBeat)
@@ -180,7 +167,7 @@ public class BeatGenerator : MonoBehaviour
             else
             {
                 //the buttons to be pressed in this beat
-                if (hasElement(aButtons, k.Key))
+                if (DataUtility.HasElement(aButtons, k.Key))
                 {
                     if (Input.GetKeyDown(k.Value))
                     {
@@ -217,7 +204,7 @@ public class BeatGenerator : MonoBehaviour
             else
             {
                 //the buttons to be pressed in this beat
-                if (hasElement(aButtons, i))
+                if (DataUtility.HasElement(aButtons, i))
                 {
                     if (arduinoInput[i])
                     {
@@ -235,20 +222,26 @@ public class BeatGenerator : MonoBehaviour
             }
         }
     }
-    void ToggleIndicator()
-    {
-        showIndicator = !showIndicator;
-        Indicator.transform.localScale = showIndicator ? Vector3.one : Vector3.zero;
-    }
+    //void ToggleIndicator()
+    //{
+    //    showIndicator = !showIndicator;
+    //    Indicator.transform.localScale = showIndicator ? Vector3.one : Vector3.zero;
+    //}
 
-    void PlayRandomMissSFX()
-    {
-        GetComponent<AudioSource>().PlayOneShot(MissSFXs[Random.Range(0, MissSFXs.Length)]);
-    }
+    
 
-    void PlayRandomMatchSFX()
+    HitResult GetResultFromInput(float ReactTime)
     {
-        GetComponent<AudioSource>().PlayOneShot(MatchSFXs[Random.Range(0, MatchSFXs.Length)]);
-        
+        if(currentBeatInfo == null)
+        {
+            Debug.Log("BeatInfo error");
+        }
+
+        if (ReactTime >= currentBeatInfo.PerfectStart && ReactTime <= currentBeatInfo.PerfectStart + currentBeatInfo.PerfectDuration)
+            return HitResult.Perfect;
+        else if (ReactTime >= currentBeatInfo.OKStart && ReactTime <= currentBeatInfo.OKDuration)
+            return HitResult.Good;
+        else
+            return HitResult.Miss;
     }
 }

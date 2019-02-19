@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ResultImageControl : MonoBehaviour
 {
     
     //0 perfect 1 good 2 miss
-    public SpriteRenderer[] Images;
+    public Image[] Images;
     // Start is called before the first frame update
 
 
@@ -30,7 +31,7 @@ public class ResultImageControl : MonoBehaviour
     }
 
 
-    IEnumerator ShowImage(SpriteRenderer imageToShow, float timeToShow = 1.0f)
+    IEnumerator ShowImage(Image imageToShow, float timeToShow = 1.0f)
     {
         imageToShow.color = new Color(imageToShow.color.r, imageToShow.color.g, imageToShow.color.b, 1.0f);
         while (imageToShow.color.a >= 0.0f)

@@ -57,4 +57,16 @@ public class EnemyAnimationControl : MonoBehaviour
         }
         return HitResult.Miss;
     }
+
+    public void SlowDown(float Speed, float time)
+    {
+        enemyAnimator.speed = Speed;
+        StartCoroutine(StopSlowDown(time));
+    }
+
+    IEnumerator StopSlowDown(float time)
+    {
+        yield return new WaitForSeconds(time);
+        enemyAnimator.speed = 1.0f;
+    }
 }
