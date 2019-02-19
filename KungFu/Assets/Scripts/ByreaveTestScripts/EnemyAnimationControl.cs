@@ -40,7 +40,7 @@ public class EnemyAnimationControl : MonoBehaviour
 
     public void SlowDown(float time)
     {
-        enemyAnimator.speed = 0.5f;
+        enemyAnimator.speed = 0.3f;
         StartCoroutine(StopSlowDown(time));
     }
 
@@ -66,8 +66,8 @@ public class EnemyAnimationControl : MonoBehaviour
             if(timing != null)
             {
                 AnimationEvent animEvt = new AnimationEvent();
-                animEvt.time = timing.PerfectStart;
-                animEvt.floatParameter = timing.PerfectDuration;
+                animEvt.time = timing.OKStart;
+                animEvt.floatParameter = timing.PerfectStart - timing.OKStart;
                 animEvt.functionName = "SlowDown";
                 ac.AddEvent(animEvt);
             }
