@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 961bc476418f55b439181db49d2147b8
+guid: 2a327e00ffbeeac42a7d81b93ecf2fb4
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -157,7 +157,7 @@ ModelImporter:
     400148: spine2_result_JNT
     400150: spine3_result_JNT
     400152: spine4_result_JNT
-    7400000: Arm_Stretching
+    7400000: Idle_HalfStand
     9500000: //RootNode
     2186277476908879412: ImportLogs
   externalObjects: {}
@@ -190,7 +190,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 3
+    animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -199,19 +199,19 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Arm_Stretching
+      name: Idle_HalfStand
       takeName: mixamo.com
       firstFrame: 0
-      lastFrame: 532
+      lastFrame: 128
       wrapMode: 0
       orientationOffsetY: 0
-      level: 0.43
+      level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
-      loopBlendOrientation: 0
+      loopBlendOrientation: 1
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 0
@@ -235,8 +235,8 @@ ModelImporter:
     useSRGBMaterialColor: 1
     importVisibility: 1
     importBlendShapes: 1
-    importCameras: 1
-    importLights: 1
+    importCameras: 0
+    importLights: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
