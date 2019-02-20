@@ -202,9 +202,9 @@ ModelImporter:
       name: Idle_Fight
       takeName: mixamo.com
       firstFrame: 0
-      lastFrame: 129
+      lastFrame: 100
       wrapMode: 0
-      orientationOffsetY: 0
+      orientationOffsetY: -28
       level: 0.37
       cycleOffset: 0
       loop: 0
@@ -235,8 +235,8 @@ ModelImporter:
     useSRGBMaterialColor: 1
     importVisibility: 1
     importBlendShapes: 1
-    importCameras: 1
-    importLights: 1
+    importCameras: 0
+    importLights: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
