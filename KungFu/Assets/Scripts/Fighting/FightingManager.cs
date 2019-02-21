@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
 using UnityEngine.UI;
+using UnityEngine.Events;
 using Cinemachine;
 
 
@@ -33,6 +34,9 @@ public class FightingManager : MonoBehaviour
     public int iFightingSceneID;
     private Character[] characters = new Character[2];
     private int currentCamera;
+    public UnityAction onPositioned;
+    private float fThresholdOfTime = 0.05f;
+    private float fTimeToPlayFightPrepare = 8.33f;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +48,15 @@ public class FightingManager : MonoBehaviour
     void Update()
     {
         Debug_SwitchCamera();
+
+        //Debug.Log(director.time);
+        if (director.time >= fTimeToPlayFightPrepare - fThresholdOfTime && director.time <= fTimeToPlayFightPrepare + fThresholdOfTime)
+        {
+            Debug.Log("Invoke!");
+            if (onPositioned != null)
+                onPositioned.Invoke();
+        }
+
     }
 
     void CreateObjects()
@@ -82,6 +95,10 @@ public class FightingManager : MonoBehaviour
         // Player Specialize
         Player thePlayer = (Player)characters[0];
         thePlayer.SetLookAt(center.transform);
+
+        // Player animation
+        PlayerAnimController _animCtrl= thePlayer.GetComponent<PlayerAnimController>();
+        onPositioned = new UnityAction( delegate { _animCtrl.bPreparing = true; });
 
         /// Set Camera
         IEnumerable<TimelineClip> clips = timelines.GetOutputTrack(1).GetClips();

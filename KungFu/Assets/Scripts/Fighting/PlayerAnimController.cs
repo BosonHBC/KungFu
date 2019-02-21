@@ -8,6 +8,7 @@ public class PlayerAnimController : MonoBehaviour
     private Animator anim;
 
     private int iPlayingFightAnimationID;
+    public bool bPreparing;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +23,7 @@ public class PlayerAnimController : MonoBehaviour
     void DebugAnimator()
     {
         // Reset to 0 to prevent keep playing one animation
-        iPlayingFightAnimationID = 0;
+        iPlayingFightAnimationID = -1;
         for (int i = 0; i < 4; i++)
         {
             if (Input.GetKeyDown((KeyCode)(i + 49)))
@@ -30,7 +31,20 @@ public class PlayerAnimController : MonoBehaviour
                 iPlayingFightAnimationID = i + 1;
             }
         }
+        PlayPrepareFight();
         anim.SetInteger("AttackID_i", iPlayingFightAnimationID);
 
     }
+
+    void PlayPrepareFight()
+    {
+        if (bPreparing)
+        {
+            bPreparing = false;
+            iPlayingFightAnimationID = 0;
+            anim.SetFloat("StandToFight_f", 1f);
+        }
+
+    }
+
 }

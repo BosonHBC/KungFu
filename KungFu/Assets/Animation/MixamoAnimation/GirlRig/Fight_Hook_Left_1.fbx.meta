@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: 2a327e00ffbeeac42a7d81b93ecf2fb4
+guid: fbf40cf9fa03d2e4db3f1ff2ccaaa898
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: hair1_result_JNT
-    100002: hair2_result_JNT
-    100004: hair3_result_JNT
-    100006: head_result_JNT
-    100008: //RootNode
+    100000: //RootNode
+    100002: hair1_result_JNT
+    100004: hair2_result_JNT
+    100006: hair3_result_JNT
+    100008: head_result_JNT
     100010: left_ball_result_JNT
     100012: left_bangs_result_JNT
     100014: left_calf_result_JNT
@@ -80,11 +80,11 @@ ModelImporter:
     100148: spine2_result_JNT
     100150: spine3_result_JNT
     100152: spine4_result_JNT
-    400000: hair1_result_JNT
-    400002: hair2_result_JNT
-    400004: hair3_result_JNT
-    400006: head_result_JNT
-    400008: //RootNode
+    400000: //RootNode
+    400002: hair1_result_JNT
+    400004: hair2_result_JNT
+    400006: hair3_result_JNT
+    400008: head_result_JNT
     400010: left_ball_result_JNT
     400012: left_bangs_result_JNT
     400014: left_calf_result_JNT
@@ -157,7 +157,7 @@ ModelImporter:
     400148: spine2_result_JNT
     400150: spine3_result_JNT
     400152: spine4_result_JNT
-    7400000: Idle_HalfStand
+    7400000: Fight_Hook_Left_1
     9500000: //RootNode
     2186277476908879412: ImportLogs
   externalObjects: {}
@@ -190,7 +190,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -199,17 +199,17 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Idle_HalfStand
+      name: Fight_Hook_Left_1
       takeName: mixamo.com
       firstFrame: 0
-      lastFrame: 128
+      lastFrame: 61
       wrapMode: 0
-      orientationOffsetY: 0
+      orientationOffsetY: -18.85
       level: 0.37
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 1
       loopBlendPositionY: 1
