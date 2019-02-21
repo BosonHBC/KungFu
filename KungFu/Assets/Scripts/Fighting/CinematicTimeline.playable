@@ -759,7 +759,7 @@ MonoBehaviour:
   m_Name: CinemachineShot
   m_EditorClassIdentifier: 
   VirtualCamera:
-    exposedName: 1cc270d40e010984289ce5f0c8f527ef
+    exposedName: d0acf0fb855366743bb94c0f77452ef9
     defaultValue: {fileID: 0}
 --- !u!114 &114278285462777514
 MonoBehaviour:
@@ -809,7 +809,7 @@ MonoBehaviour:
   m_Name: CinemachineShot
   m_EditorClassIdentifier: 
   VirtualCamera:
-    exposedName: 7ebe8b9aaac17c548a535752b9abc5a5
+    exposedName: b3d71d0e24855904dab6b219c9609de8
     defaultValue: {fileID: 0}
 --- !u!114 &114428786776851224
 MonoBehaviour:
@@ -824,7 +824,7 @@ MonoBehaviour:
   m_Name: CinemachineShot
   m_EditorClassIdentifier: 
   VirtualCamera:
-    exposedName: 114ec345d2ba7c848b21776748027beb
+    exposedName: b0910e83c78e06c4d8a64f6ef3cd46fc
     defaultValue: {fileID: 0}
 --- !u!114 &114495480451188178
 MonoBehaviour:
@@ -995,25 +995,7 @@ MonoBehaviour:
     m_BlendOutDuration: -1
     m_MixInCurve:
       serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
+      m_Curve: []
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4

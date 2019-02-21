@@ -13,6 +13,8 @@ public class Player : Character
     private Animator anim;
     private bool bSwitching;
 
+    private int iPlayingAnimationID;
+
     protected override void Start()
     {
         base.Start();
@@ -85,24 +87,18 @@ public class Player : Character
 
     void DebugAnimator()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        // Reset to 0 to prevent keep playing one animation
+        iPlayingAnimationID = 0;
+        for (int i = 0; i < 4; i++)
         {
-            anim.Play("Hook");
+            if (Input.GetKeyDown((KeyCode)(i + 49)))
+            {
+                iPlayingAnimationID = i + 1;
+            }
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            anim.Play("Hammer");
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            anim.Play("Uppercut");
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            anim.Play("handssors");
-        }
+        anim.SetInteger("AttackID_i", iPlayingAnimationID);
 
-        if (Input.GetKeyDown(KeyCode.Alpha5))
+        if (Input.GetKeyDown(KeyCode.Alpha9))
         {
             GetDamage(20);
         }

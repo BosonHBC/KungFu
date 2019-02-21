@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
 using UnityEngine.UI;
+using Cinemachine;
 
 
 public class FightingManager : MonoBehaviour
@@ -11,7 +12,7 @@ public class FightingManager : MonoBehaviour
     public static FightingManager instance;
     private void Awake()
     {
-        if(instance==null || instance != this)
+        if (instance == null || instance != this)
         {
             instance = this;
         }
@@ -25,20 +26,24 @@ public class FightingManager : MonoBehaviour
     [SerializeField] Transform[] spawnPoints;
     [SerializeField] PlayableDirector director;
     [SerializeField] TimelineAsset timelines;
+    [SerializeField] SideViewCam sideVCam;
+    [SerializeField] GameObject[] cameraList;
 
     [Header("Parameter")]
     public int iFightingSceneID;
     private Character[] characters = new Character[2];
+    private int currentCamera;
     // Start is called before the first frame update
     void Start()
     {
+        currentCamera = 0;
         CreateObjects();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        Debug_SwitchCamera();
     }
 
     void CreateObjects()
@@ -77,5 +82,47 @@ public class FightingManager : MonoBehaviour
         // Player Specialize
         Player thePlayer = (Player)characters[0];
         thePlayer.SetLookAt(center.transform);
+
+        /// Set Camera
+        IEnumerable<TimelineClip> clips = timelines.GetOutputTrack(1).GetClips();
+        IEnumerator iEnumeratorOfClips = clips.GetEnumerator();
+        while (iEnumeratorOfClips.MoveNext())
+        {
+            TimelineClip currClip = iEnumeratorOfClips.Current as TimelineClip;
+            // 1. Set the player camera to the timeline
+            if (currClip.displayName == "PlayerCamera")
+            {
+                Cinemachine.Timeline.CinemachineShot _shot = (Cinemachine.Timeline.CinemachineShot)currClip.asset;
+                _shot.VirtualCamera.exposedName = UnityEditor.GUID.Generate().ToString();
+                CinemachineVirtualCameraBase _playerVCam = characters[0].transform.GetChild(characters[0].transform.childCount - 1).GetComponent<CinemachineVirtualCameraBase>();
+                cameraList[1] = _playerVCam.gameObject;
+                director.SetReferenceValue(_shot.VirtualCamera.exposedName, _playerVCam);
+            }
+        }
+
+        // 2. Set side virtual camera to
+        sideVCam.SetData(center.transform);
+    }
+
+    public void SwitchCamera(int _switchTo)
+    {
+
+        for (int i = 0; i < cameraList.Length; i++)
+        {
+            cameraList[i].SetActive(false);
+        }
+        cameraList[_switchTo].SetActive(true);
+    }
+
+    void Debug_SwitchCamera()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            SwitchCamera(0);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            SwitchCamera(1);
+        }
     }
 }

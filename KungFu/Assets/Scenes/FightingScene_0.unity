@@ -128,6 +128,7 @@ GameObject:
   m_Component:
   - component: {fileID: 175588451}
   - component: {fileID: 175588450}
+  - component: {fileID: 175588452}
   m_Layer: 0
   m_Name: vCamSideView
   m_TagString: Untagged
@@ -176,6 +177,21 @@ Transform:
   m_Father: {fileID: 1837374650}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &175588452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 175588449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbd3955b510ac8b4caeb48c2c9c5610d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultZValue: -6
+  fFactor: 1.32
+  fMaxZValue: 0
 --- !u!1 &202588506
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,7 +201,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 202588508}
-  - component: {fileID: 202588507}
   - component: {fileID: 202588509}
   m_Layer: 0
   m_Name: LookingPorint
@@ -194,22 +209,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &202588507
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 202588506}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebc59d78bc47e464b8c7fd8db4fe9940, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  trP1: {fileID: 0}
-  trP2: {fileID: 0}
-  fLerpTime: 0.1
-  fYOffset: 1
 --- !u!4 &202588508
 Transform:
   m_ObjectHideFlags: 0
@@ -556,7 +555,7 @@ PlayableDirector:
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: c8a59048ddcf3334bab2c69eb6f574b3, type: 2}
   m_InitialState: 1
-  m_WrapMode: 0
+  m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
   m_SceneBindings:
@@ -572,13 +571,17 @@ PlayableDirector:
     value: {fileID: 0}
   m_ExposedReferences:
     m_References:
+    - c17da17c110afcc4785bf8aaf56e1f7c: {fileID: 175588450}
     - 7ebe8b9aaac17c548a535752b9abc5a5: {fileID: 0}
+    - 41f45547310531e4897a910abecee604: {fileID: 175588450}
     - 2c49e3eda0a489d44a26321117fd7b4a: {fileID: 560559539}
     - b2bb0a390c6ba9c45b9adafafb8c4491: {fileID: 0}
     - b6ba728263ea3b8428c309b62f7efcb7: {fileID: 0}
     - 114ec345d2ba7c848b21776748027beb: {fileID: 175588450}
     - 8ff7e959d3f08544187410acb973c9d5: {fileID: 0}
     - 1cc270d40e010984289ce5f0c8f527ef: {fileID: 560559539}
+    - b0910e83c78e06c4d8a64f6ef3cd46fc: {fileID: 175588450}
+    - d0acf0fb855366743bb94c0f77452ef9: {fileID: 560559539}
 --- !u!4 &656054122
 Transform:
   m_ObjectHideFlags: 0
@@ -593,6 +596,25 @@ Transform:
   m_Father: {fileID: 1837374650}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &873295827 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 102074, guid: 4e6e2ce4f2f06c34e891118966bb7f47,
+    type: 3}
+  m_PrefabInstance: {fileID: 876090056}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &873295831
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 873295827}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 51.9848, y: 0.943185, z: 39.444927}
+  m_Center: {x: -0.00000023841858, y: -0.00000023841858, z: -0.00000023841858}
 --- !u!1001 &876090056
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -720,6 +742,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 10.29
       objectReference: {fileID: 0}
+    - target: {fileID: 102074, guid: 4e6e2ce4f2f06c34e891118966bb7f47, type: 3}
+      propertyPath: m_Name
+      value: Plane
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e6e2ce4f2f06c34e891118966bb7f47, type: 3}
 --- !u!1 &910536406
@@ -798,7 +824,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 910536406}
-  m_LocalRotation: {x: 0.019667637, y: -0.6513269, z: 0.016891923, w: 0.67826825}
+  m_LocalRotation: {x: 0.019667637, y: -0.6513269, z: 0.016891923, w: 0.75835425}
   m_LocalPosition: {x: 22.402924, y: -0.5294573, z: -3.6488981}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -824,7 +850,7 @@ MonoBehaviour:
   m_UpdateMethod: 2
   m_DefaultBlend:
     m_Style: 1
-    m_Time: 2
+    m_Time: 0.5
   m_CustomBlends: {fileID: 0}
   m_CameraCutEvent:
     m_PersistentCalls:
@@ -878,6 +904,10 @@ MonoBehaviour:
   - {fileID: 1528300736}
   director: {fileID: 656054121}
   timelines: {fileID: 11400000, guid: c8a59048ddcf3334bab2c69eb6f574b3, type: 2}
+  sideVCam: {fileID: 175588452}
+  cameraList:
+  - {fileID: 175588449}
+  - {fileID: 0}
   iFightingSceneID: 0
 --- !u!4 &1273692656
 Transform:
@@ -1089,8 +1119,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1661889332}
   - component: {fileID: 1661889335}
-  - component: {fileID: 1661889334}
   - component: {fileID: 1661889333}
+  - component: {fileID: 1661889334}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -1125,7 +1155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: -21.300001, y: -0.99, z: -7.810004}
+  m_FollowOffset: {x: 0, y: 0.4, z: -6}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -1141,22 +1171,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1661889331}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4044717213e31446939f7bd49c896ea, type: 3}
+  m_Script: {fileID: 11500000, guid: a4c41ac9245b87c4192012080077d830, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TrackedObjectOffset: {x: 0, y: 0, z: 0}
-  m_LookaheadTime: 0
-  m_LookaheadSmoothing: 10
-  m_HorizontalDamping: 0.5
-  m_VerticalDamping: 0.5
-  m_ScreenX: 0.5
-  m_ScreenY: 0.5
-  m_DeadZoneWidth: 0.01
-  m_DeadZoneHeight: 0.01
-  m_SoftZoneWidth: 0.8
-  m_SoftZoneHeight: 0.8
-  m_BiasX: 0
-  m_BiasY: 0
 --- !u!114 &1661889335
 MonoBehaviour:
   m_ObjectHideFlags: 3
