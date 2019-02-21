@@ -10,10 +10,9 @@ public class Player : Character
     private CinemachineTrackedDolly trackedDolly;
     private int iCurrentView;   // 0 -> first person, 1 -> third person
     [SerializeField] private float fDebugMovespeed;
-    private Animator anim;
     private bool bSwitching;
 
-    private int iPlayingAnimationID;
+    
 
     protected override void Start()
     {
@@ -21,7 +20,7 @@ public class Player : Character
         iCurrentView = 0;
         bSwitching = false;
         trackedDolly = myCamera.GetCinemachineComponent<CinemachineTrackedDolly>();
-        anim = GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
@@ -29,7 +28,8 @@ public class Player : Character
     {
         base.Update();
         DebugMovement();
-        DebugAnimator();
+        if (Input.GetKeyDown(KeyCode.Alpha9))
+            GetDamage(20);
     }
 
     public void SwitchPerspectiveView()
@@ -85,24 +85,7 @@ public class Player : Character
             SwitchPerspectiveView();
     }
 
-    void DebugAnimator()
-    {
-        // Reset to 0 to prevent keep playing one animation
-        iPlayingAnimationID = 0;
-        for (int i = 0; i < 4; i++)
-        {
-            if (Input.GetKeyDown((KeyCode)(i + 49)))
-            {
-                iPlayingAnimationID = i + 1;
-            }
-        }
-        anim.SetInteger("AttackID_i", iPlayingAnimationID);
 
-        if (Input.GetKeyDown(KeyCode.Alpha9))
-        {
-            GetDamage(20);
-        }
-    }
 
     public void SetLookAt(Transform _lookAt)
     {

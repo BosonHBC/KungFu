@@ -5412,6 +5412,7 @@ GameObject:
   - component: {fileID: 3107315991141146088}
   - component: {fileID: 1729496712362160240}
   - component: {fileID: 6651013187684520833}
+  - component: {fileID: 4106902167652244791}
   m_Layer: 10
   m_Name: P1_kungFuGirl
   m_TagString: Untagged
@@ -5510,6 +5511,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
+--- !u!114 &4106902167652244791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3107315992147232632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d19b314219b736a40b788acb9187520d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 7400000, guid: 2a327e00ffbeeac42a7d81b93ecf2fb4, type: 3}
+  - {fileID: 7400000, guid: 6281739833e90164ba1733f914ffa8f9, type: 3}
 --- !u!1 &3107315992147232634
 GameObject:
   m_ObjectHideFlags: 0
