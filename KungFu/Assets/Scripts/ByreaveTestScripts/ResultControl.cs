@@ -31,6 +31,7 @@ public class ResultControl : MonoBehaviour
         if(!firstSpawned)
         {
             ShowResultAt(hitResult, transform.position);
+            firstSpawned = true;
             StartCoroutine(CanSpawnAnother());
         }
         else
@@ -40,7 +41,6 @@ public class ResultControl : MonoBehaviour
     }
     IEnumerator CanSpawnAnother()
     {
-        firstSpawned = true;
         yield return new WaitForSeconds(duration);
         firstSpawned = false;
     }

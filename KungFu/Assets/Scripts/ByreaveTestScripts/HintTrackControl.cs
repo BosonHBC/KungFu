@@ -155,7 +155,7 @@ public class HintTrackControl : MonoBehaviour
                 Color tmp = ChildBodyParts[0].GetComponent<Image>().color;
                 ChildBodyParts[0].GetComponent<Image>().color = new Color(tmp.r, tmp.g, tmp.b, tmp.a - Time.deltaTime / time);
             }
-            yield return new WaitForSeconds(Time.deltaTime);
+            yield return new WaitForEndOfFrame();
         }
         Destroy(gameObject);
     }

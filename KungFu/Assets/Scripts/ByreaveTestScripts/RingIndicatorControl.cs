@@ -35,6 +35,7 @@ public class RingIndicatorControl : MonoBehaviour
                 {
                     GameObject ring = Instantiate(RingIndicator, trans.position, Quaternion.identity, trans);
                     StartCoroutine(StartShrinking(ring, beatAnimation.PerfectStart, beatAnimation.PerfectDuration));
+                    break;
                 }
             }
         }
@@ -51,7 +52,7 @@ public class RingIndicatorControl : MonoBehaviour
             if(timer >= perfectStart)
                 ring.GetComponent<SpriteRenderer>().color = PerfectColor;
             timer += Time.deltaTime;
-            yield return new WaitForSeconds(Time.deltaTime);
+            yield return new WaitForEndOfFrame();
         }
         Destroy(ring);
     }
