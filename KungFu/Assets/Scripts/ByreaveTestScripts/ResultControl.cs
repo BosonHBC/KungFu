@@ -5,7 +5,7 @@ using UnityEngine;
 public class ResultControl : MonoBehaviour
 {
     public GameObject ResultImageShow;
-    public Vector3 Offset = new Vector3(100.0f, 0.0f, 0.0f);
+    public Vector3 Offset = new Vector3(0.3f, 0.0f, 0.0f);
 
     //two result at same time, can be improved
     float duration = 1.0f;
@@ -37,6 +37,7 @@ public class ResultControl : MonoBehaviour
         else
         {
             ShowResultAt(hitResult, transform.position + Offset);
+            //firstSpawned = false;
         }
     }
     IEnumerator CanSpawnAnother()

@@ -44,7 +44,10 @@ public class HintTrackControl : MonoBehaviour
             {
                 case HitResult.Miss:
                     if (timer >= beatTiming.OKStart + timeBeforeHit)
+                    {
                         ChangeToOK();
+                        Debug.Log(timer);
+                    }
                     break;
                 case HitResult.Good:
                     if (timer >= beatTiming.PerfectStart + timeBeforeHit)
