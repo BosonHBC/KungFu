@@ -65,6 +65,7 @@ public class EnemyAnimationControl : MonoBehaviour
             BeatAnimation timing = getBeatAnimationByName(ac.name);
             if(timing != null)
             {
+                Debug.Log(ac.name);
                 AnimationEvent animEvt = new AnimationEvent();
                 animEvt.time = timing.OKStart;
                 animEvt.floatParameter = timing.PerfectStart - timing.OKStart;

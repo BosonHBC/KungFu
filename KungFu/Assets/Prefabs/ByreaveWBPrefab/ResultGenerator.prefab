@@ -50,4 +50,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ResultImageShow: {fileID: 3886251922346034438, guid: c52316cb3453e734bb966353be365126,
     type: 3}
-  Offset: {x: 100, y: 0, z: 0}
+  Offset: {x: 0.3, y: 0, z: 0}
