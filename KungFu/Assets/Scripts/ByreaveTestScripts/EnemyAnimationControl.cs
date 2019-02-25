@@ -6,36 +6,20 @@ using SimpleJSON;
 public class EnemyAnimationControl : MonoBehaviour
 {
     Animator enemyAnimator;
-    JSONNode animData;
-    Dictionary<int, string> animMapping;
-    List<BeatAnimation> animationTimingData;
+    Dictionary<int, AnimationInfo> AnimationData;
+    Dictionary<int, BeatInfo> BeatData;
     // Start is called before the first frame update
     void Start()
     {
         enemyAnimator = GetComponent<Animator>();
-        animData = MyGameInstance.instance.GetComponent<TestDataLoader>().GetAnimationData();
-        animMapping = new Dictionary<int, string>()
-        {
-            {0, "Hook"},
-            {1, "Hammer" },
-            {2, "Uppercut" },
-            {3, "handssors" }
-        };
-        animationTimingData = new List<BeatAnimation>();
-        AddBeatTimingToList();
+        AnimationData = MyGameInstance.instance.GetComponent<TestDataLoader>().GetAnimationInfos();
+        BeatData = MyGameInstance.instance.GetComponent<TestDataLoader>().GetBeatInfos();
         AddSlowDownEvent();
     }
 
     public void PlayAnim(int AnimationID)
     {
-        foreach(var anim in animData.Values)
-        {
-            if(anim["AnimationID"].AsInt == AnimationID)
-            {
-                enemyAnimator.Play(anim["AnimationName"].Value);
-                return;
-            }
-        }
+        enemyAnimator.Play(AnimationData[AnimationID].AnimationName);
     }
 
     public void SlowDown(float time)
@@ -50,37 +34,47 @@ public class EnemyAnimationControl : MonoBehaviour
         enemyAnimator.speed = 1.0f;
     }
 
-    void AddBeatTimingToList()
-    {
-        foreach(var data in animData)
-        {
-            animationTimingData.Add(new BeatAnimation(data.Value[0].AsInt, data.Value[1], data.Value[2].AsFloat, data.Value[3].AsFloat, data.Value[4].AsFloat, data.Value[5].AsFloat));
-        }
-    }
+    //void AddBeatTimingToList()
+    //{
+    //    foreach(var data in animData)
+    //    {
+    //        animationTimingData.Add(new BeatAnimation(data.Value[0].AsInt, data.Value[1], data.Value[2].AsFloat, data.Value[3].AsFloat, data.Value[4].AsFloat, data.Value[5].AsFloat));
+    //    }
+    //}
     void AddSlowDownEvent()
     {
         AnimationClip[] animationClips = enemyAnimator.runtimeAnimatorController.animationClips;
         foreach(AnimationClip ac in animationClips)
         {
-            BeatAnimation timing = getBeatAnimationByName(ac.name);
+            AnimationInfo timing = getAnimationInfoByName(ac.name);
             if(timing != null)
             {
+                foreach(var beatID in timing.BeatIDs)
+                {
+                    var beatInfo = BeatData[beatID];
+                    AnimationEvent animEvt = new AnimationEvent
+                    {
+                        time = beatInfo.OKStart,
+                        floatParameter = beatInfo.PerfectStart - beatInfo.OKStart,
+                        functionName = "SlowDown"
+                    };
+                    ac.AddEvent(animEvt);
+                }
+                //Debug.Log(ac.name);
+            }
+            else
+            {
                 Debug.Log(ac.name);
-                AnimationEvent animEvt = new AnimationEvent();
-                animEvt.time = timing.OKStart;
-                animEvt.floatParameter = timing.PerfectStart - timing.OKStart;
-                animEvt.functionName = "SlowDown";
-                ac.AddEvent(animEvt);
             }
         }
     }
 
-    BeatAnimation getBeatAnimationByName(string name)
+    AnimationInfo getAnimationInfoByName(string name)
     {
-        foreach(BeatAnimation ba in animationTimingData)
+        foreach(var animInfo in AnimationData.Values)
         {
-            if (ba.Name == name)
-                return ba;
+            if (animInfo.AnimationName == name)
+                return animInfo;
         }
         return null;
     }

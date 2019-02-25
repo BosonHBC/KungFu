@@ -9,34 +9,35 @@ public class RingIndicatorControl : MonoBehaviour
     public GameObject RingIndicator;
     public Color PerfectColor = Color.red;
     public Color OKColor = Color.green;
-    Dictionary<string, Transform[]> RingPositionMap;
+    Dictionary<int, Transform[]> RingPositionMap;
 
     Vector3 FinalSize = new Vector3(0.1f, 0.1f, 0.1f);
     // Start is called before the first frame update
     void Start()
     {
-        RingPositionMap = new Dictionary<string, Transform[]>()
+        RingPositionMap = new Dictionary<int, Transform[]>()
         {
-            {"Hook", new Transform[] { RightWrist } },
-            {"Hammer", new Transform[] { RightWrist } },
-            {"Uppercut", new Transform[] { RightWrist } },
-            {"handssors", new Transform[] { LeftWrist, RightWrist } },
+            {0, new Transform[] { RightWrist } },
+            {1, new Transform[] { RightWrist } },
+            {2, new Transform[] { RightWrist } },
+            {3, new Transform[] { LeftWrist, RightWrist } },
 
         };
     }
 
-    public void ShowRingIndicator(BeatAnimation beatAnimation)
+    //pending fix
+    public void ShowRingIndicator(BeatInfo beatAnimation)
     {
         foreach(var map in RingPositionMap)
         {
-            if(map.Key == beatAnimation.Name)
+            if(map.Key == beatAnimation.BeatID)
             {
                 foreach(Transform trans in map.Value)
                 {
                     GameObject ring = Instantiate(RingIndicator, trans.position, Quaternion.identity, trans);
                     StartCoroutine(StartShrinking(ring, beatAnimation.PerfectStart, beatAnimation.PerfectDuration));
-                    break;
                 }
+                break;
             }
         }
     }

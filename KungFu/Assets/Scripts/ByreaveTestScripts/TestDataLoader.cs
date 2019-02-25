@@ -13,23 +13,87 @@ public class TestDataLoader : MonoBehaviour
     private string gameDataFileName = "AnimationTest.json";
     string animTimingFileName = "AnimationTiming.json";
 
-    private void Awake()
+
+    //new data structure
+    #region
+    string animationInfoFilename = "AnimationData.json";
+    string beatInfoFilename = "BeatData.json";
+    string songInfoFilename = "NewMusicData.json";
+
+    JSONNode allMusicData;
+    Dictionary<int, AnimationInfo> AnimationData;
+    Dictionary<int, BeatInfo> BeatData;
+
+    void LoadDataToObjects()
     {
-       
-        //just for testing, this is supposed to be in the loading scene
-        LoadGameData();
-        
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
+        AnimationData = new Dictionary<int, AnimationInfo>();
+        BeatData = new Dictionary<int, BeatInfo>();
+
+        //load animation data
+        string filePath = Path.Combine(Application.streamingAssetsPath, animationInfoFilename);
+        if (File.Exists(filePath))
+        {
+            string dataJson = File.ReadAllText(filePath);
+
+            var loadedData = JSON.Parse(dataJson);
+            foreach(var anim in loadedData["Animations"].Values)
+            {
+                AnimationData.Add(anim["AnimationID"], new AnimationInfo(anim));
+            }
+        }
+        else
+        {
+            Debug.LogError("Cannot load game data!");
+        }
+        //load beat data
+        filePath = Path.Combine(Application.streamingAssetsPath, beatInfoFilename);
+        if (File.Exists(filePath))
+        {
+            string dataJson = File.ReadAllText(filePath);
+
+            var loadedData = JSON.Parse(dataJson);
+            foreach (var beat in loadedData["BeatData"].Values)
+            {
+                BeatData.Add(beat["BeatID"], new BeatInfo(beat));
+            }
+        }
+        else
+        {
+            Debug.LogError("Cannot load game data!");
+        }
+        //load songs data
+        filePath = Path.Combine(Application.streamingAssetsPath, songInfoFilename);
+        if (File.Exists(filePath))
+        {
+            string dataJson = File.ReadAllText(filePath);
+
+            var loadedData = JSON.Parse(dataJson);
+            allMusicData = loadedData["allMusicData"];
+        }
+        else
+        {
+            Debug.LogError("Cannot load game data!");
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public Dictionary<int, AnimationInfo> GetAnimationInfos()
     {
-        
+        return AnimationData;
     }
+    public Dictionary<int, BeatInfo> GetBeatInfos()
+    {
+        return BeatData;
+    }
+
+    #endregion
+
+    private void Awake()
+    {
+        //just for testing, this is supposed to be in the loading scene
+        LoadGameData();
+        LoadDataToObjects();
+    }
+
     private void LoadGameData()
     {
         string filePath = Path.Combine(Application.streamingAssetsPath, gameDataFileName);
@@ -81,7 +145,7 @@ public class TestDataLoader : MonoBehaviour
         return animationData;
     }
 
-    public BeatAnimation GetBeatAnimationDataByID(int ID)
+    public BeatTiming GetBeatAnimationDataByID(int ID)
     {
         JSONNode retBeat = null;
         foreach (var anim in animationData)
@@ -93,7 +157,7 @@ public class TestDataLoader : MonoBehaviour
             }
         }
         if(retBeat != null)
-            return new BeatAnimation(retBeat[0].AsInt, retBeat[1], retBeat[2].AsFloat, retBeat[3].AsFloat, retBeat[4].AsFloat, retBeat[5].AsFloat);
+            return new BeatTiming(retBeat[2].AsFloat, retBeat[3].AsFloat, retBeat[4].AsFloat, retBeat[5].AsFloat);
         else
         {
             Debug.Log("No Animation");
@@ -103,5 +167,17 @@ public class TestDataLoader : MonoBehaviour
     public JSONNode GetMusicData()
     {
         return musicData;
+    }
+
+    public JSONNode GetAnimationArrayByName(string name)
+    {
+        foreach(var song in allMusicData.Values)
+        {
+            if(song["name"] == name)
+            {
+                return song["animArray"];
+            }
+        }
+        return null;
     }
 }

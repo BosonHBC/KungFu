@@ -1,0 +1,36 @@
+{
+    "Animations": [
+        {
+            "AnimationID": 0,
+            "AnimationName": "Hook",
+            "Mode": "Attack",
+            "Beats": [
+                0
+            ]
+        },
+        {
+            "AnimationID": 1,
+            "AnimationName": "Hammer",
+            "Mode": "Attack",
+            "Beats": [
+                1
+            ]
+        },
+        {
+            "AnimationID": 2,
+            "AnimationName": "Uppercut",
+            "Mode": "Attack",
+            "Beats": [
+                2
+            ]
+        },
+        {
+            "AnimationID": 3,
+            "AnimationName": "handssors",
+            "Mode": "Attack",
+            "Beats": [
+                3
+            ]
+        }
+    ]
+}

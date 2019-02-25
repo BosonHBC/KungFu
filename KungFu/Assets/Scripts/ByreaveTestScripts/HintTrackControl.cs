@@ -16,7 +16,7 @@ public class HintTrackControl : MonoBehaviour
     [SerializeField]
     Color ActiveColor = Color.yellow;
 
-    BeatAnimation beatTiming;
+    BeatInfo beatTiming;
     HitResult hintState = HitResult.Miss;
     HintGenerator hintGenerator;
     int[] buttonIDs;
@@ -46,7 +46,6 @@ public class HintTrackControl : MonoBehaviour
                     if (timer >= beatTiming.OKStart + timeBeforeHit)
                     {
                         ChangeToOK();
-                        Debug.Log(timer);
                     }
                     break;
                 case HitResult.Good:
@@ -128,11 +127,11 @@ public class HintTrackControl : MonoBehaviour
         }
     }
 
-    public void StartMoving(BeatAnimation beatTime, int[] butIDs, HintGenerator hintGen)
+    public void StartMoving(BeatInfo beatTime, HintGenerator hintGen)
     {
         matchedButtons = new Dictionary<int, bool>();
         beatTiming = beatTime;
-        buttonIDs = butIDs;
+        buttonIDs = beatTime.ButtonIDs;
         //initialize matched buttons
         foreach(int i in buttonIDs)
         {
@@ -163,7 +162,7 @@ public class HintTrackControl : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public BeatAnimation GetBeatTiming()
+    public BeatInfo GetBeatTiming()
     {
         return beatTiming;
     }

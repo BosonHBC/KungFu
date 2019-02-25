@@ -1,0 +1,45 @@
+{
+    "BeatData": [
+        {
+            "BeatID": 0,
+            "ButtonID": [
+                1
+            ],
+            "OKStart": 0.0,
+            "OKDuration": 1.5,
+            "PerfectStart": 0.9,
+            "PerfectDuration": 0.6
+        },
+        {
+            "BeatID": 1,
+            "ButtonID": [
+                0
+            ],
+            "OKStart": 0.0,
+            "OKDuration": 1.5,
+            "PerfectStart": 0.9,
+            "PerfectDuration": 0.6
+        },
+        {
+            "BeatID": 2,
+            "ButtonID": [
+                4
+            ],
+            "OKStart": 0.0,
+            "OKDuration": 1.5,
+            "PerfectStart": 0.9,
+            "PerfectDuration": 0.6
+        },
+        {
+            "BeatID": 3,
+            "ButtonID": [
+                3,
+                5
+            ],
+            "OKStart": 0.0,
+            "OKDuration": 1.5,
+            "PerfectStart": 0.9,
+            "PerfectDuration": 0.6
+        }
+    ]
+}
