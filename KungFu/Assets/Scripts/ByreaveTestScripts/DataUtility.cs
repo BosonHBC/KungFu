@@ -34,4 +34,13 @@ public class DataUtility
         }
         return true;
     }
+    public static bool DictionaryAllTrue(Dictionary<int, bool> dic)
+    {
+        foreach(bool b in dic.Values)
+        {
+            if (!b)
+                return false;
+        }
+        return true;
+    }
 }

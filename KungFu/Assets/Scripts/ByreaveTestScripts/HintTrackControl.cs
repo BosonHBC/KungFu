@@ -98,13 +98,16 @@ public class HintTrackControl : MonoBehaviour
             if(butID == pair.Key && !pair.Value)
             {
                 ChildBodyParts[butID].GetComponent<Image>().color = NormalColor;
+                matchedButtons[butID] = true;
+                break;
             }
         }
         //check for if all is matched
         if(isAllMatched())
         {
             hintGenerator.RemoveFirstHint();
-            StartCoroutine(FadeOut());
+            //StartCoroutine(FadeOut());
+            Destroy(gameObject);
         }
     }
 

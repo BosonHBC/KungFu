@@ -2,6 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using SimpleJSON;
+
+
+public class BeatHitObject
+{
+    public float TimeToHit;
+    public BeatInfo BeatTime;
+    public Dictionary<int, bool> MatchedButtons;
+}
 public class BeatGenerator : MonoBehaviour
 {
 
@@ -23,21 +31,16 @@ public class BeatGenerator : MonoBehaviour
     //Timer for beats
     public float beatTimer = 0.0f;
 
-    //current beat's start time and perfect timing etc.
-    BeatTiming currentBeatTiming;
-    //if a beat is played
-    bool isInBeat = false;
-    //the timer to get the result of the beat
-    //Buttons in this beat that are supposed to be hit
-    int[] activeButtons;
+    //for input handling
+    Queue<BeatHitObject> beatQueue;
+
     //Hint Generator
     HintGenerator hintGenerator;
     //Result Control
     ResultControl resultControl;
     //SFX Control
     SFXControl sfxControl;
-    //tmp way to check which beat is matched
-    Dictionary<int, bool> matchedButtons;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -57,7 +60,7 @@ public class BeatGenerator : MonoBehaviour
             {6, KeyCode.K },
             {7, KeyCode.O }
         };
-        matchedButtons = new Dictionary<int, bool>();
+        beatQueue = new Queue<BeatHitObject>();
         //indicatorControl = Indicator.GetComponent<IndicatorControl>();
         hintGenerator = Indicator.GetComponent<HintGenerator>();
         resultControl = FindObjectOfType<ResultControl>();
@@ -75,26 +78,28 @@ public class BeatGenerator : MonoBehaviour
                 MyGameInstance.instance.RestartGame();
 
             AnimationInfo currentAnimInfo = animationData[AnimationArray[currentAnimationIndex]["AnimationID"].AsInt];
-
-            if(beatData[currentAnimInfo.BeatIDs[currentBeatIndex]].OKStart + AnimationArray[currentAnimationIndex]["timeToHit"].AsFloat <= beatTimer)
+            BeatInfo currentBeatInfo = beatData[currentAnimInfo.BeatIDs[currentBeatIndex]];
+            if (currentBeatInfo == null)
+                Debug.Log("Error when getting beat info");
+            if (currentBeatInfo.OKStart + AnimationArray[currentAnimationIndex]["timeToHit"].AsFloat <= beatTimer)
             {
-                //get beat infos
-                activeButtons = beatData[currentAnimInfo.BeatIDs[currentBeatIndex]].ButtonIDs;
-                BeatInfo currentBeatInfo = beatData[currentAnimInfo.BeatIDs[currentBeatIndex]];
-
-
-                if (currentBeatInfo == null)
-                    Debug.Log("Error when getting beat info");
-
-                //make sure matched buttons is clear
-                matchedButtons.Clear();
-                //Add active buttons to matched buttons for miss check
-                foreach (int i in activeButtons)
+                //create a map of matched buttons for miss check
+                var matchedButtons = new Dictionary<int, bool>();
+                foreach (int i in currentBeatInfo.ButtonIDs)
                 {
                     matchedButtons.Add(i, false);
                 }
+                beatQueue.Enqueue(
+                    new BeatHitObject()
+                    {
+                        TimeToHit = AnimationArray[currentAnimationIndex]["timeToHit"].AsFloat,
+                        BeatTime = currentBeatInfo,
+                        MatchedButtons = matchedButtons
+                    }
+                );
+
                 //Beat ends
-                StartCoroutine(beatEndInSecs(activeButtons, currentBeatInfo.OKStart + currentBeatInfo.OKDuration));
+                StartCoroutine(beatEndInSecs(matchedButtons, currentBeatInfo.OKStart + currentBeatInfo.OKDuration));
 
                 GetComponentInChildren<EnemyAnimationControl>().PlayAnim(currentAnimInfo.AnimationID);
                 currentBeatIndex++;
@@ -103,17 +108,16 @@ public class BeatGenerator : MonoBehaviour
                     currentAnimationIndex++;
                     currentBeatIndex = 0;
                 }
-                isInBeat = true;
             }
             
         }
-        checkInputFromKeyboard(activeButtons, isInBeat);
+        checkInputFromKeyboard();
         //checkInputFromArduino(activeButtons, isInBeat);
         beatTimer += Time.deltaTime;
     }
 
     //there is a match hit
-    void matchButton(int buttonID)
+    void matchButton(int buttonID, Dictionary<int, bool> matchedButtons)
     {
         if(matchedButtons.ContainsKey(buttonID))
         {
@@ -133,13 +137,19 @@ public class BeatGenerator : MonoBehaviour
                 //indicatorControl.ShowResultAt(buttonID, hr);
                 resultControl.ShowResult(hr);
                 matchedButtons[buttonID] = true;
+
+                //if all buttons are hit, dequeue
+                if(DataUtility.DictionaryAllTrue(matchedButtons))
+                {
+                    beatQueue.Dequeue();
+                }
             }
         }
         else
             Debug.Log("No such button in matchedButtons!!!!!");
     }
 
-    void missCheck()
+    void missCheck(Dictionary<int, bool> matchedButtons)
     {
         foreach (var matched in matchedButtons)
         {
@@ -152,90 +162,86 @@ public class BeatGenerator : MonoBehaviour
                 sfxControl.PlayRandomMissSFX();
             }
         }
+        //dequeue
+        if(beatQueue.Count != 0 && matchedButtons == beatQueue.Peek().MatchedButtons)
+        {
+            beatQueue.Dequeue();
+        }
     }
 
     //end of this beat, reset all, can be improved
     //Improved a little, need to add the check if the next beat comes before this beat ends
-    IEnumerator beatEndInSecs(int[] ButtonIDs, float delay)
+    IEnumerator beatEndInSecs(Dictionary<int, bool> matchedButtons, float delay)
     {
         yield return new WaitForSeconds(delay);
         //indicatorControl.DeactivateButtons(ButtonIDs);
-        isInBeat = false;
-        missCheck();
+        missCheck(matchedButtons);
         matchedButtons.Clear();
     }
 
-    
 
-    void checkInputFromKeyboard(int [] aButtons, bool inBeat)
+
+    void checkInputFromKeyboard()
     {
-        //if (Input.GetKeyDown(KeyCode.I))
-        //{
-        //    ToggleIndicator();
-        //}
-        foreach (var k in buttonMapping)
+        if (beatQueue.Count != 0)
         {
-            if(!inBeat)
+            var butInfo = beatQueue.Peek();
+            if (beatTimer >= butInfo.TimeToHit + butInfo.BeatTime.OKStart && beatTimer <= butInfo.TimeToHit + butInfo.BeatTime.OKDuration)
             {
-                //if (Input.GetKeyDown(k.Value))
-                //    indicatorControl.HitButton(k.Key);
-                //else if (Input.GetKeyUp(k.Value))
-                //    indicatorControl.DeactiveButton(k.Key);
-            }
-            else
-            {
-                //the buttons to be pressed in this beat
-                if (DataUtility.HasElement(aButtons, k.Key))
+                foreach (var k in buttonMapping)
                 {
-                    if (Input.GetKeyDown(k.Value))
+                    //the buttons to be pressed in this beat
+                    if (DataUtility.HasElement(butInfo.BeatTime.ButtonIDs, k.Key))
                     {
-                        matchButton(k.Key);
+                        if (Input.GetKeyDown(k.Value))
+                        {
+                            matchButton(k.Key, butInfo.MatchedButtons);
+                        }
                     }
-                }
-                //other buttons
-                else
-                {
-                    //if (Input.GetKeyDown(k.Value))
-                    //    indicatorControl.HitButton(k.Key);
-                    //else if (Input.GetKeyUp(k.Value))
-                    //    indicatorControl.DeactiveButton(k.Key);
+                    //other buttons
+                    else
+                    {
+                        //if (Input.GetKeyDown(k.Value))
+                        //    indicatorControl.HitButton(k.Key);
+                        //else if (Input.GetKeyUp(k.Value))
+                        //    indicatorControl.DeactiveButton(k.Key);
+                    }
                 }
             }
         }
+        
     }
 
-    void checkInputFromArduino(int []aButtons, bool inBeat)
+    void checkInputFromArduino()
     {
-        bool[] arduinoInput = MyGameInstance.instance.GetArduinoInput();
-        for(int i = 0; i < arduinoInput.Length; ++ i)
+        if(beatQueue.Count != 0)
         {
-            //More arduino inputs
-            if (i >= buttonMapping.Count)
-                continue;
-            if (!inBeat)
+            bool[] arduinoInput = MyGameInstance.instance.GetArduinoInput();
+            var butInfo = beatQueue.Peek();
+            if (beatTimer >= butInfo.TimeToHit + butInfo.BeatTime.OKStart && beatTimer <= butInfo.TimeToHit + butInfo.BeatTime.OKDuration)
             {
-                //if (arduinoInput[i])
-                //    indicatorControl.HitButton(i);
-                //else
-                //    indicatorControl.DeactiveButton(i);
-            }
-            else
-            {
-                //the buttons to be pressed in this beat
-                if (DataUtility.HasElement(aButtons, i))
+                for (int i = 0; i < arduinoInput.Length; ++i)
                 {
-                    if (arduinoInput[i])
+                    //More arduino inputs
+                    if (i >= buttonMapping.Count)
+                        continue;
+                    //the buttons to be pressed in this beat
+                    if (DataUtility.HasElement(butInfo.BeatTime.ButtonIDs, i))
                     {
-                        matchButton(i);
+                        if (arduinoInput[i])
+                        {
+                            matchButton(i, butInfo.MatchedButtons);
+                        }
                     }
-                }
-                //other buttons
-                else
-                {
-                    //if (arduinoInput[i])
-                    //    indicatorControl.HitButton(i);
-                    //else 
-                    //    indicatorControl.DeactiveButton(i);
+                    //other buttons
+                    else
+                    {
+                        //if (arduinoInput[i])
+                        //    indicatorControl.HitButton(i);
+                        //else 
+                        //    indicatorControl.DeactiveButton(i);
+                    }
+
                 }
             }
         }
@@ -250,9 +256,8 @@ public class BeatGenerator : MonoBehaviour
 
     HitResult GetResultFromInput()
     {
-        BeatInfo currentBeatInfo = beatData[animationData[AnimationArray[currentAnimationIndex]["AnimationID"].AsInt].BeatIDs[currentBeatIndex]];
-        float ReactTime = beatTimer - AnimationArray[currentAnimationIndex]["timeToHit"].AsFloat;
-
+        BeatInfo currentBeatInfo = beatQueue.Peek().BeatTime;
+        float ReactTime = beatTimer - beatQueue.Peek().TimeToHit;
         if (ReactTime >= currentBeatInfo.PerfectStart && ReactTime <= currentBeatInfo.PerfectStart + currentBeatInfo.PerfectDuration)
             return HitResult.Perfect;
         else if (ReactTime >= currentBeatInfo.OKStart && ReactTime <= currentBeatInfo.OKDuration)
