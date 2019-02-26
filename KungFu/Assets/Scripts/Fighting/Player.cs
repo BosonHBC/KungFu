@@ -39,11 +39,13 @@ public class Player : Character
         {
             if (iCurrentView == 0)
             {
+                // to third person
                StartCoroutine(SwitchView(trackedDolly.m_PathPosition, 0, 0.2f));
                 iCurrentView = 1;
             }
             else if (iCurrentView == 1)
             {
+                // to first person
                 StartCoroutine(SwitchView(trackedDolly.m_PathPosition, 2f, 0.2f));
                 iCurrentView = 0;
             }
@@ -65,7 +67,9 @@ public class Player : Character
             _timeSinceStart = Time.time - _timeStartFade;
             _lerpPercentage = _timeSinceStart / _fadeTime;
             float currentValue = Mathf.Lerp(_start, _end, _lerpPercentage);
+            float _fovValue = Mathf.Lerp(_start * 10 + 40, _end * 10 + 40, _lerpPercentage);
             trackedDolly.m_PathPosition = currentValue;
+            myCamera.m_Lens.FieldOfView = _fovValue;
             if (_lerpPercentage >= 1) break;
             yield return new WaitForEndOfFrame();
         }

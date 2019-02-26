@@ -27,10 +27,11 @@ public class FightingManager : MonoBehaviour
     [SerializeField] Transform[] spawnPoints;
     [SerializeField] PlayableDirector director;
     [SerializeField] TimelineAsset timelines;
-    [SerializeField] SideViewCam sideVCam;
+    
     [SerializeField] GameObject[] cameraList;
 
     [Header("Parameter")]
+    private SideViewCam sideVCam;
     public int iFightingSceneID;
     private Character[] characters = new Character[2];
     private int currentCamera;
@@ -118,6 +119,7 @@ public class FightingManager : MonoBehaviour
         }
 
         // 2. Set side virtual camera to
+        sideVCam = cameraList[0].GetComponent<SideViewCam>();
         sideVCam.SetData(center.transform);
     }
 

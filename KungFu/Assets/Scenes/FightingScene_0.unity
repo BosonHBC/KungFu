@@ -832,7 +832,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 910536406}
-  m_LocalRotation: {x: 0.019667637, y: -0.6513269, z: 0.016891923, w: -0.6461849}
+  m_LocalRotation: {x: 0.019667637, y: -0.6513269, z: 0.016891923, w: 0.6782684}
   m_LocalPosition: {x: 22.402924, y: -0.5294573, z: -3.6488981}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -905,14 +905,13 @@ MonoBehaviour:
     type: 3}
   playerPrefabs:
   - {fileID: 3107315991141146088, guid: eb883287fabd08e46b85946b8d3ca13e, type: 3}
-  - {fileID: 1467824613, guid: b70bebe21152421428bc8aab104a5e16, type: 3}
+  - {fileID: 3392381731458139390, guid: 8c1fc7ed30b5b0f468fe96363b8c09cf, type: 3}
   playerReleventParent: {fileID: 1531893282}
   spawnPoints:
   - {fileID: 345791331}
   - {fileID: 1528300736}
   director: {fileID: 656054121}
   timelines: {fileID: 11400000, guid: c8a59048ddcf3334bab2c69eb6f574b3, type: 2}
-  sideVCam: {fileID: 175588452}
   cameraList:
   - {fileID: 175588449}
   - {fileID: 0}
