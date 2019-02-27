@@ -403,7 +403,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Hammer
+  m_Name: FireBall
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -418,7 +418,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 383f7ca2057c25e45869b2a90af6b048, type: 2}
+  m_Motion: {fileID: 7400000, guid: c574240d80767f04b8cf74953209f073, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -474,7 +474,7 @@ AnimatorState:
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: fbf40cf9fa03d2e4db3f1ff2ccaaa898, type: 3}
   m_Tag: 
-  m_SpeedParameter: 
+  m_SpeedParameter: StandToFight_f
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
@@ -485,7 +485,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: handssors
+  m_Name: Kick
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -513,7 +513,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Uppercut
+  m_Name: Straight
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -528,7 +528,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 8d8e324c3ecd197489862c9e45833865, type: 2}
+  m_Motion: {fileID: 7400000, guid: 9f22ac01b8e4e0a49937522cda9d0f55, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

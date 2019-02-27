@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9f22ac01b8e4e0a49937522cda9d0f55
+guid: c574240d80767f04b8cf74953209f073
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -157,7 +157,7 @@ ModelImporter:
     400148: spine2_result_JNT
     400150: spine3_result_JNT
     400152: spine4_result_JNT
-    7400000: Fight_Str_Right_1
+    7400000: Fight_Fireball
     9500000: //RootNode
     2186277476908879412: ImportLogs
   externalObjects: {}
@@ -199,12 +199,12 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Fight_Str_Right_1
+      name: Fight_Fireball
       takeName: mixamo.com
       firstFrame: 0
-      lastFrame: 112
+      lastFrame: 136
       wrapMode: 0
-      orientationOffsetY: 54.5
+      orientationOffsetY: -63.78
       level: 0.37
       cycleOffset: 0
       loop: 0

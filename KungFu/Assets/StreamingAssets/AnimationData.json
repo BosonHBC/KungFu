@@ -10,7 +10,7 @@
         },
         {
             "AnimationID": 1,
-            "AnimationName": "Hammer",
+            "AnimationName": "Fight_Fireball",
             "Mode": "Attack",
             "Beats": [
                 1
@@ -18,7 +18,7 @@
         },
         {
             "AnimationID": 2,
-            "AnimationName": "Uppercut",
+            "AnimationName": "Fight_Str_Right_1",
             "Mode": "Attack",
             "Beats": [
                 2
