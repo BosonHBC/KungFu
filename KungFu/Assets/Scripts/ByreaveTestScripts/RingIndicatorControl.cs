@@ -25,14 +25,41 @@ public class RingIndicatorControl : MonoBehaviour
         };
     }
 
+    public void SetData(Transform _Enemy)
+    {
+        AttackJointID[] _attackArray = _Enemy.GetComponentsInChildren<AttackJointID>();
+        foreach (var item in _attackArray)
+        {
+            switch (item.iJointID)
+            {
+                case 0:
+                    RightWrist = item.transform;
+                    break;
+                case 1:
+                    LeftWrist = item.transform;
+                    break;
+                default:
+                    break;
+            }
+        }
+        RingPositionMap = new Dictionary<int, Transform[]>()
+        {
+            {0, new Transform[] { RightWrist } },
+            {1, new Transform[] { RightWrist } },
+            {2, new Transform[] { RightWrist } },
+            {3, new Transform[] { LeftWrist, RightWrist } },
+
+        };
+    }
+
     //pending fix
     public void ShowRingIndicator(BeatInfo beatAnimation)
     {
-        foreach(var map in RingPositionMap)
+        foreach (var map in RingPositionMap)
         {
-            if(map.Key == beatAnimation.BeatID)
+            if (map.Key == beatAnimation.BeatID)
             {
-                foreach(Transform trans in map.Value)
+                foreach (Transform trans in map.Value)
                 {
                     GameObject ring = Instantiate(RingIndicator, trans.position, Quaternion.identity, trans);
                     StartCoroutine(StartShrinking(ring, beatAnimation.PerfectStart, beatAnimation.PerfectDuration));
@@ -47,10 +74,10 @@ public class RingIndicatorControl : MonoBehaviour
         float timer = 0;
         ring.GetComponent<SpriteRenderer>().color = OKColor;
         Vector3 scalingSpeed = (FinalSize - ring.transform.localScale) / (perfectStart + perfectDuration);
-        while(timer <= perfectStart + perfectDuration)
+        while (timer <= perfectStart + perfectDuration)
         {
             ring.transform.localScale += scalingSpeed * Time.deltaTime;
-            if(timer >= perfectStart)
+            if (timer >= perfectStart)
                 ring.GetComponent<SpriteRenderer>().color = PerfectColor;
             timer += Time.deltaTime;
             yield return new WaitForEndOfFrame();

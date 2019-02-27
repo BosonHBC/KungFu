@@ -15,9 +15,13 @@ public class HitIndicatorControl : MonoBehaviour
     void Update()
     {
         bool[] arduinoInput = MyGameInstance.instance.GetArduinoInput();
-        for(int i = 0; i < ChildBodyParts.Length; ++ i)
+        if(arduinoInput!= null)
         {
-            ChildBodyParts[i].SetActive(arduinoInput[i]);
+            for (int i = 0; i < ChildBodyParts.Length; ++i)
+            {
+                ChildBodyParts[i].SetActive(arduinoInput[i]);
+            }
         }
+
     }
 }

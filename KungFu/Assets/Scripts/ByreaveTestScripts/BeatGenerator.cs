@@ -13,11 +13,6 @@ public class BeatHitObject
 }
 public class BeatGenerator : MonoBehaviour
 {
-
-    //The order in the children is important, should be the same with button mapping
-    [SerializeField]
-    GameObject Indicator;
-
     //new Data structure
     #region
     Dictionary<int, AnimationInfo> animationData;
@@ -31,6 +26,7 @@ public class BeatGenerator : MonoBehaviour
     Dictionary<int, KeyCode> buttonMapping;
     //Timer for beats
     public float beatTimer = 0.0f;
+    public bool bCanPlay;
 
     //for input handling
     Queue<BeatHitObject> beatQueue;
@@ -39,17 +35,19 @@ public class BeatGenerator : MonoBehaviour
     HintGenerator hintGenerator;
     //Result Control
     ResultControl resultControl;
+    AudioSource songPlaySource;
+    EnemyAnimationControl enemyAnimCtrl;
     //SFX Control
-    SFXControl sfxControl;
+    //SFXControl sfxControl;
 
     bool animEvtsAdded = false;
     // Start is called before the first frame update
     void Start()
     {
         //BeatData = MyGameInstance.instance.GetComponent<TestDataLoader>().GetBeatDataByName("Kungfu");
-        AnimationArray = MyGameInstance.instance.GetComponent<TestDataLoader>().GetAnimationArrayByName("Kungfu");
-        animationData = MyGameInstance.instance.GetComponent<TestDataLoader>().GetAnimationInfos();
-        beatData = MyGameInstance.instance.GetComponent<TestDataLoader>().GetBeatInfos();
+        AnimationArray = MyGameInstance.instance.GetComponent<DataLoader>().GetAnimationArrayByName("Kungfu");
+        animationData = MyGameInstance.instance.GetComponent<DataLoader>().GetAnimationInfos();
+        beatData = MyGameInstance.instance.GetComponent<DataLoader>().GetBeatInfos();
 
         buttonMapping = new Dictionary<int, KeyCode>()
         {
@@ -64,26 +62,45 @@ public class BeatGenerator : MonoBehaviour
         };
         beatQueue = new Queue<BeatHitObject>();
         //indicatorControl = Indicator.GetComponent<IndicatorControl>();
-        hintGenerator = Indicator.GetComponent<HintGenerator>();
+        hintGenerator = FindObjectOfType<HintGenerator>();
         resultControl = FindObjectOfType<ResultControl>();
-        sfxControl = GetComponent<SFXControl>();
+        //sfxControl = GetComponent<SFXControl>();
     }
 
+    public void SetData(Transform _enemy, HintGenerator _generator, ResultControl _control)
+    {
+        songPlaySource = _enemy.GetComponent<AudioSource>();
+        enemyAnimCtrl = _enemy.GetComponent<EnemyAnimationControl>();
+        hintGenerator = _generator;
+        resultControl = _control;
+        
+        // Debug
+        StartGenerateBeat();
+    }
+
+    public void StartGenerateBeat()
+    {
+        songPlaySource.Play();
+        bCanPlay = true;
+    }
     // Update is called once per frame
     void Update()
     {
-        
+
         if (AnimationArray[currentAnimationIndex]["timeToHit"].AsFloat <= beatTimer)
         {
             //song ends restart
             if (AnimationArray[currentAnimationIndex]["AnimationID"].AsInt == -1)
-                MyGameInstance.instance.RestartGame();
+            {
+                bCanPlay = false;
+                Debug.Log("Song ended");
+            }
 
             AnimationInfo currentAnimInfo = animationData[AnimationArray[currentAnimationIndex]["AnimationID"].AsInt];
             BeatInfo currentBeatInfo = beatData[currentAnimInfo.BeatIDs[currentBeatIndex]];
-            if(!animEvtsAdded)
+            if (!animEvtsAdded)
             {
-                GetComponentInChildren<EnemyAnimationControl>().AddSlowDownEvent(currentAnimInfo);
+                enemyAnimCtrl.AddSlowDownEvent(currentAnimInfo);
                 animEvtsAdded = true;
             }
             if (currentBeatInfo == null)
@@ -108,7 +125,7 @@ public class BeatGenerator : MonoBehaviour
                 //Beat ends
                 StartCoroutine(beatEndInSecs(matchedButtons, currentBeatInfo.OKStart + currentBeatInfo.OKDuration));
 
-                GetComponentInChildren<EnemyAnimationControl>().PlayAnim(currentAnimInfo.AnimationID);
+                enemyAnimCtrl.PlayAnim(currentAnimInfo.AnimationID);
                 currentBeatIndex++;
                 if (currentBeatIndex >= currentAnimInfo.BeatIDs.Length)
                 {
@@ -117,22 +134,23 @@ public class BeatGenerator : MonoBehaviour
                     animEvtsAdded = false;
                 }
             }
-            
+
         }
         checkInputFromKeyboard();
         //checkInputFromArduino(activeButtons, isInBeat);
-        beatTimer += Time.deltaTime;
+        if (bCanPlay)
+            beatTimer += Time.deltaTime;
     }
 
     //there is a match hit
     void matchButton(int buttonID, Dictionary<int, bool> matchedButtons)
     {
-        if(matchedButtons.ContainsKey(buttonID))
+        if (matchedButtons.ContainsKey(buttonID))
         {
             //if is not already matched
-            if(!matchedButtons[buttonID])
+            if (!matchedButtons[buttonID])
             {
-                sfxControl.PlayRandomMatchSFX();
+                //sfxControl.PlayRandomMatchSFX();
                 HitResult hr = GetResultFromInput();
 
                 hintGenerator.MatchButton(buttonID);
@@ -147,7 +165,7 @@ public class BeatGenerator : MonoBehaviour
                 matchedButtons[buttonID] = true;
 
                 //if all buttons are hit, dequeue
-                if(DataUtility.DictionaryAllTrue(matchedButtons))
+                if (DataUtility.DictionaryAllTrue(matchedButtons))
                 {
                     beatQueue.Dequeue();
                 }
@@ -159,14 +177,13 @@ public class BeatGenerator : MonoBehaviour
 
     void missCheck(Dictionary<int, bool> matchedButtons)
     {
-        
+
         //dequeue
-        if(beatQueue.Count != 0 && matchedButtons == beatQueue.Peek().MatchedButtons)
+        if (beatQueue.Count != 0 && matchedButtons == beatQueue.Peek().MatchedButtons)
         {
-            if(beatQueue.Peek().BeatTime.IsCombo)
+            if (beatQueue.Peek().BeatTime.IsCombo)
             {
                 resultControl.ShowCombo(beatQueue.Peek().comboCount);
-                Debug.Log(beatQueue.Peek().comboCount);
             }
             else
             {
@@ -178,7 +195,7 @@ public class BeatGenerator : MonoBehaviour
                         //show miss image
                         resultControl.ShowResult(HitResult.Miss);
                         //MyGameInstance.instance.ShowResultAt(ChildBodyParts[matched.Key].transform, HitResult.Miss);
-                        sfxControl.PlayRandomMissSFX();
+                        //sfxControl.PlayRandomMissSFX();
                     }
                 }
             }
@@ -232,12 +249,12 @@ public class BeatGenerator : MonoBehaviour
                 }
             }
         }
-        
+
     }
 
     void checkInputFromArduino()
     {
-        if(beatQueue.Count != 0)
+        if (beatQueue.Count != 0)
         {
             bool[] arduinoInput = MyGameInstance.instance.GetArduinoInput();
             var butInfo = beatQueue.Peek();
@@ -275,7 +292,7 @@ public class BeatGenerator : MonoBehaviour
     //    Indicator.transform.localScale = showIndicator ? Vector3.one : Vector3.zero;
     //}
 
-    
+
 
     HitResult GetResultFromInput()
     {

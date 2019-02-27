@@ -46,8 +46,8 @@ public class MyGameInstance : MonoBehaviour
     {
         misses += number;
         Canvas canvas = GameObject.FindObjectOfType<Canvas>();
-        if (canvas != null)
-            canvas.gameObject.GetComponent<ScoreTextControl>().SetMiss("Miss: " + misses.ToString());
+        //if (canvas != null)
+        //    canvas.gameObject.GetComponent<ScoreTextControl>().SetMiss("Miss: " + misses.ToString());
     }
 
     public void SetArduinoInput(bool[] arduinoInput)

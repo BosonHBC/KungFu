@@ -4,7 +4,7 @@ using UnityEngine;
 using System.IO;
 using SimpleJSON;
 
-public class TestDataLoader : MonoBehaviour
+public class DataLoader : MonoBehaviour
 {
     // currently will be only one data
     //private MusicData[] allMusicData;
@@ -32,7 +32,7 @@ public class TestDataLoader : MonoBehaviour
             string dataJson = File.ReadAllText(filePath);
 
             var loadedData = JSON.Parse(dataJson);
-            foreach(var anim in loadedData["Animations"].Values)
+            foreach (var anim in loadedData["Animations"].Values)
             {
                 AnimationData.Add(anim["AnimationID"], new AnimationInfo(anim));
             }
@@ -93,7 +93,7 @@ public class TestDataLoader : MonoBehaviour
         JSONNode retBeat = null;
         foreach (var music in musicData)
         {
-            if(music.Value["name"] == name)
+            if (music.Value["name"] == name)
             {
                 retBeat = music.Value["beatArray"];
                 break;
@@ -119,7 +119,7 @@ public class TestDataLoader : MonoBehaviour
                 break;
             }
         }
-        if(retBeat != null)
+        if (retBeat != null)
             return new BeatTiming(retBeat[2].AsFloat, retBeat[3].AsFloat, retBeat[4].AsFloat, retBeat[5].AsFloat);
         else
         {
@@ -134,9 +134,9 @@ public class TestDataLoader : MonoBehaviour
 
     public JSONNode GetAnimationArrayByName(string name)
     {
-        foreach(var song in allMusicData.Values)
+        foreach (var song in allMusicData.Values)
         {
-            if(song["name"] == name)
+            if (song["name"] == name)
             {
                 return song["animArray"];
             }

@@ -69,6 +69,7 @@ public class FightingManager : MonoBehaviour
 
         director.SetGenericBinding(timelines.GetOutputTrack(4), _canvasGo.GetComponent<Animator>());
         // Set UIs
+        
 
         /// Characters 0-> player 1-> enemy
         for (int i = 0; i < 2; i++)
@@ -100,6 +101,10 @@ public class FightingManager : MonoBehaviour
         // Player animation
         PlayerAnimController _animCtrl= thePlayer.GetComponent<PlayerAnimController>();
         onPositioned = new UnityAction( delegate { _animCtrl.bPreparing = true; });
+
+        // Set Enemy attack joint and beat generator
+        _canvasGo.GetComponentInChildren<RingIndicatorControl>().SetData(characters[1].transform);
+        MyGameInstance.instance.GetComponent<BeatGenerator>().SetData(characters[1].transform, _canvasGo.GetComponentInChildren<HintGenerator>(), _canvasGo.GetComponentInChildren<ResultControl>());
 
         /// Set Camera
         IEnumerable<TimelineClip> clips = timelines.GetOutputTrack(1).GetClips();

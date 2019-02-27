@@ -31,35 +31,45 @@ public class HintGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animData = MyGameInstance.instance.GetComponent<TestDataLoader>().GetAnimationArrayByName("Kungfu");
-        animationData = MyGameInstance.instance.GetComponent<TestDataLoader>().GetAnimationInfos();
-        beatData = MyGameInstance.instance.GetComponent<TestDataLoader>().GetBeatInfos();
-        beatGenerator = FindObjectOfType<BeatGenerator>();
+        animData = MyGameInstance.instance.GetComponent<DataLoader>().GetAnimationArrayByName("Kungfu");
+        animationData = MyGameInstance.instance.GetComponent<DataLoader>().GetAnimationInfos();
+        beatData = MyGameInstance.instance.GetComponent<DataLoader>().GetBeatInfos();
+        beatGenerator = MyGameInstance.instance.GetComponent<BeatGenerator>();
         hintsQueue = new Queue<GameObject>();
         ringIndicator = GetComponent<RingIndicatorControl>();
     }
     private void Update()
     {
-        //generate hints
-        float hintTimer = beatGenerator.beatTimer;
-        AnimationInfo currentAnimInfo = animationData[animData[currentAnimationIndex]["AnimationID"].AsInt];
-        BeatInfo currentBeatInfo = beatData[currentAnimInfo.BeatIDs[currentBeatIndex]];
-        if (currentBeatInfo.OKStart + animData[currentAnimationIndex]["timeToHit"].AsFloat <= hintTimer + HintTimeBeforeHit)
+        if (beatGenerator.bCanPlay)
         {
-            //get beat infos
-            currentBeatIndex++;
-            GenerateHint(currentBeatInfo);
-            StartCoroutine(ShowRingIndicatorInSecs(currentBeatInfo, HintTimeBeforeHit));
-            if (currentBeatIndex >= currentAnimInfo.BeatIDs.Length)
+            //generate hints
+            float hintTimer = beatGenerator.beatTimer;
+            if(animData[currentAnimationIndex]["AnimationID"].AsInt != -1)
             {
-                currentAnimationIndex++;
-                currentBeatIndex = 0;
+                AnimationInfo currentAnimInfo = animationData[animData[currentAnimationIndex]["AnimationID"].AsInt];
+                BeatInfo currentBeatInfo = beatData[currentAnimInfo.BeatIDs[currentBeatIndex]];
+                if (currentBeatInfo.OKStart + animData[currentAnimationIndex]["timeToHit"].AsFloat <= hintTimer + HintTimeBeforeHit)
+                {
+                    //get beat infos
+                    currentBeatIndex++;
+                    GenerateHint(currentBeatInfo);
+                    StartCoroutine(ShowRingIndicatorInSecs(currentBeatInfo, HintTimeBeforeHit));
+                    if (currentBeatIndex >= currentAnimInfo.BeatIDs.Length)
+                    {
+                        currentAnimationIndex++;
+                        currentBeatIndex = 0;
+                    }
+                }
             }
         }
     }
     void GenerateHint(BeatInfo beatTiming)
     {
-        GameObject tmpGO = Instantiate(HintObject, transform.position, Quaternion.identity, transform);
+        GameObject tmpGO = Instantiate(HintObject);
+        tmpGO.transform.SetParent(transform);
+        tmpGO.transform.localPosition = Vector3.zero;
+        tmpGO.transform.localEulerAngles = Vector3.zero;
+        tmpGO.transform.localScale = Vector3.one;
         tmpGO.GetComponent<HintTrackControl>().StartMoving(beatTiming, this);
         hintsQueue.Enqueue(tmpGO);
         if(!hasAreaPlaced)
