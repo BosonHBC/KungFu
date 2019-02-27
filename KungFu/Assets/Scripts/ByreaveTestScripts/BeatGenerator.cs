@@ -42,6 +42,7 @@ public class BeatGenerator : MonoBehaviour
     //SFX Control
     SFXControl sfxControl;
 
+    bool animEvtsAdded = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -80,6 +81,11 @@ public class BeatGenerator : MonoBehaviour
 
             AnimationInfo currentAnimInfo = animationData[AnimationArray[currentAnimationIndex]["AnimationID"].AsInt];
             BeatInfo currentBeatInfo = beatData[currentAnimInfo.BeatIDs[currentBeatIndex]];
+            if(!animEvtsAdded)
+            {
+                GetComponentInChildren<EnemyAnimationControl>().AddSlowDownEvent(currentAnimInfo);
+                animEvtsAdded = true;
+            }
             if (currentBeatInfo == null)
                 Debug.Log("Error when getting beat info");
             if (currentBeatInfo.OKStart + AnimationArray[currentAnimationIndex]["timeToHit"].AsFloat <= beatTimer)
@@ -108,6 +114,7 @@ public class BeatGenerator : MonoBehaviour
                 {
                     currentAnimationIndex++;
                     currentBeatIndex = 0;
+                    animEvtsAdded = false;
                 }
             }
             

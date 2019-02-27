@@ -14,7 +14,7 @@ public class EnemyAnimationControl : MonoBehaviour
         enemyAnimator = GetComponent<Animator>();
         AnimationData = MyGameInstance.instance.GetComponent<TestDataLoader>().GetAnimationInfos();
         BeatData = MyGameInstance.instance.GetComponent<TestDataLoader>().GetBeatInfos();
-        AddSlowDownEvent();
+        //AddSlowDownEvent();
     }
 
     public void PlayAnim(int AnimationID)
@@ -65,6 +65,31 @@ public class EnemyAnimationControl : MonoBehaviour
             else
             {
                 Debug.Log(ac.name);
+            }
+        }
+    }
+
+    public void AddSlowDownEvent(AnimationInfo animInfo)
+    {
+        AnimationClip[] animationClips = enemyAnimator.runtimeAnimatorController.animationClips;
+        foreach (AnimationClip ac in animationClips)
+        {
+            if(ac.name == animInfo.AnimationName)
+            {
+                
+                ac.events = null;
+                foreach(var beat in animInfo.BeatIDs)
+                {
+                    var beatInfo = BeatData[beat];
+                    AnimationEvent animEvt = new AnimationEvent
+                    {
+                        time = beatInfo.OKStart,
+                        floatParameter = beatInfo.PerfectStart - beatInfo.OKStart,
+                        functionName = "SlowDown"
+                    };
+                    ac.AddEvent(animEvt);
+                }
+                break;
             }
         }
     }
