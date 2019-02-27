@@ -74,8 +74,19 @@ public class HintGenerator : MonoBehaviour
     {
         OKArea.rectTransform.localPosition = new Vector3(-(HintTimeBeforeHit + beatTiming.OKStart) * HintObjectSpeed, 0.0f, 0.0f);
         OKArea.rectTransform.sizeDelta = new Vector2(beatTiming.OKDuration * HintObjectSpeed, 100.0f);
-        PerfectArea.rectTransform.localPosition = new Vector3(-(HintTimeBeforeHit + beatTiming.PerfectStart) * HintObjectSpeed, 0.0f, 0.0f);
-        PerfectArea.rectTransform.sizeDelta = new Vector2(beatTiming.PerfectDuration * HintObjectSpeed, 100.0f);
+        if(beatTiming.IsCombo)
+        {
+            OKArea.transform.GetChild(0).gameObject.SetActive(true);
+            PerfectArea.rectTransform.sizeDelta = Vector2.zero;
+        }
+        else
+        {
+            OKArea.transform.GetChild(0).gameObject.SetActive(false);
+
+            PerfectArea.rectTransform.localPosition = new Vector3(-(HintTimeBeforeHit + beatTiming.PerfectStart) * HintObjectSpeed, 0.0f, 0.0f);
+            PerfectArea.rectTransform.sizeDelta = new Vector2(beatTiming.PerfectDuration * HintObjectSpeed, 100.0f);
+        }
+        
     }
 
     public void RemoveFirstHint()

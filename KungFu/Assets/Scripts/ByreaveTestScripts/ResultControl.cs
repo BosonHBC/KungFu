@@ -1,15 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ResultControl : MonoBehaviour
 {
     public GameObject ResultImageShow;
+    public GameObject ComboText;
     public Vector3 Offset = new Vector3(0.3f, 0.0f, 0.0f);
 
     //two result at same time, can be improved
     float duration = 1.0f;
     bool firstSpawned = false;
+    Coroutine comboCoroutine;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,5 +47,33 @@ public class ResultControl : MonoBehaviour
     {
         yield return new WaitForSeconds(duration);
         firstSpawned = false;
+    }
+
+    public void ShowCombo(int countNumber)
+    {
+        ComboText.GetComponent<Text>().text = countNumber.ToString();
+        //if(comboCoroutine == null)
+            comboCoroutine = StartCoroutine(ComboShow());
+        //else
+        //{
+        //    StopCoroutine(comboCoroutine);
+        //    comboCoroutine = StartCoroutine(ComboShow());
+        //}
+    }
+    IEnumerator ComboShow(float time = 1.0f)
+    {
+        ComboText.GetComponent<RectTransform>().localPosition = Vector3.zero;
+        Vector3 offset = new Vector3(0.0f, 100.0f, 0.0f);
+        ComboText.GetComponent<Text>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+        //Debug.Log("asdasd");
+        //UnityEditor.EditorApplication.isPaused = true;
+        Debug.Log(ComboText.GetComponent<RectTransform>().localPosition.y);
+        while (ComboText.GetComponent<RectTransform>().localPosition.y <= offset.y)
+        {
+            ComboText.transform.Translate(Vector3.up / 3 * Time.deltaTime);
+            yield return new WaitForEndOfFrame();
+        }
+        ComboText.GetComponent<RectTransform>().localPosition = Vector3.zero;
+        ComboText.GetComponent<Text>().color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
     }
 }

@@ -9,6 +9,7 @@ public class BeatHitObject
     public float TimeToHit;
     public BeatInfo BeatTime;
     public Dictionary<int, bool> MatchedButtons;
+    public int comboCount;
 }
 public class BeatGenerator : MonoBehaviour
 {
@@ -151,20 +152,29 @@ public class BeatGenerator : MonoBehaviour
 
     void missCheck(Dictionary<int, bool> matchedButtons)
     {
-        foreach (var matched in matchedButtons)
-        {
-            if (!matched.Value)
-            {
-                MyGameInstance.instance.Miss(1);
-                //show miss image
-                resultControl.ShowResult(HitResult.Miss); 
-                //MyGameInstance.instance.ShowResultAt(ChildBodyParts[matched.Key].transform, HitResult.Miss);
-                sfxControl.PlayRandomMissSFX();
-            }
-        }
+        
         //dequeue
         if(beatQueue.Count != 0 && matchedButtons == beatQueue.Peek().MatchedButtons)
         {
+            if(beatQueue.Peek().BeatTime.IsCombo)
+            {
+                resultControl.ShowCombo(beatQueue.Peek().comboCount);
+                Debug.Log(beatQueue.Peek().comboCount);
+            }
+            else
+            {
+                foreach (var matched in matchedButtons)
+                {
+                    if (!matched.Value)
+                    {
+                        MyGameInstance.instance.Miss(1);
+                        //show miss image
+                        resultControl.ShowResult(HitResult.Miss);
+                        //MyGameInstance.instance.ShowResultAt(ChildBodyParts[matched.Key].transform, HitResult.Miss);
+                        sfxControl.PlayRandomMissSFX();
+                    }
+                }
+            }
             beatQueue.Dequeue();
         }
     }
@@ -195,7 +205,13 @@ public class BeatGenerator : MonoBehaviour
                     {
                         if (Input.GetKeyDown(k.Value))
                         {
-                            matchButton(k.Key, butInfo.MatchedButtons);
+                            if (butInfo.BeatTime.IsCombo)
+                            {
+                                butInfo.comboCount++;
+                                resultControl.ShowCombo(beatQueue.Peek().comboCount);
+                            }
+                            else
+                                matchButton(k.Key, butInfo.MatchedButtons);
                         }
                     }
                     //other buttons
