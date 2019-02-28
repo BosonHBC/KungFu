@@ -9,8 +9,8 @@ public class ArduinoInputScript : MonoBehaviour
 
     internal bool[] buttons = new bool[11];
     private int NUMBUTTONS = 11;
-    private string outputStringCom3;
-    private string outputStringCom4;
+    private string outputStringCom3 = "";
+    private string outputStringCom4 = "";
 
     [SerializeField] bool bDebugPrintInput;
 
