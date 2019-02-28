@@ -86,25 +86,25 @@ public class BeatGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (AnimationArray[currentAnimationIndex]["timeToHit"].AsFloat <= beatTimer)
+        //song ends restart
+        if (AnimationArray[currentAnimationIndex]["AnimationID"].AsInt == -1)
         {
-            //song ends restart
-            if (AnimationArray[currentAnimationIndex]["AnimationID"].AsInt == -1)
-            {
-                bCanPlay = false;
-                Debug.Log("Song ended");
-            }
-
-            AnimationInfo currentAnimInfo = animationData[AnimationArray[currentAnimationIndex]["AnimationID"].AsInt];
-            BeatInfo currentBeatInfo = beatData[currentAnimInfo.BeatIDs[currentBeatIndex]];
+            bCanPlay = false;
+            Debug.Log("Song ended");
+        }
+        AnimationInfo currentAnimInfo = animationData[AnimationArray[currentAnimationIndex]["AnimationID"].AsInt];
+        BeatInfo currentBeatInfo = beatData[currentAnimInfo.BeatIDs[currentBeatIndex]];
+        if (currentBeatInfo == null)
+            Debug.Log("Error when getting beat info");
+        if (AnimationArray[currentAnimationIndex]["timeToHit"].AsFloat - currentBeatInfo.OKStart + currentBeatInfo.PerfectStart <= beatTimer)
+        {
             if (!animEvtsAdded)
             {
                 enemyAnimCtrl.AddSlowDownEvent(currentAnimInfo);
                 animEvtsAdded = true;
             }
-            if (currentBeatInfo == null)
-                Debug.Log("Error when getting beat info");
+            enemyAnimCtrl.PlayAnim(currentAnimInfo.AnimationID);
+
             if (currentBeatInfo.OKStart + AnimationArray[currentAnimationIndex]["timeToHit"].AsFloat <= beatTimer)
             {
                 //create a map of matched buttons for miss check
@@ -125,7 +125,6 @@ public class BeatGenerator : MonoBehaviour
                 //Beat ends
                 StartCoroutine(beatEndInSecs(matchedButtons, currentBeatInfo.OKStart + currentBeatInfo.OKDuration));
 
-                enemyAnimCtrl.PlayAnim(currentAnimInfo.AnimationID);
                 currentBeatIndex++;
                 if (currentBeatIndex >= currentAnimInfo.BeatIDs.Length)
                 {
@@ -134,7 +133,6 @@ public class BeatGenerator : MonoBehaviour
                     animEvtsAdded = false;
                 }
             }
-
         }
         checkInputFromKeyboard();
         //checkInputFromArduino(activeButtons, isInBeat);
