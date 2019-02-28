@@ -41,6 +41,7 @@ public class BeatGenerator : MonoBehaviour
     //SFXControl sfxControl;
 
     bool animEvtsAdded = false;
+    bool animPlayed = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -100,13 +101,18 @@ public class BeatGenerator : MonoBehaviour
         {
             if (!animEvtsAdded)
             {
-                enemyAnimCtrl.AddSlowDownEvent(currentAnimInfo);
+                //enemyAnimCtrl.AddSlowDownEvent(currentAnimInfo);
                 animEvtsAdded = true;
             }
-            enemyAnimCtrl.PlayAnim(currentAnimInfo.AnimationID);
-
-            if (AnimationArray[currentAnimationIndex]["timeToHit"].AsFloat - currentBeatInfo.OKStart <= beatTimer)
+            if(!animPlayed)
             {
+                enemyAnimCtrl.PlayAnim(currentAnimInfo.AnimationID);
+                animPlayed = true;
+            }
+
+            if (AnimationArray[currentAnimationIndex]["timeToHit"].AsFloat - currentBeatInfo.PerfectStart + currentBeatInfo.OKStart <= beatTimer)
+            {
+                //UnityEditor.EditorApplication.isPaused = true;
                 //create a map of matched buttons for miss check
                 var matchedButtons = new Dictionary<int, bool>();
                 foreach (int i in currentBeatInfo.ButtonIDs)
@@ -123,7 +129,7 @@ public class BeatGenerator : MonoBehaviour
                 );
 
                 //Beat ends
-                StartCoroutine(beatEndInSecs(matchedButtons, currentBeatInfo.OKStart + currentBeatInfo.OKDuration));
+                StartCoroutine(beatEndInSecs(matchedButtons, /*currentBeatInfo.OKStart +*/ currentBeatInfo.OKDuration));
 
                 currentBeatIndex++;
                 if (currentBeatIndex >= currentAnimInfo.BeatIDs.Length)
@@ -131,11 +137,12 @@ public class BeatGenerator : MonoBehaviour
                     currentAnimationIndex++;
                     currentBeatIndex = 0;
                     animEvtsAdded = false;
+                    animPlayed = false;
                 }
             }
         }
         checkInputFromKeyboard();
-        checkInputFromArduino();
+        //checkInputFromArduino();
         if (bCanPlay)
             beatTimer += Time.deltaTime;
     }
@@ -155,7 +162,7 @@ public class BeatGenerator : MonoBehaviour
                 //indicatorControl.MatchButton(buttonID);
                 //we can calculate the reacting time to give different scores (as a parameter to Score() function) here
                 if (hr != HitResult.Miss)
-                    MyGameInstance.instance.Score();
+                    MyGameInstance.instance.Score(hr);
                 else
                     MyGameInstance.instance.Miss(1);
                 //indicatorControl.ShowResultAt(buttonID, hr);
@@ -217,9 +224,12 @@ public class BeatGenerator : MonoBehaviour
     {
         if (beatQueue.Count != 0)
         {
+            //Debug.Log(beatTimer);
+
             var butInfo = beatQueue.Peek();
             if (beatTimer >= butInfo.TimeToHit - butInfo.BeatTime.PerfectStart + butInfo.BeatTime.OKStart && beatTimer <= butInfo.TimeToHit - butInfo.BeatTime.PerfectStart + butInfo.BeatTime.OKStart + butInfo.BeatTime.OKDuration)
             {
+                Debug.Log(beatTimer);
                 foreach (var k in buttonMapping)
                 {
                     //the buttons to be pressed in this beat

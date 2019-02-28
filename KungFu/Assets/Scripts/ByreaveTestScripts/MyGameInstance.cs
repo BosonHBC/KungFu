@@ -34,7 +34,7 @@ public class MyGameInstance : MonoBehaviour
 
     }
 
-    public void Score()
+    public void Score(HitResult hr)
     {
         scores++;
         FightingManager.instance.PlayerGuard();

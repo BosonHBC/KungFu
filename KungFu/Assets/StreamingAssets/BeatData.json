@@ -5,7 +5,7 @@
             "ButtonID": [
                 1
             ],
-            "IsCombo": true,
+            "IsCombo": false,
             "OKStart": 0.2,
             "OKDuration": 0.6,
             "PerfectStart": 0.5,
