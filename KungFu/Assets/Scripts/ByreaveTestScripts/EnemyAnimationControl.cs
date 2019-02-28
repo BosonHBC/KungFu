@@ -81,9 +81,6 @@ public class EnemyAnimationControl : MonoBehaviour
                 foreach(var beat in animInfo.BeatIDs)
                 {
                     var beatInfo = BeatData[beat];
-
-                    Debug.Log(beatInfo.PerfectStart - beatInfo.OKStart);
-
                     AnimationEvent animEvt = new AnimationEvent
                     {
                         time = beatInfo.OKStart,

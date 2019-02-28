@@ -96,7 +96,7 @@ public class BeatGenerator : MonoBehaviour
         BeatInfo currentBeatInfo = beatData[currentAnimInfo.BeatIDs[currentBeatIndex]];
         if (currentBeatInfo == null)
             Debug.Log("Error when getting beat info");
-        if (AnimationArray[currentAnimationIndex]["timeToHit"].AsFloat - currentBeatInfo.OKStart + currentBeatInfo.PerfectStart <= beatTimer)
+        if (AnimationArray[currentAnimationIndex]["timeToHit"].AsFloat - currentBeatInfo.PerfectStart <= beatTimer)
         {
             if (!animEvtsAdded)
             {
@@ -105,7 +105,7 @@ public class BeatGenerator : MonoBehaviour
             }
             enemyAnimCtrl.PlayAnim(currentAnimInfo.AnimationID);
 
-            if (currentBeatInfo.OKStart + AnimationArray[currentAnimationIndex]["timeToHit"].AsFloat <= beatTimer)
+            if (AnimationArray[currentAnimationIndex]["timeToHit"].AsFloat - currentBeatInfo.OKStart <= beatTimer)
             {
                 //create a map of matched buttons for miss check
                 var matchedButtons = new Dictionary<int, bool>();
@@ -135,7 +135,7 @@ public class BeatGenerator : MonoBehaviour
             }
         }
         checkInputFromKeyboard();
-        //checkInputFromArduino(activeButtons, isInBeat);
+        checkInputFromArduino();
         if (bCanPlay)
             beatTimer += Time.deltaTime;
     }
@@ -218,7 +218,7 @@ public class BeatGenerator : MonoBehaviour
         if (beatQueue.Count != 0)
         {
             var butInfo = beatQueue.Peek();
-            if (beatTimer >= butInfo.TimeToHit + butInfo.BeatTime.OKStart && beatTimer <= butInfo.TimeToHit + butInfo.BeatTime.OKDuration)
+            if (beatTimer >= butInfo.TimeToHit - butInfo.BeatTime.PerfectStart + butInfo.BeatTime.OKStart && beatTimer <= butInfo.TimeToHit - butInfo.BeatTime.PerfectStart + butInfo.BeatTime.OKStart + butInfo.BeatTime.OKDuration)
             {
                 foreach (var k in buttonMapping)
                 {
@@ -256,7 +256,7 @@ public class BeatGenerator : MonoBehaviour
         {
             bool[] arduinoInput = MyGameInstance.instance.GetArduinoInput();
             var butInfo = beatQueue.Peek();
-            if (beatTimer >= butInfo.TimeToHit + butInfo.BeatTime.OKStart && beatTimer <= butInfo.TimeToHit + butInfo.BeatTime.OKDuration)
+            if (beatTimer >= butInfo.TimeToHit - butInfo.BeatTime.PerfectStart + butInfo.BeatTime.OKStart && beatTimer <= butInfo.TimeToHit - butInfo.BeatTime.PerfectStart + butInfo.BeatTime.OKStart + butInfo.BeatTime.OKDuration)
             {
                 for (int i = 0; i < arduinoInput.Length; ++i)
                 {
@@ -268,7 +268,13 @@ public class BeatGenerator : MonoBehaviour
                     {
                         if (arduinoInput[i])
                         {
-                            matchButton(i, butInfo.MatchedButtons);
+                            if (butInfo.BeatTime.IsCombo)
+                            {
+                                butInfo.comboCount++;
+                                resultControl.ShowCombo(beatQueue.Peek().comboCount);
+                            }
+                            else
+                                matchButton(i, butInfo.MatchedButtons);
                         }
                     }
                     //other buttons
@@ -295,10 +301,11 @@ public class BeatGenerator : MonoBehaviour
     HitResult GetResultFromInput()
     {
         BeatInfo currentBeatInfo = beatQueue.Peek().BeatTime;
-        float ReactTime = beatTimer - beatQueue.Peek().TimeToHit;
+        float ReactTime = beatTimer - beatQueue.Peek().TimeToHit + currentBeatInfo.PerfectStart;
+        Debug.Log(ReactTime);
         if (ReactTime >= currentBeatInfo.PerfectStart && ReactTime <= currentBeatInfo.PerfectStart + currentBeatInfo.PerfectDuration)
             return HitResult.Perfect;
-        else if (ReactTime >= currentBeatInfo.OKStart && ReactTime <= currentBeatInfo.OKDuration)
+        else if (ReactTime >= currentBeatInfo.OKStart && ReactTime <= currentBeatInfo.OKStart + currentBeatInfo.OKDuration)
             return HitResult.Good;
         else
             return HitResult.Miss;

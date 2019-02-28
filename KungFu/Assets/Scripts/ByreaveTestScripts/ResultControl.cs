@@ -67,7 +67,7 @@ public class ResultControl : MonoBehaviour
         ComboText.GetComponent<Text>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
         //Debug.Log("asdasd");
         //UnityEditor.EditorApplication.isPaused = true;
-        Debug.Log(ComboText.GetComponent<RectTransform>().localPosition.y);
+
         while (ComboText.GetComponent<RectTransform>().localPosition.y <= offset.y)
         {
             ComboText.transform.Translate(Vector3.up / 3 * Time.deltaTime);

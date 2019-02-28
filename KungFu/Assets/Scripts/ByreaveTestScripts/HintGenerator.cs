@@ -48,7 +48,7 @@ public class HintGenerator : MonoBehaviour
             {
                 AnimationInfo currentAnimInfo = animationData[animData[currentAnimationIndex]["AnimationID"].AsInt];
                 BeatInfo currentBeatInfo = beatData[currentAnimInfo.BeatIDs[currentBeatIndex]];
-                if (currentBeatInfo.OKStart + animData[currentAnimationIndex]["timeToHit"].AsFloat <= hintTimer + HintTimeBeforeHit)
+                if (animData[currentAnimationIndex]["timeToHit"].AsFloat <= hintTimer + HintTimeBeforeHit + currentBeatInfo.PerfectStart)
                 {
                     //get beat infos
                     currentBeatIndex++;
