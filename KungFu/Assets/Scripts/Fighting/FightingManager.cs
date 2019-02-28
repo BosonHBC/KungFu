@@ -149,4 +149,16 @@ public class FightingManager : MonoBehaviour
             SwitchCamera(1);
         }
     }
+
+    public void ApplyDamageToCharacter(int _characterID, float _dmgAmount)
+    {
+        // 0 -> player, 1 -> enemy
+        characters[_characterID].GetDamage(_dmgAmount, Random.Range(0, 2) == 0 ? true : false);
+    }
+
+    public void PlayerGuard()
+    {
+        characters[0].GetComponent<PlayerAnimController>().GuardSucceed();
+    }
+
 }

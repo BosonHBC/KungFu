@@ -91,7 +91,7 @@ public class EnemyAnimationControl : MonoBehaviour
                         functionName = "SlowDown"
                     };
                     ac.AddEvent(animEvt);
-                    Debug.Log(ac.events.Length);
+                    //Debug.Log(ac.events.Length);
                 }
                 break;
             }

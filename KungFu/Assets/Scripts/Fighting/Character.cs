@@ -30,7 +30,7 @@ public class Character : MonoBehaviour
         FaceToOpponent();
     }
 
-    public virtual void GetDamage(float _dmg)
+    public virtual void GetDamage(float _dmg, bool _fromLeft)
     {
         float _afterDmg = fCurrentHp - _dmg;
         StartCoroutine(GetDamage(fCurrentHp, _afterDmg<0?0:_afterDmg));

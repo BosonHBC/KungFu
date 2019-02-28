@@ -919,7 +919,7 @@ MonoBehaviour:
   m_Name: CinemachineShot
   m_EditorClassIdentifier: 
   VirtualCamera:
-    exposedName: a7bd2045f5913ee49bf4da13f03565fe
+    exposedName: 98ddd8495e4397d42a5a944145ca5b7b
     defaultValue: {fileID: 0}
 --- !u!114 &114428786776851224
 MonoBehaviour:

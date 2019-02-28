@@ -7,12 +7,14 @@ public class PlayerAnimController : MonoBehaviour
 
     private Animator anim;
 
+
     private int iPlayingFightAnimationID;
     public bool bPreparing;
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
@@ -45,6 +47,17 @@ public class PlayerAnimController : MonoBehaviour
             anim.SetFloat("StandToFight_f", 1f);
         }
 
+    }
+
+    public void GetDamage(bool _fromLeft)
+    {
+        anim.SetBool("KnockBackLeft_b", _fromLeft);
+        anim.Play("KnockBack");
+    }
+
+    public void GuardSucceed()
+    {
+        anim.Play("Guard");
     }
 
 }

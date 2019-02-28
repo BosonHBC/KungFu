@@ -11,16 +11,17 @@ public class Player : Character
     private int iCurrentView;   // 0 -> first person, 1 -> third person
     [SerializeField] private float fDebugMovespeed;
     private bool bSwitching;
+    private PlayerAnimController pAnimCtrl;
 
     
 
     protected override void Start()
     {
         base.Start();
-        iCurrentView = 0;
+        iCurrentView = 1;
         bSwitching = false;
         trackedDolly = myCamera.GetCinemachineComponent<CinemachineTrackedDolly>();
-
+        pAnimCtrl = GetComponent<PlayerAnimController>();
     }
 
     // Update is called once per frame
@@ -29,7 +30,14 @@ public class Player : Character
         base.Update();
         DebugMovement();
         if (Input.GetKeyDown(KeyCode.Alpha9))
-            GetDamage(20);
+            GetDamage(20, Random.Range(0,2) == 0? true: false);
+    }
+
+    public override void GetDamage(float _dmg, bool _fromLeft)
+    {
+        pAnimCtrl.GetDamage(_fromLeft);
+        base.GetDamage(_dmg, _fromLeft);
+
     }
 
     public void SwitchPerspectiveView()
@@ -85,7 +93,7 @@ public class Player : Character
 
         transform.position += fDebugMovespeed * dir * Time.deltaTime;
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Z))
             SwitchPerspectiveView();
     }
 

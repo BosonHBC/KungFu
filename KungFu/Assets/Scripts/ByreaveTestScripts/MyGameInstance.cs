@@ -13,7 +13,7 @@ public class MyGameInstance : MonoBehaviour
 {
     public static MyGameInstance instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
     int scores = 0, misses = 0;
-    bool [] buttonInput;
+    bool[] buttonInput;
     //Awake is always called before any Start functions
     void Awake()
     {
@@ -37,17 +37,13 @@ public class MyGameInstance : MonoBehaviour
     public void Score()
     {
         scores++;
-        Canvas canvas = GameObject.FindObjectOfType<Canvas>();
-        if(canvas != null)
-            canvas.gameObject.GetComponent<ScoreTextControl>().SetScore("Score: " + scores.ToString());
+        FightingManager.instance.PlayerGuard();
     }
 
     public void Miss(int number)
     {
         misses += number;
-        Canvas canvas = GameObject.FindObjectOfType<Canvas>();
-        //if (canvas != null)
-        //    canvas.gameObject.GetComponent<ScoreTextControl>().SetMiss("Miss: " + misses.ToString());
+        FightingManager.instance.ApplyDamageToCharacter(0, 10f);
     }
 
     public void SetArduinoInput(bool[] arduinoInput)
