@@ -42,6 +42,7 @@ public class HintTrackControl : MonoBehaviour
                     if (timer >= beatTiming.OKStart + timeBeforeHit)
                     {
                         ChangeToOK();
+                        
                     }
                     break;
                 case HitResult.Good:
@@ -53,6 +54,7 @@ public class HintTrackControl : MonoBehaviour
                     if (timer >= beatTiming.PerfectStart + beatTiming.PerfectDuration + timeBeforeHit)
                     {
                         hintGenerator.RemoveFirstHint();
+                        isMoving = false;
                         gameObject.GetComponent<UIDestroyer>().GoDie();
                     }
                     break;
@@ -102,6 +104,7 @@ public class HintTrackControl : MonoBehaviour
         if(isAllMatched())
         {
             hintGenerator.RemoveFirstHint();
+            isMoving = false; 
             gameObject.GetComponent<UIDestroyer>().GoDie();
         }
     }

@@ -69,7 +69,7 @@ public class FightingManager : MonoBehaviour
 
         director.SetGenericBinding(timelines.GetOutputTrack(4), _canvasGo.GetComponent<Animator>());
         // Set UIs
-        
+        MyGameInstance.instance.SetScoreUI(_canvasGo.transform.Find("Combo").GetChild(0).GetComponent<Text>());
 
         /// Characters 0-> player 1-> enemy
         for (int i = 0; i < 2; i++)
@@ -81,7 +81,7 @@ public class FightingManager : MonoBehaviour
         }
         for (int i = 0; i < characters.Length; i++)
         {
-            Image _fillbar = _canvasGo.transform.GetChild(0).GetChild(i).GetChild((i + 1) % 2).GetChild(1).GetChild(0).GetComponent<Image>();
+            Image _fillbar = _canvasGo.transform.Find("HpBar").GetChild(i).GetChild((i + 1) % 2).GetChild(1).GetChild(0).GetComponent<Image>();
 
             Transform _opponentTr = characters[(i + 1) % characters.Length].transform;
             characters[i].SetData(_fillbar,

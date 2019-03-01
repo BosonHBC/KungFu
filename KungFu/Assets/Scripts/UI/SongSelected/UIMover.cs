@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class UIMover : MonoBehaviour
 {
     [SerializeField]
-    private float[] horizontalRestrition = { 0,0};
+    private float[] horizontalRestrition = { 0, 0 };
 
     private bool bMoving;
     private RectTransform trRect;
@@ -43,7 +43,7 @@ public class UIMover : MonoBehaviour
             destiation = trRect.localPosition + _dir * _dist;
             if (destiation.x < horizontalRestrition[0])
                 destiation.x = horizontalRestrition[0];
-            if(destiation.x > horizontalRestrition[1])
+            if (destiation.x > horizontalRestrition[1])
                 destiation.x = horizontalRestrition[1];
 
             bMoving = true;
@@ -65,5 +65,32 @@ public class UIMover : MonoBehaviour
     public float GetRestriction(int _id)
     {
         return horizontalRestrition[_id];
+    }
+
+    public void SimpleLocalPositionMover(Vector3 _startLPos, Vector3 _endLPos, float _fadeTime)
+    {
+        StartCoroutine(SimpleLPosMover(_startLPos, _endLPos, _fadeTime));
+    }
+
+    IEnumerator SimpleLPosMover(Vector3 _startLPos, Vector3 _endLPos, float _fadeTime = 0.5f)
+    {
+        float _timeStartFade = Time.time;
+        float _timeSinceStart = Time.time - _timeStartFade;
+        float _lerpPercentage = _timeSinceStart / _fadeTime;
+
+        while (true)
+        {
+            _timeSinceStart = Time.time - _timeStartFade;
+            _lerpPercentage = _timeSinceStart / _fadeTime;
+
+            Vector3 currentValue = Vector3.Lerp(_startLPos, _endLPos, _lerpPercentage);
+            trRect.localPosition = currentValue;
+
+            if (_lerpPercentage >= 1) break;
+
+
+            yield return new WaitForEndOfFrame();
+        }
+
     }
 }

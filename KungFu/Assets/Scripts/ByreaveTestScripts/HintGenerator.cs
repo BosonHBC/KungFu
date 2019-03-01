@@ -30,6 +30,9 @@ public class HintGenerator : MonoBehaviour
     //Ring Indicator
     RingIndicatorControl ringIndicator;
     [SerializeField] private float backgroundLength = 810;
+
+    [SerializeField] RectTransform perfectPointer;
+    [SerializeField] RectTransform okPointer;
     // Start is called before the first frame update
     void Start()
     {
@@ -83,13 +86,25 @@ public class HintGenerator : MonoBehaviour
         }
     }
 
+    [SerializeField] float fUIMoveTime = 0.1f;
     //Place the OK and Perfect Area
     void PlaceOKAndPerfect(HintTrackControl _htCtrl)
     {
 
-        OKArea.rectTransform.localPosition = new Vector3(-(HintTimeBeforeHit + _htCtrl.beatTiming.OKStart) * _htCtrl.moveSpeed, OKArea.rectTransform.anchoredPosition.y, 0.0f);
+        // Display Area
+        okPointer.transform.parent.GetComponent<UIFader>().FadeIn(0.2f);
+        // New Position x
+        float _okPosX = -(HintTimeBeforeHit + _htCtrl.beatTiming.OKStart) * _htCtrl.moveSpeed + OKArea.rectTransform.sizeDelta.x / 2;
+        // Move Area
+        OKArea.GetComponent<UIMover>().SimpleLocalPositionMover(OKArea.rectTransform.localPosition, new Vector3(_okPosX, OKArea.rectTransform.localPosition.y, 0.0f), fUIMoveTime);
+
+        // Move Pointer
+        Vector3 _OKLocalPos = new Vector3(_okPosX, okPointer.localPosition.y, okPointer.localPosition.z);
+        okPointer.GetComponent<UIMover>().SimpleLocalPositionMover(okPointer.localPosition, _OKLocalPos, fUIMoveTime);
+
+       // okPointer.localPosition = new Vector3(OKArea.rectTransform.localPosition.x, okPointer.localPosition.y, okPointer.localPosition.z);
         //OKArea.rectTransform.sizeDelta = new Vector2(/*beatTiming.OKDuration * HintObjectSpeed*/5, 100.0f);
-        if(_htCtrl.beatTiming.IsCombo)
+        if (_htCtrl.beatTiming.IsCombo)
         {
             OKArea.transform.GetChild(0).gameObject.SetActive(true);
             PerfectArea.rectTransform.sizeDelta = Vector2.zero;
@@ -97,11 +112,17 @@ public class HintGenerator : MonoBehaviour
         else
         {
             OKArea.transform.GetChild(0).gameObject.SetActive(false);
-
-            PerfectArea.rectTransform.localPosition = new Vector3(-(HintTimeBeforeHit + _htCtrl.beatTiming.PerfectStart) * HintObjectSpeed, OKArea.rectTransform.anchoredPosition.y, 0.0f);
+            // New Position
+            float _perfectPosX = -(HintTimeBeforeHit + _htCtrl.beatTiming.PerfectStart) * HintObjectSpeed + PerfectArea.rectTransform.sizeDelta.x / 2;
+            // Move area
+            PerfectArea.GetComponent<UIMover>().SimpleLocalPositionMover(PerfectArea.rectTransform.localPosition, new Vector3(_perfectPosX, PerfectArea.rectTransform.localPosition.y, 0.0f), fUIMoveTime);
+            
+            // Move Pointer
+            Vector3 _perfectLocalPos = new Vector3(_perfectPosX, perfectPointer.localPosition.y, perfectPointer.localPosition.z);
+            perfectPointer.GetComponent<UIMover>().SimpleLocalPositionMover(perfectPointer.localPosition, _perfectLocalPos, fUIMoveTime);
             //PerfectArea.rectTransform.sizeDelta = new Vector2(/*beatTiming.PerfectDuration * HintObjectSpeed*/5, 100.0f);
         }
-        
+
     }
 
     public void RemoveFirstHint()

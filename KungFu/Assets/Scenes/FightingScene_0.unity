@@ -1015,6 +1015,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a9ce097fd14ab74396c81912ba1c660, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  iPerfectScore: 1000
+  iOkScore: 500
+  fComboFactor: 30
+  comboText: {fileID: 0}
 --- !u!1 &1295115020
 GameObject:
   m_ObjectHideFlags: 0

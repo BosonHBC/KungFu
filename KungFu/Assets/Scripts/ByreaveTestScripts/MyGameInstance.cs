@@ -14,6 +14,17 @@ public class MyGameInstance : MonoBehaviour
     public static MyGameInstance instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
     int scores = 0, misses = 0;
     bool[] buttonInput;
+
+    private int iCombo;
+    private int iMaxCombo;
+
+    [Header("Score Releated")]
+    [SerializeField] private int iPerfectScore;
+    [SerializeField] private int iOkScore;
+    [SerializeField] private float fComboFactor;
+    [SerializeField] Text comboText;
+
+
     //Awake is always called before any Start functions
     void Awake()
     {
@@ -33,16 +44,36 @@ public class MyGameInstance : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
     }
-
+    private void Start()
+    {
+        iCombo = 0;
+        comboText.text = iCombo.ToString();
+    }
     public void Score(HitResult hr)
     {
+        if (++iCombo >= iMaxCombo)
+            iMaxCombo = iCombo;
+
+        comboText.text = iCombo.ToString();
+        switch (hr)
+        {
+            case HitResult.Perfect:
+                scores += (int)(iCombo * fComboFactor * iPerfectScore);
+                break;
+            case HitResult.Good:
+                scores += (int)(iCombo * fComboFactor * iOkScore);
+                break;
+        }
         scores++;
+
         FightingManager.instance.PlayerGuard();
     }
 
     public void Miss(int number)
     {
         misses += number;
+        iCombo = 0;
+        comboText.text = iCombo.ToString();
         FightingManager.instance.ApplyDamageToCharacter(0, 10f);
     }
 
@@ -59,11 +90,18 @@ public class MyGameInstance : MonoBehaviour
     {
         scores = 0;
         misses = 0;
+        iCombo = 0;
+        comboText.text = iCombo.ToString();
         SceneManager.LoadScene("ByreaveLoadingScene");
         Invoke("StartGame", 2.0f);
     }
     public void StartGame()
     {
         SceneManager.LoadScene("ByreaveWhitebox");
+    }
+
+    public void SetScoreUI(Text _comboText)
+    {
+        comboText = _comboText;
     }
 }
