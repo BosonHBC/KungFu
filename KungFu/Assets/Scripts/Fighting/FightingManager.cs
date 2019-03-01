@@ -98,6 +98,9 @@ public class FightingManager : MonoBehaviour
         Player thePlayer = (Player)characters[0];
         thePlayer.SetLookAt(center.transform);
 
+        // Set Audio Source
+        transform.GetChild(0).GetComponent<AudioPeer>().SetSource(characters[1].GetComponent<AudioSource>());
+
         // Player animation
         PlayerAnimController _animCtrl= thePlayer.GetComponent<PlayerAnimController>();
         onPositioned = new UnityAction( delegate { _animCtrl.bPreparing = true; });

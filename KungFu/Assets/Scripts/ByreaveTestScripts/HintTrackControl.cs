@@ -15,8 +15,8 @@ public class HintTrackControl : MonoBehaviour
     Color NormalColor = Color.white;
     [SerializeField]
     Color ActiveColor = Color.yellow;
-
-    BeatInfo beatTiming;
+    [HideInInspector]
+    public BeatInfo beatTiming;
     HitResult hintState = HitResult.Miss;
     HintGenerator hintGenerator;
     int[] buttonIDs;
@@ -24,13 +24,9 @@ public class HintTrackControl : MonoBehaviour
 
     float timer = 0.0f;
     bool isMoving = false;
-
-    float moveSpeed;
+    [HideInInspector]
+    public float moveSpeed;
     float timeBeforeHit;
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
 
     // Update is called once per frame
     void Update()
@@ -57,7 +53,7 @@ public class HintTrackControl : MonoBehaviour
                     if (timer >= beatTiming.PerfectStart + beatTiming.PerfectDuration + timeBeforeHit)
                     {
                         hintGenerator.RemoveFirstHint();
-                        StartCoroutine(FadeOut());
+                        gameObject.GetComponent<UIDestroyer>().GoDie();
                     }
                     break;
                 default:
@@ -106,8 +102,7 @@ public class HintTrackControl : MonoBehaviour
         if(isAllMatched())
         {
             hintGenerator.RemoveFirstHint();
-            //StartCoroutine(FadeOut());
-            Destroy(gameObject);
+            gameObject.GetComponent<UIDestroyer>().GoDie();
         }
     }
 
@@ -150,20 +145,20 @@ public class HintTrackControl : MonoBehaviour
         ActivateButtons(buttonIDs);
     }
 
-    IEnumerator FadeOut(float time = 1.0f)
-    {
-        isMoving = false;
-        while(ChildBodyParts[0].GetComponent<Image>().color.a >= 0)
-        {
-            for(int i = 0; i < ChildBodyParts.Length; ++ i)
-            {
-                Color tmp = ChildBodyParts[0].GetComponent<Image>().color;
-                ChildBodyParts[0].GetComponent<Image>().color = new Color(tmp.r, tmp.g, tmp.b, tmp.a - Time.deltaTime / time);
-            }
-            yield return new WaitForEndOfFrame();
-        }
-        Destroy(gameObject);
-    }
+    //IEnumerator FadeOut(float time = 1.0f)
+    //{
+    //    isMoving = false;
+    //    while(ChildBodyParts[0].GetComponent<Image>().color.a >= 0)
+    //    {
+    //        for(int i = 0; i < ChildBodyParts.Length; ++ i)
+    //        {
+    //            Color tmp = ChildBodyParts[0].GetComponent<Image>().color;
+    //            ChildBodyParts[0].GetComponent<Image>().color = new Color(tmp.r, tmp.g, tmp.b, tmp.a - Time.deltaTime / time);
+    //        }
+    //        yield return new WaitForEndOfFrame();
+    //    }
+    //    Destroy(gameObject);
+    //}
 
     public BeatInfo GetBeatTiming()
     {

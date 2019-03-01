@@ -7,6 +7,7 @@ using SimpleJSON;
 public class HintGenerator : MonoBehaviour
 {
     public float HintTimeBeforeHit = 3.0f;
+    [HideInInspector]
     public float HintObjectSpeed = 200.0f;
     public GameObject HintObject;
     [SerializeField]
@@ -28,6 +29,7 @@ public class HintGenerator : MonoBehaviour
     int currentHintIndex = 0;
     //Ring Indicator
     RingIndicatorControl ringIndicator;
+    [SerializeField] private float backgroundLength = 810;
     // Start is called before the first frame update
     void Start()
     {
@@ -70,21 +72,24 @@ public class HintGenerator : MonoBehaviour
         tmpGO.transform.localPosition = Vector3.zero;
         tmpGO.transform.localEulerAngles = Vector3.zero;
         tmpGO.transform.localScale = Vector3.one;
+        // Set new speed
+        HintObjectSpeed = backgroundLength / (HintTimeBeforeHit + beatTiming.OKStart + beatTiming.OKDuration);
         tmpGO.GetComponent<HintTrackControl>().StartMoving(beatTiming, this);
         hintsQueue.Enqueue(tmpGO);
         if(!hasAreaPlaced)
         {
-            PlaceOKAndPerfect(beatTiming);
+            PlaceOKAndPerfect(tmpGO.GetComponent<HintTrackControl>());
             hasAreaPlaced = true;
         }
     }
 
     //Place the OK and Perfect Area
-    void PlaceOKAndPerfect(BeatInfo beatTiming)
+    void PlaceOKAndPerfect(HintTrackControl _htCtrl)
     {
-        OKArea.rectTransform.localPosition = new Vector3(-(HintTimeBeforeHit + beatTiming.OKStart) * HintObjectSpeed, 0.0f, 0.0f);
-        OKArea.rectTransform.sizeDelta = new Vector2(beatTiming.OKDuration * HintObjectSpeed, 100.0f);
-        if(beatTiming.IsCombo)
+
+        OKArea.rectTransform.localPosition = new Vector3(-(HintTimeBeforeHit + _htCtrl.beatTiming.OKStart) * _htCtrl.moveSpeed, OKArea.rectTransform.anchoredPosition.y, 0.0f);
+        //OKArea.rectTransform.sizeDelta = new Vector2(/*beatTiming.OKDuration * HintObjectSpeed*/5, 100.0f);
+        if(_htCtrl.beatTiming.IsCombo)
         {
             OKArea.transform.GetChild(0).gameObject.SetActive(true);
             PerfectArea.rectTransform.sizeDelta = Vector2.zero;
@@ -93,8 +98,8 @@ public class HintGenerator : MonoBehaviour
         {
             OKArea.transform.GetChild(0).gameObject.SetActive(false);
 
-            PerfectArea.rectTransform.localPosition = new Vector3(-(HintTimeBeforeHit + beatTiming.PerfectStart) * HintObjectSpeed, 0.0f, 0.0f);
-            PerfectArea.rectTransform.sizeDelta = new Vector2(beatTiming.PerfectDuration * HintObjectSpeed, 100.0f);
+            PerfectArea.rectTransform.localPosition = new Vector3(-(HintTimeBeforeHit + _htCtrl.beatTiming.PerfectStart) * HintObjectSpeed, OKArea.rectTransform.anchoredPosition.y, 0.0f);
+            //PerfectArea.rectTransform.sizeDelta = new Vector2(/*beatTiming.PerfectDuration * HintObjectSpeed*/5, 100.0f);
         }
         
     }
@@ -111,7 +116,7 @@ public class HintGenerator : MonoBehaviour
                 //Change the perfect and OK area to the most current one
                 tmpGO = hintsQueue.Peek();
                 HintTrackControl tmpHTC = tmpGO.GetComponent<HintTrackControl>();
-                PlaceOKAndPerfect(tmpHTC.GetBeatTiming());
+                PlaceOKAndPerfect(tmpHTC);
             }
             else
             {

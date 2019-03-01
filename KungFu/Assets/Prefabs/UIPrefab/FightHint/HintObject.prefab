@@ -826,6 +826,9 @@ GameObject:
   - component: {fileID: 4340039251485718971}
   - component: {fileID: 370553131820720997}
   - component: {fileID: 1034657607}
+  - component: {fileID: 1973120992579098776}
+  - component: {fileID: 2588074398743838862}
+  - component: {fileID: 4915988449337938467}
   m_Layer: 0
   m_Name: HintObject
   m_TagString: Untagged
@@ -928,3 +931,41 @@ MonoBehaviour:
   PerfectColor: {r: 1, g: 0, b: 0, a: 1}
   NormalColor: {r: 1, g: 1, b: 1, a: 1}
   ActiveColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  moveSpeed: 0
+--- !u!114 &1973120992579098776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1034657606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c691df5a1111d94aa29b328fd56003c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2588074398743838862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1034657606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44861af142357614cae51fe4df3624ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delayToDeath: 0.3
+--- !u!225 &4915988449337938467
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1034657606}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0

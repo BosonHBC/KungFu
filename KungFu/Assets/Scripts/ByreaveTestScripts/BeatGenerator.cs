@@ -229,7 +229,7 @@ public class BeatGenerator : MonoBehaviour
             var butInfo = beatQueue.Peek();
             if (beatTimer >= butInfo.TimeToHit - butInfo.BeatTime.PerfectStart + butInfo.BeatTime.OKStart && beatTimer <= butInfo.TimeToHit - butInfo.BeatTime.PerfectStart + butInfo.BeatTime.OKStart + butInfo.BeatTime.OKDuration)
             {
-                Debug.Log(beatTimer);
+                //Debug.Log(beatTimer);
                 foreach (var k in buttonMapping)
                 {
                     //the buttons to be pressed in this beat
