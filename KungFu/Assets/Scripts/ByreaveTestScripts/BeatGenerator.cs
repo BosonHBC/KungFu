@@ -74,7 +74,7 @@ public class BeatGenerator : MonoBehaviour
         enemyAnimCtrl = _enemy.GetComponent<EnemyAnimationControl>();
         hintGenerator = _generator;
         resultControl = _control;
-        
+
         // Debug
         StartGenerateBeat();
     }
@@ -93,84 +93,95 @@ public class BeatGenerator : MonoBehaviour
             bCanPlay = false;
             Debug.Log("Song ended");
         }
-        AnimationInfo currentAnimInfo = animationData[AnimationArray[currentAnimationIndex]["AnimationID"].AsInt];
-        BeatInfo currentBeatInfo = beatData[currentAnimInfo.BeatIDs[currentBeatIndex]];
-        if (currentBeatInfo == null)
-            Debug.Log("Error when getting beat info");
-        if (AnimationArray[currentAnimationIndex]["timeToHit"].AsFloat - currentBeatInfo.PerfectStart <= beatTimer)
-        {
-            if (!animEvtsAdded)
-            {
-                //enemyAnimCtrl.AddSlowDownEvent(currentAnimInfo);
-                animEvtsAdded = true;
-            }
-            if(!animPlayed)
-            {
-                enemyAnimCtrl.PlayAnim(currentAnimInfo.AnimationID);
-                animPlayed = true;
-            }
-
-            if (AnimationArray[currentAnimationIndex]["timeToHit"].AsFloat - currentBeatInfo.PerfectStart + currentBeatInfo.OKStart <= beatTimer)
-            {
-                //UnityEditor.EditorApplication.isPaused = true;
-                //create a map of matched buttons for miss check
-                var matchedButtons = new Dictionary<int, bool>();
-                foreach (int i in currentBeatInfo.ButtonIDs)
-                {
-                    matchedButtons.Add(i, false);
-                }
-                beatQueue.Enqueue(
-                    new BeatHitObject()
-                    {
-                        TimeToHit = AnimationArray[currentAnimationIndex]["timeToHit"].AsFloat,
-                        BeatTime = currentBeatInfo,
-                        MatchedButtons = matchedButtons
-                    }
-                );
-
-                //Beat ends
-                StartCoroutine(beatEndInSecs(matchedButtons, /*currentBeatInfo.OKStart +*/ currentBeatInfo.OKDuration));
-
-                currentBeatIndex++;
-                if (currentBeatIndex >= currentAnimInfo.BeatIDs.Length)
-                {
-                    currentAnimationIndex++;
-                    currentBeatIndex = 0;
-                    animEvtsAdded = false;
-                    animPlayed = false;
-                }
-            }
-        }
-        checkInputFromKeyboard();
-        //checkInputFromArduino();
         if (bCanPlay)
+        {
+            AnimationInfo currentAnimInfo = animationData[AnimationArray[currentAnimationIndex]["AnimationID"].AsInt];
+            BeatInfo currentBeatInfo = beatData[currentAnimInfo.BeatIDs[currentBeatIndex]];
+            beatData[currentAnimInfo.BeatIDs[currentBeatIndex]].BeatID = 200;
+            Debug.Log(currentBeatInfo.BeatID);
+            if (currentBeatInfo == null)
+                Debug.Log("Error when getting beat info");
+            if (AnimationArray[currentAnimationIndex]["timeToHit"].AsFloat - currentBeatInfo.PerfectStart <= beatTimer)
+            {
+                if (!animEvtsAdded)
+                {
+                    enemyAnimCtrl.AddSlowDownEvent(currentAnimInfo);
+                    animEvtsAdded = true;
+                }
+                if (!animPlayed)
+                {
+                    enemyAnimCtrl.PlayAnim(currentAnimInfo.AnimationID);
+                    animPlayed = true;
+                }
+
+                if (AnimationArray[currentAnimationIndex]["timeToHit"].AsFloat - currentBeatInfo.PerfectStart + currentBeatInfo.OKStart <= beatTimer)
+                {
+                    //UnityEditor.EditorApplication.isPaused = true;
+                    //create a map of matched buttons for miss check
+                    var matchedButtons = new Dictionary<int, bool>();
+                    foreach (int i in currentBeatInfo.ButtonIDs)
+                    {
+                        matchedButtons.Add(i, false);
+                    }
+                    beatQueue.Enqueue(
+                        new BeatHitObject()
+                        {
+                            TimeToHit = AnimationArray[currentAnimationIndex]["timeToHit"].AsFloat,
+                            BeatTime = currentBeatInfo,
+                            MatchedButtons = matchedButtons
+                        }
+                    );
+
+                    //Beat ends
+                    StartCoroutine(beatEndInSecs(beatQueue.Peek(), currentBeatInfo.OKDuration));
+
+                    currentBeatIndex++;
+                    if (currentBeatIndex >= currentAnimInfo.BeatIDs.Length)
+                    {
+                        currentAnimationIndex++;
+                        currentBeatIndex = 0;
+                        animEvtsAdded = false;
+                        animPlayed = false;
+                    }
+                }
+            }
+            checkInputFromKeyboard();
+            //checkInputFromArduino();
+
             beatTimer += Time.deltaTime;
+        }
+        
     }
 
     //there is a match hit
-    void matchButton(int buttonID, Dictionary<int, bool> matchedButtons)
+    void matchButton(int buttonID, BeatHitObject beatHitObject)
     {
-        if (matchedButtons.ContainsKey(buttonID))
+        if (beatHitObject.MatchedButtons.ContainsKey(buttonID))
         {
             //if is not already matched
-            if (!matchedButtons[buttonID])
+            if (!beatHitObject.MatchedButtons[buttonID])
             {
                 //sfxControl.PlayRandomMatchSFX();
                 HitResult hr = GetResultFromInput();
 
                 hintGenerator.MatchButton(buttonID);
+                
                 //indicatorControl.MatchButton(buttonID);
                 //we can calculate the reacting time to give different scores (as a parameter to Score() function) here
                 if (hr != HitResult.Miss)
                     MyGameInstance.instance.Score(hr);
                 else
                     MyGameInstance.instance.Miss(1);
+                //Get JointID
+                int index = DataUtility.IntArrayIndex(beatHitObject.BeatTime.ButtonIDs, buttonID);
+                if (index == -1)
+                    Debug.LogError("Button ID not in beat button id array");
                 //indicatorControl.ShowResultAt(buttonID, hr);
-                resultControl.ShowResult(hr);
-                matchedButtons[buttonID] = true;
+                resultControl.ShowResult(hr, (hr == HitResult.Miss) ? 0 : beatHitObject.BeatTime.JointIDs[index]);
+                beatHitObject.MatchedButtons[buttonID] = true;
 
                 //if all buttons are hit, dequeue
-                if (DataUtility.DictionaryAllTrue(matchedButtons))
+                if (DataUtility.DictionaryAllTrue(beatHitObject.MatchedButtons))
                 {
                     beatQueue.Dequeue();
                 }
@@ -180,19 +191,19 @@ public class BeatGenerator : MonoBehaviour
             Debug.Log("No such button in matchedButtons!!!!!");
     }
 
-    void missCheck(Dictionary<int, bool> matchedButtons)
+    void missCheck(BeatHitObject beatHitObject)
     {
 
         //dequeue
-        if (beatQueue.Count != 0 && matchedButtons == beatQueue.Peek().MatchedButtons)
+        if (beatQueue.Count != 0 && beatHitObject == beatQueue.Peek())
         {
-            if (beatQueue.Peek().BeatTime.IsCombo)
+            if (beatHitObject.BeatTime.IsCombo)
             {
-                resultControl.ShowCombo(beatQueue.Peek().comboCount);
+                resultControl.ShowCombo(beatHitObject.comboCount);
             }
             else
             {
-                foreach (var matched in matchedButtons)
+                foreach (var matched in beatHitObject.MatchedButtons)
                 {
                     if (!matched.Value)
                     {
@@ -210,12 +221,12 @@ public class BeatGenerator : MonoBehaviour
 
     //end of this beat, reset all, can be improved
     //Improved a little, need to add the check if the next beat comes before this beat ends
-    IEnumerator beatEndInSecs(Dictionary<int, bool> matchedButtons, float delay)
+    IEnumerator beatEndInSecs(BeatHitObject beatHit, float delay)
     {
         yield return new WaitForSeconds(delay);
         //indicatorControl.DeactivateButtons(ButtonIDs);
-        missCheck(matchedButtons);
-        matchedButtons.Clear();
+        missCheck(beatHit);
+        beatHit.MatchedButtons.Clear();
     }
 
 
@@ -243,7 +254,7 @@ public class BeatGenerator : MonoBehaviour
                                 resultControl.ShowCombo(beatQueue.Peek().comboCount);
                             }
                             else
-                                matchButton(k.Key, butInfo.MatchedButtons);
+                                matchButton(k.Key, beatQueue.Peek());
                         }
                     }
                     //other buttons
@@ -284,7 +295,7 @@ public class BeatGenerator : MonoBehaviour
                                 resultControl.ShowCombo(beatQueue.Peek().comboCount);
                             }
                             else
-                                matchButton(i, butInfo.MatchedButtons);
+                                matchButton(i, beatQueue.Peek());
                         }
                     }
                     //other buttons
