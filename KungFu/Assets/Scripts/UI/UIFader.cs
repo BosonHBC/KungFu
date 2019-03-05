@@ -66,7 +66,7 @@ public class UIFader : MonoBehaviour
             // fade out
             if (onFadeOut != null)
             {
-                Debug.Log("On Fade out");
+              //  Debug.Log("On Fade out");
                 onFadeOut.Invoke();
             }
                 

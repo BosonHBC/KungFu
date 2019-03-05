@@ -7,7 +7,6 @@ public class ResultControl : MonoBehaviour
 {
     public GameObject ResultImageShow;
     public GameObject ComboText;
-    public Vector3 Offset = new Vector3(0.3f, 0.0f, 0.0f);
 
     //two result at same time, can be improved
     float duration = 1.0f;
@@ -24,22 +23,40 @@ public class ResultControl : MonoBehaviour
     {
 
     }
-    void ShowResultAt(HitResult hitResult, Vector3 locPos)
+    void ShowResultAt(HitResult hitResult, int _attackJointID = 0)
     {
-        GameObject ri = Instantiate(ResultImageShow, locPos, transform.rotation, transform);
+        GameObject ri = Instantiate(ResultImageShow);
+        RectTransform goTr = ri.GetComponent<RectTransform>();
+        goTr.SetParent(transform);
+        Player _player = (Player)FightingManager.instance.characters[0];
+        Vector3 WorldObject = _player.GetJointTransform(_attackJointID).position;
+       
+        RectTransform CanvasRect = FightingManager.instance.myCanvas.GetComponent<RectTransform>();
+        // Calculate The relative position according to the canvas
+        Vector3 ViewportPosition = Camera.main.WorldToViewportPoint(WorldObject);
+        
+        Vector3 WorldObject_ScreenPosition = new Vector3(
+        ((ViewportPosition.x * CanvasRect.sizeDelta.x) - (CanvasRect.sizeDelta.x * 0.5f)),
+        ((ViewportPosition.y * CanvasRect.sizeDelta.y) - (CanvasRect.sizeDelta.y * 0.5f)));
+        //Debug.Log(WorldObject_ScreenPosition);
+        //now you can set the position of the ui element
+        goTr.anchoredPosition = WorldObject_ScreenPosition;
+        goTr.localPosition = new Vector3(goTr.localPosition.x, goTr.localPosition.y, 0f);
+        goTr.localRotation = Quaternion.identity;
+        goTr.localScale = new Vector3(1, 1, 1);
         ri.GetComponent<ResultImageControl>().ShowResult(hitResult);
     }
-    public void ShowResult(HitResult hitResult)
+    public void ShowResult(HitResult hitResult, int _attackJointID = 0)
     {
         if(!firstSpawned)
         {
-            ShowResultAt(hitResult, transform.position);
+            ShowResultAt(hitResult);
             firstSpawned = true;
             StartCoroutine(CanSpawnAnother());
         }
         else
         {
-            ShowResultAt(hitResult, transform.position + Offset);
+            ShowResultAt(hitResult,0);
             //firstSpawned = false;
         }
     }

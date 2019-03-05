@@ -2309,6 +2309,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3107315992147270274}
+  - component: {fileID: 4174533200751892557}
   m_Layer: 10
   m_Name: right_hand_result_JNT
   m_TagString: Untagged
@@ -2335,6 +2336,19 @@ Transform:
   m_Father: {fileID: 3107315992147270316}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4174533200751892557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3107315992147232418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d451a0af1cf514041965b27229ca75f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  iJointID: 1
 --- !u!1 &3107315992147232420
 GameObject:
   m_ObjectHideFlags: 0
@@ -4486,6 +4500,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3107315992147270408}
+  - component: {fileID: 546381816624612423}
   m_Layer: 10
   m_Name: left_hand_result_JNT
   m_TagString: Untagged
@@ -4512,6 +4527,19 @@ Transform:
   m_Father: {fileID: 3107315992147270418}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &546381816624612423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3107315992147232552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d451a0af1cf514041965b27229ca75f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  iJointID: 2
 --- !u!1 &3107315992147232554
 GameObject:
   m_ObjectHideFlags: 0
@@ -5013,6 +5041,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3107315992147270470}
+  - component: {fileID: 1426683964559660668}
   m_Layer: 10
   m_Name: head_result_JNT
   m_TagString: Untagged
@@ -5047,6 +5076,19 @@ Transform:
   m_Father: {fileID: 3107315992147270336}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1426683964559660668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3107315992147232614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d451a0af1cf514041965b27229ca75f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  iJointID: 0
 --- !u!1 &3107315992147232616
 GameObject:
   m_ObjectHideFlags: 0

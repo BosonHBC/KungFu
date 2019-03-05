@@ -32,10 +32,10 @@ public class RingIndicatorControl : MonoBehaviour
         {
             switch (item.iJointID)
             {
-                case 0:
+                case 1:
                     RightWrist = item.transform;
                     break;
-                case 1:
+                case 2:
                     LeftWrist = item.transform;
                     break;
                 default:

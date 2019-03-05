@@ -33,11 +33,12 @@ public class FightingManager : MonoBehaviour
     [Header("Parameter")]
     private SideViewCam sideVCam;
     public int iFightingSceneID;
-    private Character[] characters = new Character[2];
+    [HideInInspector] public Character[] characters = new Character[2];
+    [HideInInspector] public Canvas myCanvas;
     private int currentCamera;
     public UnityAction onPositioned;
-    private float fThresholdOfTime = 0.05f;
-    private float fTimeToPlayFightPrepare = 8.33f;
+    private float fThresholdOfTime = 0.02f;
+    private float fTimeToPlayFightPrepare = 5.30f;
     // Start is called before the first frame update
     void Start()
     {
@@ -66,7 +67,7 @@ public class FightingManager : MonoBehaviour
         GameObject _canvasGo = Instantiate(playerUIPrefab);
         _canvasGo.GetComponent<Canvas>().worldCamera = Camera.main;
         _canvasGo.name = "PlayerUI";
-
+        myCanvas = _canvasGo.GetComponent<Canvas>();
         director.SetGenericBinding(timelines.GetOutputTrack(4), _canvasGo.GetComponent<Animator>());
         // Set UIs
         MyGameInstance.instance.SetScoreUI(_canvasGo.transform.Find("Combo").GetChild(0).GetComponent<Text>());

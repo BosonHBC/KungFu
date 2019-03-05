@@ -11,7 +11,7 @@ AnimatorController:
   m_AnimatorParameters:
   - m_Name: ShineSpeed
     m_Type: 1
-    m_DefaultFloat: 0.8
+    m_DefaultFloat: 1.2
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
@@ -37,7 +37,7 @@ AnimatorState:
   m_PrefabAsset: {fileID: 0}
   m_Name: BeatShining
   m_Speed: 1
-  m_CycleOffset: 0
+  m_CycleOffset: 0.5
   m_Transitions: []
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
@@ -52,7 +52,7 @@ AnimatorState:
   m_Tag: 
   m_SpeedParameter: ShineSpeed
   m_MirrorParameter: 
-  m_CycleOffsetParameter: 
+  m_CycleOffsetParameter: ShineSpeed
   m_TimeParameter: 
 --- !u!1107 &1107947977796624754
 AnimatorStateMachine:

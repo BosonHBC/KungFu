@@ -3,63 +3,63 @@
         {
             "charName":"XiaoHong",
             "name": "Kungfu",
-            "lengthInSeconds": 75,
+            "lengthInSeconds": 126.83,
             "numOfAnim": 19,
             "animArray": [
                 {
-                    "timeToHit": 10.9,
+                    "timeToHit": 13.66,
                     "AnimationID": 0
                 },
                 {
-                    "timeToHit": 14.340,
+                    "timeToHit": 17.16,
                     "AnimationID": 1
                 },
                 {
-                    "timeToHit": 17.877,
+                    "timeToHit": 19,
                     "AnimationID": 2
                 },
                 {
-                    "timeToHit": 21.180,
+                    "timeToHit": 20.76,
                     "AnimationID": 3
                 },
                 {
-                    "timeToHit": 28.020,
+                    "timeToHit": 24.20,
                     "AnimationID": 1
                 },
                 {
-                    "timeToHit": 34.880,
+                    "timeToHit": 25.76 ,
                     "AnimationID": 3
                 },
                 {
-                    "timeToHit": 39.760,
+                    "timeToHit": 27.4,
                     "AnimationID": 1
                 },
                 {
-                    "timeToHit": 41.910,
+                    "timeToHit": 30.86,
                     "AnimationID": 0
                 },
                 {
-                    "timeToHit": 46.410,
+                    "timeToHit": 33.43,
                     "AnimationID": 0
                 },
                 {
-                    "timeToHit": 48.330,
+                    "timeToHit": 34.46,
                     "AnimationID": 1
                 },
                 {
-                    "timeToHit": 50.460,
+                    "timeToHit": 36.73,
                     "AnimationID": 1
                 },
                 {
-                    "timeToHit": 54.850,
+                    "timeToHit": 41,
                     "AnimationID": 1
                 },
                 {
-                    "timeToHit": 57.000,
+                    "timeToHit": 44.66, 
                     "AnimationID": 2
                 },
                 {
-                    "timeToHit": 58.980,
+                    "timeToHit": 47.8,
                     "AnimationID": 0
                 },
                 {
