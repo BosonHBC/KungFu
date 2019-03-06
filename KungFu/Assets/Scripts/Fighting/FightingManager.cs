@@ -39,6 +39,8 @@ public class FightingManager : MonoBehaviour
     public UnityAction onPositioned;
     private float fThresholdOfTime = 0.02f;
     private float fTimeToPlayFightPrepare = 5.30f;
+
+    bool bPrepared = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -52,8 +54,9 @@ public class FightingManager : MonoBehaviour
         Debug_SwitchCamera();
 
         //Debug.Log(director.time);
-        if (director.time >= fTimeToPlayFightPrepare - fThresholdOfTime && director.time <= fTimeToPlayFightPrepare + fThresholdOfTime)
+        if (!bPrepared&&director.time >= fTimeToPlayFightPrepare - fThresholdOfTime && director.time <= fTimeToPlayFightPrepare + fThresholdOfTime)
         {
+            bPrepared = true;
             Debug.Log("Invoke!");
             if (onPositioned != null)
                 onPositioned.Invoke();
@@ -103,8 +106,12 @@ public class FightingManager : MonoBehaviour
         transform.GetChild(0).GetComponent<AudioPeer>().SetSource(characters[1].GetComponent<AudioSource>());
 
         // Player animation
-        PlayerAnimController _animCtrl= thePlayer.GetComponent<PlayerAnimController>();
-        onPositioned = new UnityAction( delegate { _animCtrl.bPreparing = true; });
+        onPositioned = new UnityAction( delegate {
+            for (int i = 0; i < characters.Length; i++)
+            {
+                characters[i].GetComponent<BaseAnimController>().PlayPrepareFight();
+            }
+        });
 
         // Set Enemy attack joint and beat generator
         _canvasGo.GetComponentInChildren<RingIndicatorControl>().SetData(characters[1].transform);

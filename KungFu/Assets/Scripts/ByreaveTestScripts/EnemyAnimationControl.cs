@@ -1,17 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using SimpleJSON;
 
-public class EnemyAnimationControl : MonoBehaviour
+
+public class EnemyAnimationControl : BaseAnimController
 {
-    Animator enemyAnimator;
+
     Dictionary<int, AnimationInfo> AnimationData;
     Dictionary<int, BeatInfo> BeatData;
     // Start is called before the first frame update
-    void Start()
+   protected override void Start()
     {
-        enemyAnimator = GetComponent<Animator>();
+        base.Start();
+        anim = GetComponent<Animator>();
         AnimationData = MyGameInstance.instance.GetComponent<DataLoader>().GetAnimationInfos();
         BeatData = MyGameInstance.instance.GetComponent<DataLoader>().GetBeatInfos();
         //AddSlowDownEvent();
@@ -20,19 +21,19 @@ public class EnemyAnimationControl : MonoBehaviour
     public void PlayAnim(int AnimationID)
     {
         //enemyAnimator.Play(AnimationData[AnimationID].AnimationName);
-        enemyAnimator.SetInteger("AttackID_i", AnimationID + 1);
+        anim.SetInteger("AttackID_i", AnimationID + 1);
     }
-
+    
     public void SlowDown(float time)
     {
-        enemyAnimator.speed = 0.3f;
+        anim.speed = 0.3f;
         StartCoroutine(StopSlowDown(time));
     }
 
     IEnumerator StopSlowDown(float time)
     {
         yield return new WaitForSeconds(time);
-        enemyAnimator.speed = 1.0f;
+        anim.speed = 1.0f;
     }
 
     //void AddBeatTimingToList()
@@ -44,7 +45,7 @@ public class EnemyAnimationControl : MonoBehaviour
     //}
     void AddSlowDownEvent()
     {
-        AnimationClip[] animationClips = enemyAnimator.runtimeAnimatorController.animationClips;
+        AnimationClip[] animationClips = anim.runtimeAnimatorController.animationClips;
         foreach(AnimationClip ac in animationClips)
         {
             AnimationInfo timing = getAnimationInfoByName(ac.name);
@@ -72,7 +73,7 @@ public class EnemyAnimationControl : MonoBehaviour
 
     public void AddSlowDownEvent(AnimationInfo animInfo)
     {
-        AnimationClip[] animationClips = enemyAnimator.runtimeAnimatorController.animationClips;
+        AnimationClip[] animationClips = anim.runtimeAnimatorController.animationClips;
         foreach (AnimationClip ac in animationClips)
         {
             if(ac.name == animInfo.AnimationName)

@@ -955,7 +955,7 @@ MonoBehaviour:
     type: 3}
   playerPrefabs:
   - {fileID: 3107315991141146088, guid: eb883287fabd08e46b85946b8d3ca13e, type: 3}
-  - {fileID: 3392381731458139390, guid: 8c1fc7ed30b5b0f468fe96363b8c09cf, type: 3}
+  - {fileID: 5339219851634440852, guid: 7e1f219ce486d4049bd3bcef32d40675, type: 3}
   playerReleventParent: {fileID: 1531893282}
   spawnPoints:
   - {fileID: 345791331}
@@ -966,6 +966,10 @@ MonoBehaviour:
   - {fileID: 175588449}
   - {fileID: 0}
   iFightingSceneID: 0
+  characters:
+  - {fileID: 0}
+  - {fileID: 0}
+  myCanvas: {fileID: 0}
 --- !u!4 &1273692656
 Transform:
   m_ObjectHideFlags: 0
@@ -1558,64 +1562,3 @@ Transform:
   m_Father: {fileID: 1403812478}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1001 &2024422262
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 100016, guid: 547b188f2cfbab84c8e0f8a1559cf88a, type: 3}
-      propertyPath: m_Name
-      value: kungFuGirl
-      objectReference: {fileID: 0}
-    - target: {fileID: 100016, guid: 547b188f2cfbab84c8e0f8a1559cf88a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400016, guid: 547b188f2cfbab84c8e0f8a1559cf88a, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400016, guid: 547b188f2cfbab84c8e0f8a1559cf88a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -2.55
-      objectReference: {fileID: 0}
-    - target: {fileID: 400016, guid: 547b188f2cfbab84c8e0f8a1559cf88a, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -2.07
-      objectReference: {fileID: 0}
-    - target: {fileID: 400016, guid: 547b188f2cfbab84c8e0f8a1559cf88a, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.027819907
-      objectReference: {fileID: 0}
-    - target: {fileID: 400016, guid: 547b188f2cfbab84c8e0f8a1559cf88a, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.97211146
-      objectReference: {fileID: 0}
-    - target: {fileID: 400016, guid: 547b188f2cfbab84c8e0f8a1559cf88a, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.17041597
-      objectReference: {fileID: 0}
-    - target: {fileID: 400016, guid: 547b188f2cfbab84c8e0f8a1559cf88a, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.15869437
-      objectReference: {fileID: 0}
-    - target: {fileID: 400016, guid: 547b188f2cfbab84c8e0f8a1559cf88a, type: 3}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 400016, guid: 547b188f2cfbab84c8e0f8a1559cf88a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -19.886002
-      objectReference: {fileID: 0}
-    - target: {fileID: 400016, guid: 547b188f2cfbab84c8e0f8a1559cf88a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 161.457
-      objectReference: {fileID: 0}
-    - target: {fileID: 400016, guid: 547b188f2cfbab84c8e0f8a1559cf88a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 547b188f2cfbab84c8e0f8a1559cf88a, type: 3}

@@ -6,9 +6,16 @@ public class PrepareSmb : BaseSmb
 {
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        base.OnStateEnter(animator, stateInfo, layerIndex);
-        // PlayerAnimController _pAnimCtrl = animator.gameObject.GetComponent<PlayerAnimController>();
-        animator.SetFloat("StandToFight_f", 1f);
+        base.OnStateEnter(animator, stateInfo, layerIndex);        
 
     }
+
+    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        base.OnStateExit(animator, stateInfo, layerIndex);
+        BaseAnimController baseAnim =
+        animator.gameObject.GetComponent<BaseAnimController>();
+        baseAnim.LerpFromPrepareToFight();
+    }
+
 }
