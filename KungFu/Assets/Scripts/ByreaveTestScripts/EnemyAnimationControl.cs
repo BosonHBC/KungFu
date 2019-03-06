@@ -82,6 +82,7 @@ public class EnemyAnimationControl : BaseAnimController
                 foreach(var beat in animInfo.BeatIDs)
                 {
                     var beatInfo = BeatData[beat];
+                    Debug.Log(beatInfo.BeatID);
                     AnimationEvent animEvt = new AnimationEvent
                     {
                         time = beatInfo.OKStart,

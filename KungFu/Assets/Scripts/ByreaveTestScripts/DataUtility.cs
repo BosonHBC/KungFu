@@ -43,4 +43,13 @@ public class DataUtility
         }
         return true;
     }
+    public static int IntArrayIndex(int[] intArray, int value)
+    {
+        for(int i = 0; i < intArray.Length; ++ i)
+        {
+            if (value == intArray[i])
+                return i;
+        }
+        return -1;
+    }
 }

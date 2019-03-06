@@ -5,6 +5,9 @@
             "ButtonID": [
                 1
             ],
+            "JointID": [
+                2
+            ],
             "IsCombo": false,
             "OKStart": 0.2,
             "OKDuration": 0.6,
@@ -15,6 +18,9 @@
             "BeatID": 1,
             "ButtonID": [
                 0
+            ],
+            "JointID": [
+                2
             ],
             "IsCombo": false,
             "OKStart": 0.5,
@@ -27,6 +33,9 @@
             "ButtonID": [
                 4
             ],
+            "JointID": [
+                1
+            ],
             "IsCombo": false,
             "OKStart": 0.2,
             "OKDuration": 0.83,
@@ -38,6 +47,10 @@
             "ButtonID": [
                 3,
                 5
+            ],
+            "JointID": [
+                1,
+                2
             ],
             "IsCombo": false,
             "OKStart": 1.00,
