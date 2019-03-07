@@ -9,10 +9,10 @@
                 2
             ],
             "IsCombo": false,
-            "OKStart": 0.2,
-            "OKDuration": 0.6,
-            "PerfectStart": 0.5,
-            "PerfectDuration": 0.3
+            "OKStart": 0.1,
+            "OKDuration": 0.4,
+            "PerfectStart": 0.3,
+            "PerfectDuration": 0.2
         },
         {
             "BeatID": 1,
@@ -23,10 +23,10 @@
                 2
             ],
             "IsCombo": false,
-            "OKStart": 0.5,
-            "OKDuration": 0.97,
-            "PerfectStart": 1.17,
-            "PerfectDuration": 0.3
+            "OKStart": 0.05,
+            "OKDuration": 0.55,
+            "PerfectStart": 0.4,
+            "PerfectDuration": 0.6
         },
         {
             "BeatID": 2,
@@ -37,10 +37,10 @@
                 1
             ],
             "IsCombo": false,
-            "OKStart": 0.2,
-            "OKDuration": 0.83,
-            "PerfectStart": 0.53,
-            "PerfectDuration": 0.5
+            "OKStart": 0.1,
+            "OKDuration": 0.3,
+            "PerfectStart": 0.2,
+            "PerfectDuration": 0.2
         },
         {
             "BeatID": 3,
@@ -53,10 +53,10 @@
                 2
             ],
             "IsCombo": false,
-            "OKStart": 1.00,
-            "OKDuration": 0.9,
-            "PerfectStart": 1.40,
-            "PerfectDuration": 0.5
+            "OKStart": 0.10,
+            "OKDuration": 0.4,
+            "PerfectStart": 0.16,
+            "PerfectDuration": 0.24
         }
     ]
 }

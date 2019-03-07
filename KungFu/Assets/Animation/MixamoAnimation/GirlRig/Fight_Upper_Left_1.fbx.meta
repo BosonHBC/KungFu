@@ -201,17 +201,17 @@ ModelImporter:
     - serializedVersion: 16
       name: Fight_Upper_Left_1
       takeName: mixamo.com
-      firstFrame: 0
+      firstFrame: 17
       lastFrame: 80
       wrapMode: 0
-      orientationOffsetY: 0
+      orientationOffsetY: 18.9
       level: 0.37
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 0
       loopBlend: 0
-      loopBlendOrientation: 0
+      loopBlendOrientation: 1
       loopBlendPositionY: 1
       loopBlendPositionXZ: 1
       keepOriginalOrientation: 0

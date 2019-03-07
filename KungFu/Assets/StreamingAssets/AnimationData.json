@@ -26,7 +26,7 @@
         },
         {
             "AnimationID": 3,
-            "AnimationName": "Fight_Kick_Right_1",
+            "AnimationName": "Fight_Upper_Left_1",
             "Mode": "Attack",
             "Beats": [
                 3

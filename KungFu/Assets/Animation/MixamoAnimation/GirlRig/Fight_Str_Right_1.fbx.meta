@@ -201,7 +201,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Fight_Str_Right_1
       takeName: mixamo.com
-      firstFrame: 0
+      firstFrame: 38
       lastFrame: 112
       wrapMode: 0
       orientationOffsetY: 54.5
