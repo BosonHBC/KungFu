@@ -10,6 +10,7 @@ public class DataLoader : MonoBehaviour
     //private MusicData[] allMusicData;
     JSONNode musicData;
     JSONNode animationData;
+    bool bLoaded;
     //new data structure
     #region
     string animationInfoFilename = "AnimationData.json";
@@ -85,23 +86,28 @@ public class DataLoader : MonoBehaviour
 
     private void Awake()
     {
-        LoadDataToObjects();
-    }
-
-    public JSONNode GetBeatDataByName(string name)
-    {
-        JSONNode retBeat = null;
-        foreach (var music in musicData)
+        DontDestroyOnLoad(gameObject);
+        if (!bLoaded)
         {
-            if (music.Value["name"] == name)
-            {
-                retBeat = music.Value["beatArray"];
-                break;
-            }
+            bLoaded = true;
+            LoadDataToObjects();
         }
-
-        return retBeat;
     }
+
+    //public JSONNode GetBeatDataByName(string name)
+    //{
+    //    JSONNode retBeat = null;
+    //    foreach (var music in musicData)
+    //    {
+    //        if (music.Value["name"] == name)
+    //        {
+    //            retBeat = music.Value["beatArray"];
+    //            break;
+    //        }
+    //    }
+
+    //    return retBeat;
+    //}
 
     public JSONNode GetAnimationData()
     {
@@ -129,7 +135,7 @@ public class DataLoader : MonoBehaviour
     }
     public JSONNode GetMusicData()
     {
-        return musicData;
+        return allMusicData;
     }
 
     public JSONNode GetAnimationArrayByName(string name)

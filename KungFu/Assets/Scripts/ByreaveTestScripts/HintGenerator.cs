@@ -39,7 +39,7 @@ public class HintGenerator : MonoBehaviour
         animData = MyGameInstance.instance.GetComponent<DataLoader>().GetAnimationArrayByName("Kungfu");
         animationData = MyGameInstance.instance.GetComponent<DataLoader>().GetAnimationInfos();
         beatData = MyGameInstance.instance.GetComponent<DataLoader>().GetBeatInfos();
-        beatGenerator = MyGameInstance.instance.GetComponent<BeatGenerator>();
+        beatGenerator = FightingManager.instance.GetComponent<BeatGenerator>();
         hintsQueue = new Queue<GameObject>();
         ringIndicator = GetComponent<RingIndicatorControl>();
     }

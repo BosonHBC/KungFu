@@ -7,7 +7,6 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using Cinemachine;
 
-
 public class FightingManager : MonoBehaviour
 {
     public static FightingManager instance;
@@ -64,6 +63,8 @@ public class FightingManager : MonoBehaviour
 
     }
 
+    
+
     void CreateObjects()
     {
         /// Canvas
@@ -115,7 +116,7 @@ public class FightingManager : MonoBehaviour
 
         // Set Enemy attack joint and beat generator
         _canvasGo.GetComponentInChildren<RingIndicatorControl>().SetData(characters[1].transform);
-        MyGameInstance.instance.GetComponent<BeatGenerator>().SetData(characters[1].transform, _canvasGo.GetComponentInChildren<HintGenerator>(), _canvasGo.GetComponentInChildren<ResultControl>());
+        GetComponent<BeatGenerator>().SetData(characters[1].transform, _canvasGo.GetComponentInChildren<HintGenerator>(), _canvasGo.GetComponentInChildren<ResultControl>());
 
         /// Set Camera
         IEnumerable<TimelineClip> clips = timelines.GetOutputTrack(1).GetClips();
@@ -127,7 +128,7 @@ public class FightingManager : MonoBehaviour
             if (currClip.displayName == "PlayerCamera")
             {
                 Cinemachine.Timeline.CinemachineShot _shot = (Cinemachine.Timeline.CinemachineShot)currClip.asset;
-                _shot.VirtualCamera.exposedName = UnityEditor.GUID.Generate().ToString();
+                //_shot.VirtualCamera.exposedName = System.Guid.NewGuid().ToString(); 
                 CinemachineVirtualCameraBase _playerVCam = characters[0].transform.GetChild(characters[0].transform.childCount - 1).GetComponent<CinemachineVirtualCameraBase>();
                 cameraList[1] = _playerVCam.gameObject;
                 director.SetReferenceValue(_shot.VirtualCamera.exposedName, _playerVCam);

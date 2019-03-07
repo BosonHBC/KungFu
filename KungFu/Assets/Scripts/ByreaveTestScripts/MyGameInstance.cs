@@ -19,10 +19,10 @@ public class MyGameInstance : MonoBehaviour
     private int iMaxCombo;
 
     [Header("Score Releated")]
-    [SerializeField] private int iPerfectScore;
-    [SerializeField] private int iOkScore;
-    [SerializeField] private float fComboFactor;
-    [SerializeField] Text comboText;
+    [SerializeField] private int iPerfectScore = 1000;
+    [SerializeField] private int iOkScore = 500;
+    [SerializeField] private float fComboFactor = 30;
+
 
 
     //Awake is always called before any Start functions
@@ -47,14 +47,14 @@ public class MyGameInstance : MonoBehaviour
     private void Start()
     {
         iCombo = 0;
-        comboText.text = iCombo.ToString();
+
     }
     public void Score(HitResult hr)
     {
         if (++iCombo >= iMaxCombo)
             iMaxCombo = iCombo;
 
-        comboText.text = iCombo.ToString();
+        //comboText.text = iCombo.ToString();
         switch (hr)
         {
             case HitResult.Perfect:
@@ -73,7 +73,7 @@ public class MyGameInstance : MonoBehaviour
     {
         misses += number;
         iCombo = 0;
-        comboText.text = iCombo.ToString();
+        //comboText.text = iCombo.ToString();
         FightingManager.instance.ApplyDamageToCharacter(0, 10f);
     }
 
@@ -91,7 +91,7 @@ public class MyGameInstance : MonoBehaviour
         scores = 0;
         misses = 0;
         iCombo = 0;
-        comboText.text = iCombo.ToString();
+     //   comboText.text = iCombo.ToString();
         SceneManager.LoadScene("ByreaveLoadingScene");
         Invoke("StartGame", 2.0f);
     }
@@ -102,6 +102,6 @@ public class MyGameInstance : MonoBehaviour
 
     public void SetScoreUI(Text _comboText)
     {
-        comboText = _comboText;
+  //      comboText = _comboText;
     }
 }

@@ -17,10 +17,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/BosonScene.unity
     guid: ecb0eccd7106ca448b7a87aa2cebf35c
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ByreaveWhitebox.unity
     guid: b633105f1260e2246ba5ae7c0ccdde13
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ByreaveLoadingScene.unity
     guid: f8206a22d44350e439b67a93efd9ad00
   - enabled: 1

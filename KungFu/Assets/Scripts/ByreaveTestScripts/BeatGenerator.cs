@@ -98,14 +98,14 @@ public class BeatGenerator : MonoBehaviour
             AnimationInfo currentAnimInfo = animationData[AnimationArray[currentAnimationIndex]["AnimationID"].AsInt];
             BeatInfo currentBeatInfo = beatData[currentAnimInfo.BeatIDs[currentBeatIndex]];
             beatData[currentAnimInfo.BeatIDs[currentBeatIndex]].BeatID = 200;
-            Debug.Log(currentBeatInfo.BeatID);
+           // Debug.Log(currentBeatInfo.BeatID);
             if (currentBeatInfo == null)
                 Debug.Log("Error when getting beat info");
             if (AnimationArray[currentAnimationIndex]["timeToHit"].AsFloat - currentBeatInfo.PerfectStart <= beatTimer)
             {
                 if (!animEvtsAdded)
                 {
-                    enemyAnimCtrl.AddSlowDownEvent(currentAnimInfo);
+                    //enemyAnimCtrl.AddSlowDownEvent(currentAnimInfo);
                     animEvtsAdded = true;
                 }
                 if (!animPlayed)

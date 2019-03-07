@@ -45,7 +45,7 @@ public class SongSelectControl : MonoBehaviour
         Debug.Log("CurrentIndex: " + targetSongIndex);
 
         // Debug High Score
-        TestDataLoader loader = GetComponent<TestDataLoader>();
+        DataLoader loader = MyGameInstance.instance.GetComponent<DataLoader>();
         SimpleJSON.JSONNode allMusicData = loader.GetMusicData();
 
         // Create game object
