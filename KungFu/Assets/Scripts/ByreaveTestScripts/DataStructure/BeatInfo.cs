@@ -15,14 +15,15 @@ public class BeatInfo
 
     public BeatInfo(JSONNode beatInfo)
     {
+        float _scalar = 60.0f / 24.0f;
         BeatID = beatInfo["BeatID"].AsInt;
         ButtonIDs = DataUtility.GetIntArrayFromJSONNode(beatInfo["ButtonID"]);
         JointIDs = DataUtility.GetIntArrayFromJSONNode(beatInfo["JointID"]);
         IsCombo = beatInfo["IsCombo"].AsBool;
-        OKStart = beatInfo["OKStart"].AsFloat;
-        OKDuration = beatInfo["OKDuration"].AsFloat;
-        PerfectStart = beatInfo["PerfectStart"].AsFloat;
-        PerfectDuration = beatInfo["PerfectDuration"].AsFloat;
+        OKStart = beatInfo["OKStart"].AsFloat * _scalar;
+        OKDuration = beatInfo["OKDuration"].AsFloat * _scalar;
+        PerfectStart = beatInfo["PerfectStart"].AsFloat * _scalar;
+        PerfectDuration = beatInfo["PerfectDuration"].AsFloat * _scalar;
     }
 
     public BeatInfo(int id, int[] buttonIDs, int[] jointIDs, bool isCombo, float okstart, float okduration, float perstart, float perduration)
