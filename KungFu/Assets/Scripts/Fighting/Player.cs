@@ -97,7 +97,7 @@ public class Player : Character
     void DebugMovement()
     {
         float hori = Input.GetAxisRaw("Horizontal");
-        float vert = Input.GetAxisRaw("Vertical");
+        float vert = 0; Input.GetAxisRaw("Vertical");
 
         Vector3 dir = (hori * transform.right + vert * transform.forward).normalized;
 
@@ -105,6 +105,14 @@ public class Player : Character
 
         if (Input.GetKeyDown(KeyCode.Z))
             SwitchPerspectiveView();
+
+        if (Input.GetKeyDown(KeyCode.W))
+            GetComponent<BaseAnimController>().DashVertically(1, 1, 1);
+        if(Input.GetKeyDown(KeyCode.S))
+            GetComponent<BaseAnimController>().DashVertically(-1, 1, 1);
+        if (Input.GetKeyDown(KeyCode.P))
+            GetComponent<BaseAnimController>().StopDash();
+
     }
 
 
