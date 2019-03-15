@@ -69,13 +69,8 @@ public class ResultControl : MonoBehaviour
     public void ShowCombo(int countNumber)
     {
         ComboText.GetComponent<Text>().text = countNumber.ToString();
-        //if(comboCoroutine == null)
-            comboCoroutine = StartCoroutine(ComboShow());
-        //else
-        //{
-        //    StopCoroutine(comboCoroutine);
-        //    comboCoroutine = StartCoroutine(ComboShow());
-        //}
+        comboCoroutine = StartCoroutine(ComboShow());
+
     }
     IEnumerator ComboShow(float time = 1.0f)
     {
@@ -92,5 +87,11 @@ public class ResultControl : MonoBehaviour
         }
         ComboText.GetComponent<RectTransform>().localPosition = Vector3.zero;
         ComboText.GetComponent<Text>().color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
+    }
+
+    public void ShowResultAtWorldPos(HitResult hr, Vector3 pos)
+    {
+        GameObject ri = Instantiate(ResultImageShow, pos, Quaternion.identity, transform);
+        ri.GetComponent<ResultImageControl>().ShowResult(hr);
     }
 }

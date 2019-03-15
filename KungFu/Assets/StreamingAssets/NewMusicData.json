@@ -1,8 +1,8 @@
 {
     "allMusicData": [
         {
-            "charName":"XiaoHong",
-            "name": "Kungfu",
+            "charName": "Dummy",
+            "name": "Tutorial",
             "lengthInSeconds": 126.83,
             "numOfAnim": 19,
             "animArray": [
@@ -27,7 +27,7 @@
                     "AnimationID": 1
                 },
                 {
-                    "timeToHit": 25.76 ,
+                    "timeToHit": 25.76,
                     "AnimationID": 3
                 },
                 {
@@ -55,7 +55,7 @@
                     "AnimationID": 1
                 },
                 {
-                    "timeToHit": 44.66, 
+                    "timeToHit": 44.66,
                     "AnimationID": 2
                 },
                 {
@@ -85,7 +85,91 @@
             ]
         },
         {
-            "charName":"Sailer",
+            "charName": "XiaoHong",
+            "name": "Kungfu",
+            "lengthInSeconds": 126.83,
+            "numOfAnim": 19,
+            "animArray": [
+                {
+                    "timeToHit": 13.66,
+                    "AnimationID": 0
+                },
+                {
+                    "timeToHit": 17.16,
+                    "AnimationID": 1
+                },
+                {
+                    "timeToHit": 19,
+                    "AnimationID": 2
+                },
+                {
+                    "timeToHit": 20.76,
+                    "AnimationID": 3
+                },
+                {
+                    "timeToHit": 24.20,
+                    "AnimationID": 1
+                },
+                {
+                    "timeToHit": 25.76,
+                    "AnimationID": 3
+                },
+                {
+                    "timeToHit": 27.4,
+                    "AnimationID": 1
+                },
+                {
+                    "timeToHit": 30.86,
+                    "AnimationID": 0
+                },
+                {
+                    "timeToHit": 33.43,
+                    "AnimationID": 0
+                },
+                {
+                    "timeToHit": 34.46,
+                    "AnimationID": 1
+                },
+                {
+                    "timeToHit": 36.73,
+                    "AnimationID": 1
+                },
+                {
+                    "timeToHit": 41,
+                    "AnimationID": 1
+                },
+                {
+                    "timeToHit": 44.66,
+                    "AnimationID": 2
+                },
+                {
+                    "timeToHit": 47.8,
+                    "AnimationID": 0
+                },
+                {
+                    "timeToHit": 63.300,
+                    "AnimationID": 1
+                },
+                {
+                    "timeToHit": 65.380,
+                    "AnimationID": 3
+                },
+                {
+                    "timeToHit": 67.420,
+                    "AnimationID": 3
+                },
+                {
+                    "timeToHit": 71.760,
+                    "AnimationID": 3
+                },
+                {
+                    "timeToHit": 75.000,
+                    "AnimationID": -1
+                }
+            ]
+        },
+        {
+            "charName": "Sailer",
             "name": "Trey",
             "lengthInSeconds": 125,
             "numOfAnim": 19,
@@ -169,7 +253,7 @@
             ]
         },
         {
-            "charName":"Dude",
+            "charName": "Dude",
             "name": "Tyson",
             "lengthInSeconds": 99,
             "numOfAnim": 19,
@@ -253,6 +337,4 @@
             ]
         }
     ]
-      
-    
 }

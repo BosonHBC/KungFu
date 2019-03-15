@@ -3,15 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using SimpleJSON;
 
-
-public class BeatHitObject
-{
-    public float TimeToHit;
-    public int comboCount;
-    public BeatInfo BeatTime;
-    public Dictionary<int, bool> MatchedButtons;
-}
-public class BeatGenerator : MonoBehaviour
+public class TutorialBeatGenerator : MonoBehaviour
 {
     //new Data structure
     #region
@@ -38,14 +30,15 @@ public class BeatGenerator : MonoBehaviour
     AudioSource songPlaySource;
     EnemyAnimationControl enemyAnimCtrl;
     LevelLoader levelLoader;
-    //SFX Control
-    //SFXControl sfxControl;
+    //Tutorial indicator
+    IndicatorControl indicatorControl;
 
     bool animEvtsAdded = false;
     bool animPlayed = false;
     // Start is called before the first frame update
     void Start()
     {
+        AnimationArray = MyGameInstance.instance.GetComponent<DataLoader>().GetAnimationArrayByName("Tutorial");
         animationData = MyGameInstance.instance.GetComponent<DataLoader>().GetAnimationInfos();
         beatData = MyGameInstance.instance.GetComponent<DataLoader>().GetBeatInfos();
 
@@ -58,25 +51,19 @@ public class BeatGenerator : MonoBehaviour
             {4, KeyCode.N },
             {5, KeyCode.U },
             {6, KeyCode.K },
-            {7, KeyCode.O }
+            {7, KeyCode.O },
+            {8, KeyCode.G },
+            {9, KeyCode.B },
+            {10, KeyCode.S }
         };
         beatQueue = new Queue<BeatHitObject>();
         levelLoader = FindObjectOfType<LevelLoader>();
         //indicatorControl = Indicator.GetComponent<IndicatorControl>();
-        //hintGenerator = FindObjectOfType<HintGenerator>();
-        //resultControl = FindObjectOfType<ResultControl>();
+        hintGenerator = FindObjectOfType<TutorialHintGenerator>();
+        indicatorControl = FindObjectOfType<IndicatorControl>();
+        resultControl = FindObjectOfType<ResultControl>();
+        songPlaySource = FindObjectOfType<AudioSource>();
         //sfxControl = GetComponent<SFXControl>();
-    }
-
-    public void SetData(Transform _enemy, HintGenerator _generator, ResultControl _control, string songName = "Kungfu")
-    {
-        songPlaySource = _enemy.GetComponent<AudioSource>();
-        enemyAnimCtrl = _enemy.GetComponent<EnemyAnimationControl>();
-        hintGenerator = _generator;
-        resultControl = _control;
-        AnimationArray = MyGameInstance.instance.GetComponent<DataLoader>().GetAnimationArrayByName(songName);
-
-        // Debug
         StartGenerateBeat();
     }
 
@@ -101,22 +88,11 @@ public class BeatGenerator : MonoBehaviour
             AnimationInfo currentAnimInfo = animationData[AnimationArray[currentAnimationIndex]["AnimationID"].AsInt];
             BeatInfo currentBeatInfo = beatData[currentAnimInfo.BeatIDs[currentBeatIndex]];
             beatData[currentAnimInfo.BeatIDs[currentBeatIndex]].BeatID = 200;
-           // Debug.Log(currentBeatInfo.BeatID);
+            // Debug.Log(currentBeatInfo.BeatID);
             if (currentBeatInfo == null)
                 Debug.Log("Error when getting beat info");
             if (AnimationArray[currentAnimationIndex]["timeToHit"].AsFloat - currentBeatInfo.PerfectStart <= beatTimer)
             {
-                if (!animEvtsAdded)
-                {
-                    //enemyAnimCtrl.AddSlowDownEvent(currentAnimInfo);
-                    animEvtsAdded = true;
-                }
-                if (!animPlayed)
-                {
-                    enemyAnimCtrl.PlayAnim(currentAnimInfo.AnimationID);
-                    animPlayed = true;
-                }
-
                 if (AnimationArray[currentAnimationIndex]["timeToHit"].AsFloat - currentBeatInfo.PerfectStart + currentBeatInfo.OKStart <= beatTimer)
                 {
                     //UnityEditor.EditorApplication.isPaused = true;
@@ -153,7 +129,7 @@ public class BeatGenerator : MonoBehaviour
 
             beatTimer += Time.deltaTime;
         }
-        
+
     }
 
     //there is a match hit
@@ -168,7 +144,7 @@ public class BeatGenerator : MonoBehaviour
                 HitResult hr = GetResultFromInput();
 
                 hintGenerator.MatchButton(buttonID);
-                
+
                 //indicatorControl.MatchButton(buttonID);
                 //we can calculate the reacting time to give different scores (as a parameter to Score() function) here
                 if (hr != HitResult.Miss)
@@ -210,9 +186,9 @@ public class BeatGenerator : MonoBehaviour
                 {
                     if (!matched.Value)
                     {
+                        resultControl.ShowResult(HitResult.Miss);
                         MyGameInstance.instance.Miss(1);
                         //show miss image
-                        resultControl.ShowResult(HitResult.Miss);
                         //MyGameInstance.instance.ShowResultAt(ChildBodyParts[matched.Key].transform, HitResult.Miss);
                         //sfxControl.PlayRandomMissSFX();
                     }
