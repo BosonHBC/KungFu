@@ -67,4 +67,9 @@ public class IndicatorControl : MonoBehaviour
         GameObject ri = Instantiate(ResultImageShow, locTrans.position, transform.rotation);
         ri.GetComponent<ResultImageControl>().ShowResult(hitResult);
     }
+
+    public Transform GetChildTransform(int index)
+    {
+        return ChildBodyParts[index].transform;
+    }
 }

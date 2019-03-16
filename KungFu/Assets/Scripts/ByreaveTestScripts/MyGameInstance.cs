@@ -66,7 +66,7 @@ public class MyGameInstance : MonoBehaviour
         }
         scores++;
 
-        FightingManager.instance.PlayerGuard();
+        //FightingManager.instance.PlayerGuard();
     }
 
     public void Miss(int number)
@@ -74,7 +74,7 @@ public class MyGameInstance : MonoBehaviour
         misses += number;
         iCombo = 0;
         //comboText.text = iCombo.ToString();
-        FightingManager.instance.ApplyDamageToCharacter(0, 10f);
+        //FightingManager.instance.ApplyDamageToCharacter(0, 10f);
     }
 
     public void SetArduinoInput(bool[] arduinoInput)

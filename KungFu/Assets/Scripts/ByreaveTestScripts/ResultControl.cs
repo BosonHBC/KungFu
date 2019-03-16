@@ -8,9 +8,8 @@ public class ResultControl : MonoBehaviour
     public GameObject ResultImageShow;
     public GameObject ComboText;
 
-    //two result at same time, can be improved
     float duration = 1.0f;
-    bool firstSpawned = false;
+    //bool firstSpawned = false;
     Coroutine comboCoroutine;
     // Start is called before the first frame update
     void Start()
@@ -48,23 +47,15 @@ public class ResultControl : MonoBehaviour
     }
     public void ShowResult(HitResult hitResult, int _attackJointID = 0)
     {
-        if(!firstSpawned)
-        {
-            ShowResultAt(hitResult);
-            firstSpawned = true;
-            StartCoroutine(CanSpawnAnother());
-        }
-        else
-        {
-            ShowResultAt(hitResult,0);
-            //firstSpawned = false;
-        }
+            ShowResultAt(hitResult, _attackJointID);
+
+
     }
-    IEnumerator CanSpawnAnother()
-    {
-        yield return new WaitForSeconds(duration);
-        firstSpawned = false;
-    }
+    //IEnumerator CanSpawnAnother()
+    //{
+    //    yield return new WaitForSeconds(duration);
+    //    firstSpawned = false;
+    //}
 
     public void ShowCombo(int countNumber)
     {
@@ -92,6 +83,30 @@ public class ResultControl : MonoBehaviour
     public void ShowResultAtWorldPos(HitResult hr, Vector3 pos)
     {
         GameObject ri = Instantiate(ResultImageShow, pos, Quaternion.identity, transform);
+        ri.GetComponent<ResultImageControl>().ShowResult(hr);
+    }
+
+    public void ShowTutorialResult(HitResult hr, Transform trans)
+    {
+        GameObject ri = Instantiate(ResultImageShow);
+        RectTransform goTr = ri.GetComponent<RectTransform>();
+        goTr.SetParent(transform);
+        
+        Vector3 WorldObject = trans.position;
+
+        RectTransform CanvasRect = gameObject.GetComponent<RectTransform>();
+        // Calculate The relative position according to the canvas
+        Vector3 ViewportPosition = Camera.main.WorldToViewportPoint(WorldObject);
+
+        Vector3 WorldObject_ScreenPosition = new Vector3(
+        ((ViewportPosition.x * CanvasRect.sizeDelta.x) - (CanvasRect.sizeDelta.x * 0.5f)),
+        ((ViewportPosition.y * CanvasRect.sizeDelta.y) - (CanvasRect.sizeDelta.y * 0.5f)));
+        //Debug.Log(WorldObject_ScreenPosition);
+        //now you can set the position of the ui element
+        goTr.anchoredPosition = WorldObject_ScreenPosition;
+        goTr.localPosition = new Vector3(goTr.localPosition.x, goTr.localPosition.y, 0f);
+        goTr.localRotation = Quaternion.identity;
+        goTr.localScale = new Vector3(1, 1, 1);
         ri.GetComponent<ResultImageControl>().ShowResult(hr);
     }
 }

@@ -24,7 +24,7 @@ public class TutorialBeatGenerator : MonoBehaviour
     Queue<BeatHitObject> beatQueue;
 
     //Hint Generator
-    HintGenerator hintGenerator;
+    TutorialHintGenerator hintGenerator;
     //Result Control
     ResultControl resultControl;
     AudioSource songPlaySource;
@@ -32,6 +32,8 @@ public class TutorialBeatGenerator : MonoBehaviour
     LevelLoader levelLoader;
     //Tutorial indicator
     IndicatorControl indicatorControl;
+    [SerializeField]
+    TutorialControl tutorialControl;
 
     bool animEvtsAdded = false;
     bool animPlayed = false;
@@ -58,11 +60,11 @@ public class TutorialBeatGenerator : MonoBehaviour
         };
         beatQueue = new Queue<BeatHitObject>();
         levelLoader = FindObjectOfType<LevelLoader>();
-        //indicatorControl = Indicator.GetComponent<IndicatorControl>();
         hintGenerator = FindObjectOfType<TutorialHintGenerator>();
         indicatorControl = FindObjectOfType<IndicatorControl>();
         resultControl = FindObjectOfType<ResultControl>();
         songPlaySource = FindObjectOfType<AudioSource>();
+        tutorialControl = FindObjectOfType<TutorialControl>();
         //sfxControl = GetComponent<SFXControl>();
         StartGenerateBeat();
     }
@@ -148,15 +150,17 @@ public class TutorialBeatGenerator : MonoBehaviour
                 //indicatorControl.MatchButton(buttonID);
                 //we can calculate the reacting time to give different scores (as a parameter to Score() function) here
                 if (hr != HitResult.Miss)
+                {
                     MyGameInstance.instance.Score(hr);
+                    tutorialControl.ShowBeatHit();
+                }
                 else
                     MyGameInstance.instance.Miss(1);
                 //Get JointID
                 int index = DataUtility.IntArrayIndex(beatHitObject.BeatTime.ButtonIDs, buttonID);
                 if (index == -1)
                     Debug.LogError("Button ID not in beat button id array");
-                //indicatorControl.ShowResultAt(buttonID, hr);
-                resultControl.ShowResult(hr, (hr == HitResult.Miss) ? 0 : beatHitObject.BeatTime.JointIDs[index]);
+                resultControl.ShowTutorialResult(hr, indicatorControl.GetChildTransform(buttonID));
                 beatHitObject.MatchedButtons[buttonID] = true;
 
                 //if all buttons are hit, dequeue
@@ -178,7 +182,7 @@ public class TutorialBeatGenerator : MonoBehaviour
         {
             if (beatHitObject.BeatTime.IsCombo)
             {
-                resultControl.ShowCombo(beatHitObject.comboCount);
+                //resultControl.ShowCombo(beatHitObject.comboCount);
             }
             else
             {
@@ -186,11 +190,8 @@ public class TutorialBeatGenerator : MonoBehaviour
                 {
                     if (!matched.Value)
                     {
-                        resultControl.ShowResult(HitResult.Miss);
+                        resultControl.ShowTutorialResult(HitResult.Miss, indicatorControl.GetChildTransform(matched.Key));
                         MyGameInstance.instance.Miss(1);
-                        //show miss image
-                        //MyGameInstance.instance.ShowResultAt(ChildBodyParts[matched.Key].transform, HitResult.Miss);
-                        //sfxControl.PlayRandomMissSFX();
                     }
                 }
             }
@@ -230,24 +231,22 @@ public class TutorialBeatGenerator : MonoBehaviour
                             if (butInfo.BeatTime.IsCombo)
                             {
                                 butInfo.comboCount++;
-                                resultControl.ShowCombo(beatQueue.Peek().comboCount);
+                                //resultControl.ShowCombo(beatQueue.Peek().comboCount);
                             }
                             else
-                                matchButton(k.Key, beatQueue.Peek());
+                                matchButton(k.Key, butInfo);
                         }
-                    }
-                    //other buttons
-                    else
-                    {
-                        //if (Input.GetKeyDown(k.Value))
-                        //    indicatorControl.HitButton(k.Key);
-                        //else if (Input.GetKeyUp(k.Value))
-                        //    indicatorControl.DeactiveButton(k.Key);
                     }
                 }
             }
         }
-
+        foreach (var k in buttonMapping)
+        {
+            if (Input.GetKeyDown(k.Value))
+                indicatorControl.HitButton(k.Key);
+            else if (Input.GetKeyUp(k.Value))
+                indicatorControl.DeactiveButton(k.Key);
+        }
     }
 
     void checkInputFromArduino()
@@ -271,7 +270,7 @@ public class TutorialBeatGenerator : MonoBehaviour
                             if (butInfo.BeatTime.IsCombo)
                             {
                                 butInfo.comboCount++;
-                                resultControl.ShowCombo(beatQueue.Peek().comboCount);
+                                //resultControl.ShowCombo(beatQueue.Peek().comboCount);
                             }
                             else
                                 matchButton(i, beatQueue.Peek());
@@ -302,7 +301,7 @@ public class TutorialBeatGenerator : MonoBehaviour
     {
         BeatInfo currentBeatInfo = beatQueue.Peek().BeatTime;
         float ReactTime = beatTimer - beatQueue.Peek().TimeToHit + currentBeatInfo.PerfectStart;
-        Debug.Log(ReactTime);
+
         if (ReactTime >= currentBeatInfo.PerfectStart && ReactTime <= currentBeatInfo.PerfectStart + currentBeatInfo.PerfectDuration)
             return HitResult.Perfect;
         else if (ReactTime >= currentBeatInfo.OKStart && ReactTime <= currentBeatInfo.OKStart + currentBeatInfo.OKDuration)
