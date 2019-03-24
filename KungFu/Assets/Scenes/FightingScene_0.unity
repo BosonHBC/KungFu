@@ -968,6 +968,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   myCanvas: {fileID: 0}
+  fightMode: 0
 --- !u!4 &1273692656
 Transform:
   m_ObjectHideFlags: 0
@@ -1280,7 +1281,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1531893282}
   m_Layer: 0
-  m_Name: CharacterParent
+  m_Name: World_CharacterParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

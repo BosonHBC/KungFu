@@ -34,12 +34,6 @@ public class PlayerAnimController : BaseAnimController
 
     }
 
-    public void GetDamage(bool _fromLeft)
-    {
-        anim.SetBool("KnockBackLeft_b", _fromLeft);
-        anim.Play("KnockBack");
-    }
-
     public void GuardSucceed()
     {
         anim.Play("Guard");

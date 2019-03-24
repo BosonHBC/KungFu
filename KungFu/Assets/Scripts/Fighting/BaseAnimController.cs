@@ -20,7 +20,11 @@ public class BaseAnimController : MonoBehaviour
     {
         StartCoroutine(LerpToNumber(0,0, 1, 0.5f));
     }
-
+    public void GetDamage(bool _fromLeft)
+    {
+        anim.SetBool("KnockBackLeft_b", _fromLeft);
+        anim.Play("KnockBack");
+    }
     public void DashVertically(float _vert, float _dashSpeed, float _dashDuration, UnityAction _onFinishDash = null)
     {
         if (!bDashing)

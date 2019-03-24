@@ -58,20 +58,20 @@ public class Player : Character
             if (iCurrentView == 0)
             {
                 // to third person
-               StartCoroutine(SwitchView(trackedDolly.m_PathPosition, 0, 0.2f));
+               StartCoroutine(IE_SwitchView(trackedDolly.m_PathPosition, 0, 0.2f));
                 iCurrentView = 1;
             }
             else if (iCurrentView == 1)
             {
                 // to first person
-                StartCoroutine(SwitchView(trackedDolly.m_PathPosition, 2f, 0.2f));
+                StartCoroutine(IE_SwitchView(trackedDolly.m_PathPosition, 2f, 0.2f));
                 iCurrentView = 0;
             }
 
         }
     }
 
-    IEnumerator SwitchView(float _start, float _end, float _fadeTime = 0.5f)
+    IEnumerator IE_SwitchView(float _start, float _end, float _fadeTime = 0.5f)
     {
         bSwitching = true;
         float _timeStartFade = Time.time;

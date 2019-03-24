@@ -9,6 +9,11 @@ using Cinemachine;
 
 public class FightingManager : MonoBehaviour
 {
+
+    public enum FightMode
+    {
+        Wait, Offense, Defense
+    }
     public static FightingManager instance;
     private void Awake()
     {
@@ -18,14 +23,14 @@ public class FightingManager : MonoBehaviour
         }
     }
     [Header("Prefab")]
-    [SerializeField] GameObject playerUIPrefab;
-    [SerializeField] GameObject playerCenterPrefab;
+    [SerializeField] private GameObject playerUIPrefab;
+    [SerializeField] private GameObject playerCenterPrefab;
     [SerializeField] private Character[] playerPrefabs;
     [Header("Parents")]
-    [SerializeField] Transform playerReleventParent;
-    [SerializeField] Transform[] spawnPoints;
-    [SerializeField] PlayableDirector director;
-    [SerializeField] TimelineAsset timelines;
+    [SerializeField] private Transform playerReleventParent;
+    [SerializeField] private Transform[] spawnPoints;
+    [SerializeField] private PlayableDirector director;
+    [SerializeField] private TimelineAsset timelines;
     
     [SerializeField] GameObject[] cameraList;
 
@@ -34,16 +39,14 @@ public class FightingManager : MonoBehaviour
     public int iFightingSceneID;
     [HideInInspector] public Character[] characters = new Character[2];
     [HideInInspector] public Canvas myCanvas;
-    private int currentCamera;
     public UnityAction onPositioned;
     private float fThresholdOfTime = 0.02f;
     private float fTimeToPlayFightPrepare = 5.30f;
-
+    public FightMode fightMode = FightMode.Wait;
     bool bPrepared = false;
     // Start is called before the first frame update
     void Start()
     {
-        currentCamera = 0;
         CreateObjects();
     }
 
@@ -56,14 +59,13 @@ public class FightingManager : MonoBehaviour
         if (!bPrepared&&director.time >= fTimeToPlayFightPrepare - fThresholdOfTime && director.time <= fTimeToPlayFightPrepare + fThresholdOfTime)
         {
             bPrepared = true;
-            Debug.Log("Invoke!");
+            Debug.Log("Start to Prepare!");
+            fightMode = FightMode.Defense;
             if (onPositioned != null)
                 onPositioned.Invoke();
         }
 
     }
-
-    
 
     void CreateObjects()
     {
@@ -171,6 +173,35 @@ public class FightingManager : MonoBehaviour
     public void PlayerGuard()
     {
         characters[0].GetComponent<PlayerAnimController>().GuardSucceed();
+    }
+
+    public void FM_Score(HitResult hr)
+    {
+        MyGameInstance.instance.Score(hr);
+        switch (fightMode)
+        {
+            case FightMode.Wait:
+                break;
+            case FightMode.Offense:
+                break;
+            case FightMode.Defense:
+                PlayerGuard();
+                break;
+        }
+    }
+    public void FM_Miss(int number)
+    {
+        MyGameInstance.instance.Miss(number);
+        switch (fightMode)
+        {
+            case FightMode.Wait:
+                break;
+            case FightMode.Offense:
+                break;
+            case FightMode.Defense:
+                ApplyDamageToCharacter(0, 10f);
+                break;
+        }
     }
 
 }

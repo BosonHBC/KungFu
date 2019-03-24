@@ -24,14 +24,15 @@ public class PlayerCenter : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, CenterPoint() + new Vector3(0, fYOffset,0), fLerpTime);
         distanceBetween = Vector3.Distance(trP1.position, trP2.position);
         transform.LookAt(transform.position - trP1.right);
-        DebugDraw();
+        //DebugDraw();
     }
 
     Vector3 CenterPoint()
     {
         return (trP1.position + trP2.position) / 2;
     }
-
+    // Debug Draw
+    /*
     void DebugDraw()
     {
         Debug.DrawLine(trP1.position + new Vector3(0f, fYOffset, 0f), trP2.position + new Vector3(0f, fYOffset, 0f), Color.blue);
@@ -40,5 +41,5 @@ public class PlayerCenter : MonoBehaviour
         Debug.DrawRay(trP2.position, -trP2.forward * DebugExtend, Color.green);
 
     }
-
+    */
 }

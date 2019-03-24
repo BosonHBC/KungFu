@@ -12,7 +12,7 @@ public class Character : MonoBehaviour
     protected Transform trOppoent;
     [SerializeField] protected float fMaxHp;
     [SerializeField] protected float fCurrentHp;
-
+    private BaseAnimController anim;
     private Image hpFillBar;
 
 
@@ -21,6 +21,7 @@ public class Character : MonoBehaviour
     // Start is called before the first frame update
     protected virtual void Start()
     {
+        anim = GetComponent<BaseAnimController>();
         //SetData(null);
     }
 
@@ -33,6 +34,7 @@ public class Character : MonoBehaviour
     public virtual void GetDamage(float _dmg, bool _fromLeft)
     {
         float _afterDmg = fCurrentHp - _dmg;
+        anim.GetDamage(_fromLeft);
         StartCoroutine(GetDamage(fCurrentHp, _afterDmg<0?0:_afterDmg));
         if (fCurrentHp <= 0)
         {

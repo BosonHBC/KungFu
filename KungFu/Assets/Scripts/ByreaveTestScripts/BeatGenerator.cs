@@ -159,6 +159,7 @@ public class BeatGenerator : MonoBehaviour
     //there is a match hit
     void matchButton(int buttonID, BeatHitObject beatHitObject)
     {
+
         if (beatHitObject.MatchedButtons.ContainsKey(buttonID))
         {
             //if is not already matched
@@ -172,9 +173,11 @@ public class BeatGenerator : MonoBehaviour
                 //indicatorControl.MatchButton(buttonID);
                 //we can calculate the reacting time to give different scores (as a parameter to Score() function) here
                 if (hr != HitResult.Miss)
-                    MyGameInstance.instance.Score(hr);
+                    FightingManager.instance.FM_Score(hr);
                 else
-                    MyGameInstance.instance.Miss(1);
+                {
+                    FightingManager.instance.FM_Miss(1);
+                }
                 //Get JointID
                 int index = DataUtility.IntArrayIndex(beatHitObject.BeatTime.ButtonIDs, buttonID);
                 if (index == -1)
@@ -210,7 +213,7 @@ public class BeatGenerator : MonoBehaviour
                 {
                     if (!matched.Value)
                     {
-                        MyGameInstance.instance.Miss(1);
+                        FightingManager.instance.FM_Miss(1);
                         //show miss image
                         resultControl.ShowResult(HitResult.Miss);
                         //MyGameInstance.instance.ShowResultAt(ChildBodyParts[matched.Key].transform, HitResult.Miss);
