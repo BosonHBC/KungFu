@@ -12,7 +12,7 @@ public class Character : MonoBehaviour
     protected Transform trOppoent;
     [SerializeField] protected float fMaxHp;
     [SerializeField] protected float fCurrentHp;
-    private BaseAnimController anim;
+    protected BaseAnimController anim;
     private Image hpFillBar;
 
 
