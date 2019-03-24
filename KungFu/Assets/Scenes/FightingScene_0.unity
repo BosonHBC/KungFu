@@ -266,7 +266,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 345791330}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -15.29, y: -2.58, z: 3.79}
+  m_LocalPosition: {x: -15.29, y: -2.55, z: 3.79}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1531893282}
@@ -953,7 +953,7 @@ MonoBehaviour:
     type: 3}
   playerPrefabs:
   - {fileID: 3107315991141146088, guid: eb883287fabd08e46b85946b8d3ca13e, type: 3}
-  - {fileID: 5339219851634440852, guid: 7e1f219ce486d4049bd3bcef32d40675, type: 3}
+  - {fileID: 531183485570348736, guid: 7e1f219ce486d4049bd3bcef32d40675, type: 3}
   playerReleventParent: {fileID: 1531893282}
   spawnPoints:
   - {fileID: 345791331}
@@ -1265,7 +1265,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1528300735}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -15.29, y: -2.58, z: -0.38}
+  m_LocalPosition: {x: -15.29, y: -2.55, z: -0.38}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1531893282}
