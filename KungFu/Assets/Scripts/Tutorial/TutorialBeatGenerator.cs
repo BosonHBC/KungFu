@@ -97,6 +97,9 @@ public class TutorialBeatGenerator : MonoBehaviour
             {
                 if (AnimationArray[currentAnimationIndex]["timeToHit"].AsFloat - currentBeatInfo.PerfectStart + currentBeatInfo.OKStart <= beatTimer)
                 {
+                    //show hit tutorial
+                    tutorialControl.ShowHitHint();
+
                     //UnityEditor.EditorApplication.isPaused = true;
                     //create a map of matched buttons for miss check
                     var matchedButtons = new Dictionary<int, bool>();
@@ -112,7 +115,8 @@ public class TutorialBeatGenerator : MonoBehaviour
                             MatchedButtons = matchedButtons
                         }
                     );
-
+                    //indicator highlight
+                    indicatorControl.ActivateButton(currentBeatInfo.ButtonIDs);
                     //Beat ends
                     StartCoroutine(beatEndInSecs(beatQueue.Peek(), currentBeatInfo.OKDuration));
 
@@ -152,7 +156,9 @@ public class TutorialBeatGenerator : MonoBehaviour
                 if (hr != HitResult.Miss)
                 {
                     MyGameInstance.instance.Score(hr);
+                    tutorialControl.ShowScoreHint();
                     tutorialControl.ShowBeatHit();
+                    indicatorControl.DeactiveButton(buttonID);
                 }
                 else
                     MyGameInstance.instance.Miss(1);
@@ -195,6 +201,8 @@ public class TutorialBeatGenerator : MonoBehaviour
                     }
                 }
             }
+            //indicator remove highlight
+            indicatorControl.DeactivateButtons(beatHitObject.BeatTime.ButtonIDs);
             beatQueue.Dequeue();
         }
     }
