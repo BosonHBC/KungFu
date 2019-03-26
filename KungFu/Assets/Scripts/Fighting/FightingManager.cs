@@ -41,7 +41,7 @@ public class FightingManager : MonoBehaviour
     [HideInInspector] public Canvas myCanvas;
     public UnityAction onPositioned;
     private float fThresholdOfTime = 0.02f;
-    private float fTimeToPlayFightPrepare = 5.30f;
+    private float fTimeToPlayFightPrepare = 5f;
     public FightMode fightMode = FightMode.Wait;
     bool bPrepared = false;
     // Start is called before the first frame update

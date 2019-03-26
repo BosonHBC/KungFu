@@ -71,7 +71,7 @@ public class HintGenerator : MonoBehaviour
     void GenerateHint(BeatInfo beatTiming)
     {
         // Dash before hit, some thing wrong
-        //FightingManager.instance.characters[1].GetComponent<Enemy>().DashToPlayer(1, HintTimeBeforeHit);
+        FightingManager.instance.characters[1].GetComponent<Enemy>().DashToPlayer(1, HintTimeBeforeHit);
         GameObject tmpGO = Instantiate(HintObject);
         tmpGO.transform.SetParent(transform);
         tmpGO.transform.localPosition = Vector3.zero;

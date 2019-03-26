@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ca6d0fe307f230c4fa989d7a2e122b51
+guid: f9d193afe457d7345ae9c4aeeda296a2
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -202,7 +202,7 @@ ModelImporter:
       name: Movement_SideWalk_Right
       takeName: mixamo.com
       firstFrame: 0
-      lastFrame: 62
+      lastFrame: 61
       wrapMode: 0
       orientationOffsetY: 0
       level: 0.37

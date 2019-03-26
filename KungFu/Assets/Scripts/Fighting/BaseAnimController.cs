@@ -18,7 +18,7 @@ public class BaseAnimController : MonoBehaviour
     }
     public void LerpFromPrepareToFight()
     {
-        StartCoroutine(LerpToNumber(0,0, 1, 0.5f));
+        StartCoroutine(LerpToNumber(0, 0, 1, 0.5f));
     }
     public void GetDamage(bool _fromLeft)
     {
@@ -30,9 +30,19 @@ public class BaseAnimController : MonoBehaviour
         if (!bDashing)
         {
             bDashing = true;
-            StartCoroutine(LerpToNumber(1, anim.GetFloat("vert"), _vert, fDashLerpTime/2));
+            StartCoroutine(LerpToNumber(1, anim.GetFloat("vert"), _vert, fDashLerpTime / 2));
             anim.SetFloat("fMoveSpeed", _dashSpeed);
-            StartCoroutine(onFinishDash(_dashDuration, _onFinishDash));
+            StartCoroutine(onFinishDash("vert", _dashDuration, _onFinishDash));
+        }
+    }
+    public void DashHorizontally(float _hori, float _dashSpeed, float _dashDuration, UnityAction _onFinishDash = null)
+    {
+        if (!bDashing)
+        {
+            bDashing = true;
+            StartCoroutine(LerpToNumber(2, anim.GetFloat("hori"), _hori, fDashLerpTime / 2));
+            anim.SetFloat("fMoveSpeed", _dashSpeed);
+            StartCoroutine(onFinishDash("hori", _dashDuration, _onFinishDash));
         }
     }
 
@@ -48,11 +58,11 @@ public class BaseAnimController : MonoBehaviour
         bDashing = false;
     }
     private float fDashLerpTime = 0.3f;
-    IEnumerator onFinishDash(float _dashDuration, UnityAction _onFinishDash = null)
+    IEnumerator onFinishDash(string _dir, float _dashDuration, UnityAction _onFinishDash = null)
     {
         yield return new WaitForSeconds(_dashDuration - fDashLerpTime);
-        
-        StartCoroutine(LerpToNumber(1, anim.GetFloat("vert"), 0, fDashLerpTime));
+
+        StartCoroutine(LerpToNumber(1, anim.GetFloat(_dir), 0, fDashLerpTime));
         yield return new WaitForSeconds(fDashLerpTime);
         anim.SetFloat("fMoveSpeed", 1);
         if (_onFinishDash != null)
@@ -79,6 +89,9 @@ public class BaseAnimController : MonoBehaviour
                     break;
                 case 1:
                     anim.SetFloat("vert", currentValue);
+                    break;
+                case 2:
+                    anim.SetFloat("hori", currentValue);
                     break;
             }
 

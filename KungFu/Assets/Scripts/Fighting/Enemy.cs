@@ -30,7 +30,9 @@ public class Enemy : Character
             return;
         bDashing = true;
         // 6.571 is the average speed of the animation, checked in the fbx file. // 8.16f
-        float _t = (fDistToOpponent ) / 4f;
+        float _t = (fDistToOpponent - fDashThreshold) / 6.571f;
+        Debug.Log("Start Dash, dash duration: " + _t);
+
         anim.DashVertically(vert, fDashSpeed, _t, delegate { bDashing = false; });
     }
 }

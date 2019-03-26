@@ -97,7 +97,7 @@ public class Player : Character
     void DebugMovement()
     {
         float hori = Input.GetAxisRaw("Horizontal");
-        float vert = 0; Input.GetAxisRaw("Vertical");
+        float vert = 0;// Input.GetAxisRaw("Vertical");
 
         Vector3 dir = (hori * transform.right + vert * transform.forward).normalized;
 
