@@ -23,7 +23,8 @@ public class HintTrackControl : MonoBehaviour
     Dictionary<int, bool> matchedButtons;
 
     float timer = 0.0f;
-    bool isMoving = false;
+    [HideInInspector]
+    public bool isMoving = false;
     [HideInInspector]
     public float moveSpeed;
     float timeBeforeHit;
@@ -67,23 +68,32 @@ public class HintTrackControl : MonoBehaviour
 
     void ChangeToOK()
     {
-        for (int i = 0; i < buttonIDs.Length; ++ i)
+        if (!beatTiming.IsCombo)
         {
-            if(buttonIDs[i] < ChildBodyParts.Length)
+            for (int i = 0; i < buttonIDs.Length; ++i)
             {
-                ChildBodyParts[buttonIDs[i]].GetComponent<Image>().color = OKColor;
+                if (buttonIDs[i] < ChildBodyParts.Length)
+                {
+                    ChildBodyParts[buttonIDs[i]].GetComponent<Image>().color = OKColor;
+                }
             }
         }
+        else
+            gameObject.GetComponent<Image>().color = OKColor;
+        
         hintState = HitResult.Good;
     }
 
     void ChangeToPerfect()
     {
-        for (int i = 0; i < buttonIDs.Length; ++i)
+        if (!beatTiming.IsCombo)
         {
-            if (buttonIDs[i] < ChildBodyParts.Length)
+            for (int i = 0; i < buttonIDs.Length; ++i)
             {
-                ChildBodyParts[buttonIDs[i]].GetComponent<Image>().color = PerfectColor;
+                if (buttonIDs[i] < ChildBodyParts.Length)
+                {
+                    ChildBodyParts[buttonIDs[i]].GetComponent<Image>().color = PerfectColor;
+                }
             }
         }
         hintState = HitResult.Perfect;
@@ -145,7 +155,8 @@ public class HintTrackControl : MonoBehaviour
 
         isMoving = true;
 
-        ActivateButtons(buttonIDs);
+        if(!beatTiming.IsCombo)
+            ActivateButtons(buttonIDs);
     }
 
     //IEnumerator FadeOut(float time = 1.0f)
@@ -167,4 +178,5 @@ public class HintTrackControl : MonoBehaviour
     {
         return beatTiming;
     }
+
 }

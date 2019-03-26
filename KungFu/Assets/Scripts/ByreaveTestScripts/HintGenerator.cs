@@ -10,6 +10,7 @@ public class HintGenerator : MonoBehaviour
     [HideInInspector]
     public float HintObjectSpeed = 200.0f;
     public GameObject HintObject;
+    public GameObject ComboHintObject;
     [SerializeField]
     protected Image OKArea;
     [SerializeField]
@@ -72,7 +73,11 @@ public class HintGenerator : MonoBehaviour
     {
         // Dash before hit, some thing wrong
         //FightingManager.instance.characters[1].GetComponent<Enemy>().DashToPlayer(1, HintTimeBeforeHit);
-        GameObject tmpGO = Instantiate(HintObject);
+        GameObject tmpGO;
+        if (beatTiming.IsCombo)
+            tmpGO = Instantiate(ComboHintObject);
+        else
+            tmpGO = Instantiate(HintObject);
         tmpGO.transform.SetParent(transform);
         tmpGO.transform.localPosition = Vector3.zero;
         tmpGO.transform.localEulerAngles = Vector3.zero;
@@ -108,12 +113,12 @@ public class HintGenerator : MonoBehaviour
         //OKArea.rectTransform.sizeDelta = new Vector2(/*beatTiming.OKDuration * HintObjectSpeed*/5, 100.0f);
         if (_htCtrl.beatTiming.IsCombo)
         {
-            OKArea.transform.GetChild(0).gameObject.SetActive(true);
+            //OKArea.transform.GetChild(0).gameObject.SetActive(true);
             PerfectArea.rectTransform.sizeDelta = Vector2.zero;
         }
         else
         {
-            OKArea.transform.GetChild(0).gameObject.SetActive(false);
+            //OKArea.transform.GetChild(0).gameObject.SetActive(false);
             // New Position
             float _perfectPosX = -(HintTimeBeforeHit + _htCtrl.beatTiming.PerfectStart) * HintObjectSpeed + PerfectArea.rectTransform.sizeDelta.x / 2;
             // Move area
@@ -135,6 +140,29 @@ public class HintGenerator : MonoBehaviour
             //ShowResultAt(hitResult, tmpGO.transform);
             hintsQueue.Dequeue();
             if(hintsQueue.Count != 0)
+            {
+                //Change the perfect and OK area to the most current one
+                tmpGO = hintsQueue.Peek();
+                HintTrackControl tmpHTC = tmpGO.GetComponent<HintTrackControl>();
+                PlaceOKAndPerfect(tmpHTC);
+            }
+            else
+            {
+                hasAreaPlaced = false;
+            }
+        }
+    }
+
+    public void DirectlyRemoveFirstHint()
+    {
+        if (hintsQueue.Count != 0)
+        {
+            GameObject tmpGO = hintsQueue.Peek();
+            tmpGO.GetComponent<HintTrackControl>().isMoving = false;
+            tmpGO.GetComponent<UIDestroyer>().GoDie();
+            //ShowResultAt(hitResult, tmpGO.transform);
+            hintsQueue.Dequeue();
+            if (hintsQueue.Count != 0)
             {
                 //Change the perfect and OK area to the most current one
                 tmpGO = hintsQueue.Peek();
