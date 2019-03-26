@@ -1103,18 +1103,6 @@ PrefabInstance:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1476424494, guid: 384f5888892a5a14381f5f8b79c8d691, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1476424492, guid: 384f5888892a5a14381f5f8b79c8d691, type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1476424492, guid: 384f5888892a5a14381f5f8b79c8d691, type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 616646908, guid: 384f5888892a5a14381f5f8b79c8d691, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -1124,6 +1112,18 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 616646906, guid: 384f5888892a5a14381f5f8b79c8d691, type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476424494, guid: 384f5888892a5a14381f5f8b79c8d691, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476424492, guid: 384f5888892a5a14381f5f8b79c8d691, type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476424492, guid: 384f5888892a5a14381f5f8b79c8d691, type: 3}
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}

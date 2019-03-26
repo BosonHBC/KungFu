@@ -225,6 +225,13 @@ public class BeatGenerator : MonoBehaviour
         }
     }
 
+    void mismatch(BeatHitObject beatHitObject)
+    {
+        hintGenerator.DirectlyRemoveFirstHint();
+        beatQueue.Dequeue();
+        resultControl.ShowResult(HitResult.Miss);
+    }
+
     //end of this beat, reset all, can be improved
     //Improved a little, need to add the check if the next beat comes before this beat ends
     IEnumerator beatEndInSecs(BeatHitObject beatHit, float delay)
@@ -266,10 +273,10 @@ public class BeatGenerator : MonoBehaviour
                     //other buttons
                     else
                     {
-                        //if (Input.GetKeyDown(k.Value))
-                        //    indicatorControl.HitButton(k.Key);
-                        //else if (Input.GetKeyUp(k.Value))
-                        //    indicatorControl.DeactiveButton(k.Key);
+                        if(Input.GetKeyDown(k.Value))
+                        {
+                            mismatch(butInfo);
+                        }
                     }
                 }
             }
