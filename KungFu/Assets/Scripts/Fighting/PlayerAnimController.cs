@@ -34,9 +34,11 @@ public class PlayerAnimController : BaseAnimController
 
     }
 
-    public void GuardSucceed()
+    public void GuardSucceed(int _releativeAttackID = 0)
     {
-        anim.Play("Guard");
+        //anim.Play("Guard");
+        anim.SetInteger("DefenseID_i", _releativeAttackID + 1);
+
     }
 
 }

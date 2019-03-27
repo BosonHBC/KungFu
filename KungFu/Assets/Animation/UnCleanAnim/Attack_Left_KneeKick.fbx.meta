@@ -1,58 +1,168 @@
 fileFormatVersion: 2
-guid: ed36b2d082be7654facd5b0b0f0fe236
+guid: 972ba88b80f04834ea7d4446f27e4c9e
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
-    100002: Luis_Head
-    100004: Luis_Hips
-    100006: Luis_LeftArm
-    100008: Luis_LeftFoot
-    100010: Luis_LeftForeArm
-    100012: Luis_LeftHand
-    100014: Luis_LeftLeg
-    100016: Luis_LeftShoulder
-    100018: Luis_LeftToeBase
-    100020: Luis_LeftUpLeg
-    100022: Luis_Neck
-    100024: Luis_RightArm
-    100026: Luis_RightFoot
-    100028: Luis_RightForeArm
-    100030: Luis_RightHand
-    100032: Luis_RightLeg
-    100034: Luis_RightShoulder
-    100036: Luis_RightToeBase
-    100038: Luis_RightUpLeg
-    100040: Luis_Spine
-    100042: Luis_Spine1
+    100002: hair1_result_JNT
+    100004: hair2_result_JNT
+    100006: hair3_result_JNT
+    100008: head_result_JNT
+    100010: left_ball_result_JNT
+    100012: left_bangs_result_JNT
+    100014: left_calf_result_JNT
+    100016: left_clavicle_result_JNT
+    100018: left_eye_result_JNT
+    100020: left_foot_result_JNT
+    100022: left_hair1_result_JNT
+    100024: left_hair2_result_JNT
+    100026: left_hair3_result_JNT
+    100028: left_hand_result_JNT
+    100030: left_index1_result_JNT
+    100032: left_index2_result_JNT
+    100034: left_index3_result_JNT
+    100036: left_innerEyebrow_result_JNT
+    100038: left_lowerArm_result_JNT
+    100040: left_lowerArmTwist_result_JNT
+    100042: left_middle1_result_JNT
+    100044: left_middle2_result_JNT
+    100046: left_middle3_result_JNT
+    100048: left_middleEyebrow_result_JNT
+    100050: left_outerEyebrow_result_JNT
+    100052: left_pinky1_result_JNT
+    100054: left_pinky2_result_JNT
+    100056: left_pinky3_result_JNT
+    100058: left_ring1_result_JNT
+    100060: left_ring2_result_JNT
+    100062: left_ring3_result_JNT
+    100064: left_thigh_result_JNT
+    100066: left_thumb1_result_JNT
+    100068: left_thumb2_result_JNT
+    100070: left_thumb3_result_JNT
+    100072: left_upperArm_result_JNT
+    100074: left_upperArmTwist_result_JNT
+    100076: neck_result_JNT
+    100078: pelvis_result_JNT
+    100080: right_ball_result_JNT
+    100082: right_bangs_result_JNT
+    100084: right_calf_result_JNT
+    100086: right_clavicle_result_JNT
+    100088: right_eye_result_JNT
+    100090: right_foot_result_JNT
+    100092: right_hair1_result_JNT
+    100094: right_hair2_result_JNT
+    100096: right_hair3_result_JNT
+    100098: right_hand_result_JNT
+    100100: right_index1_result_JNT
+    100102: right_index2_result_JNT
+    100104: right_index3_result_JNT
+    100106: right_innerEyebrow_result_JNT
+    100108: right_lowerArm_result_JNT
+    100110: right_lowerArmTwist_result_JNT
+    100112: right_middle1_result_JNT
+    100114: right_middle2_result_JNT
+    100116: right_middle3_result_JNT
+    100118: right_middleEyebrow_result_JNT
+    100120: right_outerEyebrow_result_JNT
+    100122: right_pinky1_result_JNT
+    100124: right_pinky2_result_JNT
+    100126: right_pinky3_result_JNT
+    100128: right_ring1_result_JNT
+    100130: right_ring2_result_JNT
+    100132: right_ring3_result_JNT
+    100134: right_thigh_result_JNT
+    100136: right_thumb1_result_JNT
+    100138: right_thumb2_result_JNT
+    100140: right_thumb3_result_JNT
+    100142: right_upperArm_result_JNT
+    100144: right_upperArmTwist_result_JNT
+    100146: spine1_result_JNT
+    100148: spine2_result_JNT
+    100150: spine3_result_JNT
+    100152: spine4_result_JNT
     400000: //RootNode
-    400002: Luis_Head
-    400004: Luis_Hips
-    400006: Luis_LeftArm
-    400008: Luis_LeftFoot
-    400010: Luis_LeftForeArm
-    400012: Luis_LeftHand
-    400014: Luis_LeftLeg
-    400016: Luis_LeftShoulder
-    400018: Luis_LeftToeBase
-    400020: Luis_LeftUpLeg
-    400022: Luis_Neck
-    400024: Luis_RightArm
-    400026: Luis_RightFoot
-    400028: Luis_RightForeArm
-    400030: Luis_RightHand
-    400032: Luis_RightLeg
-    400034: Luis_RightShoulder
-    400036: Luis_RightToeBase
-    400038: Luis_RightUpLeg
-    400040: Luis_Spine
-    400042: Luis_Spine1
-    7400000: Male_attack_gut_002
+    400002: hair1_result_JNT
+    400004: hair2_result_JNT
+    400006: hair3_result_JNT
+    400008: head_result_JNT
+    400010: left_ball_result_JNT
+    400012: left_bangs_result_JNT
+    400014: left_calf_result_JNT
+    400016: left_clavicle_result_JNT
+    400018: left_eye_result_JNT
+    400020: left_foot_result_JNT
+    400022: left_hair1_result_JNT
+    400024: left_hair2_result_JNT
+    400026: left_hair3_result_JNT
+    400028: left_hand_result_JNT
+    400030: left_index1_result_JNT
+    400032: left_index2_result_JNT
+    400034: left_index3_result_JNT
+    400036: left_innerEyebrow_result_JNT
+    400038: left_lowerArm_result_JNT
+    400040: left_lowerArmTwist_result_JNT
+    400042: left_middle1_result_JNT
+    400044: left_middle2_result_JNT
+    400046: left_middle3_result_JNT
+    400048: left_middleEyebrow_result_JNT
+    400050: left_outerEyebrow_result_JNT
+    400052: left_pinky1_result_JNT
+    400054: left_pinky2_result_JNT
+    400056: left_pinky3_result_JNT
+    400058: left_ring1_result_JNT
+    400060: left_ring2_result_JNT
+    400062: left_ring3_result_JNT
+    400064: left_thigh_result_JNT
+    400066: left_thumb1_result_JNT
+    400068: left_thumb2_result_JNT
+    400070: left_thumb3_result_JNT
+    400072: left_upperArm_result_JNT
+    400074: left_upperArmTwist_result_JNT
+    400076: neck_result_JNT
+    400078: pelvis_result_JNT
+    400080: right_ball_result_JNT
+    400082: right_bangs_result_JNT
+    400084: right_calf_result_JNT
+    400086: right_clavicle_result_JNT
+    400088: right_eye_result_JNT
+    400090: right_foot_result_JNT
+    400092: right_hair1_result_JNT
+    400094: right_hair2_result_JNT
+    400096: right_hair3_result_JNT
+    400098: right_hand_result_JNT
+    400100: right_index1_result_JNT
+    400102: right_index2_result_JNT
+    400104: right_index3_result_JNT
+    400106: right_innerEyebrow_result_JNT
+    400108: right_lowerArm_result_JNT
+    400110: right_lowerArmTwist_result_JNT
+    400112: right_middle1_result_JNT
+    400114: right_middle2_result_JNT
+    400116: right_middle3_result_JNT
+    400118: right_middleEyebrow_result_JNT
+    400120: right_outerEyebrow_result_JNT
+    400122: right_pinky1_result_JNT
+    400124: right_pinky2_result_JNT
+    400126: right_pinky3_result_JNT
+    400128: right_ring1_result_JNT
+    400130: right_ring2_result_JNT
+    400132: right_ring3_result_JNT
+    400134: right_thigh_result_JNT
+    400136: right_thumb1_result_JNT
+    400138: right_thumb2_result_JNT
+    400140: right_thumb3_result_JNT
+    400142: right_upperArm_result_JNT
+    400144: right_upperArmTwist_result_JNT
+    400146: spine1_result_JNT
+    400148: spine2_result_JNT
+    400150: spine3_result_JNT
+    400152: spine4_result_JNT
+    7400000: Attack_Left_KneeKick
     9500000: //RootNode
     2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -62,11 +172,30 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
-    rigImportErrors: "Copied Avatar Rig Configuration mis-match. Transform hierarchy
-      does not match:\n\tTransform 'pelvis_result_JNT' for human bone 'Hips' not found\n"
-    rigImportWarnings: 
+    rigImportErrors: 
+    rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Bone length in
+      copied configuration does not match position in animation file:\n\t'left_thigh_result_JNT'
+      : position error = 41.673771 mm\n\t'left_calf_result_JNT' : position error =
+      167.255356 mm\n\t'left_foot_result_JNT' : position error = 210.048370 mm\n\t'left_ball_result_JNT'
+      : position error = 53.338448 mm\n\t'right_thigh_result_JNT' : position error
+      = 41.673771 mm\n\t'right_calf_result_JNT' : position error = 167.255371 mm\n\t'right_foot_result_JNT'
+      : position error = 210.048431 mm\n\t'right_ball_result_JNT' : position error
+      = 53.338448 mm\n"
     animationImportErrors: 
-    animationImportWarnings: 
+    animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
+      might lower retargeting quality:\nNote: Activate translation DOF on avatar to
+      improve retargeting quality.\n\t'spine1_result_JNT' has translation animation
+      that will be discarded.\n\t'spine2_result_JNT' has translation animation that
+      will be discarded.\n\t'spine3_result_JNT' has translation animation that will
+      be discarded.\n\t'spine4_result_JNT' has translation animation that will be
+      discarded.\n\t'spine4_result_JNT' is inbetween humanoid transforms and has rotation
+      animation that will be discarded.\n\t'neck_result_JNT' has translation animation
+      that will be discarded.\n\t'head_result_JNT' has translation animation that
+      will be discarded.\n\t'right_clavicle_result_JNT' has translation animation
+      that will be discarded.\n\t'left_clavicle_result_JNT' has translation animation
+      that will be discarded.\n\t'left_thigh_result_JNT' has translation animation
+      that will be discarded.\n\t'right_thigh_result_JNT' has translation animation
+      that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -78,7 +207,35 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Attack_Left_KneeKick
+      takeName: Take 001
+      firstFrame: 50
+      lastFrame: 87
+      wrapMode: 0
+      orientationOffsetY: 23.94
+      level: 0.4
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -117,7 +274,447 @@ ModelImporter:
   copyAvatar: 1
   humanDescription:
     serializedVersion: 2
-    human: []
+    human:
+    - boneName: pelvis_result_JNT
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: left_thigh_result_JNT
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: right_thigh_result_JNT
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: left_calf_result_JNT
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: right_calf_result_JNT
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: left_foot_result_JNT
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: right_foot_result_JNT
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: spine1_result_JNT
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: spine2_result_JNT
+      humanName: Chest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: neck_result_JNT
+      humanName: Neck
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: head_result_JNT
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: left_clavicle_result_JNT
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: right_clavicle_result_JNT
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: left_upperArm_result_JNT
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: right_upperArm_result_JNT
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: left_lowerArm_result_JNT
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: right_lowerArm_result_JNT
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: left_hand_result_JNT
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: right_hand_result_JNT
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: left_ball_result_JNT
+      humanName: LeftToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: right_ball_result_JNT
+      humanName: RightToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: left_eye_result_JNT
+      humanName: LeftEye
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: right_eye_result_JNT
+      humanName: RightEye
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: left_innerEyebrow_result_JNT
+      humanName: Jaw
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: left_thumb1_result_JNT
+      humanName: Left Thumb Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: left_thumb2_result_JNT
+      humanName: Left Thumb Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: left_thumb3_result_JNT
+      humanName: Left Thumb Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: left_index1_result_JNT
+      humanName: Left Index Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: left_index2_result_JNT
+      humanName: Left Index Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: left_index3_result_JNT
+      humanName: Left Index Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: left_middle1_result_JNT
+      humanName: Left Middle Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: left_middle2_result_JNT
+      humanName: Left Middle Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: left_middle3_result_JNT
+      humanName: Left Middle Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: left_ring1_result_JNT
+      humanName: Left Ring Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: left_ring2_result_JNT
+      humanName: Left Ring Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: left_ring3_result_JNT
+      humanName: Left Ring Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: left_pinky1_result_JNT
+      humanName: Left Little Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: left_pinky2_result_JNT
+      humanName: Left Little Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: left_pinky3_result_JNT
+      humanName: Left Little Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: right_thumb1_result_JNT
+      humanName: Right Thumb Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: right_thumb2_result_JNT
+      humanName: Right Thumb Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: right_thumb3_result_JNT
+      humanName: Right Thumb Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: right_index1_result_JNT
+      humanName: Right Index Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: right_index2_result_JNT
+      humanName: Right Index Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: right_index3_result_JNT
+      humanName: Right Index Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: right_middle1_result_JNT
+      humanName: Right Middle Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: right_middle2_result_JNT
+      humanName: Right Middle Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: right_middle3_result_JNT
+      humanName: Right Middle Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: right_ring1_result_JNT
+      humanName: Right Ring Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: right_ring2_result_JNT
+      humanName: Right Ring Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: right_ring3_result_JNT
+      humanName: Right Ring Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: right_pinky1_result_JNT
+      humanName: Right Little Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: right_pinky2_result_JNT
+      humanName: Right Little Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: right_pinky3_result_JNT
+      humanName: Right Little Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: spine3_result_JNT
+      humanName: UpperChest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
     skeleton:
     - name: kungFuGirl(Clone)
       parentName: 
@@ -915,8 +1512,9 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 547b188f2cfbab84c8e0f8a1559cf88a,
+    type: 3}
+  animationType: 3
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

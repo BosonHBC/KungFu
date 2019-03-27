@@ -170,9 +170,9 @@ public class FightingManager : MonoBehaviour
         characters[_characterID].GetDamage(_dmgAmount, Random.Range(0, 2) == 0 ? true : false);
     }
 
-    public void PlayerGuard()
+    public void PlayerGuard(int releativeAttackID = 0)
     {
-        characters[0].GetComponent<PlayerAnimController>().GuardSucceed();
+        characters[0].GetComponent<PlayerAnimController>().GuardSucceed(releativeAttackID);
     }
 
     public void FM_Score(HitResult hr)
