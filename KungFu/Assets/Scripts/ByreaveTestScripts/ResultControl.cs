@@ -48,8 +48,6 @@ public class ResultControl : MonoBehaviour
     public void ShowResult(HitResult hitResult, int _attackJointID = 0)
     {
             ShowResultAt(hitResult, _attackJointID);
-
-
     }
     //IEnumerator CanSpawnAnother()
     //{
@@ -60,24 +58,30 @@ public class ResultControl : MonoBehaviour
     public void ShowCombo(int countNumber)
     {
         ComboText.GetComponent<Text>().text = countNumber.ToString();
+        if (comboCoroutine != null)
+            StopCoroutine(comboCoroutine);
         comboCoroutine = StartCoroutine(ComboShow());
 
     }
     IEnumerator ComboShow(float time = 1.0f)
     {
-        ComboText.GetComponent<RectTransform>().localPosition = Vector3.zero;
-        Vector3 offset = new Vector3(0.0f, 100.0f, 0.0f);
-        ComboText.GetComponent<Text>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+        RectTransform comboTrans = ComboText.GetComponent<RectTransform>();
+        comboTrans.anchoredPosition = Vector3.zero;
+        Vector2 offset = new Vector3(0.0f, 100.0f);
+        Text comboText = ComboText.GetComponent<Text>();
+        comboText.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
         //Debug.Log("asdasd");
         //UnityEditor.EditorApplication.isPaused = true;
-
-        while (ComboText.GetComponent<RectTransform>().localPosition.y <= offset.y)
+        comboText.CrossFadeAlpha(0.0f, time, false);
+        var waitforendofframe = new WaitForEndOfFrame();
+        while (comboTrans.anchoredPosition.y <= offset.y)
         {
-            ComboText.transform.Translate(Vector3.up / 3 * Time.deltaTime);
-            yield return new WaitForEndOfFrame();
+            ComboText.GetComponent<RectTransform>().anchoredPosition += offset * time * Time.deltaTime;
+            Debug.Log(comboText.GetComponent<RectTransform>().anchoredPosition);
+            yield return waitforendofframe;
         }
-        ComboText.GetComponent<RectTransform>().localPosition = Vector3.zero;
-        ComboText.GetComponent<Text>().color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
+        ComboText.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
+        comboText.color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
     }
 
     public void ShowResultAtWorldPos(HitResult hr, Vector3 pos)

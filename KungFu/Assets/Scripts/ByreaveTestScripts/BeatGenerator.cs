@@ -113,7 +113,11 @@ public class BeatGenerator : MonoBehaviour
                 }
                 if (!animPlayed)
                 {
+                    //if(currentBeatInfo.IsCombo)
+                        //go idle
+                    //else
                     enemyAnimCtrl.PlayAnim(currentAnimInfo.AnimationID);
+
                     animPlayed = true;
                 }
 
@@ -169,7 +173,10 @@ public class BeatGenerator : MonoBehaviour
                 HitResult hr = GetResultFromInput();
 
                 hintGenerator.MatchButton(buttonID);
-                
+
+                //player animation goes here
+
+
                 //indicatorControl.MatchButton(buttonID);
                 //we can calculate the reacting time to give different scores (as a parameter to Score() function) here
                 if (hr != HitResult.Miss)
@@ -230,6 +237,8 @@ public class BeatGenerator : MonoBehaviour
         hintGenerator.DirectlyRemoveFirstHint();
         beatQueue.Dequeue();
         resultControl.ShowResult(HitResult.Miss);
+        //player animation goes here
+
     }
 
     //end of this beat, reset all, can be improved
@@ -264,10 +273,12 @@ public class BeatGenerator : MonoBehaviour
                             if (butInfo.BeatTime.IsCombo)
                             {
                                 butInfo.comboCount++;
-                                resultControl.ShowCombo(beatQueue.Peek().comboCount);
+                                resultControl.ShowCombo(butInfo.comboCount);
                             }
                             else
-                                matchButton(k.Key, beatQueue.Peek());
+                            {
+                                matchButton(k.Key, butInfo);
+                            }
                         }
                     }
                     //other buttons
