@@ -114,11 +114,12 @@ public class HintGenerator : MonoBehaviour
         if (_htCtrl.beatTiming.IsCombo)
         {
             //OKArea.transform.GetChild(0).gameObject.SetActive(true);
-            PerfectArea.rectTransform.sizeDelta = Vector2.zero;
+            PerfectArea.rectTransform.localScale = Vector2.zero;
         }
         else
         {
             //OKArea.transform.GetChild(0).gameObject.SetActive(false);
+            PerfectArea.rectTransform.localScale = Vector2.one; 
             // New Position
             float _perfectPosX = -(HintTimeBeforeHit + _htCtrl.beatTiming.PerfectStart) * HintObjectSpeed + PerfectArea.rectTransform.sizeDelta.x / 2;
             // Move area
