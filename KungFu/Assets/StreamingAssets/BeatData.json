@@ -61,18 +61,44 @@
         {
             "BeatID": 4,
             "ButtonID": [
-                3,
-                5
+                0
             ],
             "JointID": [
-                1,
-                2
+                1
             ],
             "IsCombo": false,
-            "OKStart": 0.10,
+            "OKStart": 0.08,
             "OKDuration": 0.16,
-            "PerfectStart": 0.16,
+            "PerfectStart": 0.14,
             "PerfectDuration": 0.1
+        },
+        {
+            "BeatID": 5,
+            "ButtonID": [
+                0
+            ],
+            "JointID": [
+                4
+            ],
+            "IsCombo": false,
+            "OKStart": 0.05,
+            "OKDuration": 0.08,
+            "PerfectStart": 0.1,
+            "PerfectDuration": 0.03
+        },
+        {
+            "BeatID": 4,
+            "ButtonID": [
+                0
+            ],
+            "JointID": [
+                4
+            ],
+            "IsCombo": false,
+            "OKStart": 0.05,
+            "OKDuration": 0.08,
+            "PerfectStart": 0.1,
+            "PerfectDuration": 0.03
         }
         
     ]

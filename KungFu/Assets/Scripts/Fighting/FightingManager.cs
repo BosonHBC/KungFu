@@ -152,6 +152,17 @@ public class FightingManager : MonoBehaviour
         cameraList[_switchTo].SetActive(true);
     }
 
+    public void SetFightMode(FightMode _fightMode)
+    {
+        if(fightMode != _fightMode)
+        {
+            fightMode = _fightMode;
+            // Different mode
+            // Switch between attack and defense
+            // Changes in UI
+        }
+    }
+
     void Debug_SwitchCamera()
     {
         if (Input.GetKeyDown(KeyCode.Alpha5))
