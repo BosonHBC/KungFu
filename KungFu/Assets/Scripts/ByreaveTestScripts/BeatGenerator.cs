@@ -182,6 +182,7 @@ public class BeatGenerator : MonoBehaviour
             //need to change
             resultControl.ShowResult(hr);
             hintGenerator.DirectlyRemoveFirstHint();
+            if(beatQueue.Count>0)
             beatQueue.Dequeue();
         }
         else
@@ -254,7 +255,8 @@ public class BeatGenerator : MonoBehaviour
     void mismatch(BeatHitObject beatHitObject, int keyIndex)
     {
         hintGenerator.DirectlyRemoveFirstHint();
-        beatQueue.Dequeue();
+        if (beatQueue.Count > 0)
+            beatQueue.Dequeue();
         resultControl.ShowResult(HitResult.Miss);
         //player animation goes here
         playerAnimCtrl.PlayPlayerAttackAnimation(beatHitObject.BeatTime.BeatID);
@@ -371,7 +373,7 @@ public class BeatGenerator : MonoBehaviour
 
     HitResult GetResultFromInput()
     {
-        if(beatQueue.Count != 0)
+        if (beatQueue.Count != 0)
         {
             BeatInfo currentBeatInfo = beatQueue.Peek().BeatTime;
             float ReactTime = beatTimer - beatQueue.Peek().TimeToHit + currentBeatInfo.PerfectStart;

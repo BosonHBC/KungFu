@@ -53,6 +53,7 @@ public class BaseAnimController : MonoBehaviour
     IEnumerator ieStopDash()
     {
         StartCoroutine(LerpToNumber(1, anim.GetFloat("vert"), 0, fDashLerpTime));
+        StartCoroutine(LerpToNumber(2, anim.GetFloat("hori"), 0, fDashLerpTime));
         yield return new WaitForSeconds(fDashLerpTime);
         anim.SetFloat("fMoveSpeed", 1);
         bDashing = false;
@@ -62,7 +63,7 @@ public class BaseAnimController : MonoBehaviour
     {
         yield return new WaitForSeconds(_dashDuration - fDashLerpTime);
 
-        StartCoroutine(LerpToNumber(1, anim.GetFloat(_dir), 0, fDashLerpTime));
+        StartCoroutine(LerpToNumber(_dir == "hori"?2:1, anim.GetFloat(_dir), 0, fDashLerpTime));
         yield return new WaitForSeconds(fDashLerpTime);
         anim.SetFloat("fMoveSpeed", 1);
         if (_onFinishDash != null)

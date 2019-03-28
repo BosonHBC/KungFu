@@ -28,12 +28,14 @@ public class UIDestroyer : MonoBehaviour
                         transform.GetChild(i).GetComponent<Image>().CrossFadeAlpha(0, delayToDeath / 2, true);
                 }
             }
-            particle.Play();
+            if (particle != null)
+                particle.Play();
             //UnityEditor.EditorApplication.isPaused = true;
             bDestroying = true;
             fader = GetComponent<MosicFader>();
 
-            fader.FadeTo(0, delayToDeath, delegate { Destroy(gameObject); });
+            if (fader != null)
+                fader.FadeTo(0, delayToDeath, delegate { Destroy(gameObject); });
         }
     }
 }

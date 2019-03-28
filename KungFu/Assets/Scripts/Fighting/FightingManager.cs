@@ -73,6 +73,7 @@ public class FightingManager : MonoBehaviour
         /// Canvas
         GameObject _canvasGo = Instantiate(playerUIPrefab);
         _canvasGo.GetComponent<Canvas>().worldCamera = Camera.main;
+       // _canvasGo.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
         _canvasGo.name = "PlayerUI";
         myCanvas = _canvasGo.GetComponent<Canvas>();
         director.SetGenericBinding(timelines.GetOutputTrack(4), _canvasGo.GetComponent<Animator>());
