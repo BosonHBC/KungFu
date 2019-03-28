@@ -174,7 +174,7 @@ public class BeatGenerator : MonoBehaviour
         {
             Debug.Log("aaaa");
             HitResult hr = GetResultFromInput();
-
+            
             if (hr != HitResult.Miss)
                 FightingManager.instance.FM_Score(hr);
             else

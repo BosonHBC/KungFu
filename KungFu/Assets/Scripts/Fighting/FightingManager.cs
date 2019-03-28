@@ -31,7 +31,7 @@ public class FightingManager : MonoBehaviour
     [SerializeField] private Transform[] spawnPoints;
     [SerializeField] private PlayableDirector director;
     [SerializeField] private TimelineAsset timelines;
-    
+
     [SerializeField] GameObject[] cameraList;
 
     [Header("Parameter")]
@@ -56,7 +56,7 @@ public class FightingManager : MonoBehaviour
         Debug_SwitchCamera();
 
         //Debug.Log(director.time);
-        if (!bPrepared&&director.time >= fTimeToPlayFightPrepare - fThresholdOfTime && director.time <= fTimeToPlayFightPrepare + fThresholdOfTime)
+        if (!bPrepared && director.time >= fTimeToPlayFightPrepare - fThresholdOfTime && director.time <= fTimeToPlayFightPrepare + fThresholdOfTime)
         {
             bPrepared = true;
             Debug.Log("Start to Prepare!");
@@ -109,7 +109,8 @@ public class FightingManager : MonoBehaviour
         transform.GetChild(0).GetComponent<AudioPeer>().SetSource(characters[1].GetComponent<AudioSource>());
 
         // Player animation
-        onPositioned = new UnityAction( delegate {
+        onPositioned = new UnityAction(delegate
+        {
             for (int i = 0; i < characters.Length; i++)
             {
                 characters[i].GetComponent<BaseAnimController>().PlayPrepareFight();
@@ -154,12 +155,18 @@ public class FightingManager : MonoBehaviour
 
     public void SetFightMode(FightMode _fightMode)
     {
-        if(fightMode != _fightMode)
+        if (fightMode != _fightMode)
         {
             fightMode = _fightMode;
             // Different mode
             // Switch between attack and defense
             // Changes in UI
+            bool bIsPlayerAttack = false;
+            if (_fightMode == FightMode.Offense)
+                bIsPlayerAttack = true;
+            else if (_fightMode == FightMode.Defense)
+                bIsPlayerAttack = false;
+            characters[1].GetComponent<Animator>().SetBool("PlayerAttacking_b", bIsPlayerAttack);
         }
     }
 
@@ -186,7 +193,7 @@ public class FightingManager : MonoBehaviour
         characters[0].GetComponent<PlayerAnimController>().GuardSucceed(releativeAttackID);
     }
 
-    public void FM_Score(HitResult hr)
+    public void FM_Score(HitResult hr, int _attackAnimationID = 0)
     {
         MyGameInstance.instance.Score(hr);
         switch (fightMode)
@@ -194,9 +201,10 @@ public class FightingManager : MonoBehaviour
             case FightMode.Wait:
                 break;
             case FightMode.Offense:
+                ApplyDamageToCharacter(1, 10f);
                 break;
             case FightMode.Defense:
-                PlayerGuard();
+                PlayerGuard(_attackAnimationID);
                 break;
         }
     }
