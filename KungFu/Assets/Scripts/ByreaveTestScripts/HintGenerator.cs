@@ -53,10 +53,10 @@ public class HintGenerator : MonoBehaviour
             if(animData[currentAnimationIndex]["AnimationID"].AsInt != -1)
             {
                 AnimationInfo currentAnimInfo = animationData[animData[currentAnimationIndex]["AnimationID"].AsInt];
+                //get beat infos
                 BeatInfo currentBeatInfo = beatData[currentAnimInfo.BeatIDs[currentBeatIndex]];
                 if (animData[currentAnimationIndex]["timeToHit"].AsFloat - currentBeatInfo.PerfectStart <= hintTimer + HintTimeBeforeHit )
                 {
-                    //get beat infos
                     currentBeatIndex++;
                     if (currentAnimInfo.Mode == BeatMode.Defend)
                     {
@@ -66,7 +66,7 @@ public class HintGenerator : MonoBehaviour
                         FightingManager.instance.SetFightMode(FightingManager.FightMode.Offense);
                     GenerateHint(currentBeatInfo, currentAnimInfo.Mode);
                     if (currentAnimInfo.Mode == BeatMode.Defend)
-                        StartCoroutine(ShowRingIndicatorInSecs(currentBeatInfo, HintTimeBeforeHit));
+                        StartCoroutine(ShowRingIndicatorInSecs(currentBeatInfo, HintTimeBeforeHit + currentBeatInfo.OKStart));
                     if (currentBeatIndex >= currentAnimInfo.BeatIDs.Length)
                     {
                         currentAnimationIndex++;

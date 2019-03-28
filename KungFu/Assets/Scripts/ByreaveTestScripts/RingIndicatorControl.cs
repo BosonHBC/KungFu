@@ -6,6 +6,8 @@ public class RingIndicatorControl : MonoBehaviour
 {
     public Transform LeftWrist;
     public Transform RightWrist;
+    Transform LeftKnee;
+    Transform RightKnee;
     public GameObject RingIndicator;
     public Color PerfectColor = Color.red;
     public Color OKColor = Color.green;
@@ -15,16 +17,16 @@ public class RingIndicatorControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        RingPositionMap = new Dictionary<int, Transform[]>()
-        {
-            {0, new Transform[] { RightWrist } },
-            {1, new Transform[] { RightWrist } },
-            {2, new Transform[] { RightWrist } },
-            {3, new Transform[] { LeftWrist, RightWrist } },
-            {4, new Transform[] { LeftWrist } },
-            {5, new Transform[] { RightWrist } },
-            {6, new Transform[] { RightWrist } }
-        };
+        //RingPositionMap = new Dictionary<int, Transform[]>()
+        //{
+        //    {0, new Transform[] { RightWrist } },
+        //    {1, new Transform[] { RightWrist } },
+        //    {2, new Transform[] { RightWrist } },
+        //    {3, new Transform[] { LeftWrist, RightWrist } },
+        //    {4, new Transform[] { LeftWrist } },
+        //    {5, new Transform[] { RightWrist } },
+        //    {6, new Transform[] { RightWrist } }
+        //};
     }
 
     public void SetData(Transform _Enemy)
@@ -40,6 +42,12 @@ public class RingIndicatorControl : MonoBehaviour
                 case 2:
                     LeftWrist = item.transform;
                     break;
+                case 3:
+                    RightKnee = item.transform;
+                    break;
+                case 4:
+                    LeftKnee = item.transform;
+                    break;
                 default:
                     break;
             }
@@ -47,12 +55,12 @@ public class RingIndicatorControl : MonoBehaviour
         RingPositionMap = new Dictionary<int, Transform[]>()
         {
             {0, new Transform[] { RightWrist } },
-            {1, new Transform[] { RightWrist } },
-            {2, new Transform[] { RightWrist } },
-            {3, new Transform[] { LeftWrist, RightWrist } },
-            {4, new Transform[] { LeftWrist } },
-            {5, new Transform[] { RightWrist } },
-            {6, new Transform[] { RightWrist } }
+            {1, new Transform[] { LeftWrist, RightWrist } },
+            {2, new Transform[] { LeftWrist } },
+            {3, new Transform[] { LeftWrist } },
+            {4, new Transform[] { RightWrist } },
+            {5, new Transform[] { LeftKnee } },
+            {6, new Transform[] { LeftWrist } }
         };
     }
 
@@ -66,23 +74,23 @@ public class RingIndicatorControl : MonoBehaviour
                 foreach (Transform trans in map.Value)
                 {
                     GameObject ring = Instantiate(RingIndicator, trans.position, Quaternion.identity, trans);
-                    StartCoroutine(StartShrinking(ring, beatAnimation.PerfectStart, beatAnimation.PerfectDuration));
+                    StartCoroutine(StartShrinking(ring, beatAnimation));
                 }
                 break;
             }
         }
     }
 
-    IEnumerator StartShrinking(GameObject ring, float perfectStart, float perfectDuration)
+    IEnumerator StartShrinking(GameObject ring, BeatInfo beatTiming)
     {
         float timer = 0;
         ring.GetComponent<SpriteRenderer>().color = OKColor;
         var wait = new WaitForEndOfFrame();
-        Vector3 scalingSpeed = (FinalSize - ring.transform.localScale) / (perfectStart + perfectDuration);
-        while (timer <= perfectStart + perfectDuration)
+        Vector3 scalingSpeed = (FinalSize - ring.transform.localScale) / (beatTiming.PerfectStart + beatTiming.PerfectDuration);
+        while (timer <= beatTiming.PerfectStart + beatTiming.PerfectDuration)
         {
             ring.transform.localScale += scalingSpeed * Time.deltaTime;
-            if (timer >= perfectStart)
+            if (timer >= beatTiming.PerfectStart - beatTiming.OKStart)
                 ring.GetComponent<SpriteRenderer>().color = PerfectColor;
             timer += Time.deltaTime;
             yield return wait;

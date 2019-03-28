@@ -202,6 +202,7 @@ public class BeatGenerator : MonoBehaviour
                         FightingManager.instance.FM_Score(hr);
                     else
                     {
+                        Debug.Log("asdsa");
                         FightingManager.instance.FM_Miss(1);
                     }
                     //Get JointID
