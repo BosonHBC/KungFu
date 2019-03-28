@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4461605, g: 0.6250888, b: 0.72317517, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -13208,8 +13208,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 910536406}
-  m_LocalRotation: {x: 0.03179606, y: 0.7127804, z: -0.032380406, w: 0.6704881}
-  m_LocalPosition: {x: -21.28, y: -0.95, z: 2}
+  m_LocalRotation: {x: 0.019667637, y: -0.6513269, z: 0.016891923, w: 0.75835425}
+  m_LocalPosition: {x: 22.402924, y: -0.5309874, z: -3.6505706}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1837374650}
@@ -13356,6 +13356,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 1950101121137970, guid: fabefcfcd26578946935063951302f15, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 1052746462115182, guid: fabefcfcd26578946935063951302f15, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
@@ -13373,10 +13377,6 @@ PrefabInstance:
       value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 1385323528510906, guid: fabefcfcd26578946935063951302f15, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 1950101121137970, guid: fabefcfcd26578946935063951302f15, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
@@ -14889,6 +14889,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 1253365556891262, guid: 26b553f364cfeb847a77f2482e26c662, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 1013051665553138, guid: 26b553f364cfeb847a77f2482e26c662, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
@@ -14902,10 +14906,6 @@ PrefabInstance:
       value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 1190332793379032, guid: 26b553f364cfeb847a77f2482e26c662, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 1253365556891262, guid: 26b553f364cfeb847a77f2482e26c662, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
@@ -16013,7 +16013,7 @@ MonoBehaviour:
     roll: 0
   - position: {x: 0, y: 12.54, z: -7.96}
     roll: 0
-  - position: {x: -6.191147, y: 3.5559063, z: 7.510008}
+  - position: {x: -6.191147, y: 2.127633, z: 5.949029}
     roll: 0
   - position: {x: -20.96246, y: -0.60483265, z: 2.1048179}
     roll: 0

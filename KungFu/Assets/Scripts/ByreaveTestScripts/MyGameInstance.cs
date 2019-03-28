@@ -22,7 +22,7 @@ public class MyGameInstance : MonoBehaviour
     [SerializeField] private int iPerfectScore = 1000;
     [SerializeField] private int iOkScore = 500;
     [SerializeField] private float fComboFactor = 30;
-
+    [SerializeField] private Text comboText;
 
 
     //Awake is always called before any Start functions
@@ -47,13 +47,15 @@ public class MyGameInstance : MonoBehaviour
     private void Start()
     {
         iCombo = 0;
-
+        if(comboText)
+        comboText.text = "0";
     }
     public void Score(HitResult hr)
     {
         if (++iCombo >= iMaxCombo)
             iMaxCombo = iCombo;
-
+        if (comboText)
+            comboText.text = iCombo.ToString();
         //comboText.text = iCombo.ToString();
         switch (hr)
         {
@@ -72,7 +74,8 @@ public class MyGameInstance : MonoBehaviour
     {
         misses += number;
         iCombo = 0;
-        //comboText.text = iCombo.ToString();
+        if (comboText)
+            comboText.text = iCombo.ToString();
     }
 
     public void SetArduinoInput(bool[] arduinoInput)
@@ -100,6 +103,7 @@ public class MyGameInstance : MonoBehaviour
 
     public void SetScoreUI(Text _comboText)
     {
-  //      comboText = _comboText;
+        comboText = _comboText;
+        comboText.text = "0";
     }
 }

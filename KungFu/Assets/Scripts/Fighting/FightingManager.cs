@@ -44,6 +44,7 @@ public class FightingManager : MonoBehaviour
     private float fTimeToPlayFightPrepare = 5f;
     public FightMode fightMode = FightMode.Wait;
     bool bPrepared = false;
+    private ModeHint hint;
     // Start is called before the first frame update
     void Start()
     {
@@ -77,7 +78,7 @@ public class FightingManager : MonoBehaviour
         director.SetGenericBinding(timelines.GetOutputTrack(4), _canvasGo.GetComponent<Animator>());
         // Set UIs
         MyGameInstance.instance.SetScoreUI(_canvasGo.transform.Find("Combo").GetChild(0).GetComponent<Text>());
-
+        hint = _canvasGo.transform.GetChild(8).GetComponent<ModeHint>();
         /// Characters 0-> player 1-> enemy
         for (int i = 0; i < 2; i++)
         {
@@ -167,6 +168,7 @@ public class FightingManager : MonoBehaviour
             else if (_fightMode == FightMode.Defense)
                 bIsPlayerAttack = false;
             characters[1].GetComponent<Animator>().SetBool("PlayerAttacking_b", bIsPlayerAttack);
+            hint.SwitchMode(bIsPlayerAttack);
         }
     }
 
