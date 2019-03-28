@@ -6,7 +6,7 @@
                 1
             ],
             "JointID": [
-                2
+                1
             ],
             "IsCombo": false,
             "OKStart": 0.1,
@@ -17,9 +17,11 @@
         {
             "BeatID": 1,
             "ButtonID": [
-                0
+                1,
+                7
             ],
             "JointID": [
+                1,
                 2
             ],
             "IsCombo": false,
@@ -31,10 +33,10 @@
         {
             "BeatID": 2,
             "ButtonID": [
-                4
+                7
             ],
             "JointID": [
-                1
+                2
             ],
             "IsCombo": false,
             "OKStart": 0.1,
@@ -45,11 +47,9 @@
         {
             "BeatID": 3,
             "ButtonID": [
-                3,
-                5
+                7
             ],
             "JointID": [
-                1,
                 2
             ],
             "IsCombo": false,
@@ -61,7 +61,7 @@
         {
             "BeatID": 4,
             "ButtonID": [
-                4
+                1
             ],
             "JointID": [
                 1
@@ -75,7 +75,7 @@
         {
             "BeatID": 5,
             "ButtonID": [
-                1
+                4
             ],
             "JointID": [
                 4
@@ -89,7 +89,7 @@
         {
             "BeatID": 6,
             "ButtonID": [
-                4
+                7
             ],
             "JointID": [
                 2
@@ -106,7 +106,7 @@
                 1
             ],
             "JointID": [
-                2
+                1
             ],
             "IsCombo": true,
             "OKStart": 0.1,
