@@ -8,7 +8,7 @@
             "JointID": [
                 2
             ],
-            "IsCombo": true,
+            "IsCombo": false,
             "OKStart": 0.1,
             "OKDuration": 0.3,
             "PerfectStart": 0.3,

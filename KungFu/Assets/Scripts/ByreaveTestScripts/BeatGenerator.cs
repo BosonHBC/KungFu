@@ -60,7 +60,10 @@ public class BeatGenerator : MonoBehaviour
             {4, KeyCode.N },
             {5, KeyCode.U },
             {6, KeyCode.K },
-            {7, KeyCode.O }
+            {7, KeyCode.O },
+            {8, KeyCode.G },
+            {9, KeyCode.B },
+            {10, KeyCode.S }
         };
         beatQueue = new Queue<BeatHitObject>();
         levelLoader = FindObjectOfType<LevelLoader>();
@@ -119,10 +122,7 @@ public class BeatGenerator : MonoBehaviour
                     if (currentAnimInfo.Mode == BeatMode.Defend)
                     {
                         enemyAnimCtrl.PlayAnim(currentAnimInfo.AnimationID);
-                        FightingManager.instance.SetFightMode(FightingManager.FightMode.Defense);
                     }
-                    else
-                        FightingManager.instance.SetFightMode(FightingManager.FightMode.Offense);
                     animPlayed = true;
                     //Debug.Log(currentAnimInfo.Mode);
                 }
@@ -174,7 +174,7 @@ public class BeatGenerator : MonoBehaviour
         {
             Debug.Log("aaaa");
             HitResult hr = GetResultFromInput();
-            
+
             if (hr != HitResult.Miss)
                 FightingManager.instance.FM_Score(hr, beatHitObject.BeatTime.BeatID);
             else
@@ -283,7 +283,7 @@ public class BeatGenerator : MonoBehaviour
             {
                 if (beatTimer >= butInfo.TimeToHit - butInfo.BeatTime.PerfectStart + butInfo.BeatTime.OKStart && beatTimer <= butInfo.TimeToHit - butInfo.BeatTime.PerfectStart + butInfo.BeatTime.OKStart + butInfo.BeatTime.OKDuration)
                 {
-                    if(butInfo.beatMode == BeatMode.Attack)
+                    if (butInfo.beatMode == BeatMode.Attack)
                     {
                         if (butInfo.BeatTime.IsCombo && Input.GetKeyDown(k.Value))
                         {
