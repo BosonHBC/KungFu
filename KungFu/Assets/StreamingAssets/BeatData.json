@@ -67,10 +67,10 @@
                 1
             ],
             "IsCombo": false,
-            "OKStart": 0.08,
-            "OKDuration": 0.16,
-            "PerfectStart": 0.14,
-            "PerfectDuration": 0.1
+            "OKStart": 0.33,
+            "OKDuration": 0.37,
+            "PerfectStart": 0.58,
+            "PerfectDuration": 0.12
         },
         {
             "BeatID": 5,
@@ -78,13 +78,13 @@
                 1
             ],
             "JointID": [
-                2
+                4
             ],
             "IsCombo": false,
-            "OKStart": 0.05,
-            "OKDuration": 0.08,
-            "PerfectStart": 0.1,
-            "PerfectDuration": 0.03
+            "OKStart": 0.2,
+            "OKDuration": 0.33,
+            "PerfectStart": 0.41,
+            "PerfectDuration": 0.12
         },
         {
             "BeatID": 6,
@@ -95,10 +95,10 @@
                 2
             ],
             "IsCombo": false,
-            "OKStart": 0.05,
-            "OKDuration": 0.08,
-            "PerfectStart": 0.1,
-            "PerfectDuration": 0.03
+            "OKStart": 0.41,
+            "OKDuration": 0.54,
+            "PerfectStart": 0.75,
+            "PerfectDuration": 0.20
         },
         {
             "BeatID": 7,
