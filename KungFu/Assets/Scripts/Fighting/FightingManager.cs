@@ -201,6 +201,7 @@ public class FightingManager : MonoBehaviour
             case FightMode.Wait:
                 break;
             case FightMode.Offense:
+
                 // Play Player Attack animation
                 characters[0].GetComponent<PlayerAnimController>().PlayPlayerAttackAnimation(_attackAnimationID);
                 // Give Damage to Enemy

@@ -17,6 +17,7 @@ public class HintTrackControl : MonoBehaviour
     Color ActiveColor = Color.yellow;
     [HideInInspector]
     public BeatInfo beatTiming;
+    BeatMode beatMode;
     HitResult hintState = HitResult.Miss;
     HintGenerator hintGenerator;
     int[] buttonIDs;
@@ -32,18 +33,18 @@ public class HintTrackControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isMoving)
+        if (isMoving)
         {
             timer += Time.deltaTime;
             transform.localPosition += Vector3.left * moveSpeed * Time.deltaTime;
             //transform.Translate(Vector3.left * MoveSpeed * Time.deltaTime);
-            switch(hintState)
+            switch (hintState)
             {
                 case HitResult.Miss:
                     if (timer >= beatTiming.OKStart + timeBeforeHit)
                     {
                         ChangeToOK();
-                        
+
                     }
                     break;
                 case HitResult.Good:
@@ -62,13 +63,23 @@ public class HintTrackControl : MonoBehaviour
                 default:
                     break;
             }
-            
+
         }
     }
 
     void ChangeToOK()
     {
-        if (!beatTiming.IsCombo)
+        if (beatMode == BeatMode.Attack)
+        {
+            if (beatTiming.IsCombo)
+                gameObject.GetComponent<Image>().color = OKColor;
+            else
+            {
+                for (int i = 0; i < ChildBodyParts.Length; ++i)
+                    ChildBodyParts[i].GetComponent<Image>().color = OKColor;
+            }
+        }
+        else
         {
             for (int i = 0; i < buttonIDs.Length; ++i)
             {
@@ -78,15 +89,18 @@ public class HintTrackControl : MonoBehaviour
                 }
             }
         }
-        else
-            gameObject.GetComponent<Image>().color = OKColor;
-        
+
         hintState = HitResult.Good;
     }
 
     void ChangeToPerfect()
     {
-        if (!beatTiming.IsCombo)
+        if (beatMode == BeatMode.Attack && !beatTiming.IsCombo)
+        {
+            for (int i = 0; i < ChildBodyParts.Length; ++i)
+                ChildBodyParts[i].GetComponent<Image>().color = PerfectColor;
+        }
+        else if (!beatTiming.IsCombo)
         {
             for (int i = 0; i < buttonIDs.Length; ++i)
             {
@@ -101,9 +115,9 @@ public class HintTrackControl : MonoBehaviour
 
     public void MatchButton(int butID)
     {
-        foreach(var pair in matchedButtons)
+        foreach (var pair in matchedButtons)
         {
-            if(butID == pair.Key && !pair.Value)
+            if (butID == pair.Key && !pair.Value)
             {
                 ChildBodyParts[butID].GetComponent<Image>().color = NormalColor;
                 matchedButtons[butID] = true;
@@ -111,40 +125,42 @@ public class HintTrackControl : MonoBehaviour
             }
         }
         //check for if all is matched
-        if(isAllMatched())
+        if (isAllMatched())
         {
             hintGenerator.RemoveFirstHint();
-            isMoving = false; 
+            isMoving = false;
             gameObject.GetComponent<UIDestroyer>().GoDie();
         }
     }
 
     bool isAllMatched()
     {
-        foreach(bool b in matchedButtons.Values)
+        foreach (bool b in matchedButtons.Values)
         {
             if (!b)
                 return false;
         }
         return true;
     }
-    
+
     void ActivateButtons(int[] nodes)
     {
-        for(int i = 0; i < nodes.Length; ++ i)
+        for (int i = 0; i < nodes.Length; ++i)
         {
             ChildBodyParts[nodes[i]].SetActive(true);
             ChildBodyParts[nodes[i]].GetComponent<Image>().color = ActiveColor;
         }
     }
 
-    public void StartMoving(BeatInfo beatTime, HintGenerator hintGen)
+    public void StartMoving(BeatInfo beatTime, HintGenerator hintGen, BeatMode bMode)
     {
         matchedButtons = new Dictionary<int, bool>();
+        beatMode = bMode;
+
         beatTiming = beatTime;
         buttonIDs = beatTime.ButtonIDs;
         //initialize matched buttons
-        foreach(int i in buttonIDs)
+        foreach (int i in buttonIDs)
         {
             matchedButtons.Add(i, false);
         }
@@ -154,8 +170,7 @@ public class HintTrackControl : MonoBehaviour
         timeBeforeHit = hintGen.HintTimeBeforeHit;
 
         isMoving = true;
-
-        if(!beatTiming.IsCombo)
+        if (!beatTiming.IsCombo)
             ActivateButtons(buttonIDs);
     }
 

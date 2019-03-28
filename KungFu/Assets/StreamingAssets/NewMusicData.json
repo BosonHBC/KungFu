@@ -92,15 +92,15 @@
             "animArray": [
                 {
                     "timeToHit": 17.140,
-                    "AnimationID": 0
+                    "AnimationID": 7
                 },
                 {
                     "timeToHit": 23.960,
-                    "AnimationID": 1
+                    "AnimationID": 7
                 },
                 {
                     "timeToHit": 30.840,
-                    "AnimationID": 2
+                    "AnimationID": 6
                 },
                 {
                     "timeToHit": 37.730,

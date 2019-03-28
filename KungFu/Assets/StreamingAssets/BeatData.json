@@ -99,6 +99,20 @@
             "OKDuration": 0.08,
             "PerfectStart": 0.1,
             "PerfectDuration": 0.03
+        },
+        {
+            "BeatID": 7,
+            "ButtonID": [
+                1
+            ],
+            "JointID": [
+                2
+            ],
+            "IsCombo": true,
+            "OKStart": 0.1,
+            "OKDuration": 0.3,
+            "PerfectStart": 0.3,
+            "PerfectDuration": 0.1
         }
     ]
 }

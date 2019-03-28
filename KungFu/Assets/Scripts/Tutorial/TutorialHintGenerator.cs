@@ -34,7 +34,7 @@ public class TutorialHintGenerator : HintGenerator
                 {
                     //get beat infos
                     currentBeatIndex++;
-                    GenerateHint(currentBeatInfo);
+                    GenerateHint(currentBeatInfo, currentAnimInfo.Mode);
                     //StartCoroutine(ShowRingIndicatorInSecs(currentBeatInfo, HintTimeBeforeHit));
                     if (currentBeatIndex >= currentAnimInfo.BeatIDs.Length)
                     {
@@ -45,7 +45,7 @@ public class TutorialHintGenerator : HintGenerator
             }
         }
     }
-    void GenerateHint(BeatInfo beatTiming)
+    void GenerateHint(BeatInfo beatTiming, BeatMode beatMode)
     {
         GameObject tmpGO = Instantiate(HintObject);
         tmpGO.transform.SetParent(transform);
@@ -54,7 +54,7 @@ public class TutorialHintGenerator : HintGenerator
         tmpGO.transform.localScale = Vector3.one;
         // Set new speed
         HintObjectSpeed = backgroundLength / (HintTimeBeforeHit + beatTiming.OKStart + beatTiming.OKDuration);
-        tmpGO.GetComponent<HintTrackControl>().StartMoving(beatTiming, this);
+        tmpGO.GetComponent<HintTrackControl>().StartMoving(beatTiming, this, beatMode);
         hintsQueue.Enqueue(tmpGO);
         if (!hasAreaPlaced)
         {

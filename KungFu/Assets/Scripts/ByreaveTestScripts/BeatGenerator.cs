@@ -105,7 +105,7 @@ public class BeatGenerator : MonoBehaviour
         {
             AnimationInfo currentAnimInfo = animationData[AnimationArray[currentAnimationIndex]["AnimationID"].AsInt];
             BeatInfo currentBeatInfo = beatData[currentAnimInfo.BeatIDs[currentBeatIndex]];
-            beatData[currentAnimInfo.BeatIDs[currentBeatIndex]].BeatID = 200;
+            //beatData[currentAnimInfo.BeatIDs[currentBeatIndex]].BeatID = 200;
             // Debug.Log(currentBeatInfo.BeatID);
             if (currentBeatInfo == null)
                 Debug.Log("Error when getting beat info");
@@ -172,7 +172,6 @@ public class BeatGenerator : MonoBehaviour
     {
         if (beatHitObject.beatMode == BeatMode.Attack)
         {
-            Debug.Log("aaaa");
             HitResult hr = GetResultFromInput();
 
             if (hr != HitResult.Miss)
@@ -287,9 +286,9 @@ public class BeatGenerator : MonoBehaviour
                     {
                         if (butInfo.BeatTime.IsCombo && Input.GetKeyDown(k.Value))
                         {
-                            Debug.Log("asdsad");
                             butInfo.comboCount++;
                             resultControl.ShowCombo(butInfo.comboCount);
+                            playerAnimCtrl.PlayPlayerAttackAnimation(0);
                         }
                         else if (Input.GetKeyDown(k.Value))
                         {

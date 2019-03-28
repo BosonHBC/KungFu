@@ -21,7 +21,9 @@ public class RingIndicatorControl : MonoBehaviour
             {1, new Transform[] { RightWrist } },
             {2, new Transform[] { RightWrist } },
             {3, new Transform[] { LeftWrist, RightWrist } },
-
+            {4, new Transform[] { LeftWrist } },
+            {5, new Transform[] { RightWrist } },
+            {6, new Transform[] { RightWrist } }
         };
     }
 
@@ -48,7 +50,9 @@ public class RingIndicatorControl : MonoBehaviour
             {1, new Transform[] { RightWrist } },
             {2, new Transform[] { RightWrist } },
             {3, new Transform[] { LeftWrist, RightWrist } },
-
+            {4, new Transform[] { LeftWrist } },
+            {5, new Transform[] { RightWrist } },
+            {6, new Transform[] { RightWrist } }
         };
     }
 
@@ -73,6 +77,7 @@ public class RingIndicatorControl : MonoBehaviour
     {
         float timer = 0;
         ring.GetComponent<SpriteRenderer>().color = OKColor;
+        var wait = new WaitForEndOfFrame();
         Vector3 scalingSpeed = (FinalSize - ring.transform.localScale) / (perfectStart + perfectDuration);
         while (timer <= perfectStart + perfectDuration)
         {
@@ -80,7 +85,7 @@ public class RingIndicatorControl : MonoBehaviour
             if (timer >= perfectStart)
                 ring.GetComponent<SpriteRenderer>().color = PerfectColor;
             timer += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
+            yield return wait;
         }
         Destroy(ring);
     }

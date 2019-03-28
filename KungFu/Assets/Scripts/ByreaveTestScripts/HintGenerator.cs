@@ -64,8 +64,9 @@ public class HintGenerator : MonoBehaviour
                     }
                     else
                         FightingManager.instance.SetFightMode(FightingManager.FightMode.Offense);
-                    GenerateHint(currentBeatInfo);
-                    StartCoroutine(ShowRingIndicatorInSecs(currentBeatInfo, HintTimeBeforeHit));
+                    GenerateHint(currentBeatInfo, currentAnimInfo.Mode);
+                    if (currentAnimInfo.Mode == BeatMode.Defend)
+                        StartCoroutine(ShowRingIndicatorInSecs(currentBeatInfo, HintTimeBeforeHit));
                     if (currentBeatIndex >= currentAnimInfo.BeatIDs.Length)
                     {
                         currentAnimationIndex++;
@@ -75,7 +76,7 @@ public class HintGenerator : MonoBehaviour
             }
         }
     }
-    void GenerateHint(BeatInfo beatTiming)
+    void GenerateHint(BeatInfo beatTiming, BeatMode beatMode)
     {
         // Dash before hit, some thing wrong
         //FightingManager.instance.characters[1].GetComponent<Enemy>().DashToPlayer(1, HintTimeBeforeHit);
@@ -90,7 +91,7 @@ public class HintGenerator : MonoBehaviour
         tmpGO.transform.localScale = Vector3.one;
         // Set new speed
         HintObjectSpeed = backgroundLength / (HintTimeBeforeHit + beatTiming.OKStart + beatTiming.OKDuration);
-        tmpGO.GetComponent<HintTrackControl>().StartMoving(beatTiming, this);
+        tmpGO.GetComponent<HintTrackControl>().StartMoving(beatTiming, this, beatMode);
         hintsQueue.Enqueue(tmpGO);
         if(!hasAreaPlaced)
         {
@@ -120,11 +121,13 @@ public class HintGenerator : MonoBehaviour
         if (_htCtrl.beatTiming.IsCombo)
         {
             //OKArea.transform.GetChild(0).gameObject.SetActive(true);
+            perfectPointer.localScale = Vector2.zero;
             PerfectArea.rectTransform.localScale = Vector2.zero;
         }
         else
         {
             //OKArea.transform.GetChild(0).gameObject.SetActive(false);
+            perfectPointer.localScale = Vector2.one;
             PerfectArea.rectTransform.localScale = Vector2.one; 
             // New Position
             float _perfectPosX = -(HintTimeBeforeHit + _htCtrl.beatTiming.PerfectStart) * HintObjectSpeed + PerfectArea.rectTransform.sizeDelta.x / 2;
