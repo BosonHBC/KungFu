@@ -72,6 +72,7 @@ public class ResultControl : MonoBehaviour
         comboText.color = new Color(1.0f, 0.0f, 0.0f, 1.0f);
         //Debug.Log("asdasd");
         //UnityEditor.EditorApplication.isPaused = true;
+        comboText.canvasRenderer.SetAlpha(1.0f);
         comboText.CrossFadeAlpha(0.0f, time, false);
         var waitforendofframe = new WaitForEndOfFrame();
         while (comboTrans.anchoredPosition.y <= offset.y)
