@@ -3,7 +3,7 @@
         {
             "AnimationID": 0,
             "AnimationName": "Fight_Hook_Left_1",
-            "Mode": "Attack",
+            "Mode": "Defend",
             "Beats": [
                 0
             ]
@@ -11,7 +11,7 @@
         {
             "AnimationID": 1,
             "AnimationName": "Fight_Fireball",
-            "Mode": "Attack",
+            "Mode": "Defend",
             "Beats": [
                 1
             ]
@@ -19,7 +19,7 @@
         {
             "AnimationID": 2,
             "AnimationName": "Fight_Str_Right_1",
-            "Mode": "Attack",
+            "Mode": "Defend",
             "Beats": [
                 2
             ]
@@ -27,9 +27,89 @@
         {
             "AnimationID": 3,
             "AnimationName": "Fight_Upper_Left_1",
+            "Mode": "Defend",
+            "Beats": [
+                3
+            ]
+        },
+        {
+            "AnimationID": 4,
+            "AnimationName": "Fight_Upper_Left_1",
+            "Mode": "Defend",
+            "Beats": [
+                4
+            ]
+        },
+        {
+            "AnimationID": 5,
+            "AnimationName": "Fight_Upper_Left_1",
+            "Mode": "Defend",
+            "Beats": [
+                5
+            ]
+        },
+        {
+            "AnimationID": 6,
+            "AnimationName": "Fight_Upper_Left_1",
+            "Mode": "Defend",
+            "Beats": [
+                6
+            ]
+        },
+        {
+            "AnimationID": 7,
+            "AnimationName": "Fight_Upper_Left_1",
+            "Mode": "Attack",
+            "Beats": [
+                0
+            ]
+        },
+        {
+            "AnimationID": 8,
+            "AnimationName": "Fight_Upper_Left_1",
+            "Mode": "Attack",
+            "Beats": [
+                1
+            ]
+        },
+        {
+            "AnimationID": 9,
+            "AnimationName": "Fight_Upper_Left_1",
+            "Mode": "Attack",
+            "Beats": [
+                2
+            ]
+        },
+        {
+            "AnimationID": 10,
+            "AnimationName": "Fight_Upper_Left_1",
             "Mode": "Attack",
             "Beats": [
                 3
+            ]
+        },
+        {
+            "AnimationID": 11,
+            "AnimationName": "Fight_Upper_Left_1",
+            "Mode": "Attack",
+            "Beats": [
+                4
+            ]
+        },
+        {
+            "AnimationID": 12,
+            "AnimationName": "Fight_Upper_Left_1",
+            "Mode": "Attack",
+            "Beats": [
+                5
+            ]
+        },
+        {
+            "AnimationID": 13,
+            "AnimationName": "Fight_Upper_Left_1",
+            "Mode": "Attack",
+            "Beats": [
+                6
             ]
         }
     ]

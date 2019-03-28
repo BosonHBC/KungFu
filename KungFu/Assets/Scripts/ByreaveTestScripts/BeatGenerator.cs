@@ -9,6 +9,7 @@ public class BeatHitObject
     public float TimeToHit;
     public int comboCount;
     public BeatInfo BeatTime;
+    public BeatMode beatMode;
     public Dictionary<int, bool> MatchedButtons;
 }
 public class BeatGenerator : MonoBehaviour
@@ -37,6 +38,7 @@ public class BeatGenerator : MonoBehaviour
     ResultControl resultControl;
     AudioSource songPlaySource;
     EnemyAnimationControl enemyAnimCtrl;
+    PlayerAnimController playerAnimCtrl;
     LevelLoader levelLoader;
     //SFX Control
     //SFXControl sfxControl;
@@ -68,14 +70,14 @@ public class BeatGenerator : MonoBehaviour
         //sfxControl = GetComponent<SFXControl>();
     }
 
-    public void SetData(Transform _enemy, HintGenerator _generator, ResultControl _control, string songName = "Kungfu")
+    public void SetData(Transform _enemy, HintGenerator _generator, ResultControl _control, string songName = "BattleGirl")
     {
         songPlaySource = _enemy.GetComponent<AudioSource>();
         enemyAnimCtrl = _enemy.GetComponent<EnemyAnimationControl>();
         hintGenerator = _generator;
         resultControl = _control;
         AnimationArray = MyGameInstance.instance.GetComponent<DataLoader>().GetAnimationArrayByName(songName);
-
+        playerAnimCtrl = FightingManager.instance.characters[0].GetComponent<PlayerAnimController>();
         // Debug
         StartGenerateBeat();
     }
@@ -101,7 +103,7 @@ public class BeatGenerator : MonoBehaviour
             AnimationInfo currentAnimInfo = animationData[AnimationArray[currentAnimationIndex]["AnimationID"].AsInt];
             BeatInfo currentBeatInfo = beatData[currentAnimInfo.BeatIDs[currentBeatIndex]];
             beatData[currentAnimInfo.BeatIDs[currentBeatIndex]].BeatID = 200;
-           // Debug.Log(currentBeatInfo.BeatID);
+            // Debug.Log(currentBeatInfo.BeatID);
             if (currentBeatInfo == null)
                 Debug.Log("Error when getting beat info");
             if (AnimationArray[currentAnimationIndex]["timeToHit"].AsFloat - currentBeatInfo.PerfectStart <= beatTimer)
@@ -113,12 +115,16 @@ public class BeatGenerator : MonoBehaviour
                 }
                 if (!animPlayed)
                 {
-                    //if(currentBeatInfo.IsCombo)
-                        //go idle
-                    //else
-                    enemyAnimCtrl.PlayAnim(currentAnimInfo.AnimationID);
-
+                    //Enemy only has attack animations
+                    if (currentAnimInfo.Mode == BeatMode.Defend)
+                    {
+                        enemyAnimCtrl.PlayAnim(currentAnimInfo.AnimationID);
+                        FightingManager.instance.SetFightMode(FightingManager.FightMode.Defense);
+                    }
+                    else
+                        FightingManager.instance.SetFightMode(FightingManager.FightMode.Offense);
                     animPlayed = true;
+                    //Debug.Log(currentAnimInfo.Mode);
                 }
 
                 if (AnimationArray[currentAnimationIndex]["timeToHit"].AsFloat - currentBeatInfo.PerfectStart + currentBeatInfo.OKStart <= beatTimer)
@@ -135,7 +141,8 @@ public class BeatGenerator : MonoBehaviour
                         {
                             TimeToHit = AnimationArray[currentAnimationIndex]["timeToHit"].AsFloat,
                             BeatTime = currentBeatInfo,
-                            MatchedButtons = matchedButtons
+                            MatchedButtons = matchedButtons,
+                            beatMode = currentAnimInfo.Mode
                         }
                     );
 
@@ -157,56 +164,70 @@ public class BeatGenerator : MonoBehaviour
 
             beatTimer += Time.deltaTime;
         }
-        
+
     }
 
     //there is a match hit
     void matchButton(int buttonID, BeatHitObject beatHitObject)
     {
-
-        if (beatHitObject.MatchedButtons.ContainsKey(buttonID))
+        if (beatHitObject.beatMode == BeatMode.Attack)
         {
-            //if is not already matched
-            if (!beatHitObject.MatchedButtons[buttonID])
-            {
-                //sfxControl.PlayRandomMatchSFX();
-                HitResult hr = GetResultFromInput();
+            Debug.Log("aaaa");
+            HitResult hr = GetResultFromInput();
 
-                hintGenerator.MatchButton(buttonID);
+            if (hr != HitResult.Miss)
+                FightingManager.instance.FM_Score(hr);
+            else
+                FightingManager.instance.FM_Miss(1);
 
-                //player animation goes here
-
-
-                //indicatorControl.MatchButton(buttonID);
-                //we can calculate the reacting time to give different scores (as a parameter to Score() function) here
-                if (hr != HitResult.Miss)
-                    FightingManager.instance.FM_Score(hr);
-                else
-                {
-                    FightingManager.instance.FM_Miss(1);
-                }
-                //Get JointID
-                int index = DataUtility.IntArrayIndex(beatHitObject.BeatTime.ButtonIDs, buttonID);
-                if (index == -1)
-                    Debug.LogError("Button ID not in beat button id array");
-                //indicatorControl.ShowResultAt(buttonID, hr);
-                resultControl.ShowResult(hr, (hr == HitResult.Miss) ? 0 : beatHitObject.BeatTime.JointIDs[index]);
-                beatHitObject.MatchedButtons[buttonID] = true;
-
-                //if all buttons are hit, dequeue
-                if (DataUtility.DictionaryAllTrue(beatHitObject.MatchedButtons))
-                {
-                    beatQueue.Dequeue();
-                }
-            }
+            //need to change
+            playerAnimCtrl.PlayPlayerAttackAnimation(beatHitObject.BeatTime.BeatID);
+            resultControl.ShowResult(hr);
+            hintGenerator.DirectlyRemoveFirstHint();
+            beatQueue.Dequeue();
         }
         else
-            Debug.Log("No such button in matchedButtons!!!!!");
+        {
+            if (beatHitObject.MatchedButtons.ContainsKey(buttonID))
+            {
+                //if is not already matched
+                if (!beatHitObject.MatchedButtons[buttonID])
+                {
+                    //sfxControl.PlayRandomMatchSFX();
+                    HitResult hr = GetResultFromInput();
+
+                    hintGenerator.MatchButton(buttonID);
+                    //player animation goes here
+                    //indicatorControl.MatchButton(buttonID);
+                    //we can calculate the reacting time to give different scores (as a parameter to Score() function) here
+                    if (hr != HitResult.Miss)
+                        FightingManager.instance.FM_Score(hr);
+                    else
+                    {
+                        FightingManager.instance.FM_Miss(1);
+                    }
+                    //Get JointID
+                    int index = DataUtility.IntArrayIndex(beatHitObject.BeatTime.ButtonIDs, buttonID);
+                    if (index == -1)
+                        Debug.LogError("Button ID not in beat button id array");
+                    //indicatorControl.ShowResultAt(buttonID, hr);
+                    resultControl.ShowResult(hr, (hr == HitResult.Miss) ? 0 : beatHitObject.BeatTime.JointIDs[index]);
+                    beatHitObject.MatchedButtons[buttonID] = true;
+
+                    //if all buttons are hit, dequeue
+                    if (DataUtility.DictionaryAllTrue(beatHitObject.MatchedButtons))
+                    {
+                        beatQueue.Dequeue();
+                    }
+                }
+            }
+            else
+                Debug.Log("No such button in matchedButtons!!!!!");
+        }
     }
 
     void missCheck(BeatHitObject beatHitObject)
     {
-
         //dequeue
         if (beatQueue.Count != 0 && beatHitObject == beatQueue.Peek())
         {
@@ -223,7 +244,6 @@ public class BeatGenerator : MonoBehaviour
                         FightingManager.instance.FM_Miss(1);
                         //show miss image
                         resultControl.ShowResult(HitResult.Miss);
-                        //MyGameInstance.instance.ShowResultAt(ChildBodyParts[matched.Key].transform, HitResult.Miss);
                         //sfxControl.PlayRandomMissSFX();
                     }
                 }
@@ -232,13 +252,13 @@ public class BeatGenerator : MonoBehaviour
         }
     }
 
-    void mismatch(BeatHitObject beatHitObject)
+    void mismatch(BeatHitObject beatHitObject, int keyIndex)
     {
         hintGenerator.DirectlyRemoveFirstHint();
         beatQueue.Dequeue();
         resultControl.ShowResult(HitResult.Miss);
         //player animation goes here
-
+        playerAnimCtrl.PlayPlayerAttackAnimation(beatHitObject.BeatTime.BeatID);
     }
 
     //end of this beat, reset all, can be improved
@@ -249,6 +269,7 @@ public class BeatGenerator : MonoBehaviour
         //indicatorControl.DeactivateButtons(ButtonIDs);
         missCheck(beatHit);
         beatHit.MatchedButtons.Clear();
+        //FightingManager.instance.SetFightMode(FightingManager.FightMode.Wait);
     }
 
 
@@ -257,36 +278,42 @@ public class BeatGenerator : MonoBehaviour
     {
         if (beatQueue.Count != 0)
         {
-            //Debug.Log(beatTimer);
-
             var butInfo = beatQueue.Peek();
-            if (beatTimer >= butInfo.TimeToHit - butInfo.BeatTime.PerfectStart + butInfo.BeatTime.OKStart && beatTimer <= butInfo.TimeToHit - butInfo.BeatTime.PerfectStart + butInfo.BeatTime.OKStart + butInfo.BeatTime.OKDuration)
+            //Debug.Log(beatTimer);
+            foreach (var k in buttonMapping)
             {
-                //Debug.Log(beatTimer);
-                foreach (var k in buttonMapping)
+                if (beatTimer >= butInfo.TimeToHit - butInfo.BeatTime.PerfectStart + butInfo.BeatTime.OKStart && beatTimer <= butInfo.TimeToHit - butInfo.BeatTime.PerfectStart + butInfo.BeatTime.OKStart + butInfo.BeatTime.OKDuration)
                 {
-                    //the buttons to be pressed in this beat
-                    if (DataUtility.HasElement(butInfo.BeatTime.ButtonIDs, k.Key))
+                    if(butInfo.beatMode == BeatMode.Attack)
                     {
-                        if (Input.GetKeyDown(k.Value))
+                        if (butInfo.BeatTime.IsCombo && Input.GetKeyDown(k.Value))
                         {
-                            if (butInfo.BeatTime.IsCombo)
-                            {
-                                butInfo.comboCount++;
-                                resultControl.ShowCombo(butInfo.comboCount);
-                            }
-                            else
+                            Debug.Log("asdsad");
+                            butInfo.comboCount++;
+                            resultControl.ShowCombo(butInfo.comboCount);
+                        }
+                        else if (Input.GetKeyDown(k.Value))
+                        {
+                            matchButton(k.Key, butInfo);
+                        }
+                    }
+                    else
+                    {
+                        //the buttons to be pressed in this beat
+                        if (DataUtility.HasElement(butInfo.BeatTime.ButtonIDs, k.Key))
+                        {
+                            if (Input.GetKeyDown(k.Value))
                             {
                                 matchButton(k.Key, butInfo);
                             }
                         }
-                    }
-                    //other buttons
-                    else
-                    {
-                        if(Input.GetKeyDown(k.Value))
+                        //other buttons
+                        else
                         {
-                            mismatch(butInfo);
+                            if (Input.GetKeyDown(k.Value))
+                            {
+                                mismatch(butInfo, k.Key);
+                            }
                         }
                     }
                 }
@@ -347,7 +374,6 @@ public class BeatGenerator : MonoBehaviour
     {
         BeatInfo currentBeatInfo = beatQueue.Peek().BeatTime;
         float ReactTime = beatTimer - beatQueue.Peek().TimeToHit + currentBeatInfo.PerfectStart;
-        Debug.Log(ReactTime);
         if (ReactTime >= currentBeatInfo.PerfectStart && ReactTime <= currentBeatInfo.PerfectStart + currentBeatInfo.PerfectDuration)
             return HitResult.Perfect;
         else if (ReactTime >= currentBeatInfo.OKStart && ReactTime <= currentBeatInfo.OKStart + currentBeatInfo.OKDuration)

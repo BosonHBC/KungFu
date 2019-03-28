@@ -69,7 +69,7 @@ public class ResultControl : MonoBehaviour
         comboTrans.anchoredPosition = Vector3.zero;
         Vector2 offset = new Vector3(0.0f, 100.0f);
         Text comboText = ComboText.GetComponent<Text>();
-        comboText.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+        comboText.color = new Color(1.0f, 0.0f, 0.0f, 1.0f);
         //Debug.Log("asdasd");
         //UnityEditor.EditorApplication.isPaused = true;
         comboText.CrossFadeAlpha(0.0f, time, false);
@@ -77,11 +77,10 @@ public class ResultControl : MonoBehaviour
         while (comboTrans.anchoredPosition.y <= offset.y)
         {
             ComboText.GetComponent<RectTransform>().anchoredPosition += offset * time * Time.deltaTime;
-            Debug.Log(comboText.GetComponent<RectTransform>().anchoredPosition);
             yield return waitforendofframe;
         }
         ComboText.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
-        comboText.color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
+        comboText.color = new Color(1.0f, 0.0f, 0.0f, 0.0f);
     }
 
     public void ShowResultAtWorldPos(HitResult hr, Vector3 pos)

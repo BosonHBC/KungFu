@@ -36,6 +36,11 @@ public class EnemyAnimationControl : BaseAnimController
         anim.speed = 1.0f;
     }
 
+    public void PlayHitAnimation()
+    {
+        anim.Play("KnockBack");
+    }
+
     //void AddBeatTimingToList()
     //{
     //    foreach(var data in animData)

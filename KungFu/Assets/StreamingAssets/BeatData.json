@@ -61,7 +61,7 @@
         {
             "BeatID": 4,
             "ButtonID": [
-                0
+                4
             ],
             "JointID": [
                 1
@@ -75,10 +75,10 @@
         {
             "BeatID": 5,
             "ButtonID": [
-                0
+                1
             ],
             "JointID": [
-                4
+                2
             ],
             "IsCombo": false,
             "OKStart": 0.05,
@@ -87,12 +87,12 @@
             "PerfectDuration": 0.03
         },
         {
-            "BeatID": 4,
+            "BeatID": 6,
             "ButtonID": [
-                0
+                4
             ],
             "JointID": [
-                4
+                2
             ],
             "IsCombo": false,
             "OKStart": 0.05,
@@ -100,6 +100,5 @@
             "PerfectStart": 0.1,
             "PerfectDuration": 0.03
         }
-        
     ]
 }

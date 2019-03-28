@@ -37,7 +37,7 @@ public class HintGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animData = MyGameInstance.instance.GetComponent<DataLoader>().GetAnimationArrayByName("Kungfu");
+        animData = MyGameInstance.instance.GetComponent<DataLoader>().GetAnimationArrayByName("BattleGirl");
         animationData = MyGameInstance.instance.GetComponent<DataLoader>().GetAnimationInfos();
         beatData = MyGameInstance.instance.GetComponent<DataLoader>().GetBeatInfos();
         beatGenerator = FindObjectOfType<BeatGenerator>();
