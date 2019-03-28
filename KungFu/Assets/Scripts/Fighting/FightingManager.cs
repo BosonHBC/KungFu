@@ -201,6 +201,9 @@ public class FightingManager : MonoBehaviour
             case FightMode.Wait:
                 break;
             case FightMode.Offense:
+                // Play Player Attack animation
+                characters[0].GetComponent<PlayerAnimController>().PlayPlayerAttackAnimation(_attackAnimationID);
+                // Give Damage to Enemy
                 ApplyDamageToCharacter(1, 10f);
                 break;
             case FightMode.Defense:
@@ -216,6 +219,7 @@ public class FightingManager : MonoBehaviour
             case FightMode.Wait:
                 break;
             case FightMode.Offense:
+
                 break;
             case FightMode.Defense:
                 ApplyDamageToCharacter(0, 10f);

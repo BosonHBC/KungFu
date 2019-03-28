@@ -176,12 +176,11 @@ public class BeatGenerator : MonoBehaviour
             HitResult hr = GetResultFromInput();
             
             if (hr != HitResult.Miss)
-                FightingManager.instance.FM_Score(hr);
+                FightingManager.instance.FM_Score(hr, beatHitObject.BeatTime.BeatID);
             else
                 FightingManager.instance.FM_Miss(1);
 
             //need to change
-            playerAnimCtrl.PlayPlayerAttackAnimation(beatHitObject.BeatTime.BeatID);
             resultControl.ShowResult(hr);
             hintGenerator.DirectlyRemoveFirstHint();
             beatQueue.Dequeue();
