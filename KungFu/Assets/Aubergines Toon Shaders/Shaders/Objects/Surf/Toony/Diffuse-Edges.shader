@@ -3,8 +3,11 @@
 Shader "Aubergine/Objects/Surf/Toony/Diffuse-Edges" {
 	Properties {
 		_MainTex ("Base (RGB)", 2D) = "white" {}
-		_EdgeColor ("Edge Color", Color) = (0,0,0,1)
-		_EdgeWidth ("Edge width", Range (.002, 0.03)) = .005
+		_EdgeColor("Edge Color", Color) = (0,0,0,1)
+		_EdgeWidth("Edge width", Range(.002, 0.03)) = .005
+		_ColorBalance("Color Balance", Range(0.0,1.0)) = 1.0
+		_ColorOffset("Color Balance Offset", Range(0,1)) = 0.0
+
 	}
 	SubShader {
 		Tags { "RenderType"="Opaque" }
@@ -56,14 +59,15 @@ Shader "Aubergine/Objects/Surf/Toony/Diffuse-Edges" {
 		#pragma surface surf Aub_Toon
 
 		sampler2D _MainTex;
-
+		half _ColorBalance;
+		half _ColorOffset;
 		struct Input {
 			float2 uv_MainTex;
 		};
 
 		void surf (Input IN, inout SurfaceOutput o) {
 			half4 c = tex2D (_MainTex, IN.uv_MainTex);
-			o.Albedo = c.rgb;
+			o.Albedo = c.rgb *_ColorBalance + half3(_ColorOffset, _ColorOffset, _ColorOffset);
 			o.Alpha = c.a;
 		}
 		ENDCG

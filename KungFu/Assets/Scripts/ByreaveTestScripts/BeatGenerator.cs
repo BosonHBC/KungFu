@@ -94,7 +94,7 @@ public class BeatGenerator : MonoBehaviour
     void Update()
     {
         //song ends restart
-        if (AnimationArray[currentAnimationIndex]["AnimationID"].AsInt == -1)
+        if (AnimationArray[currentAnimationIndex]["AnimationID"].AsInt == -1 && bCanPlay)
         {
             bCanPlay = false;
             //levelLoader.LoadScene("");
@@ -370,13 +370,17 @@ public class BeatGenerator : MonoBehaviour
 
     HitResult GetResultFromInput()
     {
-        BeatInfo currentBeatInfo = beatQueue.Peek().BeatTime;
-        float ReactTime = beatTimer - beatQueue.Peek().TimeToHit + currentBeatInfo.PerfectStart;
-        if (ReactTime >= currentBeatInfo.PerfectStart && ReactTime <= currentBeatInfo.PerfectStart + currentBeatInfo.PerfectDuration)
-            return HitResult.Perfect;
-        else if (ReactTime >= currentBeatInfo.OKStart && ReactTime <= currentBeatInfo.OKStart + currentBeatInfo.OKDuration)
-            return HitResult.Good;
-        else
-            return HitResult.Miss;
+        if(beatQueue.Count != 0)
+        {
+            BeatInfo currentBeatInfo = beatQueue.Peek().BeatTime;
+            float ReactTime = beatTimer - beatQueue.Peek().TimeToHit + currentBeatInfo.PerfectStart;
+            if (ReactTime >= currentBeatInfo.PerfectStart && ReactTime <= currentBeatInfo.PerfectStart + currentBeatInfo.PerfectDuration)
+                return HitResult.Perfect;
+            else if (ReactTime >= currentBeatInfo.OKStart && ReactTime <= currentBeatInfo.OKStart + currentBeatInfo.OKDuration)
+                return HitResult.Good;
+            else
+                return HitResult.Miss;
+        }
+        return HitResult.Miss;
     }
 }
