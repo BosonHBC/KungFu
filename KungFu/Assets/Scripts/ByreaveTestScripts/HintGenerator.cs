@@ -50,12 +50,12 @@ public class HintGenerator : MonoBehaviour
         {
             //generate hints
             float hintTimer = beatGenerator.beatTimer;
-            if(animData[currentAnimationIndex]["AnimationID"].AsInt != -1)
+            if (animData[currentAnimationIndex]["AnimationID"].AsInt != -1)
             {
                 AnimationInfo currentAnimInfo = animationData[animData[currentAnimationIndex]["AnimationID"].AsInt];
                 //get beat infos
                 BeatInfo currentBeatInfo = beatData[currentAnimInfo.BeatIDs[currentBeatIndex]];
-                if (animData[currentAnimationIndex]["timeToHit"].AsFloat - currentBeatInfo.PerfectStart <= hintTimer + HintTimeBeforeHit )
+                if (animData[currentAnimationIndex]["timeToHit"].AsFloat - currentBeatInfo.PerfectStart <= hintTimer + HintTimeBeforeHit)
                 {
                     currentBeatIndex++;
                     if (currentAnimInfo.Mode == BeatMode.Defend)
@@ -79,7 +79,10 @@ public class HintGenerator : MonoBehaviour
     void GenerateHint(BeatInfo beatTiming, BeatMode beatMode)
     {
         // Dash before hit, some thing wrong
-        //FightingManager.instance.characters[1].GetComponent<Enemy>().DashToPlayer(1, HintTimeBeforeHit);
+        if (FightingManager.instance.fightMode == FightingManager.FightMode.Defense)
+            FightingManager.instance.characters[1].GetComponent<Character>().DashToOpponent(1, HintTimeBeforeHit);
+        else if (FightingManager.instance.fightMode == FightingManager.FightMode.Offense)
+            FightingManager.instance.characters[0].GetComponent<Character>().DashToOpponent(1, HintTimeBeforeHit);
         GameObject tmpGO;
         if (beatTiming.IsCombo)
             tmpGO = Instantiate(ComboHintObject);
@@ -93,7 +96,7 @@ public class HintGenerator : MonoBehaviour
         HintObjectSpeed = backgroundLength / (HintTimeBeforeHit + beatTiming.OKStart + beatTiming.OKDuration);
         tmpGO.GetComponent<HintTrackControl>().StartMoving(beatTiming, this, beatMode);
         hintsQueue.Enqueue(tmpGO);
-        if(!hasAreaPlaced)
+        if (!hasAreaPlaced)
         {
             PlaceOKAndPerfect(tmpGO.GetComponent<HintTrackControl>());
             hasAreaPlaced = true;
@@ -116,7 +119,7 @@ public class HintGenerator : MonoBehaviour
         Vector3 _OKLocalPos = new Vector3(_okPosX, okPointer.localPosition.y, okPointer.localPosition.z);
         okPointer.GetComponent<UIMover>().SimpleLocalPositionMover(okPointer.localPosition, _OKLocalPos, fUIMoveTime);
 
-       // okPointer.localPosition = new Vector3(OKArea.rectTransform.localPosition.x, okPointer.localPosition.y, okPointer.localPosition.z);
+        // okPointer.localPosition = new Vector3(OKArea.rectTransform.localPosition.x, okPointer.localPosition.y, okPointer.localPosition.z);
         //OKArea.rectTransform.sizeDelta = new Vector2(/*beatTiming.OKDuration * HintObjectSpeed*/5, 100.0f);
         if (_htCtrl.beatTiming.IsCombo)
         {
@@ -128,12 +131,12 @@ public class HintGenerator : MonoBehaviour
         {
             //OKArea.transform.GetChild(0).gameObject.SetActive(false);
             perfectPointer.localScale = Vector2.one;
-            PerfectArea.rectTransform.localScale = Vector2.one; 
+            PerfectArea.rectTransform.localScale = Vector2.one;
             // New Position
             float _perfectPosX = -(HintTimeBeforeHit + _htCtrl.beatTiming.PerfectStart) * HintObjectSpeed + PerfectArea.rectTransform.sizeDelta.x / 2;
             // Move area
             PerfectArea.GetComponent<UIMover>().SimpleLocalPositionMover(PerfectArea.rectTransform.localPosition, new Vector3(_perfectPosX, PerfectArea.rectTransform.localPosition.y, 0.0f), fUIMoveTime);
-            
+
             // Move Pointer
             Vector3 _perfectLocalPos = new Vector3(_perfectPosX, perfectPointer.localPosition.y, perfectPointer.localPosition.z);
             perfectPointer.GetComponent<UIMover>().SimpleLocalPositionMover(perfectPointer.localPosition, _perfectLocalPos, fUIMoveTime);
@@ -144,12 +147,12 @@ public class HintGenerator : MonoBehaviour
 
     public void RemoveFirstHint()
     {
-        if(hintsQueue.Count != 0)
+        if (hintsQueue.Count != 0)
         {
             GameObject tmpGO = hintsQueue.Peek();
             //ShowResultAt(hitResult, tmpGO.transform);
             hintsQueue.Dequeue();
-            if(hintsQueue.Count != 0)
+            if (hintsQueue.Count != 0)
             {
                 //Change the perfect and OK area to the most current one
                 tmpGO = hintsQueue.Peek();

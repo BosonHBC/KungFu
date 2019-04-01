@@ -19,6 +19,10 @@ public class Character : MonoBehaviour
 
     protected bool bFaceToOpponent = true;
 
+    [SerializeField] private float fDashSpeed;
+    [SerializeField] private float fDashThreshold;
+    private float fDistToOpponent;
+    private bool bDashing;
     // Start is called before the first frame update
     protected virtual void Start()
     {
@@ -30,6 +34,16 @@ public class Character : MonoBehaviour
     protected virtual void Update()
     {
         FaceToOpponent();
+        if (bDashing)
+        {
+            fDistToOpponent = Vector3.Distance(transform.position, trOppoent.position);
+            if (fDistToOpponent <= fDashThreshold)
+            {
+                bDashing = false;
+                anim.StopDash(0.2f);
+
+            }
+        }
     }
 
     public virtual void GetDamage(float _dmg, bool _fromLeft)
@@ -85,5 +99,16 @@ public class Character : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
 
+    }
+
+    public void DashToOpponent(int vert, float _time)
+    {
+        fDistToOpponent = Vector3.Distance(transform.position, trOppoent.position);
+
+        if (fDistToOpponent <= fDashThreshold)
+            return;
+        bDashing = true;
+
+        anim.DashVertically(vert, fDashSpeed, 5, delegate { bDashing = false; });
     }
 }

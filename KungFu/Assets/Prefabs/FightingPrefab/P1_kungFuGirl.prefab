@@ -5548,7 +5548,9 @@ MonoBehaviour:
   sCharName: XiaoHong
   iCharID: 1
   fMaxHp: 200
-  fCurrentHp: 0
+  fCurrentHp: 200
+  fDashSpeed: 1
+  fDashThreshold: 2.2
   myCamera: {fileID: 584259678}
   fDebugMovespeed: 3
 --- !u!136 &1729496712362160240

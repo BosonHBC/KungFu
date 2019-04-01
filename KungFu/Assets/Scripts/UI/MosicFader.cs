@@ -12,8 +12,7 @@ public class MosicFader : MonoBehaviour
     void Start()
     {
         m_renderer = GetComponent<Image>();
-        m_Mosic = m_renderer.material;
-        m_Mosic.SetFloat("_FadeOut", 1);
+        m_Mosic = new Material(Shader.Find("RyanShader/Rs_MosaicUI"));
         m_renderer.material = m_Mosic;
     }
 
@@ -47,9 +46,4 @@ public class MosicFader : MonoBehaviour
 
     }
 
-    private void OnDestroy()
-    {
-        m_Mosic.SetFloat("_FadeOut", 1);
-        m_renderer.material = m_Mosic;
-    }
 }

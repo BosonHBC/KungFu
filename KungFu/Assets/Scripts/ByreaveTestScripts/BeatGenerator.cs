@@ -182,7 +182,7 @@ public class BeatGenerator : MonoBehaviour
             //need to change
             resultControl.ShowResult(hr);
             hintGenerator.DirectlyRemoveFirstHint();
-            if(beatQueue.Count>0)
+            if (beatQueue.Count > 0)
                 beatQueue.Dequeue();
         }
         else
@@ -254,15 +254,15 @@ public class BeatGenerator : MonoBehaviour
 
     void mismatch(BeatHitObject beatHitObject, int keyIndex)
     {
-        
+
         //player animation goes here
         //need to add transition from defense to knockback
         playerAnimCtrl.PlayGuardAnimation(beatHitObject.BeatTime.BeatID);
-        hintGenerator.DirectlyRemoveFirstHint();
-        if (beatQueue.Count > 0)
-            beatQueue.Dequeue();
-        resultControl.ShowResult(HitResult.Miss);
-        FightingManager.instance.FM_Miss(beatHitObject.MatchedButtons.Count);
+        //hintGenerator.DirectlyRemoveFirstHint();
+        //if (beatQueue.Count > 0)
+        //    beatQueue.Dequeue();
+        //resultControl.ShowResult(HitResult.Miss);
+        //FightingManager.instance.FM_Miss(beatHitObject.MatchedButtons.Count);
     }
 
     //end of this beat, reset all, can be improved
@@ -294,7 +294,9 @@ public class BeatGenerator : MonoBehaviour
                         {
                             butInfo.comboCount++;
                             resultControl.ShowCombo(butInfo.comboCount);
-                            playerAnimCtrl.PlayPlayerAttackAnimation(0);
+                            //playerAnimCtrl.PlayPlayerAttackAnimation(-2);
+                            playerAnimCtrl.PlayComboAnimation(butInfo.BeatTime.OKDuration + butInfo.BeatTime.OKStart);
+                            FightingManager.instance.FM_Score(HitResult.Good,0, true);
                         }
                         else if (Input.GetKeyDown(k.Value))
                         {
@@ -348,6 +350,8 @@ public class BeatGenerator : MonoBehaviour
                             {
                                 butInfo.comboCount++;
                                 resultControl.ShowCombo(beatQueue.Peek().comboCount);
+                                playerAnimCtrl.PlayPlayerAttackAnimation(0);
+                                enemyAnimCtrl.GetDamage(Random.Range(0, 2) == 0 ? true : false);
                             }
                             else
                                 matchButton(i, beatQueue.Peek());

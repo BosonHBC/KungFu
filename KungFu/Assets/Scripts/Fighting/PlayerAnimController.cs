@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerAnimController : BaseAnimController
 {
     public int iPlayingFightAnimationID;
+    private bool bCombing;
    // private bool bPreparing;
     // Start is called before the first frame update
     protected override void Start()
@@ -41,6 +42,22 @@ public class PlayerAnimController : BaseAnimController
     {
         //anim.Play("Guard");
         anim.SetInteger("DefenseID_i", _releativeAttackID + 1);
+    }
+
+    public void PlayComboAnimation(float _combTime)
+    {
+        if (!bCombing)
+        {
+            anim.SetInteger("AttackID_i", -2);
+            bCombing = true;
+            StartCoroutine(finishCombo(_combTime));
+        }
+
+    }
+    IEnumerator finishCombo(float _combTime)
+    {
+        yield return new WaitForSeconds(_combTime);
+        bCombing = false;
     }
 
 }

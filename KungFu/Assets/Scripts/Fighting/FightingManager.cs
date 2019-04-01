@@ -177,7 +177,11 @@ public class FightingManager : MonoBehaviour
             if (_fightMode == FightMode.Offense)
                 bIsPlayerAttack = true;
             else if (_fightMode == FightMode.Defense)
+            {
                 bIsPlayerAttack = false;
+                characters[0].GetComponent<BaseAnimController>().DashVertically(-1, 1, 1);
+            }
+               
             characters[1].GetComponent<Animator>().SetBool("PlayerAttacking_b", bIsPlayerAttack);
             hint.SwitchMode(bIsPlayerAttack);
         }
@@ -206,7 +210,7 @@ public class FightingManager : MonoBehaviour
         characters[0].GetComponent<PlayerAnimController>().PlayGuardAnimation(releativeAttackID);
     }
 
-    public void FM_Score(HitResult hr, int _attackAnimationID = 0)
+    public void FM_Score(HitResult hr, int _attackAnimationID = 0, bool bCombo = false)
     {
         MyGameInstance.instance.Score(hr);
         switch (fightMode)
@@ -214,11 +218,17 @@ public class FightingManager : MonoBehaviour
             case FightMode.Wait:
                 break;
             case FightMode.Offense:
-
-                // Play Player Attack animation
-                characters[0].GetComponent<PlayerAnimController>().PlayPlayerAttackAnimation(_attackAnimationID);
-                // Give Damage to Enemy
-                ApplyDamageToCharacter(1, 10f);
+                if (!bCombo)
+                {
+                    // Play Player Attack animation
+                    characters[0].GetComponent<PlayerAnimController>().PlayPlayerAttackAnimation(_attackAnimationID);
+                    // Give Damage to Enemy
+                    ApplyDamageToCharacter(1, 10f);
+                }
+                else
+                {
+                    ApplyDamageToCharacter(1, 5f);
+                }
                 break;
             case FightMode.Defense:
                 PlayerGuard(_attackAnimationID);

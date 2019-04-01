@@ -143,7 +143,7 @@ MonoBehaviour:
   fMaxHp: 200
   fCurrentHp: 200
   fDashSpeed: 1
-  fDashThreshold: 0.3
+  fDashThreshold: 2.2
 --- !u!114 &6437564692994141802
 MonoBehaviour:
   m_ObjectHideFlags: 0

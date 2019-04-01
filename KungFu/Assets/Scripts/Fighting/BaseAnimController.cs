@@ -23,6 +23,7 @@ public class BaseAnimController : MonoBehaviour
     public void GetDamage(bool _fromLeft)
     {
         anim.SetBool("KnockBackLeft_b", _fromLeft);
+        
         anim.Play("KnockBack");
     }
     public void DashVertically(float _vert, float _dashSpeed, float _dashDuration, UnityAction _onFinishDash = null)
@@ -46,14 +47,15 @@ public class BaseAnimController : MonoBehaviour
         }
     }
 
-    public void StopDash()
+    public void StopDash(float _StopTime = 0.3f)
     {
-        StartCoroutine(ieStopDash());
+        StopAllCoroutines();
+        StartCoroutine(ieStopDash(_StopTime));
     }
-    IEnumerator ieStopDash()
+    IEnumerator ieStopDash(float _StopTime = 0.3f)
     {
-        StartCoroutine(LerpToNumber(1, anim.GetFloat("vert"), 0, fDashLerpTime));
-        StartCoroutine(LerpToNumber(2, anim.GetFloat("hori"), 0, fDashLerpTime));
+        StartCoroutine(LerpToNumber(1, anim.GetFloat("vert"), 0, _StopTime));
+        StartCoroutine(LerpToNumber(2, anim.GetFloat("hori"), 0, _StopTime));
         yield return new WaitForSeconds(fDashLerpTime);
         anim.SetFloat("fMoveSpeed", 1);
         bDashing = false;
