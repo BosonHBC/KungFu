@@ -46,4 +46,10 @@ public class MosicFader : MonoBehaviour
             _onFihishFade.Invoke();
 
     }
+
+    private void OnDestroy()
+    {
+        m_Mosic.SetFloat("_FadeOut", 1);
+        m_renderer.material = m_Mosic;
+    }
 }
