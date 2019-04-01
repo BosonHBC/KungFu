@@ -120,7 +120,7 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _Length: 1
+    - _Length: 0.659
     - _LengthContrast: 0.5
     - _MainTexB_Bdepth: -2
     - _Mask: 0.33
@@ -146,7 +146,7 @@ Material:
     - _UVSec: 0
     - _UseFill: 0
     - _UseTime: 1
-    - _Width: 0.5
+    - _Width: 0.813
     - _ZWrite: 1
     - _node_1838: 0
     - _node_2432: 0.75
@@ -167,7 +167,7 @@ Material:
     - _node_8560: 2
     - _node_9175: 1
     m_Colors:
-    - _Color: {r: 0.66295266, g: 1, b: 0, a: 1}
+    - _Color: {r: 0.89784634, g: 1, b: 0, a: 1}
     - _Color2: {r: 1, g: 0, b: 0, a: 1}
     - _ColorInside: {r: 0.3945098, g: 0.7843137, b: 0.7772973, a: 1}
     - _ColorOutside: {r: 0.07843138, g: 0.3921569, b: 0.7803922, a: 1}
