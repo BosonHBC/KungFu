@@ -183,7 +183,7 @@ public class BeatGenerator : MonoBehaviour
             resultControl.ShowResult(hr);
             hintGenerator.DirectlyRemoveFirstHint();
             if(beatQueue.Count>0)
-            beatQueue.Dequeue();
+                beatQueue.Dequeue();
         }
         else
         {
@@ -254,12 +254,15 @@ public class BeatGenerator : MonoBehaviour
 
     void mismatch(BeatHitObject beatHitObject, int keyIndex)
     {
-       /* hintGenerator.DirectlyRemoveFirstHint();
+        
+        //player animation goes here
+        //need to add transition from defense to knockback
+        playerAnimCtrl.PlayGuardAnimation(beatHitObject.BeatTime.BeatID);
+        hintGenerator.DirectlyRemoveFirstHint();
         if (beatQueue.Count > 0)
             beatQueue.Dequeue();
-        resultControl.ShowResult(HitResult.Miss);*/
-        //player animation goes here
-        playerAnimCtrl.PlayGuardAnimation(beatHitObject.BeatTime.BeatID);
+        resultControl.ShowResult(HitResult.Miss);
+        FightingManager.instance.FM_Miss(beatHitObject.MatchedButtons.Count);
     }
 
     //end of this beat, reset all, can be improved
