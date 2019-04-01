@@ -55,7 +55,10 @@ public class MyGameInstance : MonoBehaviour
         if (++iCombo >= iMaxCombo)
             iMaxCombo = iCombo;
         if (comboText)
+        {
             comboText.text = iCombo.ToString();
+            comboText.transform.parent.GetComponent<Animator>().Play("Pop");
+        }
         //comboText.text = iCombo.ToString();
         switch (hr)
         {

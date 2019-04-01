@@ -37,7 +37,7 @@ public class PlayerAnimController : BaseAnimController
         anim.SetInteger("AttackID_i", _AttackID + 1);
     }
 
-    public void GuardSucceed(int _releativeAttackID = 0)
+    public void PlayGuardAnimation(int _releativeAttackID = 0)
     {
         //anim.Play("Guard");
         anim.SetInteger("DefenseID_i", _releativeAttackID + 1);

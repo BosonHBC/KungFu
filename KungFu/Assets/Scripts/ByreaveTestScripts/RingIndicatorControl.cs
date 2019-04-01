@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class RingIndicatorControl : MonoBehaviour
 {
-    public Transform LeftWrist;
-    public Transform RightWrist;
+    Transform LeftWrist;
+    Transform RightWrist;
     Transform LeftKnee;
     Transform RightKnee;
     public GameObject RingIndicator;
@@ -85,6 +85,10 @@ public class RingIndicatorControl : MonoBehaviour
     {
         float timer = 0;
         ring.GetComponent<SpriteRenderer>().color = OKColor;
+        //MosicFader_Sprite _fader = ring.GetComponent<MosicFader_Sprite>();
+        //_fader.SetColor(OKColor);
+        //_fader.FadeTo(1, 0.5f);
+
         var wait = new WaitForEndOfFrame();
         Vector3 scalingSpeed = (FinalSize - ring.transform.localScale) / (beatTiming.PerfectStart + beatTiming.PerfectDuration);
         while (timer <= beatTiming.PerfectStart + beatTiming.PerfectDuration)
@@ -92,6 +96,7 @@ public class RingIndicatorControl : MonoBehaviour
             ring.transform.localScale += scalingSpeed * Time.deltaTime;
             if (timer >= beatTiming.PerfectStart - beatTiming.OKStart)
                 ring.GetComponent<SpriteRenderer>().color = PerfectColor;
+
             timer += Time.deltaTime;
             yield return wait;
         }

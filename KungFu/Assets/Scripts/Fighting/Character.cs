@@ -14,6 +14,7 @@ public class Character : MonoBehaviour
     [SerializeField] protected float fCurrentHp;
     protected BaseAnimController anim;
     private Image hpFillBar;
+    Animator iconGetRed;
 
 
     protected bool bFaceToOpponent = true;
@@ -49,6 +50,7 @@ public class Character : MonoBehaviour
     public void SetData(Image _img, Transform _trOpponent)
     {
         hpFillBar = _img;
+        iconGetRed = hpFillBar.transform.parent.parent.parent.Find("Icon").GetComponent<Animator>();
         fCurrentHp = fMaxHp;
         bFaceToOpponent = true;
         name = "P" + iCharID + "_" + sCharName;
@@ -67,7 +69,7 @@ public class Character : MonoBehaviour
 
     IEnumerator GetDamage(float _CurrentHp, float _AfterDmgHp, float _fadeTime = 0.2f)
     {
-
+        iconGetRed.Play("IconGetRed");
         float _timeStartFade = Time.time;
         float _timeSinceStart = Time.time - _timeStartFade;
         float _lerpPercentage = _timeSinceStart / _fadeTime;

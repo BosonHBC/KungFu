@@ -45,9 +45,13 @@ public class FightingManager : MonoBehaviour
     public FightMode fightMode = FightMode.Wait;
     bool bPrepared = false;
     private ModeHint hint;
+    private int[] randomID = { 0, 1, 2 };
     // Start is called before the first frame update
     void Start()
     {
+
+        randomizeArray(randomID, randomID.Length);
+        Debug.Log(randomID[0] + " " + randomID[1]);
         CreateObjects();
     }
 
@@ -73,7 +77,7 @@ public class FightingManager : MonoBehaviour
         /// Canvas
         GameObject _canvasGo = Instantiate(playerUIPrefab);
         _canvasGo.GetComponent<Canvas>().worldCamera = Camera.main;
-       // _canvasGo.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
+        // _canvasGo.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
         _canvasGo.name = "PlayerUI";
         myCanvas = _canvasGo.GetComponent<Canvas>();
         director.SetGenericBinding(timelines.GetOutputTrack(4), _canvasGo.GetComponent<Animator>());
@@ -81,12 +85,18 @@ public class FightingManager : MonoBehaviour
         MyGameInstance.instance.SetScoreUI(_canvasGo.transform.Find("Combo").GetChild(0).GetComponent<Text>());
         hint = _canvasGo.transform.GetChild(8).GetComponent<ModeHint>();
         /// Characters 0-> player 1-> enemy
+
         for (int i = 0; i < 2; i++)
         {
             Character _character = Instantiate(playerPrefabs[i]).GetComponent<Character>();
             characters[i] = _character;
             _character.transform.SetParent(playerReleventParent);
             _character.transform.position = spawnPoints[i].position;
+
+            Animator _anim = _character.GetComponent<Animator>();
+            float _prepareID = randomID[i] / 2f;
+            Debug.Log("characrer " + i + " play " + _prepareID);
+            _anim.SetFloat("rd_PrepareAnim", _prepareID);
         }
         for (int i = 0; i < characters.Length; i++)
         {
@@ -193,7 +203,7 @@ public class FightingManager : MonoBehaviour
 
     public void PlayerGuard(int releativeAttackID = 0)
     {
-        characters[0].GetComponent<PlayerAnimController>().GuardSucceed(releativeAttackID);
+        characters[0].GetComponent<PlayerAnimController>().PlayGuardAnimation(releativeAttackID);
     }
 
     public void FM_Score(HitResult hr, int _attackAnimationID = 0)
@@ -230,5 +240,25 @@ public class FightingManager : MonoBehaviour
                 break;
         }
     }
+    void randomizeArray(int[] arr, int n)
+    {
+        // Start from the last element and 
+        // swap one by one. We don't need to 
+        // run for the first element  
+        // that's why i > 0 
+        for (int i = n - 1; i > 0; i--)
+        {
 
+            // Pick a random index 
+            // from 0 to i 
+            int j = UnityEngine.Random.Range(0, i + 1);
+
+            // Swap arr[i] with the 
+            // element at random index 
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+
+    }
 }

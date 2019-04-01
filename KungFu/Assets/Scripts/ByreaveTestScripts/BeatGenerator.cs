@@ -254,12 +254,12 @@ public class BeatGenerator : MonoBehaviour
 
     void mismatch(BeatHitObject beatHitObject, int keyIndex)
     {
-        hintGenerator.DirectlyRemoveFirstHint();
+       /* hintGenerator.DirectlyRemoveFirstHint();
         if (beatQueue.Count > 0)
             beatQueue.Dequeue();
-        resultControl.ShowResult(HitResult.Miss);
+        resultControl.ShowResult(HitResult.Miss);*/
         //player animation goes here
-        playerAnimCtrl.PlayPlayerAttackAnimation(beatHitObject.BeatTime.BeatID);
+        playerAnimCtrl.PlayGuardAnimation(beatHitObject.BeatTime.BeatID);
     }
 
     //end of this beat, reset all, can be improved

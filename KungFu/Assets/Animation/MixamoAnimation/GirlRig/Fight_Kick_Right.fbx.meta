@@ -1,48 +1,48 @@
 fileFormatVersion: 2
-guid: c5116f25fe4c4dd44b9845eb28813055
+guid: acdc79ed17bf90f478bb2aea7407042d
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: hair1_result_JNT
-    100002: hair2_result_JNT
-    100004: hair3_result_JNT
-    100006: head_result_JNT
-    100008: left_ball_result_JNT
-    100010: left_bangs_result_JNT
-    100012: left_calf_result_JNT
-    100014: left_clavicle_result_JNT
-    100016: left_eye_result_JNT
-    100018: left_foot_result_JNT
-    100020: left_hair1_result_JNT
-    100022: left_hair2_result_JNT
-    100024: left_hair3_result_JNT
-    100026: left_hand_result_JNT
-    100028: left_index1_result_JNT
-    100030: left_index2_result_JNT
-    100032: left_index3_result_JNT
-    100034: left_innerEyebrow_result_JNT
-    100036: left_lowerArm_result_JNT
-    100038: left_lowerArmTwist_result_JNT
-    100040: left_middle1_result_JNT
-    100042: left_middle2_result_JNT
-    100044: left_middle3_result_JNT
-    100046: left_middleEyebrow_result_JNT
-    100048: left_outerEyebrow_result_JNT
-    100050: left_pinky1_result_JNT
-    100052: left_pinky2_result_JNT
-    100054: left_pinky3_result_JNT
-    100056: left_ring1_result_JNT
-    100058: left_ring2_result_JNT
-    100060: left_ring3_result_JNT
-    100062: left_thigh_result_JNT
-    100064: left_thumb1_result_JNT
-    100066: left_thumb2_result_JNT
-    100068: left_thumb3_result_JNT
-    100070: left_upperArm_result_JNT
-    100072: left_upperArmTwist_result_JNT
-    100074: neck_result_JNT
-    100076: pelvis_result_JNT
-    100078: //RootNode
+    100000: //RootNode
+    100002: hair1_result_JNT
+    100004: hair2_result_JNT
+    100006: hair3_result_JNT
+    100008: head_result_JNT
+    100010: left_ball_result_JNT
+    100012: left_bangs_result_JNT
+    100014: left_calf_result_JNT
+    100016: left_clavicle_result_JNT
+    100018: left_eye_result_JNT
+    100020: left_foot_result_JNT
+    100022: left_hair1_result_JNT
+    100024: left_hair2_result_JNT
+    100026: left_hair3_result_JNT
+    100028: left_hand_result_JNT
+    100030: left_index1_result_JNT
+    100032: left_index2_result_JNT
+    100034: left_index3_result_JNT
+    100036: left_innerEyebrow_result_JNT
+    100038: left_lowerArm_result_JNT
+    100040: left_lowerArmTwist_result_JNT
+    100042: left_middle1_result_JNT
+    100044: left_middle2_result_JNT
+    100046: left_middle3_result_JNT
+    100048: left_middleEyebrow_result_JNT
+    100050: left_outerEyebrow_result_JNT
+    100052: left_pinky1_result_JNT
+    100054: left_pinky2_result_JNT
+    100056: left_pinky3_result_JNT
+    100058: left_ring1_result_JNT
+    100060: left_ring2_result_JNT
+    100062: left_ring3_result_JNT
+    100064: left_thigh_result_JNT
+    100066: left_thumb1_result_JNT
+    100068: left_thumb2_result_JNT
+    100070: left_thumb3_result_JNT
+    100072: left_upperArm_result_JNT
+    100074: left_upperArmTwist_result_JNT
+    100076: neck_result_JNT
+    100078: pelvis_result_JNT
     100080: right_ball_result_JNT
     100082: right_bangs_result_JNT
     100084: right_calf_result_JNT
@@ -80,46 +80,46 @@ ModelImporter:
     100148: spine2_result_JNT
     100150: spine3_result_JNT
     100152: spine4_result_JNT
-    400000: hair1_result_JNT
-    400002: hair2_result_JNT
-    400004: hair3_result_JNT
-    400006: head_result_JNT
-    400008: left_ball_result_JNT
-    400010: left_bangs_result_JNT
-    400012: left_calf_result_JNT
-    400014: left_clavicle_result_JNT
-    400016: left_eye_result_JNT
-    400018: left_foot_result_JNT
-    400020: left_hair1_result_JNT
-    400022: left_hair2_result_JNT
-    400024: left_hair3_result_JNT
-    400026: left_hand_result_JNT
-    400028: left_index1_result_JNT
-    400030: left_index2_result_JNT
-    400032: left_index3_result_JNT
-    400034: left_innerEyebrow_result_JNT
-    400036: left_lowerArm_result_JNT
-    400038: left_lowerArmTwist_result_JNT
-    400040: left_middle1_result_JNT
-    400042: left_middle2_result_JNT
-    400044: left_middle3_result_JNT
-    400046: left_middleEyebrow_result_JNT
-    400048: left_outerEyebrow_result_JNT
-    400050: left_pinky1_result_JNT
-    400052: left_pinky2_result_JNT
-    400054: left_pinky3_result_JNT
-    400056: left_ring1_result_JNT
-    400058: left_ring2_result_JNT
-    400060: left_ring3_result_JNT
-    400062: left_thigh_result_JNT
-    400064: left_thumb1_result_JNT
-    400066: left_thumb2_result_JNT
-    400068: left_thumb3_result_JNT
-    400070: left_upperArm_result_JNT
-    400072: left_upperArmTwist_result_JNT
-    400074: neck_result_JNT
-    400076: pelvis_result_JNT
-    400078: //RootNode
+    400000: //RootNode
+    400002: hair1_result_JNT
+    400004: hair2_result_JNT
+    400006: hair3_result_JNT
+    400008: head_result_JNT
+    400010: left_ball_result_JNT
+    400012: left_bangs_result_JNT
+    400014: left_calf_result_JNT
+    400016: left_clavicle_result_JNT
+    400018: left_eye_result_JNT
+    400020: left_foot_result_JNT
+    400022: left_hair1_result_JNT
+    400024: left_hair2_result_JNT
+    400026: left_hair3_result_JNT
+    400028: left_hand_result_JNT
+    400030: left_index1_result_JNT
+    400032: left_index2_result_JNT
+    400034: left_index3_result_JNT
+    400036: left_innerEyebrow_result_JNT
+    400038: left_lowerArm_result_JNT
+    400040: left_lowerArmTwist_result_JNT
+    400042: left_middle1_result_JNT
+    400044: left_middle2_result_JNT
+    400046: left_middle3_result_JNT
+    400048: left_middleEyebrow_result_JNT
+    400050: left_outerEyebrow_result_JNT
+    400052: left_pinky1_result_JNT
+    400054: left_pinky2_result_JNT
+    400056: left_pinky3_result_JNT
+    400058: left_ring1_result_JNT
+    400060: left_ring2_result_JNT
+    400062: left_ring3_result_JNT
+    400064: left_thigh_result_JNT
+    400066: left_thumb1_result_JNT
+    400068: left_thumb2_result_JNT
+    400070: left_thumb3_result_JNT
+    400072: left_upperArm_result_JNT
+    400074: left_upperArmTwist_result_JNT
+    400076: neck_result_JNT
+    400078: pelvis_result_JNT
     400080: right_ball_result_JNT
     400082: right_bangs_result_JNT
     400084: right_calf_result_JNT
