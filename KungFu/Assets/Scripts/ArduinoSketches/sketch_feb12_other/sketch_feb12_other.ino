@@ -8,7 +8,7 @@ const int button04 = 3;
 const int button05 = 4;
 const int button06 = 5;
 
-const int ThreshHold = 600;
+const int ThreshHold = 625;
  
 void setup(void) {
   Serial.begin(9600);   
