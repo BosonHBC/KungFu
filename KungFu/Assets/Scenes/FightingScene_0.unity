@@ -294,6 +294,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 23176382417845078, guid: 16df161d0b862db42a8043155382a764,
+        type: 3}
+      propertyPath: m_SelectedEditorRenderState
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16df161d0b862db42a8043155382a764, type: 3}
 --- !u!1001 &9868429
@@ -12629,7 +12634,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -16999,7 +17004,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 1
-  m_Color: {r: 0.8113208, g: 0.75454223, b: 0.61614454, a: 1}
+  m_Color: {r: 0.5283019, g: 0.5066216, b: 0.45603418, a: 1}
   m_Intensity: 1.65
   m_Range: 10
   m_SpotAngle: 30
