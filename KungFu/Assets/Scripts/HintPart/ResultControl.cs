@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ResultControl : MonoBehaviour
 {
     public GameObject ResultImageShow;
-    public GameObject ComboText;
+    public GameObject ComboObject;
 
     float duration = 1.0f;
     //bool firstSpawned = false;
@@ -57,30 +57,37 @@ public class ResultControl : MonoBehaviour
 
     public void ShowCombo(int countNumber)
     {
-        ComboText.GetComponent<Text>().text = countNumber.ToString();
+        ComboObject.GetComponentInChildren<Text>().text = countNumber.ToString();
         if (comboCoroutine != null)
             StopCoroutine(comboCoroutine);
         comboCoroutine = StartCoroutine(ComboShow());
     }
     IEnumerator ComboShow(float time = 1.0f)
     {
-        RectTransform comboTrans = ComboText.GetComponent<RectTransform>();
-        comboTrans.anchoredPosition = Vector3.zero;
+        Text ComboText = ComboObject.GetComponentInChildren<Text>();
+        Image ComboImage = ComboObject.GetComponentInChildren<Image>();
+        RectTransform combotextTrans = ComboText.GetComponent<RectTransform>();
+        RectTransform comboimageTrans = ComboImage.GetComponent<RectTransform>();
+        combotextTrans.anchoredPosition = Vector3.zero;
+        comboimageTrans.anchoredPosition = Vector3.zero;
         Vector2 offset = new Vector3(0.0f, 100.0f);
-        Text comboText = ComboText.GetComponent<Text>();
-        comboText.color = new Color(1.0f, 0.0f, 0.0f, 1.0f);
+        //Text comboText = ComboText.GetComponent<Text>();
+        ComboText.color = new Color(1.0f, 0.0f, 0.0f, 1.0f);
         //Debug.Log("asdasd");
         //UnityEditor.EditorApplication.isPaused = true;
-        comboText.canvasRenderer.SetAlpha(1.0f);
-        comboText.CrossFadeAlpha(0.0f, time, false);
+        ComboText.canvasRenderer.SetAlpha(1.0f);
+        ComboImage.canvasRenderer.SetAlpha(1.0f);
+        ComboText.CrossFadeAlpha(0.0f, time, false);
+        ComboImage.CrossFadeAlpha(0.0f, time, false);
         var waitforendofframe = new WaitForEndOfFrame();
-        while (comboTrans.anchoredPosition.y <= offset.y)
+        while (combotextTrans.anchoredPosition.y <= offset.y)
         {
             ComboText.GetComponent<RectTransform>().anchoredPosition += offset * time * Time.deltaTime;
+            ComboImage.GetComponent<RectTransform>().anchoredPosition += offset * time * Time.deltaTime;
             yield return waitforendofframe;
         }
         ComboText.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
-        comboText.color = new Color(1.0f, 0.0f, 0.0f, 0.0f);
+        ComboText.canvasRenderer.SetAlpha(0.0f);// = new Color(1.0f, 0.0f, 0.0f, 0.0f);
     }
 
     public void ShowResultAtWorldPos(HitResult hr, Vector3 pos)

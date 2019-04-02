@@ -26,7 +26,7 @@ public class ResultImageControl : MonoBehaviour
                 StartCoroutine(ShowImage(Images[2]));
                 break;
             case HitResult.Mismatch:
-                StartCoroutine(ShowImage(Images[3]));
+                //StartCoroutine(ShowImage(Images[3]));
                 break;
             default:
                 break;
