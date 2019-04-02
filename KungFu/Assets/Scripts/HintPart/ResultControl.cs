@@ -73,6 +73,7 @@ public class ResultControl : MonoBehaviour
         Vector2 offset = new Vector3(0.0f, 100.0f);
         //Text comboText = ComboText.GetComponent<Text>();
         ComboText.color = new Color(1.0f, 0.0f, 0.0f, 1.0f);
+        ComboImage.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
         //Debug.Log("asdasd");
         //UnityEditor.EditorApplication.isPaused = true;
         ComboText.canvasRenderer.SetAlpha(1.0f);
@@ -87,7 +88,8 @@ public class ResultControl : MonoBehaviour
             yield return waitforendofframe;
         }
         ComboText.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
-        ComboText.canvasRenderer.SetAlpha(0.0f);// = new Color(1.0f, 0.0f, 0.0f, 0.0f);
+        ComboText.color = new Color(1.0f, 0.0f, 0.0f, 0.0f);
+        ComboImage.color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
     }
 
     public void ShowResultAtWorldPos(HitResult hr, Vector3 pos)
