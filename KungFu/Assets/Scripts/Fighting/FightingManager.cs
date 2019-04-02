@@ -70,9 +70,8 @@ public class FightingManager : MonoBehaviour
             fightMode = FightMode.Defense;
             if (onPositioned != null)
                 onPositioned.Invoke();
-
             // Debug Game Over
-            StartCoroutine(ie_DelayGameOverTest(6f,1));
+          //  StartCoroutine(ie_DelayGameOverTest(6f,1));
         }
 
     }
