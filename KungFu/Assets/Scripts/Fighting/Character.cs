@@ -53,20 +53,25 @@ public class Character : MonoBehaviour
         StartCoroutine(GetDamage(fCurrentHp, _afterDmg<0?0:_afterDmg));
         if (fCurrentHp <= 0)
         {
-            Die();
+            FightingManager.instance.FightOver(iCharID);
         }
     }
-    public virtual void Die()
+    public virtual void GameOver(bool _win)
+    {
+        anim.PlayEndAnim(_win);
+    }
+    public virtual void  ExecuteOpponent()
     {
 
     }
 
-    public void SetData(Image _img, Transform _trOpponent)
+    public void SetData(Image _img, Transform _trOpponent, int _icharID)
     {
         hpFillBar = _img;
         iconGetRed = hpFillBar.transform.parent.parent.parent.Find("Icon").GetComponent<Animator>();
         fCurrentHp = fMaxHp;
         bFaceToOpponent = true;
+        iCharID = _icharID;
         name = "P" + iCharID + "_" + sCharName;
         trOppoent = _trOpponent;
 

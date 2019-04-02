@@ -46,6 +46,7 @@ public class FightingManager : MonoBehaviour
     bool bPrepared = false;
     private ModeHint hint;
     private int[] randomID = { 0, 1, 2 };
+    public bool bFightOver;
     // Start is called before the first frame update
     void Start()
     {
@@ -53,6 +54,7 @@ public class FightingManager : MonoBehaviour
         randomizeArray(randomID, randomID.Length);
         Debug.Log(randomID[0] + " " + randomID[1]);
         CreateObjects();
+
     }
 
     // Update is called once per frame
@@ -68,6 +70,9 @@ public class FightingManager : MonoBehaviour
             fightMode = FightMode.Defense;
             if (onPositioned != null)
                 onPositioned.Invoke();
+
+            // Debug Game Over
+            StartCoroutine(ie_DelayGameOverTest(6f,1));
         }
 
     }
@@ -104,7 +109,7 @@ public class FightingManager : MonoBehaviour
 
             Transform _opponentTr = characters[(i + 1) % characters.Length].transform;
             characters[i].SetData(_fillbar,
-               _opponentTr);
+               _opponentTr, i);
         }
         /// Player center
         PlayerCenter center = Instantiate(playerCenterPrefab).GetComponent<PlayerCenter>();
@@ -144,7 +149,7 @@ public class FightingManager : MonoBehaviour
             {
                 Cinemachine.Timeline.CinemachineShot _shot = (Cinemachine.Timeline.CinemachineShot)currClip.asset;
                 //_shot.VirtualCamera.exposedName = System.Guid.NewGuid().ToString(); 
-                CinemachineVirtualCameraBase _playerVCam = characters[0].transform.GetChild(characters[0].transform.childCount - 1).GetComponent<CinemachineVirtualCameraBase>();
+                CinemachineVirtualCameraBase _playerVCam = characters[0].transform.GetChild(characters[0].transform.childCount - 2).GetComponent<CinemachineVirtualCameraBase>();
                 cameraList[1] = _playerVCam.gameObject;
                 director.SetReferenceValue(_shot.VirtualCamera.exposedName, _playerVCam);
             }
@@ -185,6 +190,33 @@ public class FightingManager : MonoBehaviour
             characters[1].GetComponent<Animator>().SetBool("PlayerAttacking_b", bIsPlayerAttack);
             hint.SwitchMode(bIsPlayerAttack);
         }
+    }
+
+    public void FightOver(int _characterDie)
+    {
+
+        bFightOver = true;
+        // Stop playing beat;
+        GetComponent<BeatGenerator>().bCanPlay = false;
+        // Switch to side view
+        SwitchCamera(0);
+        // Start play KO UI animation
+        Transform KOUI = myCanvas.transform.Find("KOUI");
+        KOUI.gameObject.SetActive(true);
+        KOUI.GetComponent<Animator>().Play("KOAnim");
+
+        //characters[(_characterDie + 1) % 2].ExecuteOpponent();
+
+        // Start to play player finish Animation;
+        characters[0].GameOver(_characterDie == 1);
+        characters[1].GameOver(_characterDie == 0);
+
+    }
+
+    IEnumerator ie_DelayGameOverTest(float _time, int _id)
+    {
+        yield return new WaitForSeconds(_time);
+        FightOver(_id);
     }
 
     void Debug_SwitchCamera()

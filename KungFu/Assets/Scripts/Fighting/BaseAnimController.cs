@@ -103,4 +103,10 @@ public class BaseAnimController : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
     }
+
+    public void PlayEndAnim(bool _bWin)
+    {
+        anim.SetBool("bGameOver", true);
+        anim.SetFloat("bWin", _bWin ? 0 : 1);
+    }
 }

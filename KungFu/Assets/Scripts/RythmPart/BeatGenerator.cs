@@ -99,6 +99,8 @@ public class BeatGenerator : MonoBehaviour
             bCanPlay = false;
             //levelLoader.LoadScene("");
             //show result here.
+            FightingManager.instance.FightOver(1);
+            
             Debug.Log("Song ended");
         }
         if (bCanPlay)
