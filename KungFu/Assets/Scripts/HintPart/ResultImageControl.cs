@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ResultImageControl : MonoBehaviour
 {
-    
+
     //0 perfect 1 good 2 miss
     public Image[] Images;
     // Start is called before the first frame update
@@ -13,17 +13,23 @@ public class ResultImageControl : MonoBehaviour
 
     public void ShowResult(HitResult hitResult)
     {
-        gameObject.GetComponentInChildren<ParticleSystem>().Play();
-        switch(hitResult)
+
+        switch (hitResult)
         {
             case HitResult.Perfect:
                 StartCoroutine(ShowImage(Images[0]));
+                if (FightingManager.instance.fightMode == FightingManager.FightMode.Offense)
+                    gameObject.GetComponentInChildren<ParticleSystem>().Play();
                 break;
             case HitResult.Good:
                 StartCoroutine(ShowImage(Images[1]));
+                if (FightingManager.instance.fightMode == FightingManager.FightMode.Offense)
+                    gameObject.GetComponentInChildren<ParticleSystem>().Play();
                 break;
             case HitResult.Miss:
                 StartCoroutine(ShowImage(Images[2]));
+                if (FightingManager.instance.fightMode == FightingManager.FightMode.Defense)
+                    gameObject.GetComponentInChildren<ParticleSystem>().Play();
                 break;
             case HitResult.Mismatch:
                 //StartCoroutine(ShowImage(Images[3]));
