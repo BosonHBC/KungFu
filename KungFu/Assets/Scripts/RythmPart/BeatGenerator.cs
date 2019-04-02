@@ -338,34 +338,42 @@ public class BeatGenerator : MonoBehaviour
             {
                 for (int i = 0; i < arduinoInput.Length; ++i)
                 {
-                    //More arduino inputs
-                    if (i >= buttonMapping.Count)
-                        continue;
-                    //the buttons to be pressed in this beat
-                    if (DataUtility.HasElement(butInfo.BeatTime.ButtonIDs, i))
+                    ////More arduino inputs
+                    //if (i >= buttonMapping.Count)
+                    //    continue;
+                    if(butInfo.beatMode == BeatMode.Attack)
                     {
-                        if (arduinoInput[i])
+                        if(butInfo.BeatTime.IsCombo && arduinoInput[i])
                         {
-                            if (butInfo.BeatTime.IsCombo)
-                            {
-                                butInfo.comboCount++;
-                                resultControl.ShowCombo(beatQueue.Peek().comboCount);
-                                playerAnimCtrl.PlayPlayerAttackAnimation(0);
-                                enemyAnimCtrl.GetDamage(Random.Range(0, 2) == 0 ? true : false);
-                            }
-                            else
-                                matchButton(i, beatQueue.Peek());
+                            butInfo.comboCount++;
+                            resultControl.ShowCombo(butInfo.comboCount);
+                            //playerAnimCtrl.PlayPlayerAttackAnimation(-2);
+                            playerAnimCtrl.PlayComboAnimation(butInfo.BeatTime.OKDuration + butInfo.BeatTime.OKStart);
+                            FightingManager.instance.FM_Score(HitResult.Good, 0, true);
+                        }
+                        else if(arduinoInput[i])
+                        {
+                            matchButton(i, butInfo);
                         }
                     }
-                    //other buttons
                     else
                     {
-                        //if (arduinoInput[i])
-                        //    indicatorControl.HitButton(i);
-                        //else 
-                        //    indicatorControl.DeactiveButton(i);
+                        if (DataUtility.HasElement(butInfo.BeatTime.ButtonIDs, i))
+                        {
+                            if (arduinoInput[i])
+                            {
+                                matchButton(i, butInfo);
+                            }
+                        }
+                        //other buttons
+                        else
+                        {
+                            if(arduinoInput[i])
+                            {
+                                mismatch(butInfo, i);
+                            }
+                        }
                     }
-
                 }
             }
         }
