@@ -152,6 +152,15 @@ public class HintTrackControl : MonoBehaviour
         }
     }
 
+    void ActivateAllButtons()
+    {
+        for(int i = 0; i < ChildBodyParts.Length; ++ i)
+        {
+            ChildBodyParts[i].SetActive(true);
+            ChildBodyParts[i].GetComponent<Image>().color = ActiveColor;
+        }
+    }
+
     public void StartMoving(BeatInfo beatTime, HintGenerator hintGen, BeatMode bMode)
     {
         matchedButtons = new Dictionary<int, bool>();
@@ -170,8 +179,10 @@ public class HintTrackControl : MonoBehaviour
         timeBeforeHit = hintGen.HintTimeBeforeHit;
 
         isMoving = true;
-        if (!beatTiming.IsCombo)
+        if (bMode == BeatMode.Defend)
             ActivateButtons(buttonIDs);
+        else if (bMode == BeatMode.Attack && !beatTime.IsCombo)
+            ActivateAllButtons();
     }
 
     //IEnumerator FadeOut(float time = 1.0f)
