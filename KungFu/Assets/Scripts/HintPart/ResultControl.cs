@@ -61,7 +61,6 @@ public class ResultControl : MonoBehaviour
         if (comboCoroutine != null)
             StopCoroutine(comboCoroutine);
         comboCoroutine = StartCoroutine(ComboShow());
-
     }
     IEnumerator ComboShow(float time = 1.0f)
     {

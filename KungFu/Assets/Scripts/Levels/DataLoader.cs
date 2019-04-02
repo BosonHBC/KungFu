@@ -114,25 +114,25 @@ public class DataLoader : MonoBehaviour
         return animationData;
     }
 
-    public BeatTiming GetBeatAnimationDataByID(int ID)
-    {
-        JSONNode retBeat = null;
-        foreach (var anim in animationData)
-        {
-            if (anim.Value["AnimationID"].AsInt == ID)
-            {
-                retBeat = anim.Value;
-                break;
-            }
-        }
-        if (retBeat != null)
-            return new BeatTiming(retBeat[2].AsFloat, retBeat[3].AsFloat, retBeat[4].AsFloat, retBeat[5].AsFloat);
-        else
-        {
-            Debug.Log("No Animation");
-            return null;
-        }
-    }
+    //public BeatTiming GetBeatAnimationDataByID(int ID)
+    //{
+    //    JSONNode retBeat = null;
+    //    foreach (var anim in animationData)
+    //    {
+    //        if (anim.Value["AnimationID"].AsInt == ID)
+    //        {
+    //            retBeat = anim.Value;
+    //            break;
+    //        }
+    //    }
+    //    if (retBeat != null)
+    //        return new BeatTiming(retBeat[2].AsFloat, retBeat[3].AsFloat, retBeat[4].AsFloat, retBeat[5].AsFloat);
+    //    else
+    //    {
+    //        Debug.Log("No Animation");
+    //        return null;
+    //    }
+    //}
     public JSONNode GetMusicData()
     {
         return allMusicData;

@@ -63,7 +63,7 @@ public class BeatGenerator : MonoBehaviour
             {7, KeyCode.O },
             {8, KeyCode.G },
             {9, KeyCode.B },
-            {10, KeyCode.S }
+            {10, KeyCode.V }
         };
         beatQueue = new Queue<BeatHitObject>();
         levelLoader = FindObjectOfType<LevelLoader>();
@@ -261,7 +261,7 @@ public class BeatGenerator : MonoBehaviour
         //hintGenerator.DirectlyRemoveFirstHint();
         //if (beatQueue.Count > 0)
         //    beatQueue.Dequeue();
-        //resultControl.ShowResult(HitResult.Miss);
+        //resultControl.ShowResult(HitResult.Mismatch);
         //FightingManager.instance.FM_Miss(beatHitObject.MatchedButtons.Count);
     }
 
@@ -296,7 +296,7 @@ public class BeatGenerator : MonoBehaviour
                             resultControl.ShowCombo(butInfo.comboCount);
                             //playerAnimCtrl.PlayPlayerAttackAnimation(-2);
                             playerAnimCtrl.PlayComboAnimation(butInfo.BeatTime.OKDuration + butInfo.BeatTime.OKStart);
-                            FightingManager.instance.FM_Score(HitResult.Good,0, true);
+                            FightingManager.instance.FM_Score(HitResult.Good, 0, true);
                         }
                         else if (Input.GetKeyDown(k.Value))
                         {

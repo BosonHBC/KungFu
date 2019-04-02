@@ -7,7 +7,9 @@ public enum HitResult
 {
     Perfect,
     Good,
-    Miss
+    Miss,
+    Mismatch,
+    Combo
 }
 public class MyGameInstance : MonoBehaviour
 {
