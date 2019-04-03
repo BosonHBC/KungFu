@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: acdc79ed17bf90f478bb2aea7407042d
+guid: 91d242895f38de24c86f82dce39335f1
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -157,7 +157,7 @@ ModelImporter:
     400148: spine2_result_JNT
     400150: spine3_result_JNT
     400152: spine4_result_JNT
-    7400000: Fight_Kick_Left_1
+    7400000: Fight_Stomach
     9500000: //RootNode
     2186277476908879412: ImportLogs
   externalObjects: {}
@@ -190,7 +190,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 3
+    animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -199,13 +199,13 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Fight_Kick_Left_1
+      name: Fight_Stomach
       takeName: mixamo.com
       firstFrame: 0
-      lastFrame: 84
+      lastFrame: 107
       wrapMode: 0
-      orientationOffsetY: -36.12
-      level: 0.38
+      orientationOffsetY: 59.28
+      level: 0.37
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0

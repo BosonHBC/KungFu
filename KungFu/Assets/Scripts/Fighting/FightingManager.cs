@@ -241,7 +241,7 @@ public class FightingManager : MonoBehaviour
         characters[0].GetComponent<PlayerAnimController>().PlayGuardAnimation(releativeAttackID);
     }
 
-    public void FM_Score(HitResult hr, int _attackAnimationID = 0, bool bCombo = false)
+    public void FM_Score(HitResult hr, float _attackAnimationID = 0, bool bCombo = false)
     {
         MyGameInstance.instance.Score(hr);
         switch (fightMode)
@@ -262,7 +262,7 @@ public class FightingManager : MonoBehaviour
                 }
                 break;
             case FightMode.Defense:
-                PlayerGuard(_attackAnimationID);
+                PlayerGuard((int)(_attackAnimationID*10));
                 break;
         }
     }

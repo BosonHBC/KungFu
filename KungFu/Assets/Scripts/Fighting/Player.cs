@@ -34,8 +34,6 @@ public class Player : Character
     {
         base.Update();
         DebugMovement();
-        if (Input.GetKeyDown(KeyCode.Alpha9))
-            GetDamage(20, UnityEngine.Random.Range(0,2) == 0? true: false);
     }
 
     public override void GetDamage(float _dmg, bool _fromLeft)

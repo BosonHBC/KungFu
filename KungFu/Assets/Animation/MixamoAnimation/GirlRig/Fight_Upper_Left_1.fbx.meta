@@ -157,7 +157,7 @@ ModelImporter:
     400148: spine2_result_JNT
     400150: spine3_result_JNT
     400152: spine4_result_JNT
-    7400000: Fight_Upper_Left_1
+    7400000: Fight_Upper_Right_1
     9500000: //RootNode
     2186277476908879412: ImportLogs
   externalObjects: {}
@@ -199,7 +199,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Fight_Upper_Left_1
+      name: Fight_Upper_Right_1
       takeName: mixamo.com
       firstFrame: 17
       lastFrame: 80

@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 584259676}
   m_LocalRotation: {x: -0.015986493, y: -0.016321322, z: -0.0002609888, w: 0.999739}
-  m_LocalPosition: {x: 1.1264067, y: 1.2955078, z: -2.1239336}
+  m_LocalPosition: {x: 1.1264067, y: 1.2955078, z: -2.1239338}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2114135492}
@@ -1848,6 +1848,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3107315992147270372}
+  - component: {fileID: 1400220396347747672}
   m_Layer: 10
   m_Name: right_ball_result_JNT
   m_TagString: Untagged
@@ -1869,6 +1870,19 @@ Transform:
   m_Father: {fileID: 3107315992147270390}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1400220396347747672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3107315992147232388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d451a0af1cf514041965b27229ca75f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  iJointID: 5
 --- !u!1 &3107315992147232390
 GameObject:
   m_ObjectHideFlags: 0
@@ -4067,6 +4081,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3107315992147270506}
+  - component: {fileID: 1778547474231006057}
   m_Layer: 10
   m_Name: left_ball_result_JNT
   m_TagString: Untagged
@@ -4088,6 +4103,19 @@ Transform:
   m_Father: {fileID: 3107315992147270524}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1778547474231006057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3107315992147232522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d451a0af1cf514041965b27229ca75f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  iJointID: 6
 --- !u!1 &3107315992147232524
 GameObject:
   m_ObjectHideFlags: 0
@@ -5596,7 +5624,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d19b314219b736a40b788acb9187520d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iPlayingFightAnimationID: 0
 --- !u!1 &3107315992147232634
 GameObject:
   m_ObjectHideFlags: 0

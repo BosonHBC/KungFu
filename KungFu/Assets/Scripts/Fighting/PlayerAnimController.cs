@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerAnimController : BaseAnimController
 {
-    public int iPlayingFightAnimationID;
+
     private bool bCombing;
    // private bool bPreparing;
     // Start is called before the first frame update
@@ -22,20 +22,27 @@ public class PlayerAnimController : BaseAnimController
     void DebugAnimator()
     {
         // Reset to 0 to prevent keep playing one animation
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 10; i++)
         {
-            if (Input.GetKeyDown((KeyCode)(i + 49)))
+            if (Input.GetKeyDown((KeyCode)(i + 48)))
             {
-                iPlayingFightAnimationID = i + 1;
-                anim.SetInteger("AttackID_i", iPlayingFightAnimationID);
+                anim.SetFloat("Attack_Anim_ID", (i / 10f));
+                anim.SetFloat("AttackID_i", (i / 10f));
             }
+            if (Input.GetKeyDown(KeyCode.Alpha0))
+            {
+                anim.SetFloat("Attack_Anim_ID",0f);
+                anim.SetFloat("AttackID_i", (i / 10f));
+            }
+
         }
 
     }
-    public void PlayPlayerAttackAnimation(int _AttackID)
+    public void PlayPlayerAttackAnimation(float _AttackID)
     {
-
-        anim.SetInteger("AttackID_i", _AttackID + 1);
+        Debug.Log("Anim ID: " + _AttackID);
+        anim.SetFloat("AttackID_i", _AttackID);
+        anim.SetFloat("Attack_Anim_ID", _AttackID);
     }
 
     public void PlayGuardAnimation(int _releativeAttackID = 0)
@@ -48,7 +55,7 @@ public class PlayerAnimController : BaseAnimController
     {
         if (!bCombing)
         {
-            anim.SetInteger("AttackID_i", -2);
+            anim.SetFloat("AttackID_i", -2);
             bCombing = true;
             StartCoroutine(finishCombo(_combTime));
         }

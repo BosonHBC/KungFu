@@ -100,7 +100,7 @@ public class BeatGenerator : MonoBehaviour
             //levelLoader.LoadScene("");
             //show result here.
             FightingManager.instance.FightOver(1);
-            
+
             Debug.Log("Song ended");
         }
         if (bCanPlay)
@@ -177,7 +177,12 @@ public class BeatGenerator : MonoBehaviour
             HitResult hr = GetResultFromInput();
 
             if (hr != HitResult.Miss)
-                FightingManager.instance.FM_Score(hr, beatHitObject.BeatTime.BeatID);
+            {
+                float _intToFloat = buttonID / 10f;
+                
+                FightingManager.instance.FM_Score(hr, _intToFloat);
+            }
+
             else
                 FightingManager.instance.FM_Miss(1);
 
@@ -343,9 +348,9 @@ public class BeatGenerator : MonoBehaviour
                     ////More arduino inputs
                     //if (i >= buttonMapping.Count)
                     //    continue;
-                    if(butInfo.beatMode == BeatMode.Attack)
+                    if (butInfo.beatMode == BeatMode.Attack)
                     {
-                        if(butInfo.BeatTime.IsCombo && arduinoInput[i])
+                        if (butInfo.BeatTime.IsCombo && arduinoInput[i])
                         {
                             butInfo.comboCount++;
                             resultControl.ShowCombo(butInfo.comboCount);
@@ -353,7 +358,7 @@ public class BeatGenerator : MonoBehaviour
                             playerAnimCtrl.PlayComboAnimation(butInfo.BeatTime.OKDuration + butInfo.BeatTime.OKStart);
                             FightingManager.instance.FM_Score(HitResult.Good, 0, true);
                         }
-                        else if(arduinoInput[i])
+                        else if (arduinoInput[i])
                         {
                             matchButton(i, butInfo);
                         }
@@ -370,7 +375,7 @@ public class BeatGenerator : MonoBehaviour
                         //other buttons
                         else
                         {
-                            if(arduinoInput[i])
+                            if (arduinoInput[i])
                             {
                                 mismatch(butInfo, i);
                             }
