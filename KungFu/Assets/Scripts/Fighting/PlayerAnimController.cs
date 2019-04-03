@@ -45,10 +45,10 @@ public class PlayerAnimController : BaseAnimController
         anim.SetFloat("Attack_Anim_ID", _AttackID);
     }
 
-    public void PlayGuardAnimation(int _releativeAttackID = 0)
+    public void PlayGuardAnimation(int _releativeAttackID)
     {
         //anim.Play("Guard");
-        anim.SetInteger("DefenseID_i", _releativeAttackID + 1);
+        anim.SetInteger("DefenseID_i", _releativeAttackID);
     }
 
     public void PlayComboAnimation(float _combTime)

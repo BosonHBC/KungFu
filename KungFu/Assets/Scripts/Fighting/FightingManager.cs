@@ -265,7 +265,7 @@ public class FightingManager : MonoBehaviour
         characters[_characterID].GetDamage(_dmgAmount, _attackDir);
     }
 
-    public void PlayerGuard(int releativeAttackID = 0)
+    public void PlayerGuard(int releativeAttackID)
     {
         characters[0].GetComponent<PlayerAnimController>().PlayGuardAnimation(releativeAttackID);
     }
@@ -301,7 +301,7 @@ public class FightingManager : MonoBehaviour
                 }
                 break;
             case FightMode.Defense:
-                PlayerGuard((int)(_attackAnimationID * 10));
+                PlayerGuard((int)(_attackAnimationID));
                 break;
         }
     }

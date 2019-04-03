@@ -25,7 +25,7 @@ public class Player : Character
     protected override void Update()
     {
         base.Update();
-        DebugMovement();
+       // DebugMovement();
     }
     public void SwitchPerspectiveView()
     {

@@ -30,7 +30,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1034657594}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -104,7 +104,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1034657594}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -858,8 +858,8 @@ RectTransform:
   - {fileID: 8720243352034608631}
   - {fileID: 5994507043760742683}
   - {fileID: 1362213504008215582}
-  - {fileID: 4950070649160849419}
   - {fileID: 3200603546054453684}
+  - {fileID: 4950070649160849419}
   - {fileID: 5979057631002815400}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -928,8 +928,8 @@ MonoBehaviour:
   - {fileID: 1034657599}
   - {fileID: 1034657598}
   - {fileID: 1034657597}
-  - {fileID: 1034657596}
   - {fileID: 1034657595}
+  - {fileID: 1034657596}
   OKColor: {r: 0.44001427, g: 0.9056604, b: 0.82868403, a: 1}
   PerfectColor: {r: 1, g: 0.99162006, b: 0.3726415, a: 1}
   NormalColor: {r: 1, g: 1, b: 1, a: 1}
