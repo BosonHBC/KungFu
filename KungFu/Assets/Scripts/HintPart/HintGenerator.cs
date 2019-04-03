@@ -8,7 +8,7 @@ public class HintGenerator : MonoBehaviour
 {
     public float HintTimeBeforeHit = 3.0f;
     [HideInInspector]
-    public float HintObjectSpeed = 200.0f;
+    public float HintObjectSpeed = 400.0f;
     public GameObject HintObject;
     public GameObject ComboHintObject;
     [SerializeField]

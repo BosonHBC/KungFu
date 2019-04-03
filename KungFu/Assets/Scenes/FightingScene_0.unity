@@ -14141,6 +14141,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particles:
   - {fileID: 5850785760104480875, guid: 58bd652b0a0ebd54fb99f63eb9e5fdfd, type: 3}
+  - {fileID: 1902662973084551171, guid: fad7532a7a5fcd5448e159aeeb34c327, type: 3}
 --- !u!1001 &1275338972
 PrefabInstance:
   m_ObjectHideFlags: 0

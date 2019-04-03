@@ -275,7 +275,7 @@ public class FightingManager : MonoBehaviour
         yield return new WaitForSeconds(animDatas[_buttonID].GetDelay());
         Vector3 showPos = characters[1].GetJointPositionByJointID(animDatas[_buttonID].GetJoint()).position;
         ParticleGenerator.instance.GenerateOneTimeParticleAtPosition(0, showPos);
-        Debug.Log("H: " + animDatas[_buttonID].GetAttackDir()[0] + ", V: " + animDatas[_buttonID].GetAttackDir()[1]);
+        //Debug.Log("H: " + animDatas[_buttonID].GetAttackDir()[0] + ", V: " + animDatas[_buttonID].GetAttackDir()[1]);
         ApplyDamageToCharacter(1, 10f, animDatas[_buttonID].GetAttackDir());
     }
     public void FM_Score(HitResult hr, float _attackAnimationID = 0, bool bCombo = false)
@@ -302,6 +302,8 @@ public class FightingManager : MonoBehaviour
                 break;
             case FightMode.Defense:
                 PlayerGuard((int)(_attackAnimationID));
+                Vector3 showPos = characters[0].GetJointPositionByJointID(animDatas[(int)(_attackAnimationID)].GetJoint()).position;
+                ParticleGenerator.instance.GenerateOneTimeParticleAtPosition(1, showPos);
                 break;
         }
     }

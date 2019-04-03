@@ -2275,6 +2275,11 @@ PrefabInstance:
       propertyPath: okPointer
       value: 
       objectReference: {fileID: 708502550787053408}
+    - target: {fileID: 8310223325162786680, guid: 5d27dd61a1c01be439f1654ae6af4664,
+        type: 3}
+      propertyPath: HintTimeBeforeHit
+      value: 1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d27dd61a1c01be439f1654ae6af4664, type: 3}
 --- !u!224 &1361929244142242965 stripped
