@@ -185,7 +185,7 @@ public class BeatGenerator : MonoBehaviour
                     //indicatorControl.MatchButton(buttonID);
                     //we can calculate the reacting time to give different scores (as a parameter to Score() function) here
                     if (hr != HitResult.Miss)
-                        FightingManager.instance.FM_Score(hr);
+                        FightingManager.instance.FM_Score(hr, buttonID);
                     else
                     {
                         Debug.Log("Match Button Bugged");
