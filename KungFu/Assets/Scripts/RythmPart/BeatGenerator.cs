@@ -110,7 +110,7 @@ public class BeatGenerator : MonoBehaviour
                     //Enemy only has attack animations
                     if (currentBeatInfo.Mode == BeatMode.Defend)
                     {
-                        enemyAnimCtrl.PlayAnim(currentBeatInfo.BeatID);
+                        enemyAnimCtrl.PlayAnim(currentBeatInfo.ButtonIDs[0]);
                     }
                     animPlayed = true;
                 }
@@ -161,7 +161,7 @@ public class BeatGenerator : MonoBehaviour
                 FightingManager.instance.FM_Score(hr, buttonID);
             }
             else
-                FightingManager.instance.FM_Miss(1);
+                Debug.Log("Match Button Bugged");//FightingManager.instance.FM_Miss(1);
 
             //need to change
             resultControl.ShowResult(hr);
@@ -188,8 +188,8 @@ public class BeatGenerator : MonoBehaviour
                         FightingManager.instance.FM_Score(hr);
                     else
                     {
-                        Debug.Log("asdsa");
-                        FightingManager.instance.FM_Miss(1);
+                        Debug.Log("Match Button Bugged");
+                        //FightingManager.instance.FM_Miss(1);
                     }
                     //Get JointID
                     int index = DataUtility.IntArrayIndex(beatHitObject.BeatTime.ButtonIDs, buttonID);
@@ -226,7 +226,8 @@ public class BeatGenerator : MonoBehaviour
                 {
                     if (!matched.Value)
                     {
-                        FightingManager.instance.FM_Miss(1);
+                        float[] knockbackDir = {beatHitObject.BeatTime.KnockBack_H, beatHitObject.BeatTime.KnockBack_V};
+                        FightingManager.instance.FM_Miss(1, knockbackDir);
                         //show miss image
                         resultControl.ShowResult(HitResult.Miss);
                         //sfxControl.PlayRandomMissSFX();

@@ -4,80 +4,35 @@ using UnityEngine;
 
 public class RingIndicatorControl : MonoBehaviour
 {
-    Transform LeftWrist;
-    Transform RightWrist;
-    Transform LeftKnee;
-    Transform RightKnee;
+    Dictionary<int, Transform> JointTransMap;
     public GameObject RingIndicator;
     public Color PerfectColor = Color.red;
     public Color OKColor = Color.green;
-    Dictionary<int, Transform[]> RingPositionMap;
 
     Vector3 FinalSize = new Vector3(0.1f, 0.1f, 0.1f);
     // Start is called before the first frame update
     void Start()
     {
-        //RingPositionMap = new Dictionary<int, Transform[]>()
-        //{
-        //    {0, new Transform[] { RightWrist } },
-        //    {1, new Transform[] { RightWrist } },
-        //    {2, new Transform[] { RightWrist } },
-        //    {3, new Transform[] { LeftWrist, RightWrist } },
-        //    {4, new Transform[] { LeftWrist } },
-        //    {5, new Transform[] { RightWrist } },
-        //    {6, new Transform[] { RightWrist } }
-        //};
     }
 
     public void SetData(Transform _Enemy)
     {
         AttackJointID[] _attackArray = _Enemy.GetComponentsInChildren<AttackJointID>();
+        JointTransMap = new Dictionary<int, Transform>();
         foreach (var item in _attackArray)
         {
-            switch (item.iJointID)
-            {
-                case 1:
-                    RightWrist = item.transform;
-                    break;
-                case 2:
-                    LeftWrist = item.transform;
-                    break;
-                case 3:
-                    RightKnee = item.transform;
-                    break;
-                case 4:
-                    LeftKnee = item.transform;
-                    break;
-                default:
-                    break;
-            }
+            JointTransMap.Add(item.iJointID, item.transform);
+            Debug.Log(item.iJointID);
         }
-        RingPositionMap = new Dictionary<int, Transform[]>()
-        {
-            {0, new Transform[] { RightWrist } },
-            {1, new Transform[] { LeftWrist, RightWrist } },
-            {2, new Transform[] { LeftWrist } },
-            {3, new Transform[] { LeftWrist } },
-            {4, new Transform[] { RightWrist } },
-            {5, new Transform[] { LeftKnee } },
-            {6, new Transform[] { LeftWrist } }
-        };
     }
 
     //pending fix
-    public void ShowRingIndicator(BeatInfo beatAnimation)
+    public void ShowRingIndicator(BeatInfo beatData)
     {
-        foreach (var map in RingPositionMap)
+        foreach(int jointID in beatData.JointIDs)
         {
-            if (map.Key == beatAnimation.BeatID)
-            {
-                foreach (Transform trans in map.Value)
-                {
-                    GameObject ring = Instantiate(RingIndicator, trans.position, Quaternion.identity, trans);
-                    StartCoroutine(StartShrinking(ring, beatAnimation));
-                }
-                break;
-            }
+            GameObject ring = Instantiate(RingIndicator, JointTransMap[jointID].position, Quaternion.identity, JointTransMap[jointID]);
+            StartCoroutine(StartShrinking(ring, beatData));
         }
     }
 

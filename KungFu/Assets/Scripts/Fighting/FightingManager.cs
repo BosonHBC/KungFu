@@ -305,7 +305,7 @@ public class FightingManager : MonoBehaviour
                 break;
         }
     }
-    public void FM_Miss(int number)
+    public void FM_Miss(int number, float[] knockbackDir)
     {
         MyGameInstance.instance.Miss(number);
         switch (fightMode)
@@ -318,7 +318,7 @@ public class FightingManager : MonoBehaviour
             case FightMode.Defense:
                 Vector3 showPos = characters[0].GetJointPositionByJointID(0).position;
                 ParticleGenerator.instance.GenerateOneTimeParticleAtPosition(0, showPos);
-                ApplyDamageToCharacter(0, 10f, new float[] { 0,1});
+                ApplyDamageToCharacter(0, 10f, knockbackDir);
                 break;
         }
     }
