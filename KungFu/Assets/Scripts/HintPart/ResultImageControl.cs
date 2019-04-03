@@ -13,7 +13,7 @@ public class ResultImageControl : MonoBehaviour
 
     public void ShowResult(HitResult hitResult)
     {
-        gameObject.GetComponentInChildren<ParticleSystem>().Play();
+        //gameObject.GetComponentInChildren<ParticleSystem>().Play();
         switch (hitResult)
         {
             case HitResult.Perfect:

@@ -11,22 +11,14 @@ public class Player : Character
     private int iCurrentView;   // 0 -> first person, 1 -> third person
     [SerializeField] private float fDebugMovespeed;
     private bool bSwitching;
-    private PlayerAnimController pAnimCtrl;
-    private AttackJointID[] attackJoints;
-
-    
 
     protected override void Start()
     {
-        base.Start();
+        anim = GetComponent<PlayerAnimController>();
         iCurrentView = 1;
         bSwitching = false;
         trackedDolly = myCamera.GetCinemachineComponent<CinemachineTrackedDolly>();
-        pAnimCtrl = GetComponent<PlayerAnimController>();
-        attackJoints = transform.GetComponentsInChildren<AttackJointID>();
-        System.Array.Sort(attackJoints, delegate (AttackJointID _a1, AttackJointID _a2) {
-            return _a1.iJointID.CompareTo(_a2.iJointID);
-        });
+
     }
 
     // Update is called once per frame
@@ -35,19 +27,6 @@ public class Player : Character
         base.Update();
         DebugMovement();
     }
-
-    public override void GetDamage(float _dmg, bool _fromLeft)
-    {
-        pAnimCtrl.GetDamage(_fromLeft);
-        base.GetDamage(_dmg, _fromLeft);
-
-    }
-
-    public Transform GetJointTransform(int _id)
-    {
-        return attackJoints[_id].transform;
-    }
-
     public void SwitchPerspectiveView()
     {
        

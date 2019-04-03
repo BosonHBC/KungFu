@@ -20,8 +20,10 @@ public class EnemyAnimationControl : BaseAnimController
 
     public void PlayAnim(int AnimationID)
     {
+        float _animId = (AnimationID + 1) / 10f;
         //enemyAnimator.Play(AnimationData[AnimationID].AnimationName);
-        anim.SetInteger("AttackID_i", AnimationID + 1);
+        anim.SetFloat("AttackID_i", _animId);
+        anim.SetFloat("Attack_Anim_ID", _animId);
     }
     
     public void SlowDown(float time)

@@ -47,14 +47,43 @@ public class FightingManager : MonoBehaviour
     private ModeHint hint;
     private int[] randomID = { 0, 1, 2 };
     public bool bFightOver;
+    // Mapping, should be written in json data
+    class AnimationData
+    {
+        public AnimationData(int _Joint, float _delay, float _attackDirH, float _attackDirV)
+        {
+            iJointID = _Joint;
+            fDelay = _delay;
+            fa_AttackDir = new float[2];
+            fa_AttackDir[0] = _attackDirH;
+            fa_AttackDir[1] = _attackDirV;
+        }
+        private int iJointID;
+        private float fDelay;
+        private float[] fa_AttackDir;
+
+        public int GetJoint() { return iJointID; }
+        public float GetDelay() { return fDelay; }
+        public float[] GetAttackDir() { return fa_AttackDir; }
+    };
+    List<AnimationData> animDatas = new List<AnimationData>();
     // Start is called before the first frame update
     void Start()
     {
-
         randomizeArray(randomID, randomID.Length);
-        Debug.Log(randomID[0] + " " + randomID[1]);
-        CreateObjects();
+        animDatas.Add(new AnimationData(0, 0.5f, 0f, 1f));
+        animDatas.Add(new AnimationData(1, 0.53f,-1f,0f));
+        animDatas.Add(new AnimationData(1, 0.3f, -1f,0.65f));
+        animDatas.Add(new AnimationData(1, 0.33f,-0.5f,1f));
+        animDatas.Add(new AnimationData(4, 0.68f, 0f,1f));
+        animDatas.Add(new AnimationData(2, 0.3f, 0.5f,1f));
+        animDatas.Add(new AnimationData(2, 0.3f, 0.67f,1f));
+        animDatas.Add(new AnimationData(2, 0.53f,1f,0f));
+        animDatas.Add(new AnimationData(5, 0.75f,0.3f,-1f));
+        animDatas.Add(new AnimationData(6, 0.75f,-1f,-1f));
+        animDatas.Add(new AnimationData(3, 0.66f,0f,-1f));
 
+        CreateObjects();
     }
 
     // Update is called once per frame
@@ -71,7 +100,7 @@ public class FightingManager : MonoBehaviour
             if (onPositioned != null)
                 onPositioned.Invoke();
             // Debug Game Over
-          //  StartCoroutine(ie_DelayGameOverTest(6f,1));
+            //  StartCoroutine(ie_DelayGameOverTest(6f,1));
         }
 
     }
@@ -185,7 +214,7 @@ public class FightingManager : MonoBehaviour
                 bIsPlayerAttack = false;
                 characters[0].GetComponent<BaseAnimController>().DashVertically(-1, 1, 1);
             }
-               
+
             characters[1].GetComponent<Animator>().SetBool("PlayerAttacking_b", bIsPlayerAttack);
             hint.SwitchMode(bIsPlayerAttack);
         }
@@ -230,10 +259,10 @@ public class FightingManager : MonoBehaviour
         }
     }
 
-    public void ApplyDamageToCharacter(int _characterID, float _dmgAmount)
+    public void ApplyDamageToCharacter(int _characterID, float _dmgAmount, float[] _attackDir)
     {
         // 0 -> player, 1 -> enemy
-        characters[_characterID].GetDamage(_dmgAmount, Random.Range(0, 2) == 0 ? true : false);
+        characters[_characterID].GetDamage(_dmgAmount, _attackDir);
     }
 
     public void PlayerGuard(int releativeAttackID = 0)
@@ -241,6 +270,14 @@ public class FightingManager : MonoBehaviour
         characters[0].GetComponent<PlayerAnimController>().PlayGuardAnimation(releativeAttackID);
     }
 
+    IEnumerator ie_DelayAttackScore(int _buttonID)
+    {
+        yield return new WaitForSeconds(animDatas[_buttonID].GetDelay());
+        Vector3 showPos = characters[1].GetJointPositionByJointID(animDatas[_buttonID].GetJoint()).position;
+        ParticleGenerator.instance.GenerateOneTimeParticleAtPosition(0, showPos);
+        Debug.Log("H: " + animDatas[_buttonID].GetAttackDir()[0] + ", V: " + animDatas[_buttonID].GetAttackDir()[1]);
+        ApplyDamageToCharacter(1, 10f, animDatas[_buttonID].GetAttackDir());
+    }
     public void FM_Score(HitResult hr, float _attackAnimationID = 0, bool bCombo = false)
     {
         MyGameInstance.instance.Score(hr);
@@ -251,18 +288,20 @@ public class FightingManager : MonoBehaviour
             case FightMode.Offense:
                 if (!bCombo)
                 {
+                    int _buttonID = (int)_attackAnimationID;
                     // Play Player Attack animation
-                    characters[0].GetComponent<PlayerAnimController>().PlayPlayerAttackAnimation(_attackAnimationID);
-                    // Give Damage to Enemy
-                    ApplyDamageToCharacter(1, 10f);
+                    characters[0].GetComponent<PlayerAnimController>().PlayPlayerAttackAnimation(_attackAnimationID / 10f);
+                    // Give Damage to Enemy when damage was given to enemy
+                    StartCoroutine(ie_DelayAttackScore(_buttonID));
                 }
                 else
                 {
-                    ApplyDamageToCharacter(1, 5f);
+                    // Combo Need to be re-structure
+                    //ApplyDamageToCharacter(1, 5f);
                 }
                 break;
             case FightMode.Defense:
-                PlayerGuard((int)(_attackAnimationID*10));
+                PlayerGuard((int)(_attackAnimationID * 10));
                 break;
         }
     }
@@ -277,7 +316,9 @@ public class FightingManager : MonoBehaviour
 
                 break;
             case FightMode.Defense:
-                ApplyDamageToCharacter(0, 10f);
+                Vector3 showPos = characters[0].GetJointPositionByJointID(0).position;
+                ParticleGenerator.instance.GenerateOneTimeParticleAtPosition(0, showPos);
+                ApplyDamageToCharacter(0, 10f, new float[] { 0,1});
                 break;
         }
     }

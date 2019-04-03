@@ -20,10 +20,11 @@ public class BaseAnimController : MonoBehaviour
     {
         StartCoroutine(LerpToNumber(0, 0, 1, 0.5f));
     }
-    public void GetDamage(bool _fromLeft)
+    public void GetDamage(float[] _attackDir)
     {
-        anim.SetBool("KnockBackLeft_b", _fromLeft);
-        
+        anim.SetFloat("AttackDirH_f", _attackDir[0]);
+        anim.SetFloat("AttackDirV_f", _attackDir[1]);
+
         anim.Play("KnockBack");
     }
     public void DashVertically(float _vert, float _dashSpeed, float _dashDuration, UnityAction _onFinishDash = null)

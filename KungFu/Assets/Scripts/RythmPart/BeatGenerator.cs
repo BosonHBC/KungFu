@@ -25,6 +25,8 @@ public class BeatGenerator : MonoBehaviour
     int currentBeatIndex = 0;
     #endregion
     Dictionary<int, KeyCode> buttonMapping;
+
+
     //Timer for beats
     public float beatTimer = 0.0f;
     public bool bCanPlay;
@@ -65,6 +67,7 @@ public class BeatGenerator : MonoBehaviour
             {9, KeyCode.B },
             {10, KeyCode.V }
         };
+
         beatQueue = new Queue<BeatHitObject>();
         levelLoader = FindObjectOfType<LevelLoader>();
         //indicatorControl = Indicator.GetComponent<IndicatorControl>();
@@ -178,16 +181,15 @@ public class BeatGenerator : MonoBehaviour
 
             if (hr != HitResult.Miss)
             {
-                float _intToFloat = buttonID / 10f;
-                
-                FightingManager.instance.FM_Score(hr, _intToFloat);
+                //float _intToFloat = buttonID / 10f;
+                FightingManager.instance.FM_Score(hr, buttonID);
             }
-
             else
                 FightingManager.instance.FM_Miss(1);
 
             //need to change
             resultControl.ShowResult(hr);
+            
             hintGenerator.DirectlyRemoveFirstHint();
             if (beatQueue.Count > 0)
                 beatQueue.Dequeue();

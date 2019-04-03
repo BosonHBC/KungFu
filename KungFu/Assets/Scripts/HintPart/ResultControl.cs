@@ -28,7 +28,7 @@ public class ResultControl : MonoBehaviour
         RectTransform goTr = ri.GetComponent<RectTransform>();
         goTr.SetParent(transform);
         Player _player = (Player)FightingManager.instance.characters[0];
-        Vector3 WorldObject = _player.GetJointTransform(_attackJointID).position;
+        Vector3 WorldObject = _player.GetJointPositionByJointID(_attackJointID).position;
        
         RectTransform CanvasRect = FightingManager.instance.myCanvas.GetComponent<RectTransform>();
         // Calculate The relative position according to the canvas

@@ -40,7 +40,7 @@ public class PlayerAnimController : BaseAnimController
     }
     public void PlayPlayerAttackAnimation(float _AttackID)
     {
-        Debug.Log("Anim ID: " + _AttackID);
+        //Debug.Log("Anim ID: " + _AttackID);
         anim.SetFloat("AttackID_i", _AttackID);
         anim.SetFloat("Attack_Anim_ID", _AttackID);
     }

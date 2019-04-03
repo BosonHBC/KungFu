@@ -7,7 +7,6 @@ public class Enemy : Character
     // Start is called before the first frame update
    protected override void Start()
     {
-        base.Start();
         anim = GetComponent<EnemyAnimationControl>();
     }
 

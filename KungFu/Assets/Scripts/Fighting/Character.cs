@@ -16,20 +16,18 @@ public class Character : MonoBehaviour
     private Image hpFillBar;
     Animator iconGetRed;
 
-
     protected bool bFaceToOpponent = true;
 
     [SerializeField] private float fDashSpeed;
     [SerializeField] private float fDashThreshold;
     private float fDistToOpponent;
     private bool bDashing;
+    AttackJointID[] attackJoints;
     // Start is called before the first frame update
     protected virtual void Start()
     {
         anim = GetComponent<BaseAnimController>();
-        //SetData(null);
     }
-
     // Update is called once per frame
     protected virtual void Update()
     {
@@ -41,15 +39,14 @@ public class Character : MonoBehaviour
             {
                 bDashing = false;
                 anim.StopDash(0.2f);
-
             }
         }
     }
 
-    public virtual void GetDamage(float _dmg, bool _fromLeft)
+    public virtual void GetDamage(float _dmg, float[] _attackDir)
     {
         float _afterDmg = fCurrentHp - _dmg;
-        anim.GetDamage(_fromLeft);
+        anim.GetDamage(_attackDir);
         StartCoroutine(GetDamage(fCurrentHp, _afterDmg<0?0:_afterDmg));
         if (fCurrentHp <= 0)
         {
@@ -75,6 +72,16 @@ public class Character : MonoBehaviour
         name = "P" + iCharID + "_" + sCharName;
         trOppoent = _trOpponent;
 
+        attackJoints = transform.GetComponentsInChildren<AttackJointID>();
+        //Debug.Log(name + " " + attackJoints.Length);
+        System.Array.Sort(attackJoints, delegate (AttackJointID _a1, AttackJointID _a2) {
+            return _a1.iJointID.CompareTo(_a2.iJointID);
+        });
+    }
+    
+    public Transform GetJointPositionByJointID(int _id)
+    {
+        return attackJoints[_id].transform;
     }
 
     void FaceToOpponent()
