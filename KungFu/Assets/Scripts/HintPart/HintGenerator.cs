@@ -21,10 +21,8 @@ public class HintGenerator : MonoBehaviour
     //For beat timer
     BeatGenerator beatGenerator;
     #region
-    protected int currentAnimationIndex;
     protected int currentBeatIndex;
-    protected JSONNode animData;
-    protected Dictionary<int, AnimationInfo> animationData;
+    protected JSONNode beatArray;
     protected Dictionary<int, BeatInfo> beatData;
     #endregion
     protected int currentHintIndex = 0;
@@ -37,12 +35,12 @@ public class HintGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animData = MyGameInstance.instance.GetComponent<DataLoader>().GetAnimationArrayByName("BattleGirl");
-        animationData = MyGameInstance.instance.GetComponent<DataLoader>().GetAnimationInfos();
+        beatArray = MyGameInstance.instance.GetComponent<DataLoader>().GetBeatArrayByName("BattleGirl");
         beatData = MyGameInstance.instance.GetComponent<DataLoader>().GetBeatInfos();
         beatGenerator = FindObjectOfType<BeatGenerator>();
         hintsQueue = new Queue<GameObject>();
         ringIndicator = GetComponent<RingIndicatorControl>();
+        currentBeatIndex = 0;
     }
     private void Update()
     {
@@ -50,33 +48,27 @@ public class HintGenerator : MonoBehaviour
         {
             //generate hints
             float hintTimer = beatGenerator.beatTimer;
-            if (animData[currentAnimationIndex]["AnimationID"].AsInt != -1)
+            if (beatArray[currentBeatIndex]["BeatID"].AsInt != -1)
             {
-                AnimationInfo currentAnimInfo = animationData[animData[currentAnimationIndex]["AnimationID"].AsInt];
                 //get beat infos
-                BeatInfo currentBeatInfo = beatData[currentAnimInfo.BeatIDs[currentBeatIndex]];
-                if (animData[currentAnimationIndex]["timeToHit"].AsFloat - currentBeatInfo.PerfectStart <= hintTimer + HintTimeBeforeHit)
+                BeatInfo currentBeatInfo = beatData[beatArray[currentBeatIndex]["BeatID"].AsInt];
+                if (beatArray[currentBeatIndex]["timeToHit"].AsFloat - currentBeatInfo.PerfectStart <= hintTimer + HintTimeBeforeHit)
                 {
-                    currentBeatIndex++;
-                    if (currentAnimInfo.Mode == BeatMode.Defend)
+                    if (currentBeatInfo.Mode == BeatMode.Defend)
                     {
                         FightingManager.instance.SetFightMode(FightingManager.FightMode.Defense);
                     }
                     else
                         FightingManager.instance.SetFightMode(FightingManager.FightMode.Offense);
-                    GenerateHint(currentBeatInfo, currentAnimInfo.Mode);
-                    if (currentAnimInfo.Mode == BeatMode.Defend)
+                    GenerateHint(currentBeatInfo);
+                    if (currentBeatInfo.Mode == BeatMode.Defend)
                         StartCoroutine(ShowRingIndicatorInSecs(currentBeatInfo, HintTimeBeforeHit + currentBeatInfo.OKStart));
-                    if (currentBeatIndex >= currentAnimInfo.BeatIDs.Length)
-                    {
-                        currentAnimationIndex++;
-                        currentBeatIndex = 0;
-                    }
+                    currentBeatIndex++;
                 }
             }
         }
     }
-    void GenerateHint(BeatInfo beatTiming, BeatMode beatMode)
+    void GenerateHint(BeatInfo beatTiming)
     {
         // Dash before hit, some thing wrong
         if (FightingManager.instance.fightMode == FightingManager.FightMode.Defense)
@@ -94,7 +86,7 @@ public class HintGenerator : MonoBehaviour
         tmpGO.transform.localScale = Vector3.one;
         // Set new speed
         HintObjectSpeed = backgroundLength / (HintTimeBeforeHit + beatTiming.OKStart + beatTiming.OKDuration);
-        tmpGO.GetComponent<HintTrackControl>().StartMoving(beatTiming, this, beatMode);
+        tmpGO.GetComponent<HintTrackControl>().StartMoving(beatTiming, this);
         hintsQueue.Enqueue(tmpGO);
         if (!hasAreaPlaced)
         {

@@ -13,10 +13,12 @@ public class BeatInfo
     public bool IsCombo;
     public float PerfectStart;
     public float PerfectDuration;
+    public float KnockBack_H;
+    public float KnockBack_V;
 
     public BeatInfo(JSONNode beatInfo)
     {
-        float _scalar = 60.0f / 24.0f;
+        float _scalar = 1.0f;
         BeatID = beatInfo["BeatID"].AsInt;
         ButtonIDs = DataUtility.GetIntArrayFromJSONNode(beatInfo["ButtonID"]);
         JointIDs = DataUtility.GetIntArrayFromJSONNode(beatInfo["JointID"]);
@@ -25,6 +27,8 @@ public class BeatInfo
         OKDuration = beatInfo["OKDuration"].AsFloat * _scalar;
         PerfectStart = beatInfo["PerfectStart"].AsFloat * _scalar;
         PerfectDuration = beatInfo["PerfectDuration"].AsFloat * _scalar;
+        KnockBack_H = beatInfo["KnockBack_H"];
+        KnockBack_V = beatInfo["KnockBack_V"];
         if (beatInfo["Mode"].Value == "Defend")
             Mode = BeatMode.Defend;
         else

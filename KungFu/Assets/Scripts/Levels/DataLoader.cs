@@ -13,8 +13,8 @@ public class DataLoader : MonoBehaviour
     bool bLoaded;
     //new data structure
     #region
-    string animationInfoFilename = "AnimationData.json";
-    string beatInfoFilename = "BeatData.json";
+    //string animationInfoFilename = "AnimationData.json";
+    string beatInfoFilename = "BeatData_new.json";
     string songInfoFilename = "NewMusicData.json";
 
     JSONNode allMusicData;
@@ -23,27 +23,9 @@ public class DataLoader : MonoBehaviour
 
     void LoadDataToObjects()
     {
-        AnimationData = new Dictionary<int, AnimationInfo>();
         BeatData = new Dictionary<int, BeatInfo>();
-
-        //load animation data
-        string filePath = Path.Combine(Application.streamingAssetsPath, animationInfoFilename);
-        if (File.Exists(filePath))
-        {
-            string dataJson = File.ReadAllText(filePath);
-
-            var loadedData = JSON.Parse(dataJson);
-            foreach (var anim in loadedData["Animations"].Values)
-            {
-                AnimationData.Add(anim["AnimationID"], new AnimationInfo(anim));
-            }
-        }
-        else
-        {
-            Debug.LogError("Cannot load game data!");
-        }
         //load beat data
-        filePath = Path.Combine(Application.streamingAssetsPath, beatInfoFilename);
+        string filePath = Path.Combine(Application.streamingAssetsPath, beatInfoFilename);
         if (File.Exists(filePath))
         {
             string dataJson = File.ReadAllText(filePath);
@@ -94,51 +76,17 @@ public class DataLoader : MonoBehaviour
         }
     }
 
-    //public JSONNode GetBeatDataByName(string name)
-    //{
-    //    JSONNode retBeat = null;
-    //    foreach (var music in musicData)
-    //    {
-    //        if (music.Value["name"] == name)
-    //        {
-    //            retBeat = music.Value["beatArray"];
-    //            break;
-    //        }
-    //    }
-
-    //    return retBeat;
-    //}
-
     public JSONNode GetAnimationData()
     {
         return animationData;
     }
 
-    //public BeatTiming GetBeatAnimationDataByID(int ID)
-    //{
-    //    JSONNode retBeat = null;
-    //    foreach (var anim in animationData)
-    //    {
-    //        if (anim.Value["AnimationID"].AsInt == ID)
-    //        {
-    //            retBeat = anim.Value;
-    //            break;
-    //        }
-    //    }
-    //    if (retBeat != null)
-    //        return new BeatTiming(retBeat[2].AsFloat, retBeat[3].AsFloat, retBeat[4].AsFloat, retBeat[5].AsFloat);
-    //    else
-    //    {
-    //        Debug.Log("No Animation");
-    //        return null;
-    //    }
-    //}
     public JSONNode GetMusicData()
     {
         return allMusicData;
     }
 
-    public JSONNode GetAnimationArrayByName(string name)
+    public JSONNode GetBeatArrayByName(string name)
     {
         foreach (var song in allMusicData.Values)
         {

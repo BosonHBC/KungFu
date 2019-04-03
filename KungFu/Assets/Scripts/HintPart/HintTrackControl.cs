@@ -44,7 +44,6 @@ public class HintTrackControl : MonoBehaviour
                     if (timer >= beatTiming.OKStart + timeBeforeHit)
                     {
                         ChangeToOK();
-
                     }
                     break;
                 case HitResult.Good:
@@ -161,10 +160,10 @@ public class HintTrackControl : MonoBehaviour
         }
     }
 
-    public void StartMoving(BeatInfo beatTime, HintGenerator hintGen, BeatMode bMode)
+    public void StartMoving(BeatInfo beatTime, HintGenerator hintGen)
     {
         matchedButtons = new Dictionary<int, bool>();
-        beatMode = bMode;
+        beatMode = beatTime.Mode;
 
         beatTiming = beatTime;
         buttonIDs = beatTime.ButtonIDs;
@@ -179,26 +178,11 @@ public class HintTrackControl : MonoBehaviour
         timeBeforeHit = hintGen.HintTimeBeforeHit;
 
         isMoving = true;
-        if (bMode == BeatMode.Defend)
+        if (beatMode == BeatMode.Defend)
             ActivateButtons(buttonIDs);
-        else if (bMode == BeatMode.Attack && !beatTime.IsCombo)
+        else if (beatMode == BeatMode.Attack && !beatTime.IsCombo)
             ActivateAllButtons();
     }
-
-    //IEnumerator FadeOut(float time = 1.0f)
-    //{
-    //    isMoving = false;
-    //    while(ChildBodyParts[0].GetComponent<Image>().color.a >= 0)
-    //    {
-    //        for(int i = 0; i < ChildBodyParts.Length; ++ i)
-    //        {
-    //            Color tmp = ChildBodyParts[0].GetComponent<Image>().color;
-    //            ChildBodyParts[0].GetComponent<Image>().color = new Color(tmp.r, tmp.g, tmp.b, tmp.a - Time.deltaTime / time);
-    //        }
-    //        yield return new WaitForEndOfFrame();
-    //    }
-    //    Destroy(gameObject);
-    //}
 
     public BeatInfo GetBeatTiming()
     {

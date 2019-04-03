@@ -92,139 +92,139 @@
             "animArray": [
                 {
                     "timeToHit": 17.140,
-                    "AnimationID": 0
+                    "BeatID": 22
                 },
                 {
                     "timeToHit": 23.960,
-                    "AnimationID": 1
+                    "BeatID": 23
                 },
                 {
                     "timeToHit": 30.840,
-                    "AnimationID": 6
+                    "BeatID": 6
                 },
                 {
                     "timeToHit": 37.730,
-                    "AnimationID": 3
+                    "BeatID": 3
                 },
                 {
                     "timeToHit": 44.560,
-                    "AnimationID": 1
+                    "BeatID": 1
                 },
                 {
                     "timeToHit": 51.430,
-                    "AnimationID": 3
+                    "BeatID": 3
                 },
                 {
                     "timeToHit": 58.280,
-                    "AnimationID": 1
+                    "BeatID": 1
                 },
                 {
                     "timeToHit": 65.200,
-                    "AnimationID": 0
+                    "BeatID": 0
                 },
                 {
                     "timeToHit": 72.060,
-                    "AnimationID": 7
+                    "BeatID": 7
                 },
                 {
                     "timeToHit": 75.450,
-                    "AnimationID": 8
+                    "BeatID": 8
                 },
                 {
                     "timeToHit": 78.860,
-                    "AnimationID": 8
+                    "BeatID": 8
                 },
                 {
                     "timeToHit": 82.290,
-                    "AnimationID": 8
+                    "BeatID": 8
                 },
                 {
                     "timeToHit": 85.760,
-                    "AnimationID": 9
+                    "BeatID": 9
                 },
                 {
                     "timeToHit": 89.160,
-                    "AnimationID": 7
+                    "BeatID": 7
                 },
                 {
                     "timeToHit": 92.580,
-                    "AnimationID": 8
+                    "BeatID": 8
                 },
                 {
                     "timeToHit": 99.480,
-                    "AnimationID": 3
+                    "BeatID": 3
                 },
                 {
                     "timeToHit": 106.280,
-                    "AnimationID": 3
+                    "BeatID": 3
                 },
                 {
                     "timeToHit": 113.180,
-                    "AnimationID": 3
+                    "BeatID": 3
                 },
                 {
                     "timeToHit": 120.020,
-                    "AnimationID": 1
+                    "BeatID": 1
                 },
                 {
                     "timeToHit": 126.900,
-                    "AnimationID": 9
+                    "BeatID": 9
                 },
                 {
                     "timeToHit": 128.180,
-                    "AnimationID": 10
+                    "BeatID": 10
                 },
                 {
                     "timeToHit": 130.310,
-                    "AnimationID": 11
+                    "BeatID": 11
                 },
                 {
                     "timeToHit": 132.040,
-                    "AnimationID": 9
+                    "BeatID": 9
                 },
                 {
                     "timeToHit": 133.760,
-                    "AnimationID": 10
+                    "BeatID": 10
                 },
                 {
                     "timeToHit": 135.900,
-                    "AnimationID": 8
+                    "BeatID": 8
                 },
                 {
                     "timeToHit": 137.600,
-                    "AnimationID": 9
+                    "BeatID": 9
                 },
                 {
                     "timeToHit": 138.400,
-                    "AnimationID": 11
+                    "BeatID": 11
                 },
                 {
                     "timeToHit": 140.600,
-                    "AnimationID": 11
+                    "BeatID": 11
                 },
                 {
                     "timeToHit": 142.980,
-                    "AnimationID": 9
+                    "BeatID": 9
                 },
                 {
                     "timeToHit": 144.00,
-                    "AnimationID": 8
+                    "BeatID": 8
                 },
                 {
                     "timeToHit": 145.280,
-                    "AnimationID": 8
+                    "BeatID": 8
                 },
                 {
                     "timeToHit": 147.460,
-                    "AnimationID": 8
+                    "BeatID": 8
                 },
                 {
                     "timeToHit": 150.480,
-                    "AnimationID": 8
+                    "BeatID": 8
                 },
                 {
                     "timeToHit": 152.000,
-                    "AnimationID": -1
+                    "BeatID": -1
                 }
             ]
         },
