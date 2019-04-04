@@ -188,45 +188,6 @@ MonoBehaviour:
     m_PositionOffset: 0
     m_SearchRadius: 2
     m_SearchResolution: 5
---- !u!114 &573987098942115163
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3912170483119601313}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d451a0af1cf514041965b27229ca75f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  iJointID: 5
---- !u!114 &6144127036990418552
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3912170483119601327}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d451a0af1cf514041965b27229ca75f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  iJointID: 3
---- !u!114 &6297162949715136686
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3912170483119601335}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d451a0af1cf514041965b27229ca75f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  iJointID: 1
 --- !u!54 &3183317373759745854
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -289,19 +250,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d19b314219b736a40b788acb9187520d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1326916402442783499
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3912170483119601379}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d451a0af1cf514041965b27229ca75f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  iJointID: 0
 --- !u!114 &3946314957521179772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -328,6 +276,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iJointID: 6
+--- !u!114 &6144127036990418552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3912170483119601327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d451a0af1cf514041965b27229ca75f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  iJointID: 3
+--- !u!114 &573987098942115163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3912170483119601313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d451a0af1cf514041965b27229ca75f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  iJointID: 5
 --- !u!114 &6638484730642356414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,6 +315,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iJointID: 2
+--- !u!114 &1326916402442783499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3912170483119601379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d451a0af1cf514041965b27229ca75f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  iJointID: 0
+--- !u!114 &6297162949715136686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3912170483119601335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d451a0af1cf514041965b27229ca75f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  iJointID: 1
 --- !u!1 &5919764552600114715
 GameObject:
   m_ObjectHideFlags: 0
@@ -449,7 +449,7 @@ MonoBehaviour:
     width: 0.2
   m_Looped: 0
   m_Waypoints:
-  - position: {x: 1.1264063, y: 1.725, z: -2.1239336}
+  - position: {x: 1.0588216, y: 2.1456637, z: -2.1239336}
     roll: 0
   - position: {x: 0.5075805, y: 1.932453, z: -0.17779405}
     roll: 0

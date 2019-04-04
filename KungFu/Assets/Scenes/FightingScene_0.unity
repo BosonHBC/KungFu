@@ -14080,8 +14080,8 @@ MonoBehaviour:
   playerCenterPrefab: {fileID: 7963790444639920038, guid: 45ee3a01f4a361f43b9f8844db1b3a86,
     type: 3}
   playerPrefabs:
-  - {fileID: 3107315991141146088, guid: eb883287fabd08e46b85946b8d3ca13e, type: 3}
-  - {fileID: 531183485570348736, guid: 7e1f219ce486d4049bd3bcef32d40675, type: 3}
+  - {fileID: 806495258, guid: 5451cdf61b5d2824aa65975720484b90, type: 3}
+  - {fileID: 5075994537163056933, guid: 917212540ef64a74697534d1f8c4a2d8, type: 3}
   playerReleventParent: {fileID: 1531893282}
   spawnPoints:
   - {fileID: 345791331}

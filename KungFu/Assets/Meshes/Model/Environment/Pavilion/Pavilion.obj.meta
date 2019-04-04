@@ -35,6 +35,11 @@ ModelImporter:
     4300004: polySurface2047_polySurface2047
     4300006: roof_roof
     4300008: steps_steps
+    6400000: bells_bells
+    6400002: pillar_pillar
+    6400004: polySurface2047_polySurface2047
+    6400006: roof_roof
+    6400008: steps_steps
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -68,7 +73,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     useSRGBMaterialColor: 1
     importVisibility: 1
     importBlendShapes: 1

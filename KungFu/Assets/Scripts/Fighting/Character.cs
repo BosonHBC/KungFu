@@ -37,6 +37,7 @@ public class Character : MonoBehaviour
             fDistToOpponent = Vector3.Distance(transform.position, trOppoent.position);
             if (fDistToOpponent <= fDashThreshold)
             {
+                //UnityEditor.EditorApplication.isPaused = true;
                 bDashing = false;
                 anim.StopDash(0.2f);
             }
@@ -121,6 +122,6 @@ public class Character : MonoBehaviour
             return;
         bDashing = true;
 
-        anim.DashVertically(vert, fDashSpeed, 5, delegate { bDashing = false; });
+        anim.DashVertically(vert, fDashSpeed, 1.5f, delegate { bDashing = false; });
     }
 }

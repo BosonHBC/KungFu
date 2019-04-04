@@ -185,7 +185,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3107315992147270488}
-  m_RootOrder: 8
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3107315991082245752
 MonoBehaviour:
@@ -5512,7 +5512,7 @@ GameObject:
   - component: {fileID: 6651013187684520833}
   - component: {fileID: 3236558940815130231}
   m_Layer: 10
-  m_Name: P1_kungFuGirl
+  m_Name: P1_LittleH
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5537,9 +5537,9 @@ Transform:
   - {fileID: 3107315992147270234}
   - {fileID: 3107315992147270236}
   - {fileID: 3107315992147270238}
-  - {fileID: 3107315991082245735}
-  - {fileID: 584259677}
   - {fileID: 1879998770384066891}
+  - {fileID: 584259677}
+  - {fileID: 3107315991082245735}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -5748,7 +5748,7 @@ Transform:
   m_Children:
   - {fileID: 2453545110916520405}
   m_Father: {fileID: 3107315992147270488}
-  m_RootOrder: 10
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 19.429, y: 153.00401, z: 0}
 --- !u!114 &4118952045688786549
 MonoBehaviour:
