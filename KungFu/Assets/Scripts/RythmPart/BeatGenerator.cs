@@ -142,7 +142,7 @@ public class BeatGenerator : MonoBehaviour
                 }
             }
             checkInputFromKeyboard();
-            //checkInputFromArduino();
+            checkInputFromArduino();
 
             beatTimer += Time.deltaTime;
         }
@@ -243,7 +243,7 @@ public class BeatGenerator : MonoBehaviour
 
         //player animation goes here
         //need to add transition from defense to knockback
-        playerAnimCtrl.PlayGuardAnimation(beatHitObject.BeatTime.BeatID);
+        playerAnimCtrl.PlayGuardAnimation(keyIndex);
         //hintGenerator.DirectlyRemoveFirstHint();
         //if (beatQueue.Count > 0)
         //    beatQueue.Dequeue();

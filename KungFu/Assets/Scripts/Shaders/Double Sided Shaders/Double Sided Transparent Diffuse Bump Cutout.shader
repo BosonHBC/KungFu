@@ -89,7 +89,7 @@ Shader "Ciconia Studio/Double Sided/Transparent/Diffuse Bump Cutout" {
                 float3 lightColor = _LightColor0.rgb;
                 o.pos = UnityObjectToClipPos( v.vertex );
 				o.pos.x += sin(_Time.x * 20.0) * 0.1;
-				o.pos.y += sin(_Time.x * 20.0) * 0.1;
+				o.pos.y += cos(_Time.x * 20.0) * 0.1;
 				//o.pos.z += sin(_Time.x) * 10.0;
                 UNITY_TRANSFER_FOG(o,o.pos);
                 TRANSFER_VERTEX_TO_FRAGMENT(o)
