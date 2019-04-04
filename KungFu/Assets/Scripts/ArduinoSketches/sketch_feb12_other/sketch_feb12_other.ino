@@ -26,7 +26,7 @@ void loop(void) {
     myString += "0";
   }
 
-  if (analogRead(button02) >= ThreshHold-100) {  
+  if (analogRead(button02) >= ThreshHold-50) {  
     myString += "1";
   }
   else
@@ -58,7 +58,7 @@ void loop(void) {
     myString += "0";
   }
 
-   if (analogRead(button06) >= ThreshHold) {  
+   if (analogRead(button06) >= ThreshHold-100) {  
     myString += "1";
   }
   else
@@ -68,5 +68,5 @@ void loop(void) {
  
   Serial.println(myString);
   Serial.flush();
-  delay(5);
+  delay(10);
 }
