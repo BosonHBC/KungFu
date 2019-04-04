@@ -22,7 +22,7 @@ public class RingIndicatorControl : MonoBehaviour
         foreach (var item in _attackArray)
         {
             JointTransMap.Add(item.iJointID, item.transform);
-            Debug.Log(item.iJointID);
+            //Debug.Log(item.iJointID);
         }
     }
 

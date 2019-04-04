@@ -22,9 +22,9 @@ public class ArduinoInputScript : MonoBehaviour
     {
         //opens the port and sets the read timeout. The timeout should match the write timeout in the arduino sketch to remove data stream lag.
         com3.Open();
-        com3.ReadTimeout = 5;
+        com3.ReadTimeout = 15;
         com4.Open();
-        com4.ReadTimeout = 5;
+        com4.ReadTimeout = 15;
     }
 
     // Update is called once per frame
@@ -83,12 +83,22 @@ public class ArduinoInputScript : MonoBehaviour
             }
         }
         if (bDebugPrintInput)
+        {
             Debug.Log(input + "\n");
 
-        //Saves input to GameManager
-        if (GameObject.Find("GameManager") != null)
-        {
-            GameManager.instance.SetUnoInput(buttons);
         }
+        else
+        {
+            //Saves input to GameManager
+            MyGameInstance.instance.SetArduinoInput(buttons);
+
+            //only for use with original prototype
+             if (GameObject.Find("GameManager") != null)
+            {
+               GameManager.instance.SetUnoInput(buttons);
+            }
+        }
+
+
     }
 }

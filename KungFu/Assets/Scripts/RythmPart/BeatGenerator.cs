@@ -159,13 +159,11 @@ public class BeatGenerator : MonoBehaviour
             if (hr != HitResult.Miss)
             {
                 FightingManager.instance.FM_Score(hr, buttonID);
+                resultControl.ShowResult(hr);
             }
             else
-                Debug.Log("Match Button Bugged");//FightingManager.instance.FM_Miss(1);
+                Debug.Log("No beats in the queue!");//FightingManager.instance.FM_Miss(1);
 
-            //need to change
-            resultControl.ShowResult(hr);
-            
             hintGenerator.DirectlyRemoveFirstHint();
             if (beatQueue.Count > 0)
                 beatQueue.Dequeue();

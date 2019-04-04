@@ -1,50 +1,29 @@
-const int button01 = 2;
-const int button02 = 3;
-const int button03 = 4;
-const int button04 = 5;
-const int button05 = 6;
-const int button06 = 7;
-const int button07 = 8;
-const int button08 = 9;
-const int button09 = 10;
-const int button10 = 11;
-const int button11 = 12;
+/* FSR simple testing sketch.  <br>Connect one end of FSR to power, the other end to Analog 0.
+Then connect one end of a 10K resistor from Analog 0 to ground 
+*/
+const int button01 = 0; // the FSR and 10K pulldown are connected to a0
+const int button02 = 1;
+const int button03 = 2;
+const int button04 = 3;
+const int button05 = 4;
+const int button06 = 5;
+const int button07 = 6;
+const int button08 = 7;
+const int button09 = 8;
+const int button010 = 9;
+const int button011 = 10;
 
-
-void setup() {
-  // put your setup code here, to run once:
-Serial.begin(9600);
-pinMode(button01, INPUT);
-pinMode(button02, INPUT);
-pinMode(button03, INPUT);
-pinMode(button04, INPUT);
-pinMode(button05, INPUT);
-pinMode(button06, INPUT);
-pinMode(button07, INPUT);
-pinMode(button08, INPUT);
-pinMode(button09, INPUT);
-pinMode(button10, INPUT);
-pinMode(button11, INPUT);
-
-digitalWrite(button01, HIGH);
-digitalWrite(button02, HIGH);
-digitalWrite(button03, HIGH);
-digitalWrite(button04, HIGH);
-digitalWrite(button05, HIGH);
-digitalWrite(button06, HIGH);
-digitalWrite(button07, HIGH);
-digitalWrite(button08, HIGH);
-digitalWrite(button09, HIGH);
-digitalWrite(button10, HIGH);
-digitalWrite(button11, HIGH);
+const int ThreshHold = 600;
+ 
+void setup(void) {
+  Serial.begin(9600);   
 }
-
-void loop() {
-  // put your main code here, to run repeatedly:
-
-  String myString = "";
-  if(digitalRead(button01) == LOW)
-  {
+ 
+void loop(void) {
+    String myString = ""; 
+    
+    // the analog reading from the FSR resistor divider
+  if (analogRead(button01) >= ThreshHold+75) {  
     myString += "1";
   }
   else
@@ -52,8 +31,7 @@ void loop() {
     myString += "0";
   }
 
-  if(digitalRead(button02) == LOW)
- {
+  if (analogRead(button02) >= ThreshHold+25) {  
     myString += "1";
   }
   else
@@ -61,8 +39,7 @@ void loop() {
     myString += "0";
   }
 
-  if(digitalRead(button03) == LOW)
-  {
+  if (analogRead(button03) >= ThreshHold) {  
     myString += "1";
   }
   else
@@ -70,8 +47,7 @@ void loop() {
     myString += "0";
   }
 
-  if(digitalRead(button04) == LOW)
-  {
+  if (analogRead(button04) >= ThreshHold -50) {  
     myString += "1";
   }
   else
@@ -79,26 +55,7 @@ void loop() {
     myString += "0";
   }
 
-  if(digitalRead(button05) == LOW)
-  {
-    myString += "1";
-  }
-  else
-  {
-    myString += "0";
-  }
-  
-  if(digitalRead(button06) == LOW)
- {
-    myString += "1";
-  }
-  else
-  {
-    myString += "0";
-  }
-  
-  if(digitalRead(button07) == LOW)
- {
+  if (analogRead(button05) >= ThreshHold+100) {  
     myString += "1";
   }
   else
@@ -106,8 +63,7 @@ void loop() {
     myString += "0";
   }
 
-  if(digitalRead(button08) == LOW)
-  {
+  if (analogRead(button06) >= ThreshHold) {  
     myString += "1";
   }
   else
@@ -115,8 +71,7 @@ void loop() {
     myString += "0";
   }
 
-  if(digitalRead(button09) == LOW)
-  {
+  if (analogRead(button07) >= ThreshHold-50) {  
     myString += "1";
   }
   else
@@ -124,8 +79,7 @@ void loop() {
     myString += "0";
   }
 
-  if(digitalRead(button10) == LOW)
-  {
+  if (analogRead(button08) >= ThreshHold+100) {  
     myString += "1";
   }
   else
@@ -133,15 +87,31 @@ void loop() {
     myString += "0";
   }
 
-  if(digitalRead(button11) == LOW)
- {
+  if (analogRead(button09) >= ThreshHold) {  
     myString += "1";
   }
   else
   {
     myString += "0";
   }
-    Serial.println(myString);
-    Serial.flush();
-    delay(5);
+
+  if (analogRead(button10) >= ThreshHold) {  
+    myString += "1";
+  }
+  else
+  {
+    myString += "0";
+  }
+
+   if (analogRead(button11) >= ThreshHold-100) {  
+    myString += "1";
+  }
+  else
+  {
+    myString += "0";
+  }
+ 
+  Serial.println(myString);
+  Serial.flush();
+  delay(10);
 }
