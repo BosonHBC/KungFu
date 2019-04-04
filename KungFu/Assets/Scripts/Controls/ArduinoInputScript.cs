@@ -88,8 +88,17 @@ public class ArduinoInputScript : MonoBehaviour
 
         }
         else
+        {
             //Saves input to GameManager
-       MyGameInstance.instance.SetArduinoInput(buttons);
-        
+            MyGameInstance.instance.SetArduinoInput(buttons);
+
+            //only for use with original prototype
+             if (GameObject.Find("GameManager") != null)
+            {
+               GameManager.instance.SetUnoInput(buttons);
+            }
+        }
+
+
     }
 }
