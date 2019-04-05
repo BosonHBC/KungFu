@@ -33,7 +33,7 @@ void loop(void) {
     myString += "0";
   }
 
-  if (analogRead(button03) >= ThreshHold) {  
+  if (analogRead(button03) >= ThreshHold+25) {  
     myString += "1";
   }
   else
@@ -41,7 +41,7 @@ void loop(void) {
     myString += "0";
   }
 
-  if (analogRead(button04) >= ThreshHold -50) {  
+  if (analogRead(button04) >= ThreshHold) {  
     myString += "1";
   }
   else

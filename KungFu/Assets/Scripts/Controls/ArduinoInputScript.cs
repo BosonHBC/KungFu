@@ -9,8 +9,8 @@ public class ArduinoInputScript : MonoBehaviour
 
     internal bool[] buttons = new bool[11];
     private int NUMBUTTONS = 11;
-    private string outputStringCom3 = "";
-    private string outputStringCom4 = "";
+    private string outputStringCom3 = "00000";
+    private string outputStringCom4 = "000000";
 
     [SerializeField] bool bDebugPrintInput;
 
@@ -22,38 +22,38 @@ public class ArduinoInputScript : MonoBehaviour
     {
         //opens the port and sets the read timeout. The timeout should match the write timeout in the arduino sketch to remove data stream lag.
         com3.Open();
-        com3.ReadTimeout = 15;
+        com3.ReadTimeout = 10;
         com4.Open();
-        com4.ReadTimeout = 15;
+        com4.ReadTimeout = 10;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //check if port is open and read the string from arduino.
-        if (com3.IsOpen)
-        {
-            try
+            //check if port is open and read the string from arduino.
+            if (com3.IsOpen)
             {
-                outputStringCom3 = com3.ReadLine();
+                try
+                {
+                    outputStringCom3 = com3.ReadLine();
+                }
+                catch (System.Exception)
+                {
+                    //Debug.Log("Port Closed");
+                }
             }
-            catch (System.Exception)
-            {
-                //Debug.Log("Port Closed");
-            }
-        }
 
-        if (com4.IsOpen)
-        {
-            try
+            if (com4.IsOpen)
             {
-                outputStringCom4 = com4.ReadLine();
+                try
+                {
+                    outputStringCom4 = com4.ReadLine();
+                }
+                catch (System.Exception)
+                {
+                    //Debug.Log("Port Closed");
+                }
             }
-            catch (System.Exception)
-            {
-                //Debug.Log("Port Closed");
-            }
-        }
 
         //Transfers the info sent by arduinos to the bool array of button inputs.
         string outputString = outputStringCom3 + outputStringCom4;

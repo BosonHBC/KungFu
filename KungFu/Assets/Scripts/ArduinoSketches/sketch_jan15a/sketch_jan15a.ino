@@ -10,8 +10,8 @@ const int button06 = 5;
 const int button07 = 6;
 const int button08 = 7;
 const int button09 = 8;
-const int button010 = 9;
-const int button011 = 10;
+const int button10 = 9;
+const int button11 = 10;
 
 const int ThreshHold = 600;
  
