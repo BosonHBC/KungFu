@@ -43,7 +43,7 @@ public class RingIndicatorControl : MonoBehaviour
         //MosicFader_Sprite _fader = ring.GetComponent<MosicFader_Sprite>();
         //_fader.SetColor(OKColor);
         //_fader.FadeTo(1, 0.5f);
-
+        
         var wait = new WaitForEndOfFrame();
         Vector3 scalingSpeed = (FinalSize - ring.transform.localScale) / (beatTiming.PerfectStart + beatTiming.PerfectDuration);
         while (timer <= beatTiming.PerfectStart + beatTiming.PerfectDuration)
