@@ -95,7 +95,7 @@ void loop(void) {
     myString += "0";
   }
 
-  if (analogRead(button10) >= ThreshHold) {
+  if (analogRead(button10) >= ThreshHold - 100) {
     myString += "1";
   }
   else
@@ -103,7 +103,7 @@ void loop(void) {
     myString += "0";
   }
 
-  if (analogRead(button11) >= ThreshHold - 100) {
+  if (analogRead(button11) >= ThreshHold) {
     myString += "1";
   }
   else
