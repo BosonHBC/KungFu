@@ -40,7 +40,7 @@ MonoBehaviour:
     value: 0
   color:
     overrideState: 1
-    value: {r: 0, g: 0, b: 0, a: 1}
+    value: {r: 0.3773585, g: 0.3773585, b: 0.3773585, a: 1}
   center:
     overrideState: 1
     value: {x: 0.5, y: 0.5}
@@ -112,7 +112,7 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 0.2
+    value: 0.41
   color:
     overrideState: 0
     value: {r: 0, g: 0, b: 0, a: 1}
@@ -129,7 +129,7 @@ MonoBehaviour:
     overrideState: 0
     value: -12
   thicknessModifier:
-    overrideState: 0
+    overrideState: 1
     value: 1
   directLightingStrength:
     overrideState: 0
@@ -193,7 +193,7 @@ MonoBehaviour:
     value: 1
   temperature:
     overrideState: 1
-    value: 11
+    value: 14
   tint:
     overrideState: 0
     value: 0
@@ -211,7 +211,7 @@ MonoBehaviour:
     value: 0
   postExposure:
     overrideState: 1
-    value: 1.34
+    value: 1.52
   contrast:
     overrideState: 1
     value: -8
@@ -1485,16 +1485,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48a79b01ea5641d4aa6daa2e23605641, type: 3}
   m_Name: Bloom
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   enabled:
     overrideState: 1
     value: 1
   intensity:
     overrideState: 1
-    value: 1.79
+    value: 3.43
   threshold:
     overrideState: 1
-    value: 2
+    value: 1.56
   softKnee:
     overrideState: 0
     value: 0.5
