@@ -47,6 +47,7 @@ public class FightingManager : MonoBehaviour
     private ModeHint hint;
     private int[] randomID = { 0, 1, 2 };
     public bool bFightOver;
+    private bool bGameStart;
     // Mapping, should be written in json data
     class AnimationData
     {
@@ -72,19 +73,24 @@ public class FightingManager : MonoBehaviour
     {
         randomizeArray(randomID, randomID.Length);
         animDatas.Add(new AnimationData(0, 0.5f, 0f, 1f));
-        animDatas.Add(new AnimationData(1, 0.53f,-1f,0f));
-        animDatas.Add(new AnimationData(1, 0.3f, -1f,0.65f));
-        animDatas.Add(new AnimationData(1, 0.33f,-0.5f,1f));
-        animDatas.Add(new AnimationData(4, 0.68f, 0f,1f));
-        animDatas.Add(new AnimationData(2, 0.3f, 0.5f,1f));
-        animDatas.Add(new AnimationData(2, 0.3f, 0.67f,1f));
-        animDatas.Add(new AnimationData(2, 0.53f,1f,0f));
-        animDatas.Add(new AnimationData(5, 0.75f,0.3f,-1f));
-        animDatas.Add(new AnimationData(6, 0.75f,-1f,-1f));
-        animDatas.Add(new AnimationData(3, 0.66f,0f,-1f));
+        animDatas.Add(new AnimationData(1, 0.53f, -1f, 0f));
+        animDatas.Add(new AnimationData(1, 0.3f, -1f, 0.65f));
+        animDatas.Add(new AnimationData(1, 0.33f, -0.5f, 1f));
+        animDatas.Add(new AnimationData(4, 0.68f, 0f, 1f));
+        animDatas.Add(new AnimationData(2, 0.3f, 0.5f, 1f));
+        animDatas.Add(new AnimationData(2, 0.3f, 0.67f, 1f));
+        animDatas.Add(new AnimationData(2, 0.53f, 1f, 0f));
+        animDatas.Add(new AnimationData(5, 0.75f, 0.3f, -1f));
+        animDatas.Add(new AnimationData(6, 0.75f, -1f, -1f));
+        animDatas.Add(new AnimationData(3, 0.66f, 0f, -1f));
 
         CreateObjects();
+
+        Invoke("StartGame", 2f);
+
+
     }
+
 
     // Update is called once per frame
     void Update()
@@ -92,7 +98,7 @@ public class FightingManager : MonoBehaviour
         Debug_SwitchCamera();
 
         //Debug.Log(director.time);
-        if (!bPrepared && director.time >= fTimeToPlayFightPrepare - fThresholdOfTime && director.time <= fTimeToPlayFightPrepare + fThresholdOfTime)
+        if (bGameStart && !bPrepared && director.time >= fTimeToPlayFightPrepare - fThresholdOfTime && director.time <= fTimeToPlayFightPrepare + fThresholdOfTime)
         {
             bPrepared = true;
             Debug.Log("Start to Prepare!");
@@ -100,9 +106,25 @@ public class FightingManager : MonoBehaviour
             if (onPositioned != null)
                 onPositioned.Invoke();
             // Debug Game Over
-            //  StartCoroutine(ie_DelayGameOverTest(6f,1));
+            //StartCoroutine(ie_DelayGameOverTest(6f, 1));
+
         }
 
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            LevelLoader.instance.LoadScene("FightingScene_" + iFightingSceneID);
+        }
+
+    }
+
+    public void StartGame()
+    {
+        if (!bGameStart)
+        {
+            bGameStart = true;
+            GetComponent<BeatGenerator>().StartGenerateBeat();
+            director.Play();
+        }
     }
 
     void CreateObjects()
@@ -240,7 +262,7 @@ public class FightingManager : MonoBehaviour
         characters[0].GameOver(_characterDie == 1);
         characters[1].GameOver(_characterDie == 0);
 
-        
+        //LevelLoader.instance.LoadScene("FightingScene_" + iFightingSceneID);
     }
 
     IEnumerator ie_DelayGameOverTest(float _time, int _id)

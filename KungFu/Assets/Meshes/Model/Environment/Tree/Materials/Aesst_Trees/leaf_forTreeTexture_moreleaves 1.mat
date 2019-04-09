@@ -24,7 +24,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 874fd507e33779d4a9001b4f4b067524, type: 3}
+        m_Texture: {fileID: 2800000, guid: f29ab986d656bdd48b2da177bb04a8d4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
@@ -37,5 +37,5 @@ Material:
     - _NormalIntensity: 1
     - _SpecularIntensity: 0.2
     m_Colors:
-    - _Color: {r: 0.3443841, g: 0.6698113, b: 0.43060848, a: 1}
-    - _SpecColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 1, g: 0.7877358, b: 0.90323246, a: 1}
+    - _SpecColor: {r: 0, g: 0, b: 0, a: 1}

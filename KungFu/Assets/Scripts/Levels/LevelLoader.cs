@@ -8,7 +8,15 @@ using UnityEngine.SceneManagement;
 
 public class LevelLoader : MonoBehaviour
 {
- //   [SerializeField] private CanvasGroup previousCanvas;
+    public static LevelLoader instance;
+    private void Awake()
+    {
+        if(instance==null || instance != this)
+        {
+            instance = this;
+        }
+    }
+    //   [SerializeField] private CanvasGroup previousCanvas;
     private CanvasGroup loadingCanvas;
     private Image loadingFillBar;
     private Text loadingFillText;
@@ -21,6 +29,7 @@ public class LevelLoader : MonoBehaviour
         loadingCanvas.alpha = 0;
         loadingFillBar = transform.GetChild(0).GetChild(0).GetComponent<Image>();
         loadingFillText = transform.GetChild(0).GetChild(1).GetComponent<Text>();
+        
     }
     public void LoadScene(string _name)
     {
@@ -59,7 +68,7 @@ public class LevelLoader : MonoBehaviour
                 Debug.Log("Loading Done!");
                 asyncOperation.allowSceneActivation = true;
             }
-
+            FightingManager.instance.StartGame();
             yield return null;
         }
         

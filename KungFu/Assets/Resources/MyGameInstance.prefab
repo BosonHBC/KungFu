@@ -47,6 +47,7 @@ MonoBehaviour:
   iPerfectScore: 1000
   iOkScore: 500
   fComboFactor: 30
+  comboText: {fileID: 0}
 --- !u!114 &219695812397645691
 MonoBehaviour:
   m_ObjectHideFlags: 0
