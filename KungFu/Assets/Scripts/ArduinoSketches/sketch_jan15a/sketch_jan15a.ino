@@ -13,7 +13,7 @@ const int button09 = 8;
 const int button10 = 9;
 const int button11 = 10;
 
-const int ThreshHold = 600;
+const int ThreshHold = 525;
 
 void setup(void) {
   Serial.begin(9600);
@@ -31,7 +31,7 @@ void loop(void) {
     myString += "0";
   }
 
-  if (analogRead(button02) >= ThreshHold + 25) {
+  if (analogRead(button02) >= ThreshHold+25) {
     myString += "1";
   }
   else
@@ -39,7 +39,7 @@ void loop(void) {
     myString += "0";
   }
 
-  if (analogRead(button03) >= ThreshHold) {
+  if (analogRead(button03) >= ThreshHold+50) {
     myString += "1";
   }
   else
@@ -47,7 +47,7 @@ void loop(void) {
     myString += "0";
   }
 
-  if (analogRead(button04) >= ThreshHold-25) {
+  if (analogRead(button04) >= ThreshHold) {
     myString += "1";
   }
   else
@@ -79,7 +79,7 @@ void loop(void) {
     myString += "0";
   }
 
-  if (analogRead(button08) >= ThreshHold + 100) {
+  if (analogRead(button08) >= ThreshHold + 115) {
     myString += "1";
   }
   else
