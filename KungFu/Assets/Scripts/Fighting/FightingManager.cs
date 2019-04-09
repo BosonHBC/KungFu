@@ -72,16 +72,16 @@ public class FightingManager : MonoBehaviour
     {
         randomizeArray(randomID, randomID.Length);
         animDatas.Add(new AnimationData(0, 0.5f, 0f, 1f));
-        animDatas.Add(new AnimationData(1, 0.53f,-1f,0f));
-        animDatas.Add(new AnimationData(1, 0.3f, -1f,0.65f));
-        animDatas.Add(new AnimationData(1, 0.33f,-0.5f,1f));
-        animDatas.Add(new AnimationData(4, 0.68f, 0f,1f));
-        animDatas.Add(new AnimationData(2, 0.3f, 0.5f,1f));
-        animDatas.Add(new AnimationData(2, 0.3f, 0.67f,1f));
-        animDatas.Add(new AnimationData(2, 0.53f,1f,0f));
-        animDatas.Add(new AnimationData(5, 0.75f,0.3f,-1f));
-        animDatas.Add(new AnimationData(6, 0.75f,-1f,-1f));
-        animDatas.Add(new AnimationData(3, 0.66f,0f,-1f));
+        animDatas.Add(new AnimationData(1, 0.53f, -1f, 0f));
+        animDatas.Add(new AnimationData(1, 0.3f, -1f, 0.65f));
+        animDatas.Add(new AnimationData(1, 0.33f, -0.5f, 1f));
+        animDatas.Add(new AnimationData(4, 0.68f, 0f, 1f));
+        animDatas.Add(new AnimationData(2, 0.3f, 0.5f, 1f));
+        animDatas.Add(new AnimationData(2, 0.3f, 0.67f, 1f));
+        animDatas.Add(new AnimationData(2, 0.53f, 1f, 0f));
+        animDatas.Add(new AnimationData(5, 0.75f, 0.3f, -1f));
+        animDatas.Add(new AnimationData(6, 0.75f, -1f, -1f));
+        animDatas.Add(new AnimationData(3, 0.66f, 0f, -1f));
 
         CreateObjects();
     }
@@ -100,7 +100,12 @@ public class FightingManager : MonoBehaviour
             if (onPositioned != null)
                 onPositioned.Invoke();
             // Debug Game Over
-            //  StartCoroutine(ie_DelayGameOverTest(6f,1));
+            //StartCoroutine(ie_DelayGameOverTest(6f, 1));
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            LevelLoader.instance.LoadScene("FightingScene_" + iFightingSceneID);
         }
 
     }
@@ -240,7 +245,7 @@ public class FightingManager : MonoBehaviour
         characters[0].GameOver(_characterDie == 1);
         characters[1].GameOver(_characterDie == 0);
 
-        
+        //LevelLoader.instance.LoadScene("FightingScene_" + iFightingSceneID);
     }
 
     IEnumerator ie_DelayGameOverTest(float _time, int _id)

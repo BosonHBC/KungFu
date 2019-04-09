@@ -8,7 +8,15 @@ using UnityEngine.SceneManagement;
 
 public class LevelLoader : MonoBehaviour
 {
- //   [SerializeField] private CanvasGroup previousCanvas;
+    public static LevelLoader instance;
+    private void Awake()
+    {
+        if(instance==null || instance != this)
+        {
+            instance = this;
+        }
+    }
+    //   [SerializeField] private CanvasGroup previousCanvas;
     private CanvasGroup loadingCanvas;
     private Image loadingFillBar;
     private Text loadingFillText;
