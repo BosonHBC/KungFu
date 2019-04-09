@@ -13,25 +13,25 @@ public class ArduinoInputScript : MonoBehaviour
 
     [SerializeField] bool bDebugPrintInput;
 
-    SerialPort com5 = new SerialPort("COM5", 9600);
+    SerialPort com7 = new SerialPort("COM7", 9600);
 
     // Use this for initialization
     void Start()
     {
         //opens the port and sets the read timeout. The timeout should match the write timeout in the arduino sketch to remove data stream lag.
-        com5.Open();
-        com5.ReadTimeout = 10;
+        com7.Open();
+        com7.ReadTimeout = 10;
     }
 
     // Update is called once per frame
     void Update()
     {
             //check if port is open and read the string from arduino.
-            if (com5.IsOpen)
+            if (com7.IsOpen)
             {
                 try
                 {
-                    outputString = com5.ReadLine();
+                    outputString = com7.ReadLine();
                 }
                 catch (System.Exception)
                 {
