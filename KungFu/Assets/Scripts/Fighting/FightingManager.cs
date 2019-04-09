@@ -165,6 +165,7 @@ public class FightingManager : MonoBehaviour
         // Set Enemy attack joint and beat generator
         _canvasGo.GetComponentInChildren<RingIndicatorControl>().SetData(characters[1].transform);
         GetComponent<BeatGenerator>().SetData(characters[1].transform, _canvasGo.GetComponentInChildren<HintGenerator>(), _canvasGo.GetComponentInChildren<ResultControl>());
+        _canvasGo.GetComponentInChildren<HintGenerator>().SetData(GetComponent<BeatGenerator>());
 
         /// Set Camera
         IEnumerable<TimelineClip> clips = timelines.GetOutputTrack(1).GetClips();
@@ -239,6 +240,7 @@ public class FightingManager : MonoBehaviour
         characters[0].GameOver(_characterDie == 1);
         characters[1].GameOver(_characterDie == 0);
 
+        
     }
 
     IEnumerator ie_DelayGameOverTest(float _time, int _id)

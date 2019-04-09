@@ -35,12 +35,17 @@ public class HintGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        beatArray = MyGameInstance.instance.GetComponent<DataLoader>().GetBeatArrayByName("BattleGirl");
-        beatData = MyGameInstance.instance.GetComponent<DataLoader>().GetBeatInfos();
-        beatGenerator = FindObjectOfType<BeatGenerator>();
+        //beatData = MyGameInstance.instance.GetComponent<DataLoader>().GetBeatInfos();
+        //beatGenerator = FindObjectOfType<BeatGenerator>();
         hintsQueue = new Queue<GameObject>();
-        ringIndicator = GetComponent<RingIndicatorControl>();
         currentBeatIndex = 0;
+    }
+    public void SetData(BeatGenerator _bg, string songName = "BattleGirl")
+    {
+        beatArray = MyGameInstance.instance.GetComponent<DataLoader>().GetBeatArrayByName(songName);
+        beatData = MyGameInstance.instance.GetComponent<DataLoader>().GetBeatInfos();
+        beatGenerator = _bg;
+        ringIndicator = GetComponent<RingIndicatorControl>();
     }
     private void Update()
     {
