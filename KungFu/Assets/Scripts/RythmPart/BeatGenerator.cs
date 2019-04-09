@@ -152,24 +152,24 @@ public class BeatGenerator : MonoBehaviour
     //there is a match hit
     void matchButton(int buttonID, BeatHitObject beatHitObject)
     {
-        if (beatHitObject.BeatTime.Mode == BeatMode.Attack)
-        {
-            HitResult hr = GetResultFromInput();
+        //if (beatHitObject.BeatTime.Mode == BeatMode.Attack)
+        //{
+        //    HitResult hr = GetResultFromInput();
 
-            if (hr != HitResult.Miss)
-            {
-                FightingManager.instance.FM_Score(hr, buttonID);
-                resultControl.ShowResult(hr);
-            }
-            else
-                Debug.Log("No beats in the queue!");//FightingManager.instance.FM_Miss(1);
+        //    if (hr != HitResult.Miss)
+        //    {
+        //        FightingManager.instance.FM_Score(hr, buttonID);
+        //        resultControl.ShowResult(hr);
+        //    }
+        //    else
+        //        Debug.Log("No beats in the queue!");//FightingManager.instance.FM_Miss(1);
 
-            hintGenerator.DirectlyRemoveFirstHint();
-            if (beatQueue.Count > 0)
-                beatQueue.Dequeue();
-        }
-        else
-        {
+        //    hintGenerator.DirectlyRemoveFirstHint();
+        //    if (beatQueue.Count > 0)
+        //        beatQueue.Dequeue();
+        //}
+        //else
+        //{
             if (beatHitObject.MatchedButtons.ContainsKey(buttonID))
             {
                 //if is not already matched
@@ -200,13 +200,14 @@ public class BeatGenerator : MonoBehaviour
                     //if all buttons are hit, dequeue
                     if (DataUtility.DictionaryAllTrue(beatHitObject.MatchedButtons))
                     {
-                        beatQueue.Dequeue();
+                        if (beatQueue.Count > 0)
+                            beatQueue.Dequeue();
                     }
                 }
             }
             else
                 Debug.Log("No such button in matchedButtons!!!!!");
-        }
+        //}
     }
 
     void missCheck(BeatHitObject beatHitObject)
@@ -272,19 +273,15 @@ public class BeatGenerator : MonoBehaviour
             {
                 if (beatTimer >= butInfo.TimeToHit - butInfo.BeatTime.PerfectStart + butInfo.BeatTime.OKStart && beatTimer <= butInfo.TimeToHit - butInfo.BeatTime.PerfectStart + butInfo.BeatTime.OKStart + butInfo.BeatTime.OKDuration)
                 {
-                    if (butInfo.BeatTime.Mode == BeatMode.Attack)
+                    if (butInfo.BeatTime.IsCombo)
                     {
-                        if (butInfo.BeatTime.IsCombo && Input.GetKeyDown(k.Value))
+                        if (Input.GetKeyDown(k.Value))
                         {
                             butInfo.comboCount++;
                             resultControl.ShowCombo(butInfo.comboCount);
                             //playerAnimCtrl.PlayPlayerAttackAnimation(-2);
                             playerAnimCtrl.PlayComboAnimation(butInfo.BeatTime.OKDuration + butInfo.BeatTime.OKStart);
                             FightingManager.instance.FM_Score(HitResult.Good, 0, true);
-                        }
-                        else if (Input.GetKeyDown(k.Value))
-                        {
-                            matchButton(k.Key, butInfo);
                         }
                     }
                     else
