@@ -142,7 +142,7 @@ public class BeatGenerator : MonoBehaviour
                 }
             }
             checkInputFromKeyboard();
-          //  checkInputFromArduino();
+            checkInputFromArduino();
 
             beatTimer += Time.deltaTime;
         }
