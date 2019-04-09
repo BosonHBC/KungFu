@@ -76,7 +76,7 @@ public class BeatGenerator : MonoBehaviour
         BeatArray = MyGameInstance.instance.GetComponent<DataLoader>().GetBeatArrayByName(songName);
         playerAnimCtrl = FightingManager.instance.characters[0].GetComponent<PlayerAnimController>();
         // Debug
-        StartGenerateBeat();
+       
     }
 
     public void StartGenerateBeat()

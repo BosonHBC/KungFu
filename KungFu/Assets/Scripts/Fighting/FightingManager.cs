@@ -47,6 +47,7 @@ public class FightingManager : MonoBehaviour
     private ModeHint hint;
     private int[] randomID = { 0, 1, 2 };
     public bool bFightOver;
+    private bool bGameStart;
     // Mapping, should be written in json data
     class AnimationData
     {
@@ -84,7 +85,12 @@ public class FightingManager : MonoBehaviour
         animDatas.Add(new AnimationData(3, 0.66f, 0f, -1f));
 
         CreateObjects();
+
+        Invoke("StartGame", 2f);
+
+
     }
+
 
     // Update is called once per frame
     void Update()
@@ -92,7 +98,7 @@ public class FightingManager : MonoBehaviour
         Debug_SwitchCamera();
 
         //Debug.Log(director.time);
-        if (!bPrepared && director.time >= fTimeToPlayFightPrepare - fThresholdOfTime && director.time <= fTimeToPlayFightPrepare + fThresholdOfTime)
+        if (bGameStart && !bPrepared && director.time >= fTimeToPlayFightPrepare - fThresholdOfTime && director.time <= fTimeToPlayFightPrepare + fThresholdOfTime)
         {
             bPrepared = true;
             Debug.Log("Start to Prepare!");
@@ -101,6 +107,7 @@ public class FightingManager : MonoBehaviour
                 onPositioned.Invoke();
             // Debug Game Over
             //StartCoroutine(ie_DelayGameOverTest(6f, 1));
+
         }
 
         if (Input.GetKeyDown(KeyCode.R))
@@ -108,6 +115,16 @@ public class FightingManager : MonoBehaviour
             LevelLoader.instance.LoadScene("FightingScene_" + iFightingSceneID);
         }
 
+    }
+
+    public void StartGame()
+    {
+        if (!bGameStart)
+        {
+            bGameStart = true;
+            GetComponent<BeatGenerator>().StartGenerateBeat();
+            director.Play();
+        }
     }
 
     void CreateObjects()
