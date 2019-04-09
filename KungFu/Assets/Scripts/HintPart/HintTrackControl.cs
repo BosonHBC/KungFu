@@ -68,16 +68,16 @@ public class HintTrackControl : MonoBehaviour
 
     void ChangeToOK()
     {
-        if (beatMode == BeatMode.Attack)
-        {
+        //if (beatMode == BeatMode.Attack)
+        //{
             if (beatTiming.IsCombo)
                 gameObject.GetComponent<Image>().color = OKColor;
-            else
-            {
-                for (int i = 0; i < ChildBodyParts.Length; ++i)
-                    ChildBodyParts[i].GetComponent<Image>().color = OKColor;
-            }
-        }
+        //    else
+        //    {
+        //        for (int i = 0; i < ChildBodyParts.Length; ++i)
+        //            ChildBodyParts[i].GetComponent<Image>().color = OKColor;
+        //    }
+        //}
         else
         {
             for (int i = 0; i < buttonIDs.Length; ++i)
@@ -94,12 +94,13 @@ public class HintTrackControl : MonoBehaviour
 
     void ChangeToPerfect()
     {
-        if (beatMode == BeatMode.Attack && !beatTiming.IsCombo)
-        {
-            for (int i = 0; i < ChildBodyParts.Length; ++i)
-                ChildBodyParts[i].GetComponent<Image>().color = PerfectColor;
-        }
-        else if (!beatTiming.IsCombo)
+        //if (beatMode == BeatMode.Attack && !beatTiming.IsCombo)
+        //{
+        //    for (int i = 0; i < ChildBodyParts.Length; ++i)
+        //        ChildBodyParts[i].GetComponent<Image>().color = PerfectColor;
+        //}
+        //else 
+        if (!beatTiming.IsCombo)
         {
             for (int i = 0; i < buttonIDs.Length; ++i)
             {
@@ -178,10 +179,10 @@ public class HintTrackControl : MonoBehaviour
         timeBeforeHit = hintGen.HintTimeBeforeHit;
 
         isMoving = true;
-        if (beatMode == BeatMode.Defend)
+        if (!beatTime.IsCombo)
             ActivateButtons(buttonIDs);
-        else if (beatMode == BeatMode.Attack && !beatTime.IsCombo)
-            ActivateAllButtons();
+        //else if (beatMode == BeatMode.Attack && !beatTime.IsCombo)
+        //    ActivateAllButtons();
     }
 
     public BeatInfo GetBeatTiming()
