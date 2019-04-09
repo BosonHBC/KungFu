@@ -9,45 +9,29 @@ public class ArduinoInputScript : MonoBehaviour
 
     internal bool[] buttons = new bool[11];
     private int NUMBUTTONS = 11;
-    private string outputStringCom3 = "00000";
-    private string outputStringCom4 = "000000";
+    private string outputString = "00000000000";
 
     [SerializeField] bool bDebugPrintInput;
 
-    SerialPort com3 = new SerialPort("COM3", 9600);
-    SerialPort com4 = new SerialPort("COM4", 9600);
+    SerialPort com5 = new SerialPort("COM5", 9600);
 
     // Use this for initialization
     void Start()
     {
         //opens the port and sets the read timeout. The timeout should match the write timeout in the arduino sketch to remove data stream lag.
-        com3.Open();
-        com3.ReadTimeout = 10;
-        com4.Open();
-        com4.ReadTimeout = 10;
+        com5.Open();
+        com5.ReadTimeout = 10;
     }
 
     // Update is called once per frame
     void Update()
     {
             //check if port is open and read the string from arduino.
-            if (com3.IsOpen)
+            if (com5.IsOpen)
             {
                 try
                 {
-                    outputStringCom3 = com3.ReadLine();
-                }
-                catch (System.Exception)
-                {
-                    //Debug.Log("Port Closed");
-                }
-            }
-
-            if (com4.IsOpen)
-            {
-                try
-                {
-                    outputStringCom4 = com4.ReadLine();
+                    outputString = com5.ReadLine();
                 }
                 catch (System.Exception)
                 {
@@ -56,7 +40,6 @@ public class ArduinoInputScript : MonoBehaviour
             }
 
         //Transfers the info sent by arduinos to the bool array of button inputs.
-        string outputString = outputStringCom3 + outputStringCom4;
         stringToBoolArray(outputString);
     }
 
@@ -82,6 +65,7 @@ public class ArduinoInputScript : MonoBehaviour
                 buttons[i] = false;
             }
         }
+
         if (bDebugPrintInput)
         {
             Debug.Log(input + "\n");
@@ -89,11 +73,13 @@ public class ArduinoInputScript : MonoBehaviour
         }
         else
         {
-            //Saves input to GameManager
-            MyGameInstance.instance.SetArduinoInput(buttons);
-
+            //Saves input to GameInstance
+            if (GameObject.Find("MyGameInstance") != null)
+            {
+                MyGameInstance.instance.SetArduinoInput(buttons);
+            }      
             //only for use with original prototype
-             if (GameObject.Find("GameManager") != null)
+            else if (GameObject.Find("GameManager") != null)
             {
                GameManager.instance.SetUnoInput(buttons);
             }
