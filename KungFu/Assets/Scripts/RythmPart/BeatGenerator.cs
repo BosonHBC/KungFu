@@ -67,7 +67,7 @@ public class BeatGenerator : MonoBehaviour
         levelLoader = FindObjectOfType<LevelLoader>();
     }
 
-    public void SetData(Transform _enemy, HintGenerator _generator, ResultControl _control, string songName = "BattleGirl")
+    public void SetData(Transform _enemy, HintGenerator _generator, ResultControl _control, string songName = "BattleGirl_H")
     {
         songPlaySource = _enemy.GetComponent<AudioSource>();
         enemyAnimCtrl = _enemy.GetComponent<EnemyAnimationControl>();

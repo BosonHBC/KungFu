@@ -40,7 +40,7 @@ public class HintGenerator : MonoBehaviour
         hintsQueue = new Queue<GameObject>();
         currentBeatIndex = 0;
     }
-    public void SetData(BeatGenerator _bg, string songName = "BattleGirl")
+    public void SetData(BeatGenerator _bg, string songName = "BattleGirl_H")
     {
         beatArray = MyGameInstance.instance.GetComponent<DataLoader>().GetBeatArrayByName(songName);
         beatData = MyGameInstance.instance.GetComponent<DataLoader>().GetBeatInfos();
