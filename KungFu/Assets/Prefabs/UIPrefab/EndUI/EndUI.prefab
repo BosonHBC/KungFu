@@ -90,6 +90,7 @@ GameObject:
   - component: {fileID: 512293312385876874}
   - component: {fileID: 512293312385876875}
   - component: {fileID: 4543065865179321822}
+  - component: {fileID: 871359261}
   m_Layer: 5
   m_Name: EndUI
   m_TagString: Untagged
@@ -196,6 +197,23 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &871359261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 512293312385876980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bb1abc0f9bff8d429d15b95586599bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gradeImgs:
+  - {fileID: 21300000, guid: 10cffeb9d7c6ee9429b2abdb412d3a63, type: 3}
+  - {fileID: 21300000, guid: d4f880b27f820a64ca25be987f6dfff7, type: 3}
+  - {fileID: 21300000, guid: a69e072c8f2990c4ba99b7e43076c862, type: 3}
+  fillImg: {fileID: 3153641050945381083}
 --- !u!1 &1217931951450520659
 GameObject:
   m_ObjectHideFlags: 0
@@ -1538,11 +1556,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 519193090257510218, guid: 763961a325811e04a83d3728f00115ff,
-        type: 3}
-      propertyPath: m_Text
-      value: A.
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 763961a325811e04a83d3728f00115ff, type: 3}
 --- !u!224 &478159092834047008 stripped
@@ -1677,11 +1690,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 519193090257510218, guid: 763961a325811e04a83d3728f00115ff,
-        type: 3}
-      propertyPath: m_Text
-      value: A.
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 763961a325811e04a83d3728f00115ff, type: 3}
