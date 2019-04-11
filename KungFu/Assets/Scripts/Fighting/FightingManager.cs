@@ -48,6 +48,9 @@ public class FightingManager : MonoBehaviour
     private int[] randomID = { 0, 1, 2 };
     public bool bFightOver;
     private bool bGameStart;
+
+    private float fDmgToEnemyPerAttack;
+    private int iAllowAttackCount = 30;
     // Mapping, should be written in json data
     class AnimationData
     {
@@ -84,10 +87,11 @@ public class FightingManager : MonoBehaviour
         animDatas.Add(new AnimationData(6, 0.75f, -1f, -1f));
         animDatas.Add(new AnimationData(3, 0.66f, 0f, -1f));
 
+        fDmgToEnemyPerAttack = 200f / MyGameInstance.instance.GetComponent<DataLoader>().GetNumOfAttackByName("BattleGirl_H");
+
         CreateObjects();
 
         Invoke("StartGame", 2f);
-
 
     }
 
@@ -311,7 +315,7 @@ public class FightingManager : MonoBehaviour
         Vector3 showPos = characters[1].GetJointPositionByJointID(animDatas[_buttonID].GetJoint()).position;
         ParticleGenerator.instance.GenerateOneTimeParticleAtPosition(0, showPos);
         //Debug.Log("H: " + animDatas[_buttonID].GetAttackDir()[0] + ", V: " + animDatas[_buttonID].GetAttackDir()[1]);
-        ApplyDamageToCharacter(1, 10f, animDatas[_buttonID].GetAttackDir());
+        ApplyDamageToCharacter(1, fDmgToEnemyPerAttack, animDatas[_buttonID].GetAttackDir());
     }
     public void FM_Score(HitResult hr, float _attackAnimationID = 0, bool bCombo = false)
     {
@@ -355,7 +359,7 @@ public class FightingManager : MonoBehaviour
             case FightMode.Defense:
                 Vector3 showPos = characters[0].GetJointPositionByJointID(0).position;
                 ParticleGenerator.instance.GenerateOneTimeParticleAtPosition(0, showPos);
-                ApplyDamageToCharacter(0, 10f, knockbackDir);
+                ApplyDamageToCharacter(0, 200f / iAllowAttackCount, knockbackDir);
                 break;
         }
     }

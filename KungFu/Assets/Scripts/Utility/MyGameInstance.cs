@@ -22,11 +22,10 @@ public class MyGameInstance : MonoBehaviour
 
     [Header("Score Releated")]
     [SerializeField] private int iPerfectScore = 1000;
-    [SerializeField] private int iOkScore = 500;
+    [SerializeField] private int iOkScore = 750;
     [SerializeField] private int fComboAward;
     [SerializeField] private int iComboFightScore = 500;
     [SerializeField] private Text comboText;
-
     DataLoader loader;
     private int iComboFightCount;
     //Awake is always called before any Start functions

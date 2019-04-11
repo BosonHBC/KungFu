@@ -53,7 +53,7 @@ public class LevelLoader : MonoBehaviour
         //   SceneManager.LoadScene(_name);
         asyncOperation.allowSceneActivation = false;
         collpaseTime = 0;
-        Debug.Log("Coroutine Called");
+        Debug.Log("Loading Scene");
         while (!asyncOperation.isDone || collpaseTime < minimumWaitTime)
         {
             collpaseTime += Time.deltaTime;

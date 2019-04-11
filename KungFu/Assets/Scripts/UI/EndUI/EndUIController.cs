@@ -23,11 +23,12 @@ public class EndUIController : MonoBehaviour
     [SerializeField] Text comboText;
     [SerializeField] Image gradeImg;
     private float fillDuration = 1f;
+    private float percentage;
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
-
+        percentage = 0;
 
     }
 
@@ -45,12 +46,12 @@ public class EndUIController : MonoBehaviour
         iMaxScore += _comboAllScore;
         Debug.Log("Max Score: " + iMaxScore + " currentScore: " + _currentScore);
 
-        float percentage = _currentScore / (float)iMaxScore;
+        percentage = _currentScore / (float)iMaxScore;
 
         fillEvent = new AnimationEvent();
         fillEvent.time = 140f / 60f;
         fillEvent.functionName = "FillImage";
-        fillEvent.floatParameter = percentage;
+       // fillEvent.floatParameter = percentage;
         clip = anim.runtimeAnimatorController.animationClips[0];
         if (clip.events.Length > 0)
         {
@@ -90,10 +91,10 @@ public class EndUIController : MonoBehaviour
 
     }
 
-    public void FillImage(float _percent = 0.8f)
+    public void FillImage()
     {
-        Debug.Log("Fill Amount: " + _percent);
-        StartCoroutine(ie_FillImage(_percent));
+        Debug.Log("Fill Amount: " + percentage);
+        StartCoroutine(ie_FillImage(percentage));
     }
 
     IEnumerator ie_FillImage(float _end)
