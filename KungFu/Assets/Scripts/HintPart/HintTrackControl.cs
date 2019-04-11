@@ -26,6 +26,7 @@ public class HintTrackControl : MonoBehaviour
     float timer = 0.0f;
     [HideInInspector]
     public bool isMoving = false;
+    bool isDying = false;
     [HideInInspector]
     public float moveSpeed;
     float timeBeforeHit;
@@ -38,6 +39,8 @@ public class HintTrackControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isDying)
+            rectTr.localPosition += Vector3.left * moveSpeed * Time.deltaTime;
         if (isMoving)
         {
             timer += Time.deltaTime;
@@ -54,9 +57,13 @@ public class HintTrackControl : MonoBehaviour
                 case HitResult.Good:
                     if (timer >= beatTiming.OKStart + beatTiming.OKDuration + timeBeforeHit)
                     {
-                        hintGenerator.RemoveFirstHint();
-                        isMoving = false;
-                        gameObject.GetComponent<UIDestroyer>().GoDie();
+                        if (!isDying)
+                        {
+                            hintGenerator.RemoveFirstHint();
+                            gameObject.GetComponent<UIDestroyer>().GoDie();
+                            isDying = true;
+                            isMoving = false;
+                        }
                     }
                     else if (timer >= beatTiming.PerfectStart + timeBeforeHit && timer < beatTiming.PerfectStart + beatTiming.PerfectDuration + timeBeforeHit)
                         ChangeToPerfect();
@@ -78,20 +85,10 @@ public class HintTrackControl : MonoBehaviour
 
     void ChangeToOK()
     {
-        // Debug.Log("Ok moving hint position: " + rectTr.localPosition.x);
-
-        //  UnityEditor.EditorApplication.isPaused = true;
-        //if (beatMode == BeatMode.Attack)
-        //{
-        //  hintGenerator.blommer.Blink(0.1f, OKColor);
-        if (beatTiming.IsCombo)
-            gameObject.GetComponent<Image>().color = OKColor;
-        //    else
-        //    {
-        //        for (int i = 0; i < ChildBodyParts.Length; ++i)
-        //            ChildBodyParts[i].GetComponent<Image>().color = OKColor;
-        //    }
-        //}
+        if(beatTiming.IsCombo)
+        {
+            ActivateAllButtons();
+        }
         else
         {
             for (int i = 0; i < buttonIDs.Length; ++i)

@@ -37,6 +37,11 @@ public class ResultControl : MonoBehaviour
         Vector3 WorldObject_ScreenPosition = new Vector3(
         ((ViewportPosition.x * CanvasRect.sizeDelta.x) - (CanvasRect.sizeDelta.x * 0.5f)),
         ((ViewportPosition.y * CanvasRect.sizeDelta.y) - (CanvasRect.sizeDelta.y * 0.5f)));
+        if (WorldObject_ScreenPosition.y <= -CanvasRect.sizeDelta.y * 0.5f)
+        {
+            WorldObject_ScreenPosition.y = -CanvasRect.sizeDelta.y * 0.4f;
+            //Debug.Log("asdasdasd");
+        }
         //Debug.Log(WorldObject_ScreenPosition);
         //now you can set the position of the ui element
         goTr.anchoredPosition = WorldObject_ScreenPosition;

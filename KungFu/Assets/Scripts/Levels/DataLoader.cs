@@ -74,6 +74,7 @@ public class DataLoader : MonoBehaviour
             bLoaded = true;
             LoadDataToObjects();
         }
+        Debug.Log(GetNumOfAttackByName("BattleGirl_H"));
     }
 
     public JSONNode GetAnimationData()
@@ -105,6 +106,18 @@ public class DataLoader : MonoBehaviour
             if (song["name"] == name)
             {
                 return song["numOfAnim"];
+            }
+        }
+        return 0;
+    }
+
+    public int GetNumOfAttackByName(string name)
+    {
+        foreach (var song in allMusicData.Values)
+        {
+            if (song["name"] == name)
+            {
+                return song["numOfAttack"];
             }
         }
         return 0;
