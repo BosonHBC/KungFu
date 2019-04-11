@@ -97,4 +97,16 @@ public class DataLoader : MonoBehaviour
         }
         return null;
     }
+
+    public int GetBeatNumByName(string name)
+    {
+        foreach (var song in allMusicData.Values)
+        {
+            if (song["name"] == name)
+            {
+                return song["numOfAnim"];
+            }
+        }
+        return 0;
+    }
 }
