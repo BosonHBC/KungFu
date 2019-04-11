@@ -52,7 +52,7 @@ public class HintTrackControl : MonoBehaviour
                     }
                     break;
                 case HitResult.Good:
-                    if(timer >= beatTiming.OKStart + beatTiming.OKDuration + timeBeforeHit)
+                    if (timer >= beatTiming.OKStart + beatTiming.OKDuration + timeBeforeHit)
                     {
                         hintGenerator.RemoveFirstHint();
                         isMoving = false;
@@ -78,13 +78,14 @@ public class HintTrackControl : MonoBehaviour
 
     void ChangeToOK()
     {
-       // Debug.Log("Ok moving hint position: " + rectTr.localPosition.x);
+        // Debug.Log("Ok moving hint position: " + rectTr.localPosition.x);
 
-      //  UnityEditor.EditorApplication.isPaused = true;
+        //  UnityEditor.EditorApplication.isPaused = true;
         //if (beatMode == BeatMode.Attack)
         //{
-            if (beatTiming.IsCombo)
-                gameObject.GetComponent<Image>().color = OKColor;
+        //  hintGenerator.blommer.Blink(0.1f, OKColor);
+        if (beatTiming.IsCombo)
+            gameObject.GetComponent<Image>().color = OKColor;
         //    else
         //    {
         //        for (int i = 0; i < ChildBodyParts.Length; ++i)
@@ -107,8 +108,8 @@ public class HintTrackControl : MonoBehaviour
 
     void ChangeToPerfect()
     {
-      //  Debug.Log("Perfect moving hint position: " + rectTr.localPosition.x);
-      //  UnityEditor.EditorApplication.isPaused = true;
+        //  Debug.Log("Perfect moving hint position: " + rectTr.localPosition.x);
+        //  UnityEditor.EditorApplication.isPaused = true;
 
         //if (beatMode == BeatMode.Attack && !beatTiming.IsCombo)
         //{
@@ -116,6 +117,7 @@ public class HintTrackControl : MonoBehaviour
         //        ChildBodyParts[i].GetComponent<Image>().color = PerfectColor;
         //}
         //else 
+        // hintGenerator.blommer.Blink(0.1f, PerfectColor);
         if (!beatTiming.IsCombo)
         {
             for (int i = 0; i < buttonIDs.Length; ++i)
@@ -170,7 +172,7 @@ public class HintTrackControl : MonoBehaviour
 
     void ActivateAllButtons()
     {
-        for(int i = 0; i < ChildBodyParts.Length; ++ i)
+        for (int i = 0; i < ChildBodyParts.Length; ++i)
         {
             ChildBodyParts[i].SetActive(true);
             ChildBodyParts[i].GetComponent<Image>().color = ActiveColor;

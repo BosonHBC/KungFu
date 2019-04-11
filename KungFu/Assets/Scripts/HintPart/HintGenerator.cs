@@ -28,7 +28,8 @@ public class HintGenerator : MonoBehaviour
     //Ring Indicator
     RingIndicatorControl ringIndicator;
     [SerializeField] protected float backgroundLength = 810;
-
+    [HideInInspector]
+    public UIBloomer blommer;
    // [SerializeField] protected RectTransform perfectPointer;
 
     // Start is called before the first frame update
@@ -38,6 +39,7 @@ public class HintGenerator : MonoBehaviour
         //beatGenerator = FindObjectOfType<BeatGenerator>();
         hintsQueue = new Queue<GameObject>();
         currentBeatIndex = 0;
+        blommer = PerfectArea.transform.GetComponentInChildren<UIBloomer>();
     }
     public void SetData(BeatGenerator _bg, string songName = "BattleGirl_H")
     {
@@ -46,6 +48,8 @@ public class HintGenerator : MonoBehaviour
         beatGenerator = _bg;
         ringIndicator = GetComponent<RingIndicatorControl>();
     }
+
+
     private void Update()
     {
         if (beatGenerator.bCanPlay)
