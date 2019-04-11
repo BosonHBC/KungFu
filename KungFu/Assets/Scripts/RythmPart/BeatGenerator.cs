@@ -281,7 +281,7 @@ public class BeatGenerator : MonoBehaviour
                             resultControl.ShowCombo(butInfo.comboCount);
                             //playerAnimCtrl.PlayPlayerAttackAnimation(-2);
                             playerAnimCtrl.PlayComboAnimation(butInfo.BeatTime.OKDuration + butInfo.BeatTime.OKStart);
-                            FightingManager.instance.FM_Score(HitResult.Good, 0, true);
+                            FightingManager.instance.FM_Score(HitResult.Combo, 0, true);
                         }
                     }
                     else
@@ -330,7 +330,7 @@ public class BeatGenerator : MonoBehaviour
                             resultControl.ShowCombo(butInfo.comboCount);
                             //playerAnimCtrl.PlayPlayerAttackAnimation(-2);
                             playerAnimCtrl.PlayComboAnimation(butInfo.BeatTime.OKDuration + butInfo.BeatTime.OKStart);
-                            FightingManager.instance.FM_Score(HitResult.Good, 0, true);
+                            FightingManager.instance.FM_Score(HitResult.Combo, 0, true);
                         }
                         else if (arduinoInput[i])
                         {

@@ -110,7 +110,7 @@ public class FightingManager : MonoBehaviour
 
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.F12))
         {
             LevelLoader.instance.LoadScene("FightingScene_" + iFightingSceneID);
         }
@@ -264,6 +264,16 @@ public class FightingManager : MonoBehaviour
         characters[1].GameOver(_characterDie == 0);
 
         //LevelLoader.instance.LoadScene("FightingScene_" + iFightingSceneID);
+        StartCoroutine(ie_ShowEndUI());
+    }
+
+    IEnumerator ie_ShowEndUI()
+    {
+       
+        yield return new WaitForSeconds(1.5f);
+        DisablePlayerUI();
+        yield return new WaitForSeconds(1.5f);
+        MyGameInstance.instance.CalcualteScore();
     }
 
     IEnumerator ie_DelayGameOverTest(float _time, int _id)
@@ -349,6 +359,12 @@ public class FightingManager : MonoBehaviour
                 break;
         }
     }
+
+    public void DisablePlayerUI()
+    {
+        myCanvas.GetComponent<UIFader>().FadeOut(0.2f);
+    }
+
     void randomizeArray(int[] arr, int n)
     {
         // Start from the last element and 

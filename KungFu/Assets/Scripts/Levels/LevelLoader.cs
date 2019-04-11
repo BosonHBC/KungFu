@@ -33,6 +33,7 @@ public class LevelLoader : MonoBehaviour
     }
     public void LoadScene(string _name)
     {
+        MyGameInstance.instance.RestartGame();
         if (SceneManager.GetSceneByName(_name) != null)
         {
             StartCoroutine(LoadAsynchronously(_name));

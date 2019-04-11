@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   iPerfectScore: 1000
   iOkScore: 500
-  fComboFactor: 30
+  fComboAward: 100
   comboText: {fileID: 0}
 --- !u!114 &219695812397645691
 MonoBehaviour:
