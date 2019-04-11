@@ -14099,6 +14099,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EndUI
       objectReference: {fileID: 0}
+    - target: {fileID: 512293312385876980, guid: 6fb44130491a87643935b39c06b00962,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 512293312385876872, guid: 6fb44130491a87643935b39c06b00962,
         type: 3}
       propertyPath: m_LocalPosition.x

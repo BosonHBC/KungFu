@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 8310223324695992860}
   - component: {fileID: 8310223324695992859}
   - component: {fileID: 1583983697033921540}
+  - component: {fileID: 4783035979334394904}
+  - component: {fileID: 7074815081945125173}
   m_Layer: 5
   m_Name: PerfectArea
   m_TagString: Untagged
@@ -59,7 +61,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.9843137, b: 0.4627451, a: 0.50980395}
+  m_Color: {r: 1, g: 0.9843137, b: 0.4627451, a: 0.5882353}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -90,6 +92,36 @@ MonoBehaviour:
   horizontalRestrition:
   - 0
   - 0
+--- !u!114 &4783035979334394904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8310223324695992857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 0.9843137, b: 0.4627451, a: 0.19607843}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
+--- !u!114 &7074815081945125173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8310223324695992857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 252b77aadc90eea419c41cea026c6c75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fa_trans:
+  - 0.1960784
+  - 1
 --- !u!1 &8310223324833557869
 GameObject:
   m_ObjectHideFlags: 0
@@ -102,6 +134,8 @@ GameObject:
   - component: {fileID: 8310223324833557856}
   - component: {fileID: 8310223324833557871}
   - component: {fileID: 1335918540767811504}
+  - component: {fileID: 1075773162411782743}
+  - component: {fileID: 8804593769429395267}
   m_Layer: 5
   m_Name: OKArea
   m_TagString: Untagged
@@ -149,7 +183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.18396229, g: 0.9704337, b: 1, a: 0.5176471}
+  m_Color: {r: 0.18396229, g: 0.9704337, b: 1, a: 0.5882353}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -180,6 +214,36 @@ MonoBehaviour:
   horizontalRestrition:
   - 0
   - 0
+--- !u!114 &1075773162411782743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8310223324833557869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0.3915094, g: 1, b: 1, a: 0.19607843}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
+--- !u!114 &8804593769429395267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8310223324833557869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 252b77aadc90eea419c41cea026c6c75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fa_trans:
+  - 0.1960784
+  - 1
 --- !u!1 &8310223325162786662
 GameObject:
   m_ObjectHideFlags: 0
@@ -265,6 +329,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8310223325162786663}
     m_Modifications:
+    - target: {fileID: 2277223860738176872, guid: b1c683146e6b1cd47b34a86ba0b03e32,
+        type: 3}
+      propertyPath: m_Name
+      value: NewIndicator
+      objectReference: {fileID: 0}
+    - target: {fileID: 2277223860738176872, guid: b1c683146e6b1cd47b34a86ba0b03e32,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2277223860738176875, guid: b1c683146e6b1cd47b34a86ba0b03e32,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -384,16 +458,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1.0309278
-      objectReference: {fileID: 0}
-    - target: {fileID: 2277223860738176872, guid: b1c683146e6b1cd47b34a86ba0b03e32,
-        type: 3}
-      propertyPath: m_Name
-      value: NewIndicator
-      objectReference: {fileID: 0}
-    - target: {fileID: 2277223860738176872, guid: b1c683146e6b1cd47b34a86ba0b03e32,
-        type: 3}
-      propertyPath: m_Layer
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2277223861070210754, guid: b1c683146e6b1cd47b34a86ba0b03e32,
         type: 3}
