@@ -29,6 +29,11 @@ public class HintTrackControl : MonoBehaviour
     [HideInInspector]
     public float moveSpeed;
     float timeBeforeHit;
+    RectTransform rectTr;
+    private void Start()
+    {
+        rectTr = GetComponent<RectTransform>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -36,7 +41,7 @@ public class HintTrackControl : MonoBehaviour
         if (isMoving)
         {
             timer += Time.deltaTime;
-            transform.localPosition += Vector3.left * moveSpeed * Time.deltaTime;
+            rectTr.localPosition += Vector3.left * moveSpeed * Time.deltaTime;
             //transform.Translate(Vector3.left * MoveSpeed * Time.deltaTime);
             switch (hintState)
             {
@@ -47,16 +52,21 @@ public class HintTrackControl : MonoBehaviour
                     }
                     break;
                 case HitResult.Good:
-                    if (timer >= beatTiming.PerfectStart + timeBeforeHit)
+                    if(timer >= beatTiming.OKStart + beatTiming.OKDuration + timeBeforeHit)
+                    {
+                        hintGenerator.RemoveFirstHint();
+                        isMoving = false;
+                        gameObject.GetComponent<UIDestroyer>().GoDie();
+                    }
+                    else if (timer >= beatTiming.PerfectStart + timeBeforeHit && timer < beatTiming.PerfectStart + beatTiming.PerfectDuration + timeBeforeHit)
                         ChangeToPerfect();
+
                     break;
                 //Missed
                 case HitResult.Perfect:
                     if (timer >= beatTiming.PerfectStart + beatTiming.PerfectDuration + timeBeforeHit)
                     {
-                        hintGenerator.RemoveFirstHint();
-                        isMoving = false;
-                        gameObject.GetComponent<UIDestroyer>().GoDie();
+                        ChangeToOK();
                     }
                     break;
                 default:
@@ -68,6 +78,9 @@ public class HintTrackControl : MonoBehaviour
 
     void ChangeToOK()
     {
+       // Debug.Log("Ok moving hint position: " + rectTr.localPosition.x);
+
+      //  UnityEditor.EditorApplication.isPaused = true;
         //if (beatMode == BeatMode.Attack)
         //{
             if (beatTiming.IsCombo)
@@ -94,6 +107,9 @@ public class HintTrackControl : MonoBehaviour
 
     void ChangeToPerfect()
     {
+      //  Debug.Log("Perfect moving hint position: " + rectTr.localPosition.x);
+      //  UnityEditor.EditorApplication.isPaused = true;
+
         //if (beatMode == BeatMode.Attack && !beatTiming.IsCombo)
         //{
         //    for (int i = 0; i < ChildBodyParts.Length; ++i)
@@ -177,6 +193,7 @@ public class HintTrackControl : MonoBehaviour
 
         moveSpeed = hintGen.HintObjectSpeed;
         timeBeforeHit = hintGen.HintTimeBeforeHit;
+
 
         isMoving = true;
         if (!beatTime.IsCombo)

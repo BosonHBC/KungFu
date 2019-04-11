@@ -11,8 +11,7 @@ public class HintGenerator : MonoBehaviour
     public float HintObjectSpeed = 400.0f;
     public GameObject HintObject;
     public GameObject ComboHintObject;
-    [SerializeField]
-    protected Image OKArea;
+
     [SerializeField]
     protected Image PerfectArea;
     protected Queue<GameObject> hintsQueue;
@@ -30,8 +29,8 @@ public class HintGenerator : MonoBehaviour
     RingIndicatorControl ringIndicator;
     [SerializeField] protected float backgroundLength = 810;
 
-    [SerializeField] protected RectTransform perfectPointer;
-    [SerializeField] protected RectTransform okPointer;
+   // [SerializeField] protected RectTransform perfectPointer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -89,13 +88,14 @@ public class HintGenerator : MonoBehaviour
         tmpGO.transform.localPosition = Vector3.zero;
         tmpGO.transform.localEulerAngles = Vector3.zero;
         tmpGO.transform.localScale = Vector3.one;
+       // UnityEditor.EditorApplication.isPaused = true;
         // Set new speed
-        HintObjectSpeed = backgroundLength / (HintTimeBeforeHit + beatTiming.OKStart + beatTiming.OKDuration);
+        HintObjectSpeed = Mathf.Abs( PerfectArea.rectTransform.localPosition.x) / (HintTimeBeforeHit + beatTiming.PerfectStart + beatTiming.PerfectDuration/2f);
         tmpGO.GetComponent<HintTrackControl>().StartMoving(beatTiming, this);
         hintsQueue.Enqueue(tmpGO);
         if (!hasAreaPlaced)
         {
-            PlaceOKAndPerfect(tmpGO.GetComponent<HintTrackControl>());
+            //PlaceOKAndPerfect(tmpGO.GetComponent<HintTrackControl>());
             hasAreaPlaced = true;
         }
     }
@@ -104,39 +104,33 @@ public class HintGenerator : MonoBehaviour
     //Place the OK and Perfect Area
     void PlaceOKAndPerfect(HintTrackControl _htCtrl)
     {
-
-        // Display Area
-        okPointer.transform.parent.GetComponent<UIFader>().FadeIn(0.2f);
-        // New Position x
-        float _okPosX = -(HintTimeBeforeHit + _htCtrl.beatTiming.OKStart) * _htCtrl.moveSpeed + OKArea.rectTransform.sizeDelta.x / 2;
-        // Move Area
-        OKArea.GetComponent<UIMover>().SimpleLocalPositionMover(OKArea.rectTransform.localPosition, new Vector3(_okPosX, OKArea.rectTransform.localPosition.y, 0.0f), fUIMoveTime);
-
-        // Move Pointer
-        Vector3 _OKLocalPos = new Vector3(_okPosX, okPointer.localPosition.y, okPointer.localPosition.z);
-        okPointer.GetComponent<UIMover>().SimpleLocalPositionMover(okPointer.localPosition, _OKLocalPos, fUIMoveTime);
-
         // okPointer.localPosition = new Vector3(OKArea.rectTransform.localPosition.x, okPointer.localPosition.y, okPointer.localPosition.z);
         //OKArea.rectTransform.sizeDelta = new Vector2(/*beatTiming.OKDuration * HintObjectSpeed*/5, 100.0f);
         if (_htCtrl.beatTiming.IsCombo)
         {
             //OKArea.transform.GetChild(0).gameObject.SetActive(true);
-            perfectPointer.localScale = Vector2.zero;
+           // perfectPointer.localScale = Vector2.zero;
             PerfectArea.rectTransform.localScale = Vector2.zero;
         }
         else
         {
             //OKArea.transform.GetChild(0).gameObject.SetActive(false);
-            perfectPointer.localScale = Vector2.one;
+          //  perfectPointer.localScale = Vector2.one;
             PerfectArea.rectTransform.localScale = Vector2.one;
-            // New Position
-            float _perfectPosX = -(HintTimeBeforeHit + _htCtrl.beatTiming.PerfectStart) * HintObjectSpeed + PerfectArea.rectTransform.sizeDelta.x / 2;
+            // New Position with width offset;
+            float _perfectPosX = -(HintTimeBeforeHit + _htCtrl.beatTiming.PerfectStart + _htCtrl.beatTiming.PerfectDuration/2f) * HintObjectSpeed;
+            Debug.Log("End Position of  Solid Hint: " + _perfectPosX);
             // Move area
-            PerfectArea.GetComponent<UIMover>().SimpleLocalPositionMover(PerfectArea.rectTransform.localPosition, new Vector3(_perfectPosX, PerfectArea.rectTransform.localPosition.y, 0.0f), fUIMoveTime);
-
+            PerfectArea.GetComponent<UIMover>().SimpleLocalPositionMover(
+                PerfectArea.rectTransform.localPosition,
+                new Vector3(
+                    _perfectPosX,
+                    PerfectArea.rectTransform.localPosition.y,
+                    0.0f),
+                fUIMoveTime);
             // Move Pointer
-            Vector3 _perfectLocalPos = new Vector3(_perfectPosX, perfectPointer.localPosition.y, perfectPointer.localPosition.z);
-            perfectPointer.GetComponent<UIMover>().SimpleLocalPositionMover(perfectPointer.localPosition, _perfectLocalPos, fUIMoveTime);
+            //Vector3 _perfectLocalPos = new Vector3(_perfectPosX + perfectPointer.sizeDelta.x / 2, perfectPointer.localPosition.y, perfectPointer.localPosition.z);
+            //perfectPointer.GetComponent<UIMover>().SimpleLocalPositionMover(perfectPointer.localPosition, _perfectLocalPos, fUIMoveTime);
             //PerfectArea.rectTransform.sizeDelta = new Vector2(/*beatTiming.PerfectDuration * HintObjectSpeed*/5, 100.0f);
         }
 
@@ -153,8 +147,8 @@ public class HintGenerator : MonoBehaviour
             {
                 //Change the perfect and OK area to the most current one
                 tmpGO = hintsQueue.Peek();
-                HintTrackControl tmpHTC = tmpGO.GetComponent<HintTrackControl>();
-                PlaceOKAndPerfect(tmpHTC);
+                //HintTrackControl tmpHTC = tmpGO.GetComponent<HintTrackControl>();
+                //PlaceOKAndPerfect(tmpHTC);
             }
             else
             {
@@ -176,8 +170,8 @@ public class HintGenerator : MonoBehaviour
             {
                 //Change the perfect and OK area to the most current one
                 tmpGO = hintsQueue.Peek();
-                HintTrackControl tmpHTC = tmpGO.GetComponent<HintTrackControl>();
-                PlaceOKAndPerfect(tmpHTC);
+               // HintTrackControl tmpHTC = tmpGO.GetComponent<HintTrackControl>();
+               // PlaceOKAndPerfect(tmpHTC);
             }
             else
             {

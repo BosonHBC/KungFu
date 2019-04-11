@@ -182,6 +182,7 @@ public class FightingManager : MonoBehaviour
             {
                 characters[i].GetComponent<BaseAnimController>().PlayPrepareFight();
             }
+            cameraList[2].gameObject.SetActive(false);
         });
 
         // Set Enemy attack joint and beat generator

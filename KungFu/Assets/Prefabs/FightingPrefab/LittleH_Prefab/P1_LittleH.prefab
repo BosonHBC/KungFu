@@ -48,7 +48,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 11
+  m_Priority: 12
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 3107315992147270488}
   m_Lens:
@@ -5525,7 +5525,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3107315992147232632}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
   m_LocalPosition: {x: -15.29, y: -2.58, z: 3.79}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
