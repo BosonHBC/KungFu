@@ -60,7 +60,10 @@ public class HintTrackControl : MonoBehaviour
                         if (!isDying)
                         {
                             hintGenerator.RemoveFirstHint();
-                            gameObject.GetComponent<UIDestroyer>().GoDie();
+                            if (beatTiming.IsCombo)
+                                StartCoroutine(ComboDie());
+                            else
+                                gameObject.GetComponent<UIDestroyer>().GoDie();
                             isDying = true;
                             isMoving = false;
                         }
@@ -87,7 +90,8 @@ public class HintTrackControl : MonoBehaviour
     {
         if(beatTiming.IsCombo)
         {
-            ActivateAllButtons();
+            for (int i = 0; i < ChildBodyParts.Length; ++i)
+                ChildBodyParts[i].GetComponent<Image>().color = OKColor;
         }
         else
         {
@@ -130,21 +134,24 @@ public class HintTrackControl : MonoBehaviour
 
     public void MatchButton(int butID)
     {
-        foreach (var pair in matchedButtons)
+        if(!beatTiming.IsCombo)
         {
-            if (butID == pair.Key && !pair.Value)
+            foreach (var pair in matchedButtons)
             {
-                ChildBodyParts[butID].GetComponent<Image>().color = NormalColor;
-                matchedButtons[butID] = true;
-                break;
+                if (butID == pair.Key && !pair.Value)
+                {
+                    ChildBodyParts[butID].GetComponent<Image>().color = NormalColor;
+                    matchedButtons[butID] = true;
+                    break;
+                }
             }
-        }
-        //check for if all is matched
-        if (isAllMatched())
-        {
-            hintGenerator.RemoveFirstHint();
-            isMoving = false;
-            gameObject.GetComponent<UIDestroyer>().GoDie();
+            //check for if all is matched
+            if (isAllMatched())
+            {
+                hintGenerator.RemoveFirstHint();
+                isMoving = false;
+                gameObject.GetComponent<UIDestroyer>().GoDie();
+            }
         }
     }
 
@@ -197,8 +204,11 @@ public class HintTrackControl : MonoBehaviour
         isMoving = true;
         if (!beatTime.IsCombo)
             ActivateButtons(buttonIDs);
-        //else if (beatMode == BeatMode.Attack && !beatTime.IsCombo)
-        //    ActivateAllButtons();
+        else
+        {
+            ActivateAllButtons();
+            GetComponent<RectTransform>().sizeDelta.Set(beatTime.PerfectDuration * moveSpeed, 88);
+        }
     }
 
     public BeatInfo GetBeatTiming()
@@ -206,4 +216,15 @@ public class HintTrackControl : MonoBehaviour
         return beatTiming;
     }
 
+    public void ChangeColor()
+    {
+        GetComponent<Image>().color = new Color(Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f));
+    }
+
+    IEnumerator ComboDie()
+    {
+        GetComponent<Image>().CrossFadeAlpha(0.0f, 0.3f, false);
+        yield return new WaitForSeconds(0.3f);
+        Destroy(gameObject);
+    }
 }
