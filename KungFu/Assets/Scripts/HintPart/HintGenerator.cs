@@ -198,4 +198,20 @@ public class HintGenerator : MonoBehaviour
         yield return new WaitForSeconds(secs);
         ringIndicator.ShowRingIndicator(ba);
     }
+    public HintTrackControl GetCurrentComboHTC()
+    {
+        if (hintsQueue.Count != 0)
+        {
+            var hint = hintsQueue.Peek();
+            if (hint.GetComponent<HintTrackControl>().beatTiming.IsCombo)
+            {
+                return hint.GetComponent<HintTrackControl>();
+            }
+            else
+                Debug.Log("asdasdasfsadfasd");
+        }
+        else
+            Debug.Log("No beats now");
+        return null;
+    }
 }

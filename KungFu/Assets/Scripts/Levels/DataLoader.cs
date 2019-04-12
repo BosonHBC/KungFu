@@ -74,7 +74,6 @@ public class DataLoader : MonoBehaviour
             bLoaded = true;
             LoadDataToObjects();
         }
-        Debug.Log(GetNumOfAttackByName("BattleGirl_H"));
     }
 
     public JSONNode GetAnimationData()

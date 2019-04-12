@@ -279,6 +279,7 @@ public class BeatGenerator : MonoBehaviour
                         {
                             butInfo.comboCount++;
                             resultControl.ShowCombo(butInfo.comboCount);
+                            hintGenerator.GetCurrentComboHTC().ChangeColor();
                             //playerAnimCtrl.PlayPlayerAttackAnimation(-2);
                             playerAnimCtrl.PlayComboAnimation(butInfo.BeatTime.OKDuration + butInfo.BeatTime.OKStart);
                             FightingManager.instance.FM_Score(HitResult.Combo, 0, true);
