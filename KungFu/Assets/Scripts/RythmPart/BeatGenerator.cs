@@ -36,6 +36,8 @@ public class BeatGenerator : MonoBehaviour
     HintGenerator hintGenerator;
     //Result Control
     ResultControl resultControl;
+    //SFX
+    SFXControl sfxControl;
     AudioSource songPlaySource;
     EnemyAnimationControl enemyAnimCtrl;
     PlayerAnimController playerAnimCtrl;
@@ -69,7 +71,8 @@ public class BeatGenerator : MonoBehaviour
 
     public void SetData(Transform _enemy, HintGenerator _generator, ResultControl _control, string songName = "BattleGirl_H")
     {
-        songPlaySource = _enemy.GetComponent<AudioSource>();
+        songPlaySource = Camera.main.GetComponent<AudioSource>();
+        sfxControl = _enemy.GetComponent<SFXControl>();
         enemyAnimCtrl = _enemy.GetComponent<EnemyAnimationControl>();
         hintGenerator = _generator;
         resultControl = _control;
@@ -278,6 +281,7 @@ public class BeatGenerator : MonoBehaviour
                         if (Input.GetKeyDown(k.Value))
                         {
                             butInfo.comboCount++;
+                            sfxControl.PlayRandomImpactSFX();
                             resultControl.ShowCombo(butInfo.comboCount);
                             hintGenerator.GetCurrentComboHTC().ChangeColor();
                             //playerAnimCtrl.PlayPlayerAttackAnimation(-2);
@@ -292,6 +296,7 @@ public class BeatGenerator : MonoBehaviour
                         {
                             if (Input.GetKeyDown(k.Value))
                             {
+                                sfxControl.PlayRandomImpactSFX();
                                 matchButton(k.Key, butInfo);
                             }
                         }
@@ -329,6 +334,8 @@ public class BeatGenerator : MonoBehaviour
                         {
                             butInfo.comboCount++;
                             resultControl.ShowCombo(butInfo.comboCount);
+                            sfxControl.PlayRandomImpactSFX();
+
                             hintGenerator.GetCurrentComboHTC().ChangeColor();
 
                             //playerAnimCtrl.PlayPlayerAttackAnimation(-2);
@@ -346,6 +353,8 @@ public class BeatGenerator : MonoBehaviour
                         {
                             if (arduinoInput[i])
                             {
+                                sfxControl.PlayRandomImpactSFX();
+
                                 matchButton(i, butInfo);
                             }
                         }

@@ -4,16 +4,10 @@ using UnityEngine;
 
 public class SFXControl : MonoBehaviour
 {
-    public AudioClip[] MissSFXs;
-    public AudioClip[] MatchSFXs;
+    public AudioClip[] ImpactSFXs;
 
-    public void PlayRandomMissSFX()
+    public void PlayRandomImpactSFX()
     {
-        GetComponent<AudioSource>().PlayOneShot(MissSFXs[Random.Range(0, MissSFXs.Length)]);
-    }
-
-    public void PlayRandomMatchSFX()
-    {
-        GetComponent<AudioSource>().PlayOneShot(MatchSFXs[Random.Range(0, MatchSFXs.Length)]);
+        GetComponent<AudioSource>().PlayOneShot(ImpactSFXs[Random.Range(0, ImpactSFXs.Length)]);
     }
 }
