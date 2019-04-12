@@ -18,7 +18,7 @@ public class DestroyParticle : MonoBehaviour
         {
             ParticleSystem.MainModule _main = childParticles[i].main;
             _main.startColor= _color;
-            Debug.Log("Play particle");
+            //Debug.Log("Play particle");
             childParticles[i].Play();
         }
 
