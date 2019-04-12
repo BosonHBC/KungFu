@@ -32,9 +32,9 @@ public class ModeHint : MonoBehaviour
 
     IEnumerator ieUIMover()
     {
-        mover.SimpleLocalPositionMover(transform.localPosition, Vector3.left * 300 + transform.localPosition, 0.3f);
+        mover.SimpleLocalPositionMover(transform.localPosition, Vector3.left * 700 + transform.localPosition, 0.3f);
         yield return new WaitForSeconds(2.3f);
-        mover.SimpleLocalPositionMover(transform.localPosition, Vector3.right * 300 + transform.localPosition, 0.3f);
+        mover.SimpleLocalPositionMover(transform.localPosition, Vector3.right * 700 + transform.localPosition, 0.3f);
 
     }
 }

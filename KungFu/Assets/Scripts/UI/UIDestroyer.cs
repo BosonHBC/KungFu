@@ -6,13 +6,15 @@ using UnityEngine.UI;
 public class UIDestroyer : MonoBehaviour
 {
     MosicFader fader;
-    ParticleSystem particle;
+    DestroyParticle particle;
     public float delayToDeath;
+    [SerializeField] Color _color;
     private bool bDestroying;
     private void Start()
     {
         fader = GetComponent<MosicFader>();
-        particle = transform.Find("Particle").GetComponent<ParticleSystem>();
+        particle = transform.GetChild(12).GetComponent<DestroyParticle>();
+
     }
 
     public void GoDie()
@@ -29,7 +31,7 @@ public class UIDestroyer : MonoBehaviour
                 }
             }
             if (particle != null)
-                particle.Play();
+                particle.PlayParticle(_color);
             //UnityEditor.EditorApplication.isPaused = true;
             bDestroying = true;
             fader = GetComponent<MosicFader>();
