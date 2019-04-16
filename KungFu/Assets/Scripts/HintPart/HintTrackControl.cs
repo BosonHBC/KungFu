@@ -15,6 +15,9 @@ public class HintTrackControl : MonoBehaviour
     Color NormalColor = Color.white;
     [SerializeField]
     Color ActiveColor = Color.yellow;
+    [SerializeField]
+    Image ComboOutline;
+    Coroutine comboOutlineShow;
     [HideInInspector]
     public BeatInfo beatTiming;
     BeatMode beatMode;
@@ -208,6 +211,7 @@ public class HintTrackControl : MonoBehaviour
         {
             ActivateAllButtons();
             GetComponent<RectTransform>().sizeDelta.Set(beatTime.PerfectDuration * moveSpeed, 88);
+            ComboOutline.GetComponent<RectTransform>().sizeDelta.Set(beatTime.PerfectDuration * moveSpeed, 88);
         }
     }
 
@@ -219,8 +223,24 @@ public class HintTrackControl : MonoBehaviour
     public void ChangeColor()
     {
         GetComponent<Image>().color = new Color(Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f));
+        if (comboOutlineShow != null)
+            StopCoroutine(comboOutlineShow);
+        comboOutlineShow = StartCoroutine(ComboOutlineShow(GetComponent<Image>().color));
     }
 
+    IEnumerator ComboOutlineShow(Color newColor)
+    {
+        ComboOutline.color = newColor;
+        ComboOutline.GetComponent<RectTransform>().localScale = Vector3.one;
+        var wait = new WaitForEndOfFrame();
+        Vector3 step = new Vector3(Time.deltaTime, Time.deltaTime, 0.0f);
+        ComboOutline.CrossFadeAlpha(0.0f, 0.5f, false);
+        while(ComboOutline.GetComponent<RectTransform>().localScale.x <= 1.5f)
+        {
+            ComboOutline.GetComponent<RectTransform>().localScale += step;
+            yield return wait;
+        }
+    }
     IEnumerator ComboDie()
     {
         GetComponent<Image>().CrossFadeAlpha(0.0f, 0.3f, false);
