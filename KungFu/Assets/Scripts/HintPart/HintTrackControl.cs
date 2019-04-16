@@ -232,6 +232,7 @@ public class HintTrackControl : MonoBehaviour
     {
         ComboOutline.color = newColor;
         ComboOutline.GetComponent<RectTransform>().localScale = Vector3.one;
+        ComboOutline.canvasRenderer.SetAlpha(1.0f);
         var wait = new WaitForEndOfFrame();
         Vector3 step = new Vector3(Time.deltaTime, Time.deltaTime, 0.0f);
         ComboOutline.CrossFadeAlpha(0.0f, 0.5f, false);
