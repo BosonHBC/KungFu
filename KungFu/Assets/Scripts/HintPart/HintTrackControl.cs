@@ -17,6 +17,8 @@ public class HintTrackControl : MonoBehaviour
     Color ActiveColor = Color.yellow;
     [SerializeField]
     Image ComboOutline;
+    [SerializeField]
+    GameObject HitLineHint;
     Coroutine comboOutlineShow;
     [HideInInspector]
     public BeatInfo beatTiming;
@@ -154,10 +156,18 @@ public class HintTrackControl : MonoBehaviour
                 hintGenerator.RemoveFirstHint();
                 isMoving = false;
                 gameObject.GetComponent<UIDestroyer>().GoDie();
+                GenerateHitLine();
             }
         }
     }
 
+    void GenerateHitLine()
+    {
+        var go = Instantiate(HitLineHint, transform.position, transform.rotation, transform);
+        go.GetComponent<Image>().color = hintState == HitResult.Good ? OKColor : PerfectColor;
+        go.GetComponent<Image>().CrossFadeAlpha(0.0f, 0.7f, false);
+        Destroy(go, 0.7f);
+    }
     bool isAllMatched()
     {
         foreach (bool b in matchedButtons.Values)

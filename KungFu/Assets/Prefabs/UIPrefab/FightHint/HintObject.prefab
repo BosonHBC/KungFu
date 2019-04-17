@@ -934,6 +934,9 @@ MonoBehaviour:
   PerfectColor: {r: 1, g: 0.99162006, b: 0.3726415, a: 1}
   NormalColor: {r: 1, g: 1, b: 1, a: 1}
   ActiveColor: {r: 1, g: 0.78825736, b: 0.43867922, a: 1}
+  ComboOutline: {fileID: 0}
+  HitLineHint: {fileID: 278021165443884360, guid: 413eb88d516da694a8b020f967d3bc65,
+    type: 3}
   isMoving: 0
   moveSpeed: 0
 --- !u!114 &2588074398743838862
@@ -949,6 +952,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delayToDeath: 0.3
+  _color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &2439809869133397464
 MonoBehaviour:
   m_ObjectHideFlags: 0
