@@ -16,7 +16,7 @@ public class EndUIController : MonoBehaviour
     Animator anim;
     AnimationClip clip;
     AnimationEvent fillEvent;
-    float[] gradeOfScore = { 0.33f, 0.50f, 0.67f };
+    float[] gradeOfScore = { 0.25f, 0.50f, 0.75f };
     int iMaxScore;
     [SerializeField] Sprite[] gradeImgs;
     [SerializeField] Image fillImg;
@@ -24,12 +24,20 @@ public class EndUIController : MonoBehaviour
     [SerializeField] Image gradeImg;
     private float fillDuration = 1f;
     private float percentage;
+
+    [Header("Detail Score Field")]
+    [SerializeField] private Text tx_PerfectCount;
+    [SerializeField] private Text tx_OkCount;
+    [SerializeField] private Text tx_MissCount;
+    [SerializeField] private Text tx_ScoreCount;
+    private int finalScore;
+
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
         percentage = 0;
-
+        finalScore = 0;
     }
 
     public void StartEndSession(int _numOfBeat, int _currentScore, int _PerfectScore, int _comboAward, int _maxCombo, int _comboAllScore)
@@ -37,21 +45,24 @@ public class EndUIController : MonoBehaviour
         GetComponent<CanvasGroup>().alpha = 1;
 
         // Calculate Max score
-        iMaxScore = 0;
+        int comboAwardScore = 0;
         for (int i = 0; i < _numOfBeat; i++)
         {
-            iMaxScore += _PerfectScore + i * _comboAward;
+            comboAwardScore += i * _comboAward;
         }
+        Debug.Log("Combo Award Score: " + comboAwardScore);
+        iMaxScore = _numOfBeat * _PerfectScore + comboAwardScore;
         Debug.Log("ComboScore: " + _comboAllScore);
         iMaxScore += _comboAllScore;
-        Debug.Log("Max Score: " + iMaxScore + " currentScore: " + _currentScore);
+        finalScore = (_currentScore + _comboAllScore);
+        Debug.Log("Max Score: " + iMaxScore + " currentScore: " + finalScore);
 
-        percentage = _currentScore / (float)iMaxScore;
+        percentage = finalScore / (float)iMaxScore;
 
         fillEvent = new AnimationEvent();
         fillEvent.time = 140f / 60f;
         fillEvent.functionName = "FillImage";
-       // fillEvent.floatParameter = percentage;
+        // fillEvent.floatParameter = percentage;
         clip = anim.runtimeAnimatorController.animationClips[0];
         if (clip.events.Length > 0)
         {
@@ -86,9 +97,12 @@ public class EndUIController : MonoBehaviour
         }
     }
 
-    public void SetData(int _maxCombo, int _score, float _p1RemainHp, float _p2RemainHp)
+    public void SetData(int _score, int _perfectCount, int _OkCount, int _missCount)
     {
-
+        tx_PerfectCount.text = _perfectCount.ToString();
+        tx_OkCount.text = _OkCount.ToString();
+        tx_MissCount.text = _missCount.ToString();
+        tx_ScoreCount.text = finalScore.ToString();
     }
 
     public void FillImage()

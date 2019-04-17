@@ -22,12 +22,15 @@ public class MyGameInstance : MonoBehaviour
 
     [Header("Score Releated")]
     [SerializeField] private int iPerfectScore = 1000;
-    [SerializeField] private int iOkScore = 750;
+    [SerializeField] private int iOkScore = 800;
     [SerializeField] private int fComboAward;
     [SerializeField] private int iComboFightScore = 500;
     [SerializeField] private Text comboText;
+    [SerializeField] private Text scoreText;
     DataLoader loader;
     private int iComboFightCount;
+    private int perfectCount;
+    private int okCount;
     //Awake is always called before any Start functions
     void Awake()
     {
@@ -50,8 +53,8 @@ public class MyGameInstance : MonoBehaviour
     private void Start()
     {
         iCombo = 0;
-        if(comboText)
-        comboText.text = "0";
+        if (comboText)
+            comboText.text = "0";
 
         loader = GetComponent<DataLoader>();
     }
@@ -64,11 +67,13 @@ public class MyGameInstance : MonoBehaviour
                 if (++iCombo >= iMaxCombo)
                     iMaxCombo = iCombo;
                 scores += (int)(iCombo * fComboAward + iPerfectScore);
+                perfectCount++;
                 break;
             case HitResult.Good:
                 if (++iCombo >= iMaxCombo)
                     iMaxCombo = iCombo;
                 scores += (int)(iCombo * fComboAward + iOkScore);
+                okCount++;
                 break;
             case HitResult.Combo:
                 iComboFightCount++;
@@ -78,12 +83,16 @@ public class MyGameInstance : MonoBehaviour
         {
             comboText.text = iCombo.ToString();
             comboText.transform.parent.GetComponent<Animator>().Play("Pop");
+            scoreText.text = scores.ToString();
+            scoreText.transform.parent.GetComponent<Animator>().Play("Pop");
+
         }
     }
 
     public void Miss(int number)
     {
         misses += number;
+
         iCombo = 0;
         if (comboText)
             comboText.text = iCombo.ToString();
@@ -105,22 +114,29 @@ public class MyGameInstance : MonoBehaviour
         iCombo = 0;
         iMaxCombo = 0;
 
+        perfectCount = 0;
+        okCount = 0;
+
     }
     public void StartGame()
     {
         SceneManager.LoadScene("ByreaveWhitebox");
     }
 
-    public void SetScoreUI(Text _comboText)
+    public void SetScoreUI(Text _comboText, Text _scoreText)
     {
         comboText = _comboText;
         comboText.text = "0";
+
+        scoreText = _scoreText;
+        scoreText.text = "0";
     }
 
     public void CalcualteScore()
     {
         Debug.Log("Max Combo: " + iMaxCombo);
         int overallComboFightScore = iComboFightScore * iComboFightCount;
-        EndUIController.instance.StartEndSession(loader.GetBeatNumByName("BattleGirl_H"), scores,iPerfectScore, fComboAward, iMaxCombo, overallComboFightScore);
+        EndUIController.instance.StartEndSession(loader.GetBeatNumByName("BattleGirl_H"), scores, iPerfectScore, fComboAward, iMaxCombo, overallComboFightScore);
+        EndUIController.instance.SetData(scores, perfectCount, okCount, misses);
     }
 }
