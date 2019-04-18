@@ -31,9 +31,16 @@ public class MyGameInstance : MonoBehaviour
     private int iComboFightCount;
     private int perfectCount;
     private int okCount;
+
+    //Menu Select Data
+    [HideInInspector]
+    public int PlayerCharacterIndex = 0;
+    [HideInInspector]
+    public int SongIndex = 0;
     //Awake is always called before any Start functions
     void Awake()
     {
+        //PlayerCharacterIndex = 1;
         //Check if instance already exists
         if (instance == null)
 
@@ -120,7 +127,7 @@ public class MyGameInstance : MonoBehaviour
     }
     public void StartGame()
     {
-        SceneManager.LoadScene("ByreaveWhitebox");
+        LevelLoader.instance.LoadScene("FightingScene_0");
     }
 
     public void SetScoreUI(Text _comboText, Text _scoreText)

@@ -25,7 +25,9 @@ public class FightingManager : MonoBehaviour
     [Header("Prefab")]
     [SerializeField] private GameObject playerUIPrefab;
     [SerializeField] private GameObject playerCenterPrefab;
-    [SerializeField] private Character[] playerPrefabs;
+    //[SerializeField] private Character[] playerPrefabs;
+    [SerializeField] private Player[] playerPrefabs;
+    [SerializeField] private Enemy[] enemyPrefabs;
     [Header("Parents")]
     [SerializeField] private Transform playerReleventParent;
     [SerializeField] private Transform[] spawnPoints;
@@ -71,6 +73,9 @@ public class FightingManager : MonoBehaviour
         public float[] GetAttackDir() { return fa_AttackDir; }
     };
     List<AnimationData> animDatas = new List<AnimationData>();
+
+    //Hard code song name data
+    Dictionary<int, string> songNameData;
     // Start is called before the first frame update
     void Start()
     {
@@ -87,7 +92,13 @@ public class FightingManager : MonoBehaviour
         animDatas.Add(new AnimationData(6, 0.75f, -1f, -1f));
         animDatas.Add(new AnimationData(3, 0.66f, 0f, -1f));
 
-        fDmgToEnemyPerAttack = 200f / MyGameInstance.instance.GetComponent<DataLoader>().GetNumOfAttackByName("BattleGirl_H");
+        songNameData = new Dictionary<int, string>()
+        {
+            {0, "BattleGirl_H" },
+            {1, "Sailor_H" }
+        };
+
+        fDmgToEnemyPerAttack = 200f / MyGameInstance.instance.GetComponent<DataLoader>().GetNumOfAttackByName(songNameData[MyGameInstance.instance.SongIndex]);
 
         CreateObjects();
 
@@ -149,7 +160,12 @@ public class FightingManager : MonoBehaviour
 
         for (int i = 0; i < 2; i++)
         {
-            Character _character = Instantiate(playerPrefabs[i]).GetComponent<Character>();
+            Character _character;
+            if (i == 0)
+                _character = Instantiate(playerPrefabs[MyGameInstance.instance.PlayerCharacterIndex]);
+            else
+                _character = Instantiate(enemyPrefabs[(MyGameInstance.instance.PlayerCharacterIndex + Random.Range(1, 3)) % enemyPrefabs.Length]);
+            //Character _character = Instantiate(playerPrefabs[i]).GetComponent<Character>();
             characters[i] = _character;
             _character.transform.SetParent(playerReleventParent);
             _character.transform.position = spawnPoints[i].position;
@@ -159,6 +175,9 @@ public class FightingManager : MonoBehaviour
             Debug.Log("characrer " + i + " play " + _prepareID);
             _anim.SetFloat("rd_PrepareAnim", _prepareID);
         }
+
+
+
         for (int i = 0; i < characters.Length; i++)
         {
             Image _fillbar = _canvasGo.transform.Find("HpBar").GetChild(i).GetChild((i + 1) % 2).GetChild(1).GetChild(0).GetComponent<Image>();
@@ -193,8 +212,8 @@ public class FightingManager : MonoBehaviour
 
         // Set Enemy attack joint and beat generator
         _canvasGo.GetComponentInChildren<RingIndicatorControl>().SetData(characters[1].transform);
-        GetComponent<BeatGenerator>().SetData(characters[1].transform, _canvasGo.GetComponentInChildren<HintGenerator>(), _canvasGo.GetComponentInChildren<ResultControl>());
-        _canvasGo.GetComponentInChildren<HintGenerator>().SetData(GetComponent<BeatGenerator>());
+        GetComponent<BeatGenerator>().SetData(characters[1].transform, _canvasGo.GetComponentInChildren<HintGenerator>(), _canvasGo.GetComponentInChildren<ResultControl>(), songNameData[MyGameInstance.instance.SongIndex]);
+        _canvasGo.GetComponentInChildren<HintGenerator>().SetData(GetComponent<BeatGenerator>(), songNameData[MyGameInstance.instance.SongIndex]);
 
         /// Set Camera
         IEnumerable<TimelineClip> clips = timelines.GetOutputTrack(1).GetClips();

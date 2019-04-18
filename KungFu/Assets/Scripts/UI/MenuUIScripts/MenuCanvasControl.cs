@@ -6,7 +6,7 @@ public class MenuCanvasControl : MonoBehaviour
 {
     TransitionControl CanvasMove;
     AudioSource audioSource;
-    //0 Main, 1 Song Select, 2 Character Select, 3 Credits
+    //0 Main, 1 Character Select, 2 Song Select, 3 Credits
     public int CurrentCanvas = 0;
     public AudioClip CanvasChange;
     public AudioClip GameStart;
@@ -19,26 +19,13 @@ public class MenuCanvasControl : MonoBehaviour
     {
         CanvasMove = FindObjectOfType<TransitionControl>();
         audioSource = GetComponent<AudioSource>();
-        OnCanvasChange += canvastest1;
-        OnCanvasChange += canvastest2;
-
-
     }
 
-    void canvastest1(int i)
-    {
-        if(i == 1)
-            Debug.Log(i);
-    }
-    void canvastest2(int i)
-    {
-        if(i == 2)
-            Debug.Log(i);
-    }
     // Update is called once per frame
     void Update()
     {
         CheckInputFromKeyboard();
+        CheckInputFromArduino();
     }
     void CheckInputFromKeyboard()
     {

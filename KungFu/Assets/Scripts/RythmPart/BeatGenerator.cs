@@ -91,7 +91,7 @@ public class BeatGenerator : MonoBehaviour
     void Update()
     {
         //song ends restart
-        if (BeatArray[currentBeatIndex]["BeatID"].AsInt == -1 && bCanPlay)
+        if (bCanPlay && BeatArray[currentBeatIndex]["BeatID"].AsInt == -1 &&  beatTimer >= BeatArray[currentBeatIndex]["timeToHit"].AsFloat)
         {
             bCanPlay = false;
             //levelLoader.LoadScene("");
@@ -346,10 +346,14 @@ public class BeatGenerator : MonoBehaviour
                             playerAnimCtrl.PlayComboAnimation(butInfo.BeatTime.OKDuration + butInfo.BeatTime.OKStart);
                             FightingManager.instance.FM_Score(HitResult.Combo, 0, true);
                         }
-                        //else if (arduinoInput[i])
-                        //{
-                        //    matchButton(i, butInfo);
-                        //}
+                        else if (DataUtility.HasElement(butInfo.BeatTime.ButtonIDs, i))
+                        {
+                            if (arduinoInput[i])
+                            {
+                                sfxControl.PlayRandomImpactSFX();
+                                matchButton(i, butInfo);
+                            }
+                        }
                     }
                     else
                     {
@@ -358,7 +362,6 @@ public class BeatGenerator : MonoBehaviour
                             if (arduinoInput[i])
                             {
                                 sfxControl.PlayRandomImpactSFX();
-
                                 matchButton(i, butInfo);
                             }
                         }

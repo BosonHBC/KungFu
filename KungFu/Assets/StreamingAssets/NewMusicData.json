@@ -1,230 +1,6 @@
 {
     "allMusicData": [
         {
-            "charName": "Dummy",
-            "name": "Tutorial",
-            "lengthInSeconds": 126.83,
-            "numOfAnim": 19,
-            "animArray": [
-                {
-                    "timeToHit": 13.66,
-                    "AnimationID": 0
-                },
-                {
-                    "timeToHit": 17.16,
-                    "AnimationID": 1
-                },
-                {
-                    "timeToHit": 19,
-                    "AnimationID": 2
-                },
-                {
-                    "timeToHit": 20.76,
-                    "AnimationID": 3
-                },
-                {
-                    "timeToHit": 24.20,
-                    "AnimationID": 1
-                },
-                {
-                    "timeToHit": 25.76,
-                    "AnimationID": 3
-                },
-                {
-                    "timeToHit": 27.4,
-                    "AnimationID": 1
-                },
-                {
-                    "timeToHit": 30.86,
-                    "AnimationID": 0
-                },
-                {
-                    "timeToHit": 33.43,
-                    "AnimationID": 0
-                },
-                {
-                    "timeToHit": 34.46,
-                    "AnimationID": 1
-                },
-                {
-                    "timeToHit": 36.73,
-                    "AnimationID": 1
-                },
-                {
-                    "timeToHit": 41,
-                    "AnimationID": 1
-                },
-                {
-                    "timeToHit": 44.66,
-                    "AnimationID": 2
-                },
-                {
-                    "timeToHit": 47.8,
-                    "AnimationID": 0
-                },
-                {
-                    "timeToHit": 63.300,
-                    "AnimationID": 1
-                },
-                {
-                    "timeToHit": 65.380,
-                    "AnimationID": 3
-                },
-                {
-                    "timeToHit": 67.420,
-                    "AnimationID": 3
-                },
-                {
-                    "timeToHit": 71.760,
-                    "AnimationID": 3
-                },
-                {
-                    "timeToHit": 75.000,
-                    "AnimationID": -1
-                }
-            ]
-        },
-        {
-            "charName": "Girl",
-            "name": "BattleGirl",
-            "lengthInSeconds": 152.00,
-            "numOfAnim": 19,
-            "animArray": [
-                {
-                    "timeToHit": 17.140,
-                    "BeatID": 11
-                },
-                {
-                    "timeToHit": 23.960,
-                    "BeatID": 13
-                },
-                {
-                    "timeToHit": 30.840,
-                    "BeatID": 17
-                },
-                {
-                    "timeToHit": 37.730,
-                    "BeatID": 16
-                },
-                {
-                    "timeToHit": 44.560,
-                    "BeatID": 23
-                },
-                {
-                    "timeToHit": 51.430,
-                    "BeatID": 14
-                },
-                {
-                    "timeToHit": 58.280,
-                    "BeatID": 18
-                },
-                {
-                    "timeToHit": 65.200,
-                    "BeatID": 20
-                },
-                {
-                    "timeToHit": 72.060,
-                    "BeatID": 3
-                },
-                {
-                    "timeToHit": 75.450,
-                    "BeatID": 1
-                },
-                {
-                    "timeToHit": 78.860,
-                    "BeatID": 0
-                },
-                {
-                    "timeToHit": 82.290,
-                    "BeatID": 4
-                },
-                {
-                    "timeToHit": 85.760,
-                    "BeatID": 5
-                },
-                {
-                    "timeToHit": 89.160,
-                    "BeatID": 6
-                },
-                {
-                    "timeToHit": 92.580,
-                    "BeatID": 10
-                },
-                {
-                    "timeToHit": 99.480,
-                    "BeatID": 12
-                },
-                {
-                    "timeToHit": 106.280,
-                    "BeatID": 15
-                },
-                {
-                    "timeToHit": 113.180,
-                    "BeatID": 16
-                },
-                {
-                    "timeToHit": 120.020,
-                    "BeatID": 23
-                },
-                {
-                    "timeToHit": 126.900,
-                    "BeatID": 1
-                },
-                {
-                    "timeToHit": 128.180,
-                    "BeatID": 3
-                },
-                {
-                    "timeToHit": 130.310,
-                    "BeatID": 8
-                },
-                {
-                    "timeToHit": 132.040,
-                    "BeatID": 6
-                },
-                {
-                    "timeToHit": 133.760,
-                    "BeatID": 22
-                },
-                {
-                    "timeToHit": 137.600,
-                    "BeatID": 9
-                },
-                {
-                    "timeToHit": 138.400,
-                    "BeatID": 5
-                },
-                {
-                    "timeToHit": 140.600,
-                    "BeatID": 4
-                },
-                {
-                    "timeToHit": 142.980,
-                    "BeatID": 3
-                },
-                {
-                    "timeToHit": 144.00,
-                    "BeatID": 7
-                },
-                {
-                    "timeToHit": 145.280,
-                    "BeatID": 10
-                },
-                {
-                    "timeToHit": 147.460,
-                    "BeatID": 0
-                },
-                {
-                    "timeToHit": 150.480,
-                    "BeatID": 22
-                },
-                {
-                    "timeToHit": 152.000,
-                    "BeatID": -1
-                }
-            ]
-        },
-        {
             "charName": "Girl",
             "name": "BattleGirl_H",
             "lengthInSeconds": 152.00,
@@ -584,260 +360,373 @@
                     "BeatID": 29
                 },
                 {
-                    "timeToHit": 154.000,
+                    "timeToHit": 153.000,
                     "BeatID": -1
                 }
             ]
         },
         {
-            "charName": "XiaoHong",
-            "name": "Kungfu",
-            "lengthInSeconds": 126.83,
-            "numOfAnim": 19,
+            "charName": "Girl",
+            "name": "Sailor_H",
+            "lengthInSeconds": 152.00,
+            "numOfAnim": 105,
+            "numOfAttack": 44,
             "animArray": [
                 {
-                    "timeToHit": 13.66,
-                    "AnimationID": 0
+                    "timeToHit": 14.430,
+                    "BeatID": 16
                 },
                 {
-                    "timeToHit": 17.16,
-                    "AnimationID": 1
+                    "timeToHit": 16.260,
+                    "BeatID": 14
                 },
                 {
-                    "timeToHit": 19,
-                    "AnimationID": 2
+                    "timeToHit": 17.140,
+                    "BeatID": 16
                 },
                 {
-                    "timeToHit": 20.76,
-                    "AnimationID": 3
+                    "timeToHit": 18.000,
+                    "BeatID": 14
                 },
                 {
-                    "timeToHit": 24.20,
-                    "AnimationID": 1
+                    "timeToHit": 19.720,
+                    "BeatID": 20
                 },
                 {
-                    "timeToHit": 25.76,
-                    "AnimationID": 3
+                    "timeToHit": 20.680,
+                    "BeatID": 19
                 },
                 {
-                    "timeToHit": 27.4,
-                    "AnimationID": 1
+                    "timeToHit": 23.960,
+                    "BeatID": 17
                 },
                 {
-                    "timeToHit": 30.86,
-                    "AnimationID": 0
+                    "timeToHit": 25.720,
+                    "BeatID": 13
                 },
                 {
-                    "timeToHit": 33.43,
-                    "AnimationID": 0
+                    "timeToHit": 27.710,
+                    "BeatID": 14
                 },
                 {
-                    "timeToHit": 34.46,
-                    "AnimationID": 1
+                    "timeToHit": 28.310,
+                    "BeatID": 16
                 },
                 {
-                    "timeToHit": 36.73,
-                    "AnimationID": 1
+                    "timeToHit": 30.840,
+                    "BeatID": 23
                 },
                 {
-                    "timeToHit": 41,
-                    "AnimationID": 1
+                    "timeToHit": 31.710,
+                    "BeatID": 24
                 },
                 {
-                    "timeToHit": 44.66,
-                    "AnimationID": 2
+                    "timeToHit": 33.450,
+                    "BeatID": 23
                 },
                 {
-                    "timeToHit": 47.8,
-                    "AnimationID": 0
+                    "timeToHit": 34.220,
+                    "BeatID": 24
                 },
                 {
-                    "timeToHit": 63.300,
-                    "AnimationID": 1
+                    "timeToHit": 36.100,
+                    "BeatID": 18
                 },
                 {
-                    "timeToHit": 65.380,
-                    "AnimationID": 3
+                    "timeToHit": 37.730,
+                    "BeatID": 12
                 },
                 {
-                    "timeToHit": 67.420,
-                    "AnimationID": 3
+                    "timeToHit": 41.160,
+                    "BeatID": 25
                 },
                 {
-                    "timeToHit": 71.760,
-                    "AnimationID": 3
+                    "timeToHit": 42.910,
+                    "BeatID": 26
                 },
                 {
-                    "timeToHit": 75.000,
-                    "AnimationID": -1
-                }
-            ]
-        },
-        {
-            "charName": "Sailer",
-            "name": "Trey",
-            "lengthInSeconds": 125,
-            "numOfAnim": 19,
-            "beatArray": [
-                {
-                    "timeToHit": 10.9,
-                    "AnimationID": 0
+                    "timeToHit": 44.560,
+                    "BeatID": 21
                 },
                 {
-                    "timeToHit": 14.340,
-                    "AnimationID": 1
+                    "timeToHit": 45.600,
+                    "BeatID": 21
                 },
                 {
-                    "timeToHit": 17.877,
-                    "AnimationID": 2
+                    "timeToHit": 48.070,
+                    "BeatID": 17
                 },
                 {
-                    "timeToHit": 21.180,
-                    "AnimationID": 3
+                    "timeToHit": 49.890,
+                    "BeatID": 13
                 },
                 {
-                    "timeToHit": 28.020,
-                    "AnimationID": 1
+                    "timeToHit": 51.430,
+                    "BeatID": 21
                 },
                 {
-                    "timeToHit": 34.880,
-                    "AnimationID": 3
+                    "timeToHit": 52.920,
+                    "BeatID": 14
                 },
                 {
-                    "timeToHit": 39.760,
-                    "AnimationID": 1
+                    "timeToHit": 54.930,
+                    "BeatID": 16
                 },
                 {
-                    "timeToHit": 41.910,
-                    "AnimationID": 0
+                    "timeToHit": 56.590,
+                    "BeatID": 16
                 },
                 {
-                    "timeToHit": 46.410,
-                    "AnimationID": 0
+                    "timeToHit": 58.280,
+                    "BeatID": 14
                 },
                 {
-                    "timeToHit": 48.330,
-                    "AnimationID": 1
+                    "timeToHit": 60.000,
+                    "BeatID": 12
                 },
                 {
-                    "timeToHit": 50.460,
-                    "AnimationID": 1
+                    "timeToHit": 61.650,
+                    "BeatID": 18
                 },
                 {
-                    "timeToHit": 54.850,
-                    "AnimationID": 1
+                    "timeToHit": 63.360,
+                    "BeatID": 21
                 },
                 {
-                    "timeToHit": 57.000,
-                    "AnimationID": 2
+                    "timeToHit": 65.200,
+                    "BeatID": 22
                 },
                 {
-                    "timeToHit": 58.980,
-                    "AnimationID": 0
+                    "timeToHit": 69.100,
+                    "BeatID": 4
                 },
                 {
-                    "timeToHit": 63.300,
-                    "AnimationID": 1
+                    "timeToHit": 70.750,
+                    "BeatID": 4
                 },
                 {
-                    "timeToHit": 65.380,
-                    "AnimationID": 3
+                    "timeToHit": 72.060,
+                    "BeatID": 4
                 },
                 {
-                    "timeToHit": 67.420,
-                    "AnimationID": 3
+                    "timeToHit": 73.720,
+                    "BeatID": 0
                 },
                 {
-                    "timeToHit": 71.760,
-                    "AnimationID": 3
+                    "timeToHit": 75.450,
+                    "BeatID": 0
                 },
                 {
-                    "timeToHit": 75.000,
-                    "AnimationID": -1
-                }
-            ]
-        },
-        {
-            "charName": "Dude",
-            "name": "Tyson",
-            "lengthInSeconds": 99,
-            "numOfAnim": 19,
-            "animArray": [
-                {
-                    "timeToHit": 10.9,
-                    "AnimationID": 0
+                    "timeToHit": 77.160,
+                    "BeatID": 0
                 },
                 {
-                    "timeToHit": 14.340,
-                    "AnimationID": 1
+                    "timeToHit": 78.860,
+                    "BeatID": 7
                 },
                 {
-                    "timeToHit": 17.877,
-                    "AnimationID": 2
+                    "timeToHit": 80.160,
+                    "BeatID": 2
                 },
                 {
-                    "timeToHit": 21.180,
-                    "AnimationID": 3
+                    "timeToHit": 82.290,
+                    "BeatID": 1
                 },
                 {
-                    "timeToHit": 28.020,
-                    "AnimationID": 1
+                    "timeToHit": 83.210,
+                    "BeatID": 6
                 },
                 {
-                    "timeToHit": 34.880,
-                    "AnimationID": 3
+                    "timeToHit": 84.360,
+                    "BeatID": 30
                 },
                 {
-                    "timeToHit": 39.760,
-                    "AnimationID": 1
+                    "timeToHit": 85.760,
+                    "BeatID": 2
                 },
                 {
-                    "timeToHit": 41.910,
-                    "AnimationID": 0
+                    "timeToHit": 86.860,
+                    "BeatID": 6
                 },
                 {
-                    "timeToHit": 46.410,
-                    "AnimationID": 0
+                    "timeToHit": 88.210,
+                    "BeatID": 31
                 },
                 {
-                    "timeToHit": 48.330,
-                    "AnimationID": 1
+                    "timeToHit": 89.160,
+                    "BeatID": 0
                 },
                 {
-                    "timeToHit": 50.460,
-                    "AnimationID": 1
+                    "timeToHit": 90.320,
+                    "BeatID": 4
                 },
                 {
-                    "timeToHit": 54.850,
-                    "AnimationID": 1
+                    "timeToHit": 92.580,
+                    "BeatID": 22
                 },
                 {
-                    "timeToHit": 57.000,
-                    "AnimationID": 2
+                    "timeToHit": 96.690,
+                    "BeatID": 17
                 },
                 {
-                    "timeToHit": 58.980,
-                    "AnimationID": 0
+                    "timeToHit": 97.980,
+                    "BeatID": 14
                 },
                 {
-                    "timeToHit": 63.300,
-                    "AnimationID": 1
+                    "timeToHit": 99.480,
+                    "BeatID": 13
                 },
                 {
-                    "timeToHit": 65.380,
-                    "AnimationID": 3
+                    "timeToHit": 100.980,
+                    "BeatID": 16
                 },
                 {
-                    "timeToHit": 67.420,
-                    "AnimationID": 3
+                    "timeToHit": 102.690,
+                    "BeatID": 21
                 },
                 {
-                    "timeToHit": 71.760,
-                    "AnimationID": 3
+                    "timeToHit": 104.340,
+                    "BeatID": 24
                 },
                 {
-                    "timeToHit": 75.000,
-                    "AnimationID": -1
+                    "timeToHit": 106.280,
+                    "BeatID": 18
+                },
+                {
+                    "timeToHit": 107.160,
+                    "BeatID": 19
+                },
+                {
+                    "timeToHit": 108.240,
+                    "BeatID": 20
+                },
+                {
+                    "timeToHit": 109.750,
+                    "BeatID": 12
+                },
+                {
+                    "timeToHit": 111.255,
+                    "BeatID": 21
+                },
+                {
+                    "timeToHit": 113.180,
+                    "BeatID": 28
+                },
+                {
+                    "timeToHit": 115.620,
+                    "BeatID": 27
+                },
+                {
+                    "timeToHit": 116.660,
+                    "BeatID": 21
+                },
+                {
+                    "timeToHit": 118.320,
+                    "BeatID": 23
+                },
+                {
+                    "timeToHit": 120.020,
+                    "BeatID": 24
+                },
+                {
+                    "timeToHit": 121.540,
+                    "BeatID": 26
+                },
+                {
+                    "timeToHit": 122.530,
+                    "BeatID": 25
+                },
+                {
+                    "timeToHit": 125.170,
+                    "BeatID": 1
+                },
+                {
+                    "timeToHit": 126.900,
+                    "BeatID": 7
+                },
+                {
+                    "timeToHit": 127.780,
+                    "BeatID": 1
+                },
+                {
+                    "timeToHit": 128.180,
+                    "BeatID": 2
+                },
+                {
+                    "timeToHit": 130.310,
+                    "BeatID": 6
+                },
+                {
+                    "timeToHit": 131.200,
+                    "BeatID": 7
+                },
+                {
+                    "timeToHit": 132.040,
+                    "BeatID": 4
+                },
+                {
+                    "timeToHit": 133.760,
+                    "BeatID": 4
+                },
+                {
+                    "timeToHit": 134.595,
+                    "BeatID": 0
+                },
+                {
+                    "timeToHit": 135.900,
+                    "BeatID": 0
+                },
+                {
+                    "timeToHit": 137.600,
+                    "BeatID": 33
+                },
+                {
+                    "timeToHit": 138.400,
+                    "BeatID": 32
+                },
+                {
+                    "timeToHit": 139.320,
+                    "BeatID": 4
+                },
+                {
+                    "timeToHit": 140.600,
+                    "BeatID": 0
+                },
+                {
+                    "timeToHit": 141.740,
+                    "BeatID": 4
+                },
+                {
+                    "timeToHit": 142.980,
+                    "BeatID": 0
+                },
+                {
+                    "timeToHit": 144.000,
+                    "BeatID": 1
+                },
+                {
+                    "timeToHit": 145.280,
+                    "BeatID": 6
+                },
+                {
+                    "timeToHit": 146.250,
+                    "BeatID": 2
+                },
+                {
+                    "timeToHit": 147.460,
+                    "BeatID": 7
+                },
+                {
+                    "timeToHit": 149.040,
+                    "BeatID": 29
+                },
+                {
+                    "timeToHit": 150.480,
+                    "BeatID": 29
+                },
+                {
+                    "timeToHit": 153.000,
+                    "BeatID": -1
                 }
             ]
         }
