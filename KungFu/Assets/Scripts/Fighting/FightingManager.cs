@@ -153,7 +153,7 @@ public class FightingManager : MonoBehaviour
         director.SetGenericBinding(timelines.GetOutputTrack(4), _canvasGo.GetComponent<Animator>());
         // Set UIs
         MyGameInstance.instance.SetScoreUI(
-            _canvasGo.transform.Find("Combo").GetChild(0).GetComponent<Text>()
+            _canvasGo.transform.Find("Combo").GetComponent<ComboController>()
             , _canvasGo.transform.Find("Score").GetChild(0).GetComponent<Text>());
         hint = _canvasGo.transform.GetChild(8).GetComponent<ModeHint>();
         /// Characters 0-> player 1-> enemy

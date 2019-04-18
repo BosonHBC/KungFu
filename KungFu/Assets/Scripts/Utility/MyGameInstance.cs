@@ -25,7 +25,7 @@ public class MyGameInstance : MonoBehaviour
     [SerializeField] private int iOkScore = 800;
     [SerializeField] private int fComboAward;
     [SerializeField] private int iComboFightScore = 500;
-    [SerializeField] private Text comboText;
+    [SerializeField] private ComboController comboText;
     [SerializeField] private Text scoreText;
     DataLoader loader;
     private int iComboFightCount;
@@ -60,8 +60,6 @@ public class MyGameInstance : MonoBehaviour
     private void Start()
     {
         iCombo = 0;
-        if (comboText)
-            comboText.text = "0";
 
         loader = GetComponent<DataLoader>();
     }
@@ -88,8 +86,8 @@ public class MyGameInstance : MonoBehaviour
         }
         if (comboText)
         {
-            comboText.text = iCombo.ToString();
-            comboText.transform.parent.GetComponent<Animator>().Play("Pop");
+            comboText.ChangeCombo(iCombo);
+
             scoreText.text = scores.ToString();
             scoreText.transform.parent.GetComponent<Animator>().Play("Pop");
 
@@ -101,8 +99,8 @@ public class MyGameInstance : MonoBehaviour
         misses += number;
 
         iCombo = 0;
-        if (comboText)
-            comboText.text = iCombo.ToString();
+        comboText.ChangeCombo(iCombo);
+
     }
 
     public void SetArduinoInput(bool[] arduinoInput)
@@ -130,10 +128,9 @@ public class MyGameInstance : MonoBehaviour
         LevelLoader.instance.LoadScene("FightingScene_0");
     }
 
-    public void SetScoreUI(Text _comboText, Text _scoreText)
+    public void SetScoreUI(ComboController _comboText, Text _scoreText)
     {
         comboText = _comboText;
-        comboText.text = "0";
 
         scoreText = _scoreText;
         scoreText.text = "0";
