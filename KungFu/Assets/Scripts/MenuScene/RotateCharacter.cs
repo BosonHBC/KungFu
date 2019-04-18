@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Rendering.PostProcessing;
 
 public class RotateCharacter : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class RotateCharacter : MonoBehaviour
     int currentCharacter = 0;
     bool bRotating;
     Quaternion destQuat;
+
+    private PostProcessVolume volume;
+    private DepthOfField DoF;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +23,24 @@ public class RotateCharacter : MonoBehaviour
         for (int i = 0; i < charas.Length; i++)
         {
             anims[i] = charas[i].GetComponent<Animator>();
+        }
+
+        volume = Camera.main.GetComponent<PostProcessVolume>();
+        bool isValid1 = volume.profile.TryGetSettings<DepthOfField>(out DoF);
+        MenuCanvasControl.OnCanvasChange += ChangeDoF;
+    }
+
+    public void ChangeDoF(int _id)
+    {
+        if (_id == 3)
+        {
+            // turn on DoF
+            DoF.active = true;
+        }
+        else
+        {
+            // turn off Dof
+            DoF.active = false;
         }
     }
 
