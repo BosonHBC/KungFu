@@ -79,7 +79,7 @@ public class BeatGenerator : MonoBehaviour
         BeatArray = MyGameInstance.instance.GetComponent<DataLoader>().GetBeatArrayByName(songName);
         playerAnimCtrl = FightingManager.instance.characters[0].GetComponent<PlayerAnimController>();
         // Debug
-       
+
     }
 
     public void StartGenerateBeat()
@@ -91,7 +91,7 @@ public class BeatGenerator : MonoBehaviour
     void Update()
     {
         //song ends restart
-        if (bCanPlay && BeatArray[currentBeatIndex]["BeatID"].AsInt == -1 &&  beatTimer >= BeatArray[currentBeatIndex]["timeToHit"].AsFloat)
+        if (bCanPlay && BeatArray[currentBeatIndex]["BeatID"].AsInt == -1 && BeatArray[currentBeatIndex]["timeToHit"].AsInt <= beatTimer)
         {
             bCanPlay = false;
             //levelLoader.LoadScene("");
@@ -102,48 +102,52 @@ public class BeatGenerator : MonoBehaviour
         }
         if (bCanPlay)
         {
-            BeatInfo currentBeatInfo = beatData[BeatArray[currentBeatIndex]["BeatID"].AsInt];
-            if (currentBeatInfo == null)
-                Debug.Log("Error when getting beat info");
-            float TimeToHitThisBeat = BeatArray[currentBeatIndex]["timeToHit"].AsFloat;
-            if (TimeToHitThisBeat - currentBeatInfo.PerfectStart <= beatTimer)
+            if (BeatArray[currentBeatIndex]["BeatID"].AsInt != -1)
             {
-                if (!animPlayed)
+                BeatInfo currentBeatInfo = beatData[BeatArray[currentBeatIndex]["BeatID"].AsInt];
+                if (currentBeatInfo == null)
+                    Debug.Log("Error when getting beat info");
+                float TimeToHitThisBeat = BeatArray[currentBeatIndex]["timeToHit"].AsFloat;
+                if (TimeToHitThisBeat - currentBeatInfo.PerfectStart <= beatTimer)
                 {
-                    //Enemy only has attack animations
-                    if (currentBeatInfo.Mode == BeatMode.Defend)
+                    if (!animPlayed)
                     {
-                        enemyAnimCtrl.PlayAnim(currentBeatInfo.ButtonIDs[0]);
-                    }
-                    animPlayed = true;
-                }
-
-                if (TimeToHitThisBeat - currentBeatInfo.PerfectStart + currentBeatInfo.OKStart <= beatTimer)
-                {
-                    //Debug.Log("BeatOut");
-                    //create a map of matched buttons for miss check
-                    var matchedButtons = new Dictionary<int, bool>();
-                    foreach (int i in currentBeatInfo.ButtonIDs)
-                    {
-                        matchedButtons.Add(i, false);
-                    }
-                    beatQueue.Enqueue(
-                        new BeatHitObject()
+                        //Enemy only has attack animations
+                        if (currentBeatInfo.Mode == BeatMode.Defend)
                         {
-                            TimeToHit = TimeToHitThisBeat,
-                            BeatTime = currentBeatInfo,
-                            MatchedButtons = matchedButtons,
+                            enemyAnimCtrl.PlayAnim(currentBeatInfo.ButtonIDs[0]);
                         }
-                    );
+                        animPlayed = true;
+                    }
 
-                    //Beat ends
-                    StartCoroutine(beatEndInSecs(beatQueue.Peek(), currentBeatInfo.OKDuration));
+                    if (TimeToHitThisBeat - currentBeatInfo.PerfectStart + currentBeatInfo.OKStart <= beatTimer)
+                    {
+                        //Debug.Log("BeatOut");
+                        //create a map of matched buttons for miss check
+                        var matchedButtons = new Dictionary<int, bool>();
+                        foreach (int i in currentBeatInfo.ButtonIDs)
+                        {
+                            matchedButtons.Add(i, false);
+                        }
+                        beatQueue.Enqueue(
+                            new BeatHitObject()
+                            {
+                                TimeToHit = TimeToHitThisBeat,
+                                BeatTime = currentBeatInfo,
+                                MatchedButtons = matchedButtons,
+                            }
+                        );
 
-                    //check for next beat
-                    currentBeatIndex++;
-                    animPlayed = false;
+                        //Beat ends
+                        StartCoroutine(beatEndInSecs(beatQueue.Peek(), currentBeatInfo.OKDuration));
+
+                        //check for next beat
+                        currentBeatIndex++;
+                        animPlayed = false;
+                    }
                 }
             }
+
             checkInputFromKeyboard();
             checkInputFromArduino();
 
@@ -173,43 +177,43 @@ public class BeatGenerator : MonoBehaviour
         //}
         //else
         //{
-            if (beatHitObject.MatchedButtons.ContainsKey(buttonID))
+        if (beatHitObject.MatchedButtons.ContainsKey(buttonID))
+        {
+            //if is not already matched
+            if (!beatHitObject.MatchedButtons[buttonID])
             {
-                //if is not already matched
-                if (!beatHitObject.MatchedButtons[buttonID])
+                //sfxControl.PlayRandomMatchSFX();
+                HitResult hr = GetResultFromInput();
+
+                hintGenerator.MatchButton(buttonID);
+                //player animation goes here
+                //indicatorControl.MatchButton(buttonID);
+                //we can calculate the reacting time to give different scores (as a parameter to Score() function) here
+                if (hr != HitResult.Miss)
+                    FightingManager.instance.FM_Score(hr, buttonID);
+                else
                 {
-                    //sfxControl.PlayRandomMatchSFX();
-                    HitResult hr = GetResultFromInput();
+                    Debug.Log("Match Button Bugged");
+                    //FightingManager.instance.FM_Miss(1);
+                }
+                //Get JointID
+                int index = DataUtility.IntArrayIndex(beatHitObject.BeatTime.ButtonIDs, buttonID);
+                if (index == -1)
+                    Debug.LogError("Button ID not in beat button id array");
+                //indicatorControl.ShowResultAt(buttonID, hr);
+                resultControl.ShowResult(hr, (hr == HitResult.Miss) ? 0 : beatHitObject.BeatTime.JointIDs[index]);
+                beatHitObject.MatchedButtons[buttonID] = true;
 
-                    hintGenerator.MatchButton(buttonID);
-                    //player animation goes here
-                    //indicatorControl.MatchButton(buttonID);
-                    //we can calculate the reacting time to give different scores (as a parameter to Score() function) here
-                    if (hr != HitResult.Miss)
-                        FightingManager.instance.FM_Score(hr, buttonID);
-                    else
-                    {
-                        Debug.Log("Match Button Bugged");
-                        //FightingManager.instance.FM_Miss(1);
-                    }
-                    //Get JointID
-                    int index = DataUtility.IntArrayIndex(beatHitObject.BeatTime.ButtonIDs, buttonID);
-                    if (index == -1)
-                        Debug.LogError("Button ID not in beat button id array");
-                    //indicatorControl.ShowResultAt(buttonID, hr);
-                    resultControl.ShowResult(hr, (hr == HitResult.Miss) ? 0 : beatHitObject.BeatTime.JointIDs[index]);
-                    beatHitObject.MatchedButtons[buttonID] = true;
-
-                    //if all buttons are hit, dequeue
-                    if (DataUtility.DictionaryAllTrue(beatHitObject.MatchedButtons))
-                    {
-                        if (beatQueue.Count > 0)
-                            beatQueue.Dequeue();
-                    }
+                //if all buttons are hit, dequeue
+                if (DataUtility.DictionaryAllTrue(beatHitObject.MatchedButtons))
+                {
+                    if (beatQueue.Count > 0)
+                        beatQueue.Dequeue();
                 }
             }
-            else
-                Debug.Log("No such button in matchedButtons!!!!!");
+        }
+        else
+            Debug.Log("No such button in matchedButtons!!!!!");
         //}
     }
 
@@ -228,7 +232,7 @@ public class BeatGenerator : MonoBehaviour
                 {
                     if (!matched.Value)
                     {
-                        float[] knockbackDir = {beatHitObject.BeatTime.KnockBack_H, beatHitObject.BeatTime.KnockBack_V};
+                        float[] knockbackDir = { beatHitObject.BeatTime.KnockBack_H, beatHitObject.BeatTime.KnockBack_V };
                         FightingManager.instance.FM_Miss(1, knockbackDir);
                         //show miss image
                         resultControl.ShowResult(HitResult.Miss);
@@ -346,13 +350,10 @@ public class BeatGenerator : MonoBehaviour
                             playerAnimCtrl.PlayComboAnimation(butInfo.BeatTime.OKDuration + butInfo.BeatTime.OKStart);
                             FightingManager.instance.FM_Score(HitResult.Combo, 0, true);
                         }
-                        else if (DataUtility.HasElement(butInfo.BeatTime.ButtonIDs, i))
+                        else if (arduinoInput[i] && DataUtility.HasElement(butInfo.BeatTime.ButtonIDs, i))
                         {
-                            if (arduinoInput[i])
-                            {
-                                sfxControl.PlayRandomImpactSFX();
-                                matchButton(i, butInfo);
-                            }
+                            sfxControl.PlayRandomImpactSFX();
+                            matchButton(i, butInfo);
                         }
                     }
                     else
