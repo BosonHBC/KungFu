@@ -164,7 +164,10 @@ public class FightingManager : MonoBehaviour
             if (i == 0)
                 _character = Instantiate(playerPrefabs[MyGameInstance.instance.PlayerCharacterIndex]);
             else
-                _character = Instantiate(enemyPrefabs[(MyGameInstance.instance.PlayerCharacterIndex + Random.Range(1, 3)) % enemyPrefabs.Length]);
+            {
+                int rng = (MyGameInstance.instance.PlayerCharacterIndex + Random.Range(1, 3)) % enemyPrefabs.Length;
+                _character = Instantiate(enemyPrefabs[rng]);
+            }
             //Character _character = Instantiate(playerPrefabs[i]).GetComponent<Character>();
             characters[i] = _character;
             _character.transform.SetParent(playerReleventParent);
