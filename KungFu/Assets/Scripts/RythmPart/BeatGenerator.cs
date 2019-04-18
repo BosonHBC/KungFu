@@ -232,7 +232,7 @@ public class BeatGenerator : MonoBehaviour
                         FightingManager.instance.FM_Miss(1, knockbackDir);
                         //show miss image
                         resultControl.ShowResult(HitResult.Miss);
-                        //sfxControl.PlayRandomMissSFX();
+                        sfxControl.PlayRandomImpactSFX();
                     }
                 }
             }
@@ -245,7 +245,11 @@ public class BeatGenerator : MonoBehaviour
 
         //player animation goes here
         //need to add transition from defense to knockback
-        playerAnimCtrl.PlayGuardAnimation(keyIndex);
+        sfxControl.PlayRandomMismatchSFX();
+        if (beatHitObject.BeatTime.Mode == BeatMode.Defend)
+            playerAnimCtrl.PlayGuardAnimation(keyIndex);
+        else
+            playerAnimCtrl.PlayPlayerAttackAnimation(keyIndex);
         //hintGenerator.DirectlyRemoveFirstHint();
         //if (beatQueue.Count > 0)
         //    beatQueue.Dequeue();
@@ -342,10 +346,10 @@ public class BeatGenerator : MonoBehaviour
                             playerAnimCtrl.PlayComboAnimation(butInfo.BeatTime.OKDuration + butInfo.BeatTime.OKStart);
                             FightingManager.instance.FM_Score(HitResult.Combo, 0, true);
                         }
-                        else if (arduinoInput[i])
-                        {
-                            matchButton(i, butInfo);
-                        }
+                        //else if (arduinoInput[i])
+                        //{
+                        //    matchButton(i, butInfo);
+                        //}
                     }
                     else
                     {

@@ -37,7 +37,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 4
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -174,12 +174,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d38dcc97c1b898a478b390ece0b122ab, type: 3}
   - {fileID: 8300000, guid: 708d15aa0257bb846846ed8fe7ed6158, type: 3}
   - {fileID: 8300000, guid: 16cc7933c12464246a7db90b044ad6e4, type: 3}
-  - {fileID: 8300000, guid: ef95be98671893142a539f3c7c0f72d9, type: 3}
-  - {fileID: 8300000, guid: bd216009dc6f960418740189807ec6f2, type: 3}
-  - {fileID: 8300000, guid: 4c40d9c59738c4b42a164c2a36b64123, type: 3}
-  - {fileID: 8300000, guid: 2332fae8c9ec9ea4fa8b87a1bb14dd55, type: 3}
-  - {fileID: 8300000, guid: 7d7f0e7fa9fd99342b3014fbcfbeef60, type: 3}
-  - {fileID: 8300000, guid: 7a89e73b71e2cae44910d9d5fd1a5ec1, type: 3}
+  MismatchSFXs:
+  - {fileID: 8300000, guid: 73257f1a77502bb4cb36e8f215f1df21, type: 3}
+  - {fileID: 8300000, guid: fcef21c212d4e8f49886d71db9c1f551, type: 3}
+  - {fileID: 8300000, guid: d887e403baffb964f9250a5e67e06c29, type: 3}
 --- !u!114 &6126547395278215180
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -19,6 +19,11 @@ public class HintTrackControl : MonoBehaviour
     Image ComboOutline;
     [SerializeField]
     GameObject HitLineHint;
+    [SerializeField]
+    Transform TooEarlyOrLate;
+    [SerializeField]
+    GameObject TooEarly, TooLate;
+    bool IsTooLate = false;
     Coroutine comboOutlineShow;
     [HideInInspector]
     public BeatInfo beatTiming;
@@ -81,6 +86,7 @@ public class HintTrackControl : MonoBehaviour
                 case HitResult.Perfect:
                     if (timer >= beatTiming.PerfectStart + beatTiming.PerfectDuration + timeBeforeHit)
                     {
+                        IsTooLate = true;
                         ChangeToOK();
                     }
                     break;
@@ -147,6 +153,15 @@ public class HintTrackControl : MonoBehaviour
                 {
                     ChildBodyParts[butID].GetComponent<Image>().color = NormalColor;
                     matchedButtons[butID] = true;
+
+                    //Show Too early or late
+                    if(hintState == HitResult.Good)
+                    {
+                        if (IsTooLate)
+                            ShowTooLate();
+                        else
+                            ShowTooEarly();
+                    }
                     break;
                 }
             }
@@ -163,10 +178,22 @@ public class HintTrackControl : MonoBehaviour
 
     void GenerateHitLine()
     {
-        var go = Instantiate(HitLineHint, transform.position, transform.rotation, transform);
+        var go = Instantiate(HitLineHint, transform.position, transform.rotation, transform.parent);
         go.GetComponent<Image>().color = hintState == HitResult.Good ? OKColor : PerfectColor;
         go.GetComponent<Image>().CrossFadeAlpha(0.0f, 0.7f, false);
         Destroy(go, 0.7f);
+    }
+    void ShowTooLate()
+    {
+        var go = Instantiate(TooLate, TooEarlyOrLate.transform.position, Quaternion.identity, transform.parent);
+        go.GetComponent<Image>().CrossFadeAlpha(0.0f, 1.0f, false);
+        Destroy(go, 1.0f);
+    }
+    void ShowTooEarly()
+    {
+        var go = Instantiate(TooEarly, TooEarlyOrLate.transform.position, Quaternion.identity, transform.parent);
+        go.GetComponent<Image>().CrossFadeAlpha(0.0f, 1.0f, false);
+        Destroy(go, 1.0f);
     }
     bool isAllMatched()
     {
