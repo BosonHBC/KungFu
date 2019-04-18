@@ -13,7 +13,7 @@ const int button09 = 8;
 const int button10 = 9;
 const int button11 = 10;
 
-const int ThreshHold = 525;
+const int ThreshHold = 500;
 
 void setup(void) {
   Serial.begin(9600);
@@ -23,7 +23,7 @@ void loop(void) {
   String myString = "";
 
   // the analog reading from the FSR resistor divider
-  if (analogRead(button01) >= ThreshHold + 75) {
+  if (analogRead(button01) >= ThreshHold-75) {
     myString += "1";
   }
   else
@@ -31,7 +31,7 @@ void loop(void) {
     myString += "0";
   }
 
-  if (analogRead(button02) >= ThreshHold+30) {
+  if (analogRead(button02) >= ThreshHold+25) {
     myString += "1";
   }
   else
@@ -39,7 +39,7 @@ void loop(void) {
     myString += "0";
   }
 
-  if (analogRead(button03) >= ThreshHold+50) {
+  if (analogRead(button03) >= ThreshHold-25) {
     myString += "1";
   }
   else
@@ -47,7 +47,7 @@ void loop(void) {
     myString += "0";
   }
 
-  if (analogRead(button04) >= ThreshHold) {
+  if (analogRead(button04) >= ThreshHold-90) {
     myString += "1";
   }
   else
@@ -55,7 +55,7 @@ void loop(void) {
     myString += "0";
   }
 
-  if (analogRead(button05) >= ThreshHold + 100) {
+  if (analogRead(button05) >= ThreshHold - 75) {
     myString += "1";
   }
   else
@@ -63,7 +63,7 @@ void loop(void) {
     myString += "0";
   }
 
-  if (analogRead(button06) >= ThreshHold) {
+  if (analogRead(button06) >= ThreshHold-50) {
     myString += "1";
   }
   else
