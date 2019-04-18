@@ -180,10 +180,10 @@ public class FightingManager : MonoBehaviour
 
         for (int i = 0; i < characters.Length; i++)
         {
-            Image _fillbar = _canvasGo.transform.Find("HpBar").GetChild(i).GetChild((i + 1) % 2).GetChild(1).GetChild(0).GetComponent<Image>();
+            HpBarControl _HpBarControl = _canvasGo.transform.GetComponentInChildren<HpBarControl>();
 
             Transform _opponentTr = characters[(i + 1) % characters.Length].transform;
-            characters[i].SetData(_fillbar,
+            characters[i].SetData(_HpBarControl,
                _opponentTr, i);
         }
         /// Player center

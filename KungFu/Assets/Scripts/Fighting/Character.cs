@@ -13,9 +13,7 @@ public class Character : MonoBehaviour
     [SerializeField] protected float fMaxHp;
     [SerializeField] protected float fCurrentHp;
     protected BaseAnimController anim;
-    private Image hpFillBar;
-    Animator iconGetRed;
-
+    private HpBarControl hpCtrl;
     protected bool bFaceToOpponent = true;
 
     [SerializeField] private float fDashSpeed;
@@ -46,9 +44,10 @@ public class Character : MonoBehaviour
 
     public virtual void GetDamage(float _dmg, float[] _attackDir)
     {
-        float _afterDmg = fCurrentHp - _dmg;
+        
         anim.GetDamage(_attackDir);
-        StartCoroutine(GetDamage(fCurrentHp, _afterDmg<0?0:_afterDmg));
+        hpCtrl.GetDamage(fCurrentHp,_dmg);
+        fCurrentHp -= _dmg;
         if (fCurrentHp <= 0)
         {
             FightingManager.instance.FightOver(iCharID);
@@ -63,10 +62,9 @@ public class Character : MonoBehaviour
 
     }
 
-    public void SetData(Image _img, Transform _trOpponent, int _icharID)
+    public void SetData(HpBarControl _hpCtrl, Transform _trOpponent, int _icharID)
     {
-        hpFillBar = _img;
-        iconGetRed = hpFillBar.transform.parent.parent.parent.Find("Icon").GetComponent<Animator>();
+        hpCtrl = _hpCtrl;
         fCurrentHp = fMaxHp;
         bFaceToOpponent = true;
         iCharID = _icharID;
@@ -94,25 +92,7 @@ public class Character : MonoBehaviour
         }
     }
 
-    IEnumerator GetDamage(float _CurrentHp, float _AfterDmgHp, float _fadeTime = 0.2f)
-    {
-        iconGetRed.Play("IconGetRed");
-        float _timeStartFade = Time.time;
-        float _timeSinceStart = Time.time - _timeStartFade;
-        float _lerpPercentage = _timeSinceStart / _fadeTime;
-
-        while (true)
-        {
-            _timeSinceStart = Time.time - _timeStartFade;
-            _lerpPercentage = _timeSinceStart / _fadeTime;
-            float currentValue = Mathf.Lerp(_CurrentHp, _AfterDmgHp, _lerpPercentage);
-            fCurrentHp= currentValue;
-            hpFillBar.fillAmount = fCurrentHp / fMaxHp;
-            if (_lerpPercentage >= 1) break;
-            yield return new WaitForEndOfFrame();
-        }
-
-    }
+   
 
     public void DashToOpponent(int vert, float _time)
     {
