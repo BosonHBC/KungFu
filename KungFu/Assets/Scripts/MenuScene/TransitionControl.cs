@@ -21,14 +21,6 @@ public class TransitionControl : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            MoveMenu(-1);
-        }
-        else if (Input.GetKeyDown(KeyCode.D))
-        {
-            MoveMenu(1);
-        }
     }
 
     public void MoveMenu(int _delta)
@@ -38,12 +30,12 @@ public class TransitionControl : MonoBehaviour
             bMoving = true;
             if (_delta > 0)
             {
-                Debug.Log("MoveRight");
+                //Debug.Log("MoveRight");
                 currentId++;
             }
             else if (_delta < 0)
             {
-                Debug.Log("MoveLeft");
+                //Debug.Log("MoveLeft");
                 currentId--;
             }
 

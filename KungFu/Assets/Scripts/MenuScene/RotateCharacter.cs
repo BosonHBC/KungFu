@@ -30,9 +30,9 @@ public class RotateCharacter : MonoBehaviour
         MenuCanvasControl.OnCanvasChange += ChangeDoF;
     }
 
-    public void ChangeDoF(int _id)
+    public void ChangeDoF(MenuCanvasControl.MenuCanvas _canvas)
     {
-        if (_id == 3)
+        if (_canvas == MenuCanvasControl.MenuCanvas.CharacterSelect)
         {
             // turn on DoF
             DoF.active = true;
