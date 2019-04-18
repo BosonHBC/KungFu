@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Menu_Bobo
+  m_Controller: {fileID: 9100000, guid: 703322a6055913043adae17cda02d420, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: b3ae9ce68d3411045a8d35d78f7720dc, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 29d1e1e94d365f746a6958dae2d701ed, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 6deb7030d38f5004194876a79eb77f50, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: d34b7783de9b6a444aef4fb6e016191a, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: c5116f25fe4c4dd44b9845eb28813055, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 2637773cb29ec9f4c9871dee6e5b1056, type: 3}
