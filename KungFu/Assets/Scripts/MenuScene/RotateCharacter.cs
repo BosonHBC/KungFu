@@ -16,6 +16,12 @@ public class RotateCharacter : MonoBehaviour
 
     private PostProcessVolume volume;
     private DepthOfField DoF;
+    private void OnEnable()
+    {
+        //add events
+        MenuCanvasControl.OnSelectLeft += CharacterRotateLeft;
+        MenuCanvasControl.OnSelectRight += CharacterRotateRight;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -54,14 +60,31 @@ public class RotateCharacter : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.W))
         {
+            //left
             SwitchChar(-1);
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
+            //right
             SwitchChar(1);
         }
     }
 
+    void CharacterRotateLeft(MenuCanvasControl.MenuCanvas currentCanvas)
+    {
+        if(currentCanvas == MenuCanvasControl.MenuCanvas.CharacterSelect)
+        {
+            SwitchChar(-1);
+        }
+    }
+
+    void CharacterRotateRight(MenuCanvasControl.MenuCanvas currentCanvas)
+    {
+        if(currentCanvas == MenuCanvasControl.MenuCanvas.CharacterSelect)
+        {
+            SwitchChar(1);
+        }
+    }
     public void SwitchChar(int _dleta)
     {
         if (!bRotating)
@@ -80,6 +103,8 @@ public class RotateCharacter : MonoBehaviour
                 if (currentCharacter < 0)
                     currentCharacter = 2;
             }
+            //Set to MyGameInstance
+            MyGameInstance.instance.PlayerCharacterIndex = currentCharacter;
             destQuat = Quaternion.Euler(new Vector3(0, currentCharacter * 120f, 0));
             StartCoroutine(Rotator(destQuat, delegate { anims[currentCharacter].SetBool("PlayGesture", true); },0.8f));
         }
@@ -109,5 +134,11 @@ public class RotateCharacter : MonoBehaviour
         bRotating = false;
         if (_onFinishRotation != null)
             _onFinishRotation.Invoke();
+    }
+
+    private void OnDisable()
+    {
+        MenuCanvasControl.OnSelectLeft -= CharacterRotateLeft;
+        MenuCanvasControl.OnSelectRight -= CharacterRotateRight;
     }
 }

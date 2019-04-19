@@ -16,6 +16,7 @@ public class MenuCanvasControl : MonoBehaviour
     //0 Main, 1 Character Select, 2 Song Select, 3 Credits
     public int CurrentCanvas = 0;
     public AudioClip CanvasChange;
+    public AudioClip OptionSwitch;
     public AudioClip GameStart;
     public delegate void ButtonAction(MenuCanvas currentCanvas);
     public static event ButtonAction OnCanvasChange;
@@ -44,6 +45,17 @@ public class MenuCanvasControl : MonoBehaviour
         {
             PageLeft();   
         }
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            OnSelectLeft?.Invoke((MenuCanvas)CurrentCanvas);
+            audioSource.PlayOneShot(OptionSwitch);
+        }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            OnSelectRight?.Invoke((MenuCanvas)CurrentCanvas);
+            audioSource.PlayOneShot(OptionSwitch);
+
+        }
     }
 
     void CheckInputFromArduino()
@@ -63,9 +75,11 @@ public class MenuCanvasControl : MonoBehaviour
                         break;
                     case 3:
                         OnSelectLeft?.Invoke((MenuCanvas)CurrentCanvas);
+                        audioSource.PlayOneShot(OptionSwitch);
                         break;
                     case 5:
                         OnSelectRight?.Invoke((MenuCanvas)CurrentCanvas);
+                        audioSource.PlayOneShot(OptionSwitch);
                         break;
                     case 7:
                         PageRight();
