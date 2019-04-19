@@ -373,359 +373,363 @@
             "numOfAttack": 44,
             "animArray": [
                 {
-                    "timeToHit": 14.430,
+                    "timeToHit": 16.820,
+                    "BeatID": 21
+                },
+                {
+                    "timeToHit": 19.830,
                     "BeatID": 16
                 },
                 {
-                    "timeToHit": 16.260,
+                    "timeToHit": 21.690,
                     "BeatID": 14
                 },
                 {
-                    "timeToHit": 17.140,
+                    "timeToHit": 24.610,
                     "BeatID": 16
                 },
                 {
-                    "timeToHit": 18.000,
+                    "timeToHit": 26.420,
                     "BeatID": 14
                 },
                 {
-                    "timeToHit": 19.720,
-                    "BeatID": 20
-                },
-                {
-                    "timeToHit": 20.680,
-                    "BeatID": 19
-                },
-                {
-                    "timeToHit": 23.960,
+                    "timeToHit": 29.110,
                     "BeatID": 17
                 },
                 {
-                    "timeToHit": 25.720,
+                    "timeToHit": 31.230,
                     "BeatID": 13
                 },
                 {
-                    "timeToHit": 27.710,
-                    "BeatID": 14
+                    "timeToHit": 33.920,
+                    "BeatID": 17
                 },
                 {
-                    "timeToHit": 28.310,
-                    "BeatID": 16
+                    "timeToHit": 36.010,
+                    "BeatID": 13
                 },
                 {
-                    "timeToHit": 30.840,
-                    "BeatID": 23
-                },
-                {
-                    "timeToHit": 31.710,
-                    "BeatID": 24
-                },
-                {
-                    "timeToHit": 33.450,
-                    "BeatID": 23
-                },
-                {
-                    "timeToHit": 34.220,
-                    "BeatID": 24
-                },
-                {
-                    "timeToHit": 36.100,
+                    "timeToHit": 39.320,
                     "BeatID": 18
                 },
                 {
-                    "timeToHit": 37.730,
+                    "timeToHit": 40.800,
                     "BeatID": 12
                 },
                 {
-                    "timeToHit": 41.160,
-                    "BeatID": 25
+                    "timeToHit": 44.410,
+                    "BeatID": 20
                 },
                 {
-                    "timeToHit": 42.910,
+                    "timeToHit": 45.700,
+                    "BeatID": 19
+                },
+                {
+                    "timeToHit": 52.840,
+                    "BeatID": 0
+                },
+                {
+                    "timeToHit": 55.250,
+                    "BeatID": 4
+                },
+                {
+                    "timeToHit": 57.660,
+                    "BeatID": 0
+                },
+                {
+                    "timeToHit": 60.010,
+                    "BeatID": 4
+                },
+                {
+                    "timeToHit": 62.680,
+                    "BeatID": 0
+                },
+                {
+                    "timeToHit": 65.080,
+                    "BeatID": 4
+                },
+                {
+                    "timeToHit": 67.430,
+                    "BeatID": 9
+                },
+                {
+                    "timeToHit": 69.850,
+                    "BeatID": 8
+                },
+                {
+                    "timeToHit": 72.260,
+                    "BeatID": 10
+                },
+                {
+                    "timeToHit": 74.690,
+                    "BeatID": 3
+                },
+                {
+                    "timeToHit": 77.080,
+                    "BeatID": 5
+                },
+                {
+                    "timeToHit": 79.200,
+                    "BeatID": 24
+                },
+                {
+                    "timeToHit": 82.210,
+                    "BeatID": 19
+                },
+                {
+                    "timeToHit": 84.010,
+                    "BeatID": 20
+                },
+                {
+                    "timeToHit": 86.950,
+                    "BeatID": 12
+                },
+                {
+                    "timeToHit": 88.810,
+                    "BeatID": 24
+                },
+                {
+                    "timeToHit": 91.800,
+                    "BeatID": 17
+                },
+                {
+                    "timeToHit": 93.550,
+                    "BeatID": 13
+                },
+                {
+                    "timeToHit": 96.280,
                     "BeatID": 26
                 },
                 {
-                    "timeToHit": 44.560,
-                    "BeatID": 21
-                },
-                {
-                    "timeToHit": 45.600,
-                    "BeatID": 21
-                },
-                {
-                    "timeToHit": 48.070,
-                    "BeatID": 17
-                },
-                {
-                    "timeToHit": 49.890,
-                    "BeatID": 13
-                },
-                {
-                    "timeToHit": 51.430,
-                    "BeatID": 21
-                },
-                {
-                    "timeToHit": 52.920,
-                    "BeatID": 14
-                },
-                {
-                    "timeToHit": 54.930,
-                    "BeatID": 16
-                },
-                {
-                    "timeToHit": 56.590,
-                    "BeatID": 16
-                },
-                {
-                    "timeToHit": 58.280,
-                    "BeatID": 14
-                },
-                {
-                    "timeToHit": 60.000,
-                    "BeatID": 12
-                },
-                {
-                    "timeToHit": 61.650,
+                    "timeToHit": 98.410,
                     "BeatID": 18
                 },
                 {
-                    "timeToHit": 63.360,
-                    "BeatID": 21
+                    "timeToHit": 101.120,
+                    "BeatID": 25
                 },
                 {
-                    "timeToHit": 65.200,
-                    "BeatID": 22
+                    "timeToHit": 103.210,
+                    "BeatID": 23
                 },
                 {
-                    "timeToHit": 69.100,
-                    "BeatID": 4
-                },
-                {
-                    "timeToHit": 70.750,
-                    "BeatID": 4
-                },
-                {
-                    "timeToHit": 72.060,
-                    "BeatID": 4
-                },
-                {
-                    "timeToHit": 73.720,
-                    "BeatID": 0
-                },
-                {
-                    "timeToHit": 75.450,
-                    "BeatID": 0
-                },
-                {
-                    "timeToHit": 77.160,
-                    "BeatID": 0
-                },
-                {
-                    "timeToHit": 78.860,
-                    "BeatID": 7
-                },
-                {
-                    "timeToHit": 80.160,
-                    "BeatID": 2
-                },
-                {
-                    "timeToHit": 82.290,
-                    "BeatID": 1
-                },
-                {
-                    "timeToHit": 83.210,
-                    "BeatID": 6
-                },
-                {
-                    "timeToHit": 84.360,
-                    "BeatID": 30
-                },
-                {
-                    "timeToHit": 85.760,
-                    "BeatID": 2
-                },
-                {
-                    "timeToHit": 86.860,
-                    "BeatID": 6
-                },
-                {
-                    "timeToHit": 88.210,
-                    "BeatID": 31
-                },
-                {
-                    "timeToHit": 89.160,
-                    "BeatID": 0
-                },
-                {
-                    "timeToHit": 90.320,
-                    "BeatID": 4
-                },
-                {
-                    "timeToHit": 92.580,
-                    "BeatID": 22
-                },
-                {
-                    "timeToHit": 96.690,
-                    "BeatID": 17
-                },
-                {
-                    "timeToHit": 97.980,
+                    "timeToHit": 106.460,
                     "BeatID": 14
                 },
                 {
-                    "timeToHit": 99.480,
-                    "BeatID": 13
-                },
-                {
-                    "timeToHit": 100.980,
-                    "BeatID": 16
-                },
-                {
-                    "timeToHit": 102.690,
-                    "BeatID": 21
-                },
-                {
-                    "timeToHit": 104.340,
-                    "BeatID": 24
-                },
-                {
-                    "timeToHit": 106.280,
-                    "BeatID": 18
-                },
-                {
-                    "timeToHit": 107.160,
+                    "timeToHit": 108.080,
                     "BeatID": 19
                 },
                 {
-                    "timeToHit": 108.240,
+                    "timeToHit": 111.290,
                     "BeatID": 20
                 },
                 {
-                    "timeToHit": 109.750,
+                    "timeToHit": 112.800,
+                    "BeatID": 16
+                },
+                {
+                    "timeToHit": 105.050,
+                    "BeatID": 20
+                },
+                {
+                    "timeToHit": 120.010,
+                    "BeatID": 10
+                },
+                {
+                    "timeToHit": 122.400,
+                    "BeatID": 10
+                },
+                {
+                    "timeToHit": 124.820,
+                    "BeatID": 0
+                },
+                {
+                    "timeToHit": 127.210,
+                    "BeatID": 4
+                },
+                {
+                    "timeToHit": 129.880,
+                    "BeatID": 29
+                },
+                {
+                    "timeToHit": 132.290,
+                    "BeatID": 29
+                },
+                {
+                    "timeToHit": 134.660,
+                    "BeatID": 1
+                },
+                {
+                    "timeToHit": 137.070,
+                    "BeatID": 7
+                },
+                {
+                    "timeToHit": 139.490,
+                    "BeatID": 2
+                },
+                {
+                    "timeToHit": 141.900,
+                    "BeatID": 6
+                },
+                {
+                    "timeToHit": 144.410,
+                    "BeatID": 10
+                },
+                {
+                    "timeToHit": 146.400,
+                    "BeatID": 16
+                },
+                {
+                    "timeToHit": 147.600,
+                    "BeatID": 13
+                },
+                {
+                    "timeToHit": 148.810,
+                    "BeatID": 14
+                },
+                {
+                    "timeToHit": 150.000,
+                    "BeatID": 17
+                },
+                {
+                    "timeToHit": 151.210,
+                    "BeatID": 25
+                },
+                {
+                    "timeToHit": 152.410,
                     "BeatID": 12
                 },
                 {
-                    "timeToHit": 111.255,
+                    "timeToHit": 153.600,
+                    "BeatID": 18
+                },
+                {
+                    "timeToHit": 154.810,
                     "BeatID": 21
                 },
                 {
-                    "timeToHit": 113.180,
+                    "timeToHit": 156.010,
                     "BeatID": 28
                 },
                 {
-                    "timeToHit": 115.620,
-                    "BeatID": 27
-                },
-                {
-                    "timeToHit": 116.660,
-                    "BeatID": 21
-                },
-                {
-                    "timeToHit": 118.320,
-                    "BeatID": 23
-                },
-                {
-                    "timeToHit": 120.020,
-                    "BeatID": 24
-                },
-                {
-                    "timeToHit": 121.540,
+                    "timeToHit": 158.400,
                     "BeatID": 26
                 },
                 {
-                    "timeToHit": 122.530,
-                    "BeatID": 25
+                    "timeToHit": 160.830,
+                    "BeatID": 27
                 },
                 {
-                    "timeToHit": 125.170,
-                    "BeatID": 1
+                    "timeToHit": 163.200,
+                    "BeatID": 26
                 },
                 {
-                    "timeToHit": 126.900,
-                    "BeatID": 7
+                    "timeToHit": 165.620,
+                    "BeatID": 14
                 },
                 {
-                    "timeToHit": 127.780,
-                    "BeatID": 1
+                    "timeToHit": 168.010,
+                    "BeatID": 16
                 },
                 {
-                    "timeToHit": 128.180,
+                    "timeToHit": 170.460,
+                    "BeatID": 13
+                },
+                {
+                    "timeToHit": 172.810,
+                    "BeatID": 17
+                },
+                {
+                    "timeToHit": 175.180,
+                    "BeatID": 23
+                },
+                {
+                    "timeToHit": 177.610,
+                    "BeatID": 12
+                },
+                {
+                    "timeToHit": 180.040,
+                    "BeatID": 18
+                },
+                {
+                    "timeToHit": 182.430,
+                    "BeatID": 26
+                },
+                {
+                    "timeToHit": 184.810,
+                    "BeatID": 0
+                },
+                {
+                    "timeToHit": 187.790,
+                    "BeatID": 4
+                },
+                {
+                    "timeToHit": 189.600,
+                    "BeatID": 4
+                },
+                {
+                    "timeToHit": 192.580,
+                    "BeatID": 0
+                },
+                {
+                    "timeToHit": 194.400,
+                    "BeatID": 3
+                },
+                {
+                    "timeToHit": 197.350,
+                    "BeatID": 0
+                },
+                {
+                    "timeToHit": 199.190,
+                    "BeatID": 5
+                },
+                {
+                    "timeToHit": 201.850,
+                    "BeatID": 0
+                },
+                {
+                    "timeToHit": 203.970,
                     "BeatID": 2
                 },
                 {
-                    "timeToHit": 130.310,
+                    "timeToHit": 206.540,
+                    "BeatID": 4
+                },
+                {
+                    "timeToHit": 208.740,
                     "BeatID": 6
                 },
                 {
-                    "timeToHit": 131.200,
-                    "BeatID": 7
-                },
-                {
-                    "timeToHit": 132.040,
+                    "timeToHit": 211.570,
                     "BeatID": 4
                 },
                 {
-                    "timeToHit": 133.760,
-                    "BeatID": 4
+                    "timeToHit": 213.670,
+                    "BeatID": 34
                 },
                 {
-                    "timeToHit": 134.595,
-                    "BeatID": 0
+                    "timeToHit": 216.980,
+                    "BeatID": 35
                 },
                 {
-                    "timeToHit": 135.900,
-                    "BeatID": 0
+                    "timeToHit": 218.400,
+                    "BeatID": 10
                 },
                 {
-                    "timeToHit": 137.600,
-                    "BeatID": 33
+                    "timeToHit": 221.220,
+                    "BeatID": 31
                 },
                 {
-                    "timeToHit": 138.400,
-                    "BeatID": 32
-                },
-                {
-                    "timeToHit": 139.320,
-                    "BeatID": 4
-                },
-                {
-                    "timeToHit": 140.600,
-                    "BeatID": 0
-                },
-                {
-                    "timeToHit": 141.740,
-                    "BeatID": 4
-                },
-                {
-                    "timeToHit": 142.980,
-                    "BeatID": 0
-                },
-                {
-                    "timeToHit": 144.000,
-                    "BeatID": 1
-                },
-                {
-                    "timeToHit": 145.280,
-                    "BeatID": 6
-                },
-                {
-                    "timeToHit": 146.250,
-                    "BeatID": 2
-                },
-                {
-                    "timeToHit": 147.460,
-                    "BeatID": 7
-                },
-                {
-                    "timeToHit": 149.040,
+                    "timeToHit": 228.010,
                     "BeatID": 29
                 },
                 {
-                    "timeToHit": 150.480,
+                    "timeToHit": 230.110,
                     "BeatID": 29
                 },
                 {
-                    "timeToHit": 153.000,
+                    "timeToHit": 233.000,
                     "BeatID": -1
                 }
             ]

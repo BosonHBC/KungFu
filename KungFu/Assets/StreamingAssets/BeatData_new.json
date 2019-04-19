@@ -599,6 +599,44 @@
             "PerfectDuration": 0.2,
             "KnockBack_H": -1.0,
             "KnockBack_V": -1.0
+        },
+        {
+            "BeatID": 34,
+            "ButtonID": [
+                3,
+                4
+            ],
+            "JointID": [
+                1,
+                4
+            ],
+            "Mode": "Attack",
+            "IsCombo": false,
+            "OKStart": 0.417,
+            "OKDuration": 0.366,
+            "PerfectStart": 0.5,
+            "PerfectDuration": 0.2,
+            "KnockBack_H": -1.0,
+            "KnockBack_V": -1.0
+        },
+        {
+            "BeatID": 35,
+            "ButtonID": [
+                4,
+                5
+            ],
+            "JointID": [
+                2,
+                4
+            ],
+            "Mode": "Attack",
+            "IsCombo": false,
+            "OKStart": 0.417,
+            "OKDuration": 0.366,
+            "PerfectStart": 0.5,
+            "PerfectDuration": 0.2,
+            "KnockBack_H": -1.0,
+            "KnockBack_V": -1.0
         }
     ]
 }

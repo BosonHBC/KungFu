@@ -22,6 +22,10 @@ public class MenuCanvasControl : MonoBehaviour
     public static event ButtonAction OnCanvasChange;
     public static event ButtonAction OnSelectLeft;
     public static event ButtonAction OnSelectRight;
+
+    float ArduinoCoolDownTimer = 0.0f;
+    float ArduinoCoolDownTime = 0.5f;
+    bool isInCoolDown = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -54,38 +58,50 @@ public class MenuCanvasControl : MonoBehaviour
         {
             OnSelectRight?.Invoke((MenuCanvas)CurrentCanvas);
             audioSource.PlayOneShot(OptionSwitch);
-
+        }
+        if(isInCoolDown)
+        {
+            ArduinoCoolDownTimer += Time.deltaTime;
+            if(ArduinoCoolDownTimer >= ArduinoCoolDownTime)
+            {
+                ArduinoCoolDownTimer = 0.0f;
+                isInCoolDown = false;
+            }
         }
     }
 
     void CheckInputFromArduino()
     {
-        bool[] arduinoInput = MyGameInstance.instance.GetArduinoInput();
-        for(int i = 0; i < arduinoInput.Length; ++ i)
+        if(!isInCoolDown)
         {
-            if(arduinoInput[i])
+            bool[] arduinoInput = MyGameInstance.instance.GetArduinoInput();
+            for (int i = 0; i < arduinoInput.Length; ++i)
             {
-                switch (i)
+                if (arduinoInput[i])
                 {
-                    case 0:
-                        MyGameInstance.instance.StartGame();
-                        break;
-                    case 1:
-                        PageLeft();
-                        break;
-                    case 3:
-                        OnSelectLeft?.Invoke((MenuCanvas)CurrentCanvas);
-                        audioSource.PlayOneShot(OptionSwitch);
-                        break;
-                    case 5:
-                        OnSelectRight?.Invoke((MenuCanvas)CurrentCanvas);
-                        audioSource.PlayOneShot(OptionSwitch);
-                        break;
-                    case 7:
-                        PageRight();
-                        break;
-                    default:
-                        break;
+                    isInCoolDown = true;
+                    switch (i)
+                    {
+                        case 0:
+                            MyGameInstance.instance.StartGame();
+                            break;
+                        case 1:
+                            PageLeft();
+                            break;
+                        case 3:
+                            OnSelectLeft?.Invoke((MenuCanvas)CurrentCanvas);
+                            audioSource.PlayOneShot(OptionSwitch);
+                            break;
+                        case 5:
+                            OnSelectRight?.Invoke((MenuCanvas)CurrentCanvas);
+                            audioSource.PlayOneShot(OptionSwitch);
+                            break;
+                        case 7:
+                            PageRight();
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
         }

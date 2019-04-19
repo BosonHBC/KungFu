@@ -39,6 +39,8 @@ public class BeatGenerator : MonoBehaviour
     //SFX
     SFXControl sfxControl;
     AudioSource songPlaySource;
+    [SerializeField]
+    AudioClip[] songs;
     EnemyAnimationControl enemyAnimCtrl;
     PlayerAnimController playerAnimCtrl;
     LevelLoader levelLoader;
@@ -84,6 +86,7 @@ public class BeatGenerator : MonoBehaviour
 
     public void StartGenerateBeat()
     {
+        songPlaySource.clip = songs[MyGameInstance.instance.SongIndex];
         songPlaySource.Play();
         bCanPlay = true;
     }
