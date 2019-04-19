@@ -10,18 +10,21 @@ public class HpBarControl : MonoBehaviour
     private Animator barShake;
     private int maxHp = 200;
 
-    [SerializeField]Color[] hpBarColor;
     RectTransform psRectTr;
     ParticleSystem ps;
+    ParticleSystem.MainModule psMain;
     [SerializeField] float fEndXPosition = 150f;
+
+    [SerializeField] Gradient gradient;
 
     // Start is called before the first frame update
     void Start()
     {
-        hpFillBar = transform.GetChild(1).GetChild(0).GetComponent<Image>();
+        hpFillBar = transform.GetChild(1).GetComponent<Image>();
         ps = GetComponentInChildren<ParticleSystem>();
         psRectTr = ps.GetComponent<RectTransform>();
         barShake = GetComponent<Animator>();
+        psMain = ps.main;
     }
 
     public void GetDamage(float fCurrentHp, float _dmg)
@@ -32,13 +35,13 @@ public class HpBarControl : MonoBehaviour
 
     IEnumerator Ie_GetDamage(float _CurrentHp, float _AfterDmgHp, float _fadeTime = 0.2f)
     {
-        barShake.Play("IconGetRed");
+
         float _timeStartFade = Time.time;
         float _timeSinceStart = Time.time - _timeStartFade;
         float _lerpPercentage = _timeSinceStart / _fadeTime;
 
-        
-        
+
+
         barShake.Play("ShakeHp");
         while (true)
         {
@@ -50,7 +53,11 @@ public class HpBarControl : MonoBehaviour
             float hpPercent = currentValue / maxHp;
             psRectTr.anchoredPosition = new Vector3(Mathf.Lerp(-fEndXPosition, fEndXPosition, hpPercent), psRectTr.anchoredPosition.y);
             hpFillBar.fillAmount = hpPercent;
-            hpFillBar.color = Color.Lerp(hpBarColor[0], hpBarColor[1], hpPercent);
+            Color _color = gradient.Evaluate(hpPercent);
+            hpFillBar.color = _color;
+
+            _color.a = 1;
+            psMain.startColor = new ParticleSystem.MinMaxGradient(_color, _color/2);
             if (_lerpPercentage >= 1) break;
             yield return new WaitForEndOfFrame();
         }
