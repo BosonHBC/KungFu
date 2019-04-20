@@ -43,14 +43,14 @@ public class HintTrackControl : MonoBehaviour
     RectTransform rectTr;
 
     [SerializeField] GameObject perfectPSPrefab;
+    [SerializeField] GameObject OkPSPrefab;
     ParticleSystem perfectPS;
+    [SerializeField] RectTransform[] particleInitPoint;
     private void Start()
     {
         rectTr = GetComponent<RectTransform>();
 
-        perfectPS = Instantiate(perfectPSPrefab).GetComponent<ParticleSystem>();
-        perfectPS.transform.parent = transform.parent;
-        perfectPS.gameObject.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -179,17 +179,30 @@ public class HintTrackControl : MonoBehaviour
                 isMoving = false;
                 gameObject.GetComponent<UIDestroyer>().GoDie();
                 GenerateHitLine();
-                PlayPerfectParticle();
+                PlayPerfectParticle( hintState,0);
             }
         }
     }
 
-    public void PlayPerfectParticle()
+    public void PlayPerfectParticle(HitResult _result, int _posID)
     {
+        if (_result.Equals(HitResult.Perfect))
+        {
+            perfectPS = Instantiate(perfectPSPrefab).GetComponent<ParticleSystem>();
+            
+        }
+        else if (_result.Equals(HitResult.Good))
+        {
+            perfectPS = Instantiate(OkPSPrefab).GetComponent<ParticleSystem>();
+        }
+        else
+        {
+            perfectPS = null;
+        }
         if (perfectPS != null)
         {
-            perfectPS.gameObject.SetActive(true);
-            perfectPS.GetComponent<RectTransform>().anchoredPosition = rectTr.anchoredPosition;
+            perfectPS.transform.SetParent(transform.parent);
+            perfectPS.GetComponent<RectTransform>().position = particleInitPoint[_posID].position;
             perfectPS.Play(true);
 
             Destroy(perfectPS.gameObject, perfectPS.main.startLifetime.constant);

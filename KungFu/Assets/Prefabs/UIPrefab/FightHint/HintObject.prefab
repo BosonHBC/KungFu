@@ -945,6 +945,10 @@ MonoBehaviour:
   moveSpeed: 0
   perfectPSPrefab: {fileID: 3310252386535031742, guid: d7e694fb7758beb43820dc5221d9193b,
     type: 3}
+  OkPSPrefab: {fileID: 3310252386535031742, guid: f82a3f2c44f8c614b96685de170060d7,
+    type: 3}
+  particleInitPoint:
+  - {fileID: 1546714105890664835}
 --- !u!114 &2588074398743838862
 MonoBehaviour:
   m_ObjectHideFlags: 0
