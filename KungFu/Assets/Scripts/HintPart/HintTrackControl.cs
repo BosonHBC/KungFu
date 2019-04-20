@@ -41,9 +41,16 @@ public class HintTrackControl : MonoBehaviour
     public float moveSpeed;
     float timeBeforeHit;
     RectTransform rectTr;
+
+    [SerializeField] GameObject perfectPSPrefab;
+    ParticleSystem perfectPS;
     private void Start()
     {
         rectTr = GetComponent<RectTransform>();
+
+        perfectPS = Instantiate(perfectPSPrefab).GetComponent<ParticleSystem>();
+        perfectPS.transform.parent = transform.parent;
+        perfectPS.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -99,7 +106,7 @@ public class HintTrackControl : MonoBehaviour
 
     void ChangeToOK()
     {
-        if(beatTiming.IsCombo)
+        if (beatTiming.IsCombo)
         {
             for (int i = 0; i < ChildBodyParts.Length; ++i)
                 ChildBodyParts[i].GetComponent<Image>().color = OKColor;
@@ -145,7 +152,7 @@ public class HintTrackControl : MonoBehaviour
 
     public void MatchButton(int butID)
     {
-        if(!beatTiming.IsCombo)
+        if (!beatTiming.IsCombo)
         {
             foreach (var pair in matchedButtons)
             {
@@ -155,7 +162,7 @@ public class HintTrackControl : MonoBehaviour
                     matchedButtons[butID] = true;
 
                     //Show Too early or late
-                    if(hintState == HitResult.Good)
+                    if (hintState == HitResult.Good)
                     {
                         if (IsTooLate)
                             ShowTooLate();
@@ -172,7 +179,20 @@ public class HintTrackControl : MonoBehaviour
                 isMoving = false;
                 gameObject.GetComponent<UIDestroyer>().GoDie();
                 GenerateHitLine();
+                PlayPerfectParticle();
             }
+        }
+    }
+
+    public void PlayPerfectParticle()
+    {
+        if (perfectPS != null)
+        {
+            perfectPS.gameObject.SetActive(true);
+            perfectPS.GetComponent<RectTransform>().anchoredPosition = rectTr.anchoredPosition;
+            perfectPS.Play(true);
+
+            Destroy(perfectPS.gameObject, perfectPS.main.startLifetime.constant);
         }
     }
 
@@ -273,7 +293,7 @@ public class HintTrackControl : MonoBehaviour
         var wait = new WaitForEndOfFrame();
         Vector3 step = new Vector3(Time.deltaTime, Time.deltaTime, 0.0f);
         ComboOutline.CrossFadeAlpha(0.0f, 0.5f, false);
-        while(ComboOutline.GetComponent<RectTransform>().localScale.x <= 1.5f)
+        while (ComboOutline.GetComponent<RectTransform>().localScale.x <= 1.5f)
         {
             ComboOutline.GetComponent<RectTransform>().localScale += step;
             yield return wait;
