@@ -59,6 +59,12 @@ public class MenuCanvasControl : MonoBehaviour
             OnSelectRight?.Invoke((MenuCanvas)CurrentCanvas);
             audioSource.PlayOneShot(OptionSwitch);
         }
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            audioSource.PlayOneShot(GameStart);
+            Camera.main.GetComponent<AudioSource>().Pause();
+            MyGameInstance.instance.StartGame();
+        }
         if(isInCoolDown)
         {
             ArduinoCoolDownTimer += Time.deltaTime;
@@ -83,6 +89,8 @@ public class MenuCanvasControl : MonoBehaviour
                     switch (i)
                     {
                         case 0:
+                            audioSource.PlayOneShot(GameStart);
+                            Camera.main.GetComponent<AudioSource>().Pause();
                             MyGameInstance.instance.StartGame();
                             break;
                         case 1:

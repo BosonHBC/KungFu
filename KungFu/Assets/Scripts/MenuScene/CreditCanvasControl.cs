@@ -12,7 +12,6 @@ public class CreditCanvasControl : MonoBehaviour
     {
         if(canvasIndex == MenuCanvasControl.MenuCanvas.Credits)
         {
-            Debug.Log(canvasIndex);
             GetComponent<Animator>().Play("CreditMove");
         }
     }
