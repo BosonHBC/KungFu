@@ -45,6 +45,7 @@ public class HintTrackControl : MonoBehaviour
     // Particle Releated
     [SerializeField] GameObject perfectPSPrefab;
     [SerializeField] GameObject OkPSPrefab;
+    [SerializeField] ParticleSystem comboPS;
     ParticleSystem perfectPS;
     [SerializeField] RectTransform[] particleInitPoint;
     private void Start()
@@ -197,10 +198,16 @@ public class HintTrackControl : MonoBehaviour
                 gameObject.GetComponent<UIDestroyer>().GoDie();
                 GenerateHitLine();
 
-                
-                
+
+
             }
         }
+    }
+
+    public void PlayComboParticle()
+    {
+        if (comboPS)
+            comboPS.Emit(5);
     }
 
     public void PlayPerfectParticle(HitResult _result, int _posID)
@@ -208,7 +215,7 @@ public class HintTrackControl : MonoBehaviour
         if (_result.Equals(HitResult.Perfect))
         {
             perfectPS = Instantiate(perfectPSPrefab).GetComponent<ParticleSystem>();
-            
+
         }
         else if (_result.Equals(HitResult.Good))
         {
@@ -311,7 +318,9 @@ public class HintTrackControl : MonoBehaviour
 
     public void ChangeColor()
     {
+
         GetComponent<Image>().color = new Color(Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f));
+        //PlayComboParticle();
         if (comboOutlineShow != null)
             StopCoroutine(comboOutlineShow);
         comboOutlineShow = StartCoroutine(ComboOutlineShow(GetComponent<Image>().color));

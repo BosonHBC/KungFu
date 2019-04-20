@@ -34,7 +34,7 @@ public class ResultImageControl : MonoBehaviour
     }
 
 
-    IEnumerator ShowImage(Image imageToShow, float timeToShow = 1.0f)
+    IEnumerator ShowImage(Image imageToShow, float timeToShow = 0.5f)
     {
         imageToShow.color = new Color(imageToShow.color.r, imageToShow.color.g, imageToShow.color.b, 1.0f);
         while (imageToShow.color.a >= 0.0f)
@@ -45,6 +45,6 @@ public class ResultImageControl : MonoBehaviour
         }
         imageToShow.color = new Color(imageToShow.color.r, imageToShow.color.g, imageToShow.color.b, 0.0f);
         imageToShow.gameObject.transform.position = gameObject.transform.position;
-        Destroy(gameObject, 1.0f);
+        Destroy(gameObject, timeToShow);
     }
 }
