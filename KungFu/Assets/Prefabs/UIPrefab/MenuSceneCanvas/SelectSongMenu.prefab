@@ -2848,6 +2848,7 @@ GameObject:
   - component: {fileID: 2219439215495893933}
   - component: {fileID: 1223732829978271662}
   - component: {fileID: 12593676165263218}
+  - component: {fileID: 8953159007528368151}
   m_Layer: 0
   m_Name: LeftRight
   m_TagString: Untagged
@@ -2911,6 +2912,22 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!114 &8953159007528368151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6803467514600541411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97de4357117c07247a55162e57417dc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ImageToBlink: {fileID: 12593676165263218}
+  BlinkInterval: 0.4
+  MinAlpha: 0.5
+  MaxAlpha: 1
 --- !u!1 &7230394632784442682
 GameObject:
   m_ObjectHideFlags: 0
@@ -7788,6 +7805,7 @@ GameObject:
   - component: {fileID: 3500641346278121040}
   - component: {fileID: 1423455713914373058}
   - component: {fileID: 281947106488152597}
+  - component: {fileID: 7860844292266445821}
   m_Layer: 0
   m_Name: RightLeft
   m_TagString: Untagged
@@ -7851,6 +7869,22 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!114 &7860844292266445821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7657359615088859710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97de4357117c07247a55162e57417dc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ImageToBlink: {fileID: 281947106488152597}
+  BlinkInterval: 0.4
+  MinAlpha: 0.5
+  MaxAlpha: 1
 --- !u!1 &7719061766114246829
 GameObject:
   m_ObjectHideFlags: 0
@@ -8056,7 +8090,6 @@ GameObject:
   - component: {fileID: 5354207253103800458}
   - component: {fileID: 1679208185547801403}
   - component: {fileID: 1067447241837044460}
-  - component: {fileID: 1795382047507970760}
   m_Layer: 0
   m_Name: LeftLeft
   m_TagString: Untagged
@@ -8120,22 +8153,6 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
---- !u!114 &1795382047507970760
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7818397373558552495}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97de4357117c07247a55162e57417dc8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ImageToBlink: {fileID: 1067447241837044460}
-  BlinkInterval: 0.4
-  MinAlpha: 0.5
-  MaxAlpha: 1
 --- !u!1 &7832344257536897563
 GameObject:
   m_ObjectHideFlags: 0
