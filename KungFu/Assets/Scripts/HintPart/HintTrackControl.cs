@@ -42,6 +42,7 @@ public class HintTrackControl : MonoBehaviour
     float timeBeforeHit;
     RectTransform rectTr;
 
+    // Particle Releated
     [SerializeField] GameObject perfectPSPrefab;
     [SerializeField] GameObject OkPSPrefab;
     ParticleSystem perfectPS;
@@ -161,6 +162,22 @@ public class HintTrackControl : MonoBehaviour
                     ChildBodyParts[butID].GetComponent<Image>().color = NormalColor;
                     matchedButtons[butID] = true;
 
+                    #region PlayParticle By triggering order
+                    // Play particles
+                    int generatePosID = 0;
+                    if (butID == 0)
+                        generatePosID = 0;
+                    else if (butID > 0 && butID < 4)
+                        generatePosID = 3;
+                    else if (butID == 4)
+                        generatePosID = 2;
+                    else if (butID > 4 && butID < 8)
+                        generatePosID = 1;
+                    else if (butID >= 8 && butID <= 10)
+                        generatePosID = 4;
+
+                    PlayPerfectParticle(hintState, generatePosID);
+                    #endregion
                     //Show Too early or late
                     if (hintState == HitResult.Good)
                     {
@@ -179,7 +196,9 @@ public class HintTrackControl : MonoBehaviour
                 isMoving = false;
                 gameObject.GetComponent<UIDestroyer>().GoDie();
                 GenerateHitLine();
-                PlayPerfectParticle( hintState,0);
+
+                
+                
             }
         }
     }
