@@ -6,15 +6,19 @@ using UnityEngine.UI;
 public class ResultControl : MonoBehaviour
 {
     public GameObject ResultImageShow;
-    public GameObject ComboObject;
+    private GameObject ComboObject;
+    private RectTransform imgPosRef;
 
     float duration = 1.0f;
     //bool firstSpawned = false;
     Coroutine comboCoroutine;
+
+    float fYOffset = 80f;
     // Start is called before the first frame update
     void Start()
     {
-        
+        ComboObject = transform.GetChild(0).gameObject;
+        imgPosRef = transform.GetChild(1).GetComponent<RectTransform>();
     }
 
     // Update is called once per frame
@@ -26,7 +30,11 @@ public class ResultControl : MonoBehaviour
     {
         GameObject ri = Instantiate(ResultImageShow);
         RectTransform goTr = ri.GetComponent<RectTransform>();
-        goTr.SetParent(transform);
+        goTr.SetParent(imgPosRef);
+        goTr.position = imgPosRef.position + new Vector3(Random.Range(-50f, 50f), Random.Range(-50f, 50f), 0) + imgPosRef.childCount * new Vector3(0, fYOffset, 0);
+        #region SetPosition By Player Position
+        /*
+
         Player _player = (Player)FightingManager.instance.characters[0];
         Vector3 WorldObject = _player.GetJointPositionByJointID(_attackJointID).position;
        
@@ -50,11 +58,14 @@ public class ResultControl : MonoBehaviour
         goTr.localPosition = new Vector3(goTr.localPosition.x, goTr.localPosition.y, 0f);
         goTr.localRotation = Quaternion.identity;
         goTr.localScale = new Vector3(1, 1, 1);
+      
+        */
+        #endregion
         ri.GetComponent<ResultImageControl>().ShowResult(hitResult);
     }
     public void ShowResult(HitResult hitResult, int _attackJointID = 0)
     {
-            ShowResultAt(hitResult, _attackJointID);
+        ShowResultAt(hitResult, _attackJointID);
     }
     //IEnumerator CanSpawnAnother()
     //{
@@ -110,7 +121,7 @@ public class ResultControl : MonoBehaviour
         GameObject ri = Instantiate(ResultImageShow);
         RectTransform goTr = ri.GetComponent<RectTransform>();
         goTr.SetParent(transform);
-        
+
         Vector3 WorldObject = trans.position;
 
         RectTransform CanvasRect = gameObject.GetComponent<RectTransform>();
