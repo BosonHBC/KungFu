@@ -57,17 +57,6 @@ public class RotateCharacter : MonoBehaviour
         {
             charas[i].rotation = Quaternion.LookRotation(lookDir, charas[i].up);
         }
-
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            //left
-            SwitchChar(-1);
-        }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            //right
-            SwitchChar(1);
-        }
     }
 
     void CharacterRotateLeft(MenuCanvasControl.MenuCanvas currentCanvas)

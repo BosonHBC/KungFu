@@ -127,7 +127,8 @@ public class FightingManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F12))
         {
-            LevelLoader.instance.LoadScene("FightingScene_" + iFightingSceneID);
+            //LevelLoader.instance.LoadScene("FightingScene_" + iFightingSceneID);
+            LevelLoader.instance.LoadScene("MenuScene");
         }
 
     }

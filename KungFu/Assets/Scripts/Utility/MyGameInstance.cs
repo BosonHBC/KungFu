@@ -33,9 +33,9 @@ public class MyGameInstance : MonoBehaviour
     private int okCount;
 
     //Menu Select Data
-    [HideInInspector]
+    //[HideInInspector]
     public int PlayerCharacterIndex = 0;
-    [HideInInspector]
+    //[HideInInspector]
     public int SongIndex = 0;
     //Awake is always called before any Start functions
     void Awake()

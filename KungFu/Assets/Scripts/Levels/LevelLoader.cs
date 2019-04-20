@@ -69,7 +69,7 @@ public class LevelLoader : MonoBehaviour
                 Debug.Log("Loading Done!");
                 asyncOperation.allowSceneActivation = true;
             }
-            FightingManager.instance.StartGame();
+            //FightingManager.instance.StartGame();
             yield return null;
         }
         
