@@ -25,7 +25,9 @@ public class Player : Character
     protected override void Update()
     {
         base.Update();
-        DebugMovement();
+        //DebugMovement();
+        if (Input.GetKeyDown(KeyCode.Z))
+            SwitchPerspectiveView();
     }
     public void SwitchPerspectiveView()
     {
@@ -80,8 +82,7 @@ public class Player : Character
 
         // transform.position += fDebugMovespeed * dir * Time.deltaTime;
 
-        if (Input.GetKeyDown(KeyCode.Z))
-            SwitchPerspectiveView();
+
         if (Input.GetKeyDown(KeyCode.A))
             GetComponent<BaseAnimController>().DashHorizontally(-1, 1, 1);
         if (Input.GetKeyDown(KeyCode.D))

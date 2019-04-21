@@ -27,6 +27,7 @@ public class BeatGenerator : MonoBehaviour
 
     //Timer for beats
     public float beatTimer = 0.0f;
+    private float fSongLengthInSec;
     public bool bCanPlay;
 
     //for input handling
@@ -44,6 +45,7 @@ public class BeatGenerator : MonoBehaviour
     EnemyAnimationControl enemyAnimCtrl;
     PlayerAnimController playerAnimCtrl;
     LevelLoader levelLoader;
+
 
     bool animPlayed = false;
     // Start is called before the first frame update
@@ -69,6 +71,7 @@ public class BeatGenerator : MonoBehaviour
 
         beatQueue = new Queue<BeatHitObject>();
         levelLoader = FindObjectOfType<LevelLoader>();
+        
     }
 
     public void SetData(Transform _enemy, HintGenerator _generator, ResultControl _control, string songName = "BattleGirl_H")
@@ -81,7 +84,7 @@ public class BeatGenerator : MonoBehaviour
         BeatArray = MyGameInstance.instance.GetComponent<DataLoader>().GetBeatArrayByName(songName);
         playerAnimCtrl = FightingManager.instance.characters[0].GetComponent<PlayerAnimController>();
         // Debug
-
+        fSongLengthInSec = MyGameInstance.instance.GetComponent<DataLoader>().GetLenghOfSongByName(songName);
     }
 
     public void StartGenerateBeat()
@@ -103,6 +106,10 @@ public class BeatGenerator : MonoBehaviour
 
             Debug.Log("Song ended");
         }
+
+        // SetTimer for Time bar control
+        TimeBarControl.instance.SetPercentage(beatTimer / fSongLengthInSec);
+
         if (bCanPlay)
         {
             if (BeatArray[currentBeatIndex]["BeatID"].AsInt != -1)

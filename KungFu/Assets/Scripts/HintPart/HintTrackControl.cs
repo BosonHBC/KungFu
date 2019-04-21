@@ -22,7 +22,7 @@ public class HintTrackControl : MonoBehaviour
     [SerializeField]
     Transform TooEarlyOrLate;
     [SerializeField]
-    GameObject TooEarly, TooLate;
+    GameObject TooEarly, TooLate, OnPerfect;
     bool IsTooLate = false;
     Coroutine comboOutlineShow;
     [HideInInspector]
@@ -187,6 +187,10 @@ public class HintTrackControl : MonoBehaviour
                         else
                             ShowTooEarly();
                     }
+                    else if(hintState == HitResult.Perfect)
+                    {
+                        ShowPerfect();
+                    }
                     break;
                 }
             }
@@ -197,9 +201,6 @@ public class HintTrackControl : MonoBehaviour
                 isMoving = false;
                 gameObject.GetComponent<UIDestroyer>().GoDie();
                 GenerateHitLine();
-
-
-
             }
         }
     }
@@ -245,13 +246,19 @@ public class HintTrackControl : MonoBehaviour
     void ShowTooLate()
     {
         var go = Instantiate(TooLate, TooEarlyOrLate.transform.position, Quaternion.identity, transform.parent);
-        go.GetComponent<Image>().CrossFadeAlpha(0.0f, 1.0f, false);
+        go.GetComponent<Image>().CrossFadeAlpha(0.5f, 1.0f, false);
         Destroy(go, 1.0f);
     }
     void ShowTooEarly()
     {
         var go = Instantiate(TooEarly, TooEarlyOrLate.transform.position, Quaternion.identity, transform.parent);
-        go.GetComponent<Image>().CrossFadeAlpha(0.0f, 1.0f, false);
+        go.GetComponent<Image>().CrossFadeAlpha(0.5f, 1.0f, false);
+        Destroy(go, 1.0f);
+    }
+    void ShowPerfect()
+    {
+        var go = Instantiate(OnPerfect, TooEarlyOrLate.transform.position, Quaternion.identity, transform.parent);
+        go.GetComponent<Image>().CrossFadeAlpha(0.5f, 1.0f, false);
         Destroy(go, 1.0f);
     }
     bool isAllMatched()

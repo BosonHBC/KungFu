@@ -121,4 +121,16 @@ public class DataLoader : MonoBehaviour
         }
         return 0;
     }
+
+    public float GetLenghOfSongByName(string name)
+    {
+        foreach (var song in allMusicData.Values)
+        {
+            if (song["name"] == name)
+            {
+                return song["lengthInSeconds"];
+            }
+        }
+        return 0;
+    }
 }

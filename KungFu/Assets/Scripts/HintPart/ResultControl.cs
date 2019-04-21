@@ -13,7 +13,7 @@ public class ResultControl : MonoBehaviour
     //bool firstSpawned = false;
     Coroutine comboCoroutine;
 
-    float fYOffset = 80f;
+    float fYOffset = 100f;
     // Start is called before the first frame update
     void Start()
     {

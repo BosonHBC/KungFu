@@ -10,20 +10,20 @@ public class ResultImageControl : MonoBehaviour
     public Image[] Images;
     // Start is called before the first frame update
 
-
+    ParticleSystem ps;
     public void ShowResult(HitResult hitResult)
     {
         //gameObject.GetComponentInChildren<ParticleSystem>().Play();
         switch (hitResult)
         {
             case HitResult.Perfect:
-                StartCoroutine(ShowImage(Images[0]));                 
+                StartCoroutine(ShowImage(0));                 
                 break;
             case HitResult.Good:
-                StartCoroutine(ShowImage(Images[1]));
+                StartCoroutine(ShowImage(1));
                 break;
             case HitResult.Miss:
-                StartCoroutine(ShowImage(Images[2]));
+                StartCoroutine(ShowImage(2));
                 break;
             case HitResult.Mismatch:
                 //StartCoroutine(ShowImage(Images[3]));
@@ -34,8 +34,15 @@ public class ResultImageControl : MonoBehaviour
     }
 
 
-    IEnumerator ShowImage(Image imageToShow, float timeToShow = 0.5f)
+    IEnumerator ShowImage(int id, float timeToShow = 1f)
     {
+        Image imageToShow = Images[id];
+        ps = transform.GetChild(id).GetComponent<ParticleSystem>();
+        if (ps)
+        {
+            ps.gameObject.SetActive(true);
+            ps.Play(true);
+        }
         imageToShow.color = new Color(imageToShow.color.r, imageToShow.color.g, imageToShow.color.b, 1.0f);
         while (imageToShow.color.a >= 0.0f)
         {
@@ -45,6 +52,6 @@ public class ResultImageControl : MonoBehaviour
         }
         imageToShow.color = new Color(imageToShow.color.r, imageToShow.color.g, imageToShow.color.b, 0.0f);
         imageToShow.gameObject.transform.position = gameObject.transform.position;
-        Destroy(gameObject, timeToShow);
+        Destroy(gameObject, 0.85f);
     }
 }
