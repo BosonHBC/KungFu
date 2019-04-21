@@ -5,27 +5,16 @@ using UnityEngine.UI;
 
 public class AudioVisualizer : MonoBehaviour
 {
-    RectTransform[] childList = new RectTransform[AudioPeer.sampleSize];
+    int sampleSize;
     [SerializeField] float fDistToCenter;
-    LineRenderer lr;
+    RectTransform RectTr;
 
     // Start is called before the first frame update
     void Start()
     {
-        lr = GetComponent<LineRenderer>();
-        lr.positionCount = AudioPeer.sampleSize;
-        int segments = lr.positionCount;
+        RectTr = transform.GetChild(0).GetComponent<RectTransform>();
+        sampleSize = AudioPeer.sampleSize;
 
-        float angle = 0;
-        for (int i = 0; i < (segments + 1); i++)
-        {
-          float  x = Mathf.Sin(Mathf.Deg2Rad * angle) * fDistToCenter;
-           float z = Mathf.Cos(Mathf.Deg2Rad * angle) * fDistToCenter;
-
-            lr.SetPosition(i, new Vector3(x, 0, z));
-
-            angle += (360f / segments);
-        }
     }
     float _max = 0;
     float _min = 1000000;
@@ -33,16 +22,18 @@ public class AudioVisualizer : MonoBehaviour
     void Update()
     {
 
-        for (int i = 0; i < childList.Length; i++)
+        for (int i = 0; i < sampleSize; i++)
         {
             if (AudioPeer.sample[i] < _min)
                 _min = AudioPeer.sample[i];
             if (AudioPeer.sample[i] > _max)
                 _max = AudioPeer.sample[i];
         }
-        for (int i = 0; i < childList.Length; i++)
+        for (int i = 0; i < sampleSize; i++)
         {
-            //childList[i].localScale = new Vector3(1, AudioPeer.sample[i] /(_max) + 0.5f,1);
+            float _usefulSample = AudioPeer.sample[i] * 1000000f;
+            //Debug.Log("Sample_" + i +": "+ _usefulSample);
+            RectTr.localScale = new Vector3(_usefulSample + 0.5f, _usefulSample + 0.5f,1);
         }
     }
 }

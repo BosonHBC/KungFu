@@ -202,7 +202,7 @@ public class FightingManager : MonoBehaviour
         thePlayer.SetLookAt(center.transform);
 
         // Set Audio Source
-        transform.GetChild(0).GetComponent<AudioPeer>().SetSource(Camera.main.transform.GetComponent<AudioSource>());
+      //  transform.GetChild(0).GetComponent<AudioPeer>().SetSource(Camera.main.transform.GetComponent<AudioSource>());
 
         // Player animation
         onPositioned = new UnityAction(delegate
