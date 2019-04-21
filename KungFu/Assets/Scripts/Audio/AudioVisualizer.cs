@@ -5,38 +5,44 @@ using UnityEngine.UI;
 
 public class AudioVisualizer : MonoBehaviour
 {
-    [SerializeField] GameObject ImagePrefab;
-    Image[] images = new Image[AudioPeer.sampleSize];
+    RectTransform[] childList = new RectTransform[AudioPeer.sampleSize];
+    [SerializeField] float fDistToCenter;
+    LineRenderer lr;
 
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 0; i < images.Length / 2; i++)
+        lr = GetComponent<LineRenderer>();
+        lr.positionCount = AudioPeer.sampleSize;
+        int segments = lr.positionCount;
+
+        float angle = 0;
+        for (int i = 0; i < (segments + 1); i++)
         {
-            GameObject go = Instantiate(ImagePrefab);
-            go.transform.SetParent(this.transform);
-            go.transform.localPosition = new Vector3(i * -28, 0, 0);
-            go.transform.localScale = Vector3.one;
-            go.transform.localEulerAngles = Vector3.zero;
-            images[i] = go.GetComponent<Image>();
+          float  x = Mathf.Sin(Mathf.Deg2Rad * angle) * fDistToCenter;
+           float z = Mathf.Cos(Mathf.Deg2Rad * angle) * fDistToCenter;
+
+            lr.SetPosition(i, new Vector3(x, 0, z));
+
+            angle += (360f / segments);
         }
     }
-
+    float _max = 0;
+    float _min = 1000000;
     // Update is called once per frame
     void Update()
     {
-        float _max = 0;
-        float _min = 1000000;
-        for (int i = 0; i < images.Length / 2; i++)
+
+        for (int i = 0; i < childList.Length; i++)
         {
             if (AudioPeer.sample[i] < _min)
                 _min = AudioPeer.sample[i];
             if (AudioPeer.sample[i] > _max)
                 _max = AudioPeer.sample[i];
         }
-        for (int i = 0; i < images.Length / 2; i++)
+        for (int i = 0; i < childList.Length; i++)
         {
-            images[i].fillAmount = AudioPeer.sample[i] / (_max);
+            //childList[i].localScale = new Vector3(1, AudioPeer.sample[i] /(_max) + 0.5f,1);
         }
     }
 }
