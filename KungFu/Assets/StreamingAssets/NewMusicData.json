@@ -368,9 +368,9 @@
         {
             "charName": "Girl",
             "name": "Sailor_H",
-            "lengthInSeconds": 152.00,
-            "numOfAnim": 105,
-            "numOfAttack": 44,
+            "lengthInSeconds": 233.00,
+            "numOfAnim": 107,
+            "numOfAttack": 47,
             "animArray": [
                 {
                     "timeToHit": 16.820,
