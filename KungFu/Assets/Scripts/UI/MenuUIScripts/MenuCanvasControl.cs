@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MenuCanvasControl : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class MenuCanvasControl : MonoBehaviour
     TransitionControl CanvasMove;
     AudioSource audioSource;
     //0 Main, 1 Character Select, 2 Song Select, 3 Credits
-    public int CurrentCanvas = 0;
+    public int CurrentCanvas = 1;
     public AudioClip CanvasChange;
     public AudioClip OptionSwitch;
     public AudioClip GameStart;
@@ -22,15 +23,24 @@ public class MenuCanvasControl : MonoBehaviour
     public static event ButtonAction OnCanvasChange;
     public static event ButtonAction OnSelectLeft;
     public static event ButtonAction OnSelectRight;
+    public Text[] TopMenuText;
 
     float ArduinoCoolDownTimer = 0.0f;
     float ArduinoCoolDownTime = 0.5f;
     bool isInCoolDown = false;
+    Dictionary<MenuCanvas, string[]> CanvasText;
     // Start is called before the first frame update
     void Start()
     {
         CanvasMove = FindObjectOfType<TransitionControl>();
         audioSource = GetComponent<AudioSource>();
+        CanvasText = new Dictionary<MenuCanvas, string[]>()
+        {
+            {MenuCanvas.MainMenu, new string[] {"CREDITS", "CHARACTERS" } },
+            {MenuCanvas.CharacterSelect, new string[] {"TUTORIAL", "SONGS" } },
+            {MenuCanvas.SongSelect, new string[] {"CHARACTERS", "CREDITS" } },
+            {MenuCanvas.Credits, new string[] {"SONGS", "TUTORIAL" } },
+        };
     }
 
     // Update is called once per frame
@@ -121,6 +131,8 @@ public class MenuCanvasControl : MonoBehaviour
         if (CurrentCanvas < 0)
             CurrentCanvas = 3;
         audioSource.PlayOneShot(CanvasChange);
+        TopMenuText[0].text = CanvasText[(MenuCanvas)CurrentCanvas][0];
+        TopMenuText[1].text = CanvasText[(MenuCanvas)CurrentCanvas][1];
         OnCanvasChange?.Invoke((MenuCanvas)CurrentCanvas);
     }
 
@@ -130,7 +142,8 @@ public class MenuCanvasControl : MonoBehaviour
         CurrentCanvas = (CurrentCanvas + 1) % 4;
 
         audioSource.PlayOneShot(CanvasChange);
-
+        TopMenuText[0].text = CanvasText[(MenuCanvas)CurrentCanvas][0];
+        TopMenuText[1].text = CanvasText[(MenuCanvas)CurrentCanvas][1];
         OnCanvasChange?.Invoke((MenuCanvas)CurrentCanvas);
     }
 }

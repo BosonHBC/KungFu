@@ -8,7 +8,7 @@ public class RotateCharacter : MonoBehaviour
 {
     [SerializeField] Transform[] charas;
     Animator[] anims;
-    Vector3 lookDir = Vector3.back;
+    Vector3 lookDir = Vector3.left;
 
     int currentCharacter = 0;
     bool bRotating;
@@ -33,6 +33,7 @@ public class RotateCharacter : MonoBehaviour
 
         volume = Camera.main.GetComponent<PostProcessVolume>();
         bool isValid1 = volume.profile.TryGetSettings<DepthOfField>(out DoF);
+        ChangeDoF(MenuCanvasControl.MenuCanvas.CharacterSelect);
         MenuCanvasControl.OnCanvasChange += ChangeDoF;
     }
 
