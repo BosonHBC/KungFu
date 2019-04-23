@@ -59,7 +59,6 @@ public class EndGame : MonoBehaviour
         result.sprite = ABS[_id];
 
         // must be changed with a string that corresponds to the song played.
-        HighScoreManager._instance.CheckIfHighScore(_score , "XiaoHong");
     }
 
     IEnumerator DelayShow()

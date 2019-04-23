@@ -8,7 +8,7 @@ public class LeaderBoardScript : MonoBehaviour
     public GameObject[] scoreTextBoxes;
     public GameObject songText;
     public bool resetScores;
-    public string songToReset;
+    public int songIDToReset;
     public string[] songs;
     public int prevID;
     public int nextID;
@@ -30,7 +30,7 @@ public class LeaderBoardScript : MonoBehaviour
 
         if(resetScores)
         {
-        HighScoreManager._instance.ClearLeaderBoard(songToReset);
+        HighScoreManager._instance.ClearLeaderBoard(songIDToReset);
         }
 
         //HighScoreManager._instance.SaveHighScore("      ", 0, songs[currSong]);
@@ -100,7 +100,7 @@ public class LeaderBoardScript : MonoBehaviour
     {
         songText.GetComponent<Text>().text = songs[currSong];
         int i = 0;
-        foreach (Scores highScore in HighScoreManager._instance.GetHighScore(songs[currSong]))
+        foreach (Scores highScore in HighScoreManager._instance.GetHighScore(currSong))
         {
             scoreTextBoxes[i].GetComponent<Text>().text = (i + 1) + ": " + highScore.name + " - " + highScore.score;
             i++;

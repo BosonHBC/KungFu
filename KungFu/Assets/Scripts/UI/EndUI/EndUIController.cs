@@ -30,7 +30,7 @@ public class EndUIController : MonoBehaviour
     [SerializeField] private Text tx_OkCount;
     [SerializeField] private Text tx_MissCount;
     [SerializeField] private Text tx_ScoreCount;
-    private int finalScore;
+    public int finalScore;
 
     // Start is called before the first frame update
     void Start()

@@ -102,9 +102,8 @@ public class GetPlayerNameScript : MonoBehaviour {
 
             if (input.GetComponent<ArduinoInputScript>().buttons[enterID] && charCounter >= 3)
             {
-                canRegister = false;
                 HighScoreManager._instance.SaveHighScore(stringToEdit, score, song);
-                gameObject.GetComponent<HighScoreManager>().DisableText();
+                //gameObject.GetComponent<HighScoreManager>().DisableText();
                 canRegister = false;
                 this.enabled = false;
             }
@@ -120,7 +119,7 @@ public class GetPlayerNameScript : MonoBehaviour {
     private void UpdateText()
     {
         stringToEdit = "" + chars[0] + " - " + chars[1] + " - "  + chars[2];
-        gameObject.GetComponent<HighScoreManager>().SetText(stringToEdit);
+        //gameObject.GetComponent<HighScoreManager>().SetText(stringToEdit);
     }
 
     private void CreateCharArray()

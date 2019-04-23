@@ -39,7 +39,7 @@ public class SongPannel : MonoBehaviour
         songNameText.text = _songName;
         songDurationText.text = string.Format("{0}:{1:00}", (int)_duration / 60, (int)_duration % 60);
 
-        List<Scores> scoreList = HighScoreManager._instance.GetHighScore(_songName);
+        List<Scores> scoreList = HighScoreManager._instance.GetHighScore(iSongID);
         if (scoreList != null)
         {
             if (scoreList.Count > 0)

@@ -572,6 +572,7 @@ GameObject:
   - component: {fileID: 7010308210672975921}
   - component: {fileID: 8653650134153120929}
   - component: {fileID: 2098708647222340792}
+  - component: {fileID: 6536141363814868676}
   m_Layer: 0
   m_Name: SecondSong
   m_TagString: Untagged
@@ -638,6 +639,25 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!114 &6536141363814868676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2438644948433017224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24e8ef885a7ea2842b70eb1709b364e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  songName: TightShip
+  scoreTextBoxes:
+  - {fileID: 1934927889760436775}
+  - {fileID: 958879435109939094}
+  - {fileID: 6792760918377690472}
+  - {fileID: 3938259666234011412}
+  - {fileID: 4884798341546204520}
 --- !u!1 &3012960132403179547
 GameObject:
   m_ObjectHideFlags: 0
@@ -2586,6 +2606,7 @@ GameObject:
   - component: {fileID: 6612399015906976200}
   - component: {fileID: 6232237956903481962}
   - component: {fileID: 3195664231530850957}
+  - component: {fileID: 1943512973097041470}
   m_Layer: 0
   m_Name: FirstSong
   m_TagString: Untagged
@@ -2652,6 +2673,25 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!114 &1943512973097041470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8672465960402409475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24e8ef885a7ea2842b70eb1709b364e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  songName: ARhythmicIntensity
+  scoreTextBoxes:
+  - {fileID: 3710377670663993306}
+  - {fileID: 7381133125699041336}
+  - {fileID: 3821982669309355265}
+  - {fileID: 1957233044317345880}
+  - {fileID: 5705987530085286099}
 --- !u!1 &8675711037472257464
 GameObject:
   m_ObjectHideFlags: 0

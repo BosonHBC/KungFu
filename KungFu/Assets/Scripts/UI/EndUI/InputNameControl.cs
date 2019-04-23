@@ -5,15 +5,37 @@ using UnityEngine.UI;
 
 public class InputNameControl : MonoBehaviour
 {
+    private GameObject input;
+    private int charCounter = 1;
     public bool bCanShoose;
     private int iMaxIndex = 3;
     private int iCurrentIndex;
     private int[] initials = { 0, 0, 0 };
     char[] alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
+
+    private int enterID = 10;
+    private int prevID = 0;
+    private int nextID = 4;
+
+    private bool canRegister;
+    private bool canEnterName;
+    private float inputDelay;
+    private float delayTime;
+
     Text[] childs;
-    // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
     {
+        inputDelay = 0;
+        delayTime = 1.0f;
+        canRegister = true;
+        canEnterName = true;
+    }
+
+        // Start is called before the first frame update
+        void Start()
+    {
+        input = GameObject.Find("UduinoManager");
         childs = new Text[] {
             transform.GetChild(1).GetChild(2).GetComponent<Text >(),
             transform.GetChild(2).GetChild(2).GetComponent<Text >(),
@@ -25,6 +47,17 @@ public class InputNameControl : MonoBehaviour
     void Update()
     {
         DebugTest();
+        ControllerInputs();
+
+        if (inputDelay < delayTime)
+        {
+            inputDelay += Time.deltaTime;
+        }
+        else
+        {
+            inputDelay = 0;
+            canRegister = true;
+        }
     }
     private void DebugTest()
     {
@@ -37,6 +70,19 @@ public class InputNameControl : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.RightArrow))
             NextIndex();
 
+        if (Input.GetKeyDown(KeyCode.Return) && canEnterName)
+        {
+            string playerName = "" + alpha[initials[0]] + alpha[initials[1]] + alpha[initials[2]];
+
+            if (playerName.Equals("ASS") || playerName.Equals("AZZ"))
+            {
+                playerName = "***";
+            }
+
+            HighScoreManager._instance.CheckIfHighScore(MyGameInstance.instance.SongIndex, playerName, EndUIController.instance.finalScore);
+            charCounter = 1;
+            canEnterName = false;
+        }
     }
 
     public void NextIndex()
@@ -57,8 +103,8 @@ public class InputNameControl : MonoBehaviour
                 bCanShoose = false;
                 childs[iMaxIndex - 1].transform.parent.GetChild(0).gameObject.SetActive(false);
                 childs[iMaxIndex - 1].transform.parent.GetChild(1).gameObject.SetActive(false);
-                // Upload Data to the High Score Manager
             }
+            charCounter++;
         }
        
     }
@@ -83,6 +129,50 @@ public class InputNameControl : MonoBehaviour
                 initials[iCurrentIndex] = 25;
 
             childs[iCurrentIndex].text = alpha[initials[iCurrentIndex]].ToString() + ".";
+        }
+    }
+
+    public void ControllerInputs()
+    {
+        if(charCounter == 3)
+        {
+            canEnterName = true;
+        }
+
+        if (canRegister)
+        {
+            if (input.GetComponent<ArduinoInputScript>().buttons[nextID])
+            {
+                NextCharacter();
+                canRegister = false;
+            }
+
+            if (input.GetComponent<ArduinoInputScript>().buttons[prevID])
+            {
+                PreviousCharacter();
+                canRegister = false;
+            }
+
+            if (input.GetComponent<ArduinoInputScript>().buttons[enterID] && !canEnterName)
+            {
+                NextIndex();
+                canRegister = false;
+            }
+
+            if (input.GetComponent<ArduinoInputScript>().buttons[enterID] && canEnterName)
+            {
+                string playerName = "" + alpha[initials[0]] + alpha[initials[1]] + alpha[initials[2]];
+
+                if (playerName.Equals("ASS") || playerName.Equals("AZZ"))
+                {
+                    playerName = "***";
+                }
+
+                HighScoreManager._instance.CheckIfHighScore(MyGameInstance.instance.SongIndex, playerName, EndUIController.instance.finalScore);
+                charCounter = 1;
+                canRegister = false;
+                canEnterName = false;
+            }
         }
     }
 }
