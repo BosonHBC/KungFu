@@ -102,7 +102,7 @@ public class FightingManager : MonoBehaviour
 
         CreateObjects();
 
-        Invoke("StartGame", 2f);
+        Invoke("StartGame", 1f);
 
     }
 
@@ -158,7 +158,7 @@ public class FightingManager : MonoBehaviour
             , _canvasGo.transform.Find("Score").GetChild(0).GetComponent<Text>());
         hint = _canvasGo.transform.GetChild(8).GetComponent<ModeHint>();
         /// Characters 0-> player 1-> enemy
-
+        int rng = 1;
         for (int i = 0; i < 2; i++)
         {
             Character _character;
@@ -166,9 +166,12 @@ public class FightingManager : MonoBehaviour
                 _character = Instantiate(playerPrefabs[MyGameInstance.instance.PlayerCharacterIndex]);
             else
             {
-                int rng = (MyGameInstance.instance.PlayerCharacterIndex + Random.Range(1, 3)) % enemyPrefabs.Length;
+                rng = (MyGameInstance.instance.PlayerCharacterIndex + Random.Range(1, 3)) % enemyPrefabs.Length;
                 _character = Instantiate(enemyPrefabs[rng]);
             }
+            HPIconControl _HpBarControl = _canvasGo.GetComponentInChildren<HPIconControl>();
+            _HpBarControl.SetIconAndName(MyGameInstance.instance.PlayerCharacterIndex, rng);
+
             //Character _character = Instantiate(playerPrefabs[i]).GetComponent<Character>();
             characters[i] = _character;
             _character.transform.SetParent(playerReleventParent);

@@ -6,6 +6,19 @@ using Uduino;
 
 public class ArduinoInputScript : MonoBehaviour
 {
+    public static ArduinoInputScript instance;
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            DontDestroyOnLoad(gameObject);
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     internal bool[] buttons = new bool[11];
     private int NUMBUTTONS = 11;

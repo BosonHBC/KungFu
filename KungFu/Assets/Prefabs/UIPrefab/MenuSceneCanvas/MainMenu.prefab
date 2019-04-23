@@ -128,7 +128,7 @@ RectTransform:
   m_GameObject: {fileID: 656049305664327210}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.004501498, y: 0.004501497, z: 0.004501498}
   m_Children:
   - {fileID: 6239377571224688064}
   m_Father: {fileID: 0}
@@ -148,7 +148,7 @@ Canvas:
   m_GameObject: {fileID: 656049305664327210}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 2
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -321,6 +321,7 @@ GameObject:
   - component: {fileID: 2593406560626695982}
   - component: {fileID: 3350053386898202558}
   - component: {fileID: 1591517501469733503}
+  - component: {fileID: 959599691}
   m_Layer: 5
   m_Name: Tip1
   m_TagString: Untagged
@@ -389,6 +390,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Hit the controller to test your strength!
+--- !u!114 &959599691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805085707736334208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1444072598220754520
 GameObject:
   m_ObjectHideFlags: 0
@@ -830,6 +846,7 @@ GameObject:
   - component: {fileID: 3656535224371162201}
   - component: {fileID: 5199485146553248152}
   - component: {fileID: 1277458520229297611}
+  - component: {fileID: 263968613}
   m_Layer: 5
   m_Name: Tip5
   m_TagString: Untagged
@@ -898,6 +915,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: If your HP gets zero, you will surely die.
+--- !u!114 &263968613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2735676534189385370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &2973045703616666638
 GameObject:
   m_ObjectHideFlags: 0
@@ -1000,6 +1032,7 @@ GameObject:
   - component: {fileID: 7417899897891922508}
   - component: {fileID: 1052381445791160363}
   - component: {fileID: 1145907218755097721}
+  - component: {fileID: 178357313}
   m_Layer: 5
   m_Name: Tip4
   m_TagString: Untagged
@@ -1068,6 +1101,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Higher combo gives much higher scores!
+--- !u!114 &178357313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3575506625623774863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &4243971972393848790
 GameObject:
   m_ObjectHideFlags: 0
@@ -1189,6 +1237,7 @@ GameObject:
   - component: {fileID: 8887442625189883558}
   - component: {fileID: 4995462329307232424}
   - component: {fileID: 3811654341464052169}
+  - component: {fileID: 107366074}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -1257,6 +1306,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 'TIPS:'
+--- !u!114 &107366074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4387815241312633947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &4700185310065685006
 GameObject:
   m_ObjectHideFlags: 0
@@ -1698,6 +1762,7 @@ GameObject:
   - component: {fileID: 8176913559572028448}
   - component: {fileID: 8362452098433370529}
   - component: {fileID: 4202350105752017105}
+  - component: {fileID: 1730705860}
   m_Layer: 5
   m_Name: Tip2
   m_TagString: Untagged
@@ -1766,6 +1831,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Perfectly matching the beats gives more scores!
+--- !u!114 &1730705860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8152928880337233494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &8268479243313262622
 GameObject:
   m_ObjectHideFlags: 0
@@ -1876,6 +1956,7 @@ GameObject:
   - component: {fileID: 2412038024407300657}
   - component: {fileID: 6035614795455413927}
   - component: {fileID: 5123482031887462563}
+  - component: {fileID: 2027880894}
   m_Layer: 5
   m_Name: Tip3
   m_TagString: Untagged
@@ -1944,6 +2025,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Rectangle beats are COMBOs! Hit anywhere as fast as you can!
+--- !u!114 &2027880894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8274131673101889554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &8985971485139289526
 GameObject:
   m_ObjectHideFlags: 0

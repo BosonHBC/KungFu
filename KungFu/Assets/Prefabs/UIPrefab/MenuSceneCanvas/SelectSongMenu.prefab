@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5505113314851168214}
   - component: {fileID: 4109688083180155869}
   - component: {fileID: 7150038891609046371}
+  - component: {fileID: 1072830990}
   m_Layer: 0
   m_Name: 2nd
   m_TagString: Untagged
@@ -80,6 +81,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 2 nd
+--- !u!114 &1072830990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 83443086396797503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &261302515476591235
 GameObject:
   m_ObjectHideFlags: 0
@@ -215,6 +231,7 @@ GameObject:
   - component: {fileID: 6829552227522128649}
   - component: {fileID: 3028537900639692065}
   - component: {fileID: 6467451382240599958}
+  - component: {fileID: 1072830983}
   m_Layer: 0
   m_Name: 4th
   m_TagString: Untagged
@@ -284,6 +301,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 4 th
+--- !u!114 &1072830983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 915601566335138196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &958879435109939094
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,6 +327,7 @@ GameObject:
   - component: {fileID: 1653369882016381454}
   - component: {fileID: 3072421451066111693}
   - component: {fileID: 2225980880287852041}
+  - component: {fileID: 1767471986}
   m_Layer: 0
   m_Name: Value
   m_TagString: Untagged
@@ -363,6 +396,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 'Name: Score'
+--- !u!114 &1767471986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 958879435109939094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1158499643686226872
 GameObject:
   m_ObjectHideFlags: 0
@@ -414,6 +462,7 @@ GameObject:
   - component: {fileID: 4402050160974379766}
   - component: {fileID: 3148138335682345864}
   - component: {fileID: 503065987973199482}
+  - component: {fileID: 1898341329}
   m_Layer: 0
   m_Name: Value
   m_TagString: Untagged
@@ -482,6 +531,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 'Name: Score'
+--- !u!114 &1898341329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1934927889760436775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1957233044317345880
 GameObject:
   m_ObjectHideFlags: 0
@@ -493,6 +557,7 @@ GameObject:
   - component: {fileID: 5153431054080072657}
   - component: {fileID: 610734784557084291}
   - component: {fileID: 2290192919365161000}
+  - component: {fileID: 363462803}
   m_Layer: 0
   m_Name: Value
   m_TagString: Untagged
@@ -561,6 +626,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 'Name: Score'
+--- !u!114 &363462803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1957233044317345880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &2438644948433017224
 GameObject:
   m_ObjectHideFlags: 0
@@ -651,13 +731,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24e8ef885a7ea2842b70eb1709b364e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  songName: TightShip
+  songID: 1
   scoreTextBoxes:
   - {fileID: 1934927889760436775}
   - {fileID: 958879435109939094}
   - {fileID: 6792760918377690472}
   - {fileID: 3938259666234011412}
   - {fileID: 4884798341546204520}
+  resetSongScores: 0
 --- !u!1 &3012960132403179547
 GameObject:
   m_ObjectHideFlags: 0
@@ -669,6 +750,7 @@ GameObject:
   - component: {fileID: 3275696029502729100}
   - component: {fileID: 6820772007651142950}
   - component: {fileID: 4642100551792421073}
+  - component: {fileID: 1072830988}
   m_Layer: 0
   m_Name: 4th
   m_TagString: Untagged
@@ -738,6 +820,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 4 th
+--- !u!114 &1072830988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3012960132403179547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &3437532830601554240
 GameObject:
   m_ObjectHideFlags: 0
@@ -749,6 +846,7 @@ GameObject:
   - component: {fileID: 4308184163800513013}
   - component: {fileID: 6771832055311709750}
   - component: {fileID: 5854653770746246678}
+  - component: {fileID: 1072830984}
   m_Layer: 0
   m_Name: 3rd
   m_TagString: Untagged
@@ -818,6 +916,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 3 rd
+--- !u!114 &1072830984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3437532830601554240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &3505543072871378443
 GameObject:
   m_ObjectHideFlags: 0
@@ -829,6 +942,7 @@ GameObject:
   - component: {fileID: 4249722776954620336}
   - component: {fileID: 244770813866253203}
   - component: {fileID: 5265767287641213481}
+  - component: {fileID: 1072830987}
   m_Layer: 0
   m_Name: 5th
   m_TagString: Untagged
@@ -898,6 +1012,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 5 th
+--- !u!114 &1072830987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3505543072871378443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &3710377670663993306
 GameObject:
   m_ObjectHideFlags: 0
@@ -909,6 +1038,7 @@ GameObject:
   - component: {fileID: 1056155736358796713}
   - component: {fileID: 4165647796822324061}
   - component: {fileID: 854737976339268110}
+  - component: {fileID: 250017055}
   m_Layer: 0
   m_Name: Value
   m_TagString: Untagged
@@ -977,6 +1107,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 'Name: Score'
+--- !u!114 &250017055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3710377670663993306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &3821982669309355265
 GameObject:
   m_ObjectHideFlags: 0
@@ -988,6 +1133,7 @@ GameObject:
   - component: {fileID: 1803815754447487141}
   - component: {fileID: 4806257048826527272}
   - component: {fileID: 7228769637472405032}
+  - component: {fileID: 1376285074}
   m_Layer: 0
   m_Name: Value
   m_TagString: Untagged
@@ -1056,6 +1202,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 'Name: Score'
+--- !u!114 &1376285074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3821982669309355265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &3938259666234011412
 GameObject:
   m_ObjectHideFlags: 0
@@ -1067,6 +1228,7 @@ GameObject:
   - component: {fileID: 2789582036084399803}
   - component: {fileID: 8511898429298630553}
   - component: {fileID: 1195969489719935364}
+  - component: {fileID: 1522142046}
   m_Layer: 0
   m_Name: Value
   m_TagString: Untagged
@@ -1135,6 +1297,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 'Name: Score'
+--- !u!114 &1522142046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3938259666234011412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &4266531011849038090
 GameObject:
   m_ObjectHideFlags: 0
@@ -1463,6 +1640,7 @@ GameObject:
   - component: {fileID: 412050035194659527}
   - component: {fileID: 8682208076219078724}
   - component: {fileID: 231697067335449818}
+  - component: {fileID: 688404434}
   m_Layer: 0
   m_Name: Value
   m_TagString: Untagged
@@ -1531,6 +1709,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 'Name: Score'
+--- !u!114 &688404434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4884798341546204520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &5314744329985388699
 GameObject:
   m_ObjectHideFlags: 0
@@ -1580,6 +1773,7 @@ GameObject:
   - component: {fileID: 4587469536664691400}
   - component: {fileID: 4910381180604440997}
   - component: {fileID: 3301416947085365032}
+  - component: {fileID: 980271461}
   m_Layer: 0
   m_Name: Value
   m_TagString: Untagged
@@ -1648,6 +1842,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 'Name: Score'
+--- !u!114 &980271461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5705987530085286099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &6417794377232599752
 GameObject:
   m_ObjectHideFlags: 0
@@ -1659,6 +1868,7 @@ GameObject:
   - component: {fileID: 8651838914188047247}
   - component: {fileID: 8356012373646255303}
   - component: {fileID: 2421963977012088016}
+  - component: {fileID: 1072830989}
   m_Layer: 0
   m_Name: 3rd
   m_TagString: Untagged
@@ -1728,6 +1938,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 3 rd
+--- !u!114 &1072830989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6417794377232599752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &6741906331906692848
 GameObject:
   m_ObjectHideFlags: 0
@@ -1833,6 +2058,7 @@ GameObject:
   - component: {fileID: 9141133774599870199}
   - component: {fileID: 902479353114546557}
   - component: {fileID: 817982249701838711}
+  - component: {fileID: 440448776}
   m_Layer: 0
   m_Name: Value
   m_TagString: Untagged
@@ -1901,6 +2127,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 'Name: Score'
+--- !u!114 &440448776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6792760918377690472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &6959945963670784614
 GameObject:
   m_ObjectHideFlags: 0
@@ -1912,6 +2153,7 @@ GameObject:
   - component: {fileID: 6031026491719815984}
   - component: {fileID: 2351570693644176030}
   - component: {fileID: 8467174099170593768}
+  - component: {fileID: 1072830982}
   m_Layer: 0
   m_Name: 5th
   m_TagString: Untagged
@@ -1981,6 +2223,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 5 th
+--- !u!114 &1072830982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6959945963670784614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &7003403597990230274
 GameObject:
   m_ObjectHideFlags: 0
@@ -2160,6 +2417,7 @@ GameObject:
   - component: {fileID: 4778726179982357934}
   - component: {fileID: 1235624746754985629}
   - component: {fileID: 5983840981234980897}
+  - component: {fileID: 1072830991}
   m_Layer: 0
   m_Name: 1st
   m_TagString: Untagged
@@ -2229,6 +2487,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 1 st
+--- !u!114 &1072830991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7373641814235196195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &7381133125699041336
 GameObject:
   m_ObjectHideFlags: 0
@@ -2240,6 +2513,7 @@ GameObject:
   - component: {fileID: 6295535139157328858}
   - component: {fileID: 462913504883464364}
   - component: {fileID: 7667723701372836880}
+  - component: {fileID: 1311666401}
   m_Layer: 0
   m_Name: Value
   m_TagString: Untagged
@@ -2308,6 +2582,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 'Name: Score'
+--- !u!114 &1311666401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7381133125699041336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &7719061766114246829
 GameObject:
   m_ObjectHideFlags: 0
@@ -2421,8 +2710,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelectArrow:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 4499710179386141986}
+  - {fileID: 5314744329985388699}
   currentSongIndex: 0
 --- !u!1 &7777041172612452389
 GameObject:
@@ -2526,6 +2815,7 @@ GameObject:
   - component: {fileID: 2840475561047854344}
   - component: {fileID: 187478434008366390}
   - component: {fileID: 730038480783234464}
+  - component: {fileID: 1072830985}
   m_Layer: 0
   m_Name: 2nd
   m_TagString: Untagged
@@ -2595,6 +2885,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 2 nd
+--- !u!114 &1072830985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8023322002015225921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &8672465960402409475
 GameObject:
   m_ObjectHideFlags: 0
@@ -2685,13 +2990,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24e8ef885a7ea2842b70eb1709b364e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  songName: ARhythmicIntensity
+  songID: 0
   scoreTextBoxes:
   - {fileID: 3710377670663993306}
   - {fileID: 7381133125699041336}
   - {fileID: 3821982669309355265}
   - {fileID: 1957233044317345880}
   - {fileID: 5705987530085286099}
+  resetSongScores: 0
 --- !u!1 &8675711037472257464
 GameObject:
   m_ObjectHideFlags: 0
@@ -2703,6 +3009,7 @@ GameObject:
   - component: {fileID: 5655980714701049222}
   - component: {fileID: 473496576917246527}
   - component: {fileID: 8928160953943071378}
+  - component: {fileID: 1072830986}
   m_Layer: 0
   m_Name: 1st
   m_TagString: Untagged
@@ -2772,6 +3079,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 1 st
+--- !u!114 &1072830986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8675711037472257464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &8726418804605748174
 GameObject:
   m_ObjectHideFlags: 0
