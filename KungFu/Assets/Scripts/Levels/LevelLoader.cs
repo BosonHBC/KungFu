@@ -22,6 +22,8 @@ public class LevelLoader : MonoBehaviour
     private Text loadingFillText;
     [SerializeField] private float minimumWaitTime = 2f;
     private float collpaseTime;
+
+    private bool bStarting;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,13 +35,18 @@ public class LevelLoader : MonoBehaviour
     }
     public void LoadScene(string _name)
     {
-        MyGameInstance.instance.RestartGame();
-        if (SceneManager.GetSceneByName(_name) != null)
+        if (!bStarting)
         {
-            StartCoroutine(LoadAsynchronously(_name));
+            bStarting = true;
+            MyGameInstance.instance.RestartGame();
+            if (SceneManager.GetSceneByName(_name) != null)
+            {
+                StartCoroutine(LoadAsynchronously(_name));
+            }
+            else
+                Debug.LogError("No such scene called " + _name);
         }
-        else
-            Debug.LogError("No such scene called " + _name);
+
     }
 
     IEnumerator LoadAsynchronously(string _name)
@@ -68,6 +75,7 @@ public class LevelLoader : MonoBehaviour
             {
                 Debug.Log("Loading Done!");
                 asyncOperation.allowSceneActivation = true;
+                bStarting = false;
             }
             //FightingManager.instance.StartGame();
             yield return null;
