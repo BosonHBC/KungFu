@@ -38,7 +38,9 @@ public class LevelLoader : MonoBehaviour
         if (!bStarting)
         {
             bStarting = true;
-            MyGameInstance.instance.RestartGame();
+            //MyGameInstance.instance.RestartGame();
+            if(_name == "MenuScene")
+                MyGameInstance.instance.RestartGame();
             if (SceneManager.GetSceneByName(_name) != null)
             {
                 StartCoroutine(LoadAsynchronously(_name));
