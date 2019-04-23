@@ -118,7 +118,7 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _Scale_R: 0
-    - _ScanelineContrast: 0.5
+    - _ScanelineContrast: 1
     - _ScanelineDensity: 128
     - _ScanlineDensity: 256
     - _ShinnyAmount: 0.25
