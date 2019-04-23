@@ -1432,7 +1432,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 256567769}
-  m_LocalRotation: {x: 0.020151984, y: 0.71861964, z: -0.020842884, w: 0.6947988}
+  m_LocalRotation: {x: 0.020186642, y: 0.71863365, z: -0.020879641, w: 0.69478214}
   m_LocalPosition: {x: 3.0062313, y: -0.6621084, z: -3.2745788}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -2297,7 +2297,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 1707991230}
-  m_PathPosition: 3
+  m_PathPosition: 1
   m_PositionUnits: 0
   m_PathOffset: {x: 0, y: 0, z: 0}
   m_XDamping: 0
@@ -7355,11 +7355,12 @@ MonoBehaviour:
   vCam: {fileID: 1410858140}
   positions:
   - {fileID: 2046988459}
-  - {fileID: 1045563378}
-  - {fileID: 598299241}
   - {fileID: 1821816441}
+  - {fileID: 598299241}
+  - {fileID: 1045563378}
   ActualLookPoint: {fileID: 2010776734}
   fLerpTime: 1
+  bMoving: 0
 --- !u!4 &1393661355
 Transform:
   m_ObjectHideFlags: 0
@@ -7881,7 +7882,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1410858139}
-  m_LocalRotation: {x: 0.020151984, y: 0.71861964, z: -0.020842884, w: 0.6947988}
+  m_LocalRotation: {x: 0.020186642, y: 0.71863365, z: -0.020879641, w: 0.69478214}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -7909,7 +7910,7 @@ PrefabInstance:
     - target: {fileID: 4563925630903532278, guid: fedb6ed64f1b87d438a71c04f0532a39,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.87
+      value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: 4563925630903532278, guid: fedb6ed64f1b87d438a71c04f0532a39,
         type: 3}
@@ -8927,11 +8928,11 @@ MonoBehaviour:
   m_Waypoints:
   - position: {x: 0, y: 0, z: 0}
     roll: 0
-  - position: {x: -3.00623, y: 0, z: -3.2745793}
+  - position: {x: 3.006231, y: -0.6621084, z: -3.274579}
     roll: 0
   - position: {x: 0, y: 0, z: -6}
     roll: 0
-  - position: {x: 3.006231, y: -0.6621084, z: -3.274579}
+  - position: {x: -3.00623, y: 0, z: -3.2745793}
     roll: 0
   - position: {x: 0, y: 0, z: 0}
     roll: 0

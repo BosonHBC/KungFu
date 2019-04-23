@@ -10,9 +10,9 @@ public class TransitionControl : MonoBehaviour
     [SerializeField] Transform[] positions;
     [SerializeField] Transform ActualLookPoint;
     [SerializeField] float fLerpTime = 1f;
-    private int currentId = 3;
-
-    bool bMoving = false;
+    private int currentId = 1;
+    [HideInInspector]
+    public bool bMoving = false;
     // Start is called before the first frame update
     void Start()
     {

@@ -126,7 +126,9 @@ public class MenuCanvasControl : MonoBehaviour
     }
     void PageLeft()
     {
-        CanvasMove.MoveMenu(1);
+        if (CanvasMove.bMoving)
+            return;
+        CanvasMove.MoveMenu(-1);
         CurrentCanvas -= 1;
         if (CurrentCanvas < 0)
             CurrentCanvas = 3;
@@ -138,7 +140,9 @@ public class MenuCanvasControl : MonoBehaviour
 
     void PageRight()
     {
-        CanvasMove.MoveMenu(-1);
+        if (CanvasMove.bMoving)
+            return;
+        CanvasMove.MoveMenu(1);
         CurrentCanvas = (CurrentCanvas + 1) % 4;
 
         audioSource.PlayOneShot(CanvasChange);

@@ -121,6 +121,8 @@ public class MyGameInstance : MonoBehaviour
 
         perfectCount = 0;
         okCount = 0;
+        PlayerCharacterIndex = 0;
+        SongIndex = 0;
 
     }
     public void StartGame()

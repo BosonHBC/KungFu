@@ -87,4 +87,8 @@ public class ArduinoInputScript : MonoBehaviour
 
 
     }
+    private void OnDisable()
+    {
+        com7.Close();
+    }
 }

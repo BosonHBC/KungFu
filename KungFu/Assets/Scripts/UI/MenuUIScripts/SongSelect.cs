@@ -36,4 +36,9 @@ public class SongSelect : MonoBehaviour
             MyGameInstance.instance.SongIndex = currentSongIndex;
         }
     }
+    private void OnDisable()
+    {
+        MenuCanvasControl.OnSelectLeft -= SongSelectLeft;
+        MenuCanvasControl.OnSelectRight -= SongSelectRight;
+    }
 }
