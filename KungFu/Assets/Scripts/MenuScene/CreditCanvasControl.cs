@@ -10,14 +10,13 @@ public class CreditCanvasControl : MonoBehaviour
     }
     void OnCreditCanvasEnter(MenuCanvasControl.MenuCanvas canvasIndex)
     {
-        if(canvasIndex == MenuCanvasControl.MenuCanvas.Credits)
-        {
-            GetComponent<Animator>().Play("CreditMove");
-        }
+        //if(canvasIndex == MenuCanvasControl.MenuCanvas.Credits)
+        //{
+        //    GetComponent<Animator>().Play("CreditMove");
+        //}
     }
     private void OnDisable()
     {
         MenuCanvasControl.OnCanvasChange -= OnCreditCanvasEnter;
-
     }
 }
