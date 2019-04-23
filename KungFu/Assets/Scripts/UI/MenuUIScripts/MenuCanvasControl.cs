@@ -71,9 +71,13 @@ public class MenuCanvasControl : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            audioSource.PlayOneShot(GameStart);
-            Camera.main.GetComponent<AudioSource>().Pause();
-            MyGameInstance.instance.StartGame();
+            if (CurrentCanvas == (int)MenuCanvas.CharacterSelect || CurrentCanvas == (int)MenuCanvas.SongSelect)
+            {
+                audioSource.PlayOneShot(GameStart);
+                Camera.main.GetComponent<AudioSource>().Pause();
+                MyGameInstance.instance.StartGame();
+            }
+            
         }
         if(isInCoolDown)
         {
@@ -99,9 +103,12 @@ public class MenuCanvasControl : MonoBehaviour
                     switch (i)
                     {
                         case 0:
-                            audioSource.PlayOneShot(GameStart);
-                            Camera.main.GetComponent<AudioSource>().Pause();
-                            MyGameInstance.instance.StartGame();
+                            if(CurrentCanvas == (int)MenuCanvas.CharacterSelect || CurrentCanvas == (int)MenuCanvas.SongSelect)
+                            {
+                                audioSource.PlayOneShot(GameStart);
+                                Camera.main.GetComponent<AudioSource>().Pause();
+                                MyGameInstance.instance.StartGame();
+                            }
                             break;
                         case 1:
                             PageLeft();
