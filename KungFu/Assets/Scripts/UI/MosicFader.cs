@@ -12,14 +12,24 @@ public class MosicFader : MonoBehaviour
     void Start()
     {
         m_renderer = GetComponent<Image>();
-        m_Mosic = new Material(Shader.Find("RyanShader/Rs_MosaicUI"));
-        m_renderer.material = m_Mosic;
+        //m_Mosic = new Material(Shader.Find("RyanShader/Rs_MosaicUI"));
+        //m_renderer.material = m_Mosic;
     }
 
     public void FadeTo(float _result, float _time, UnityAction _onFihishFade = null)
     {
-        StartCoroutine(FadeMosic(m_Mosic.GetFloat("_FadeOut"),_result, _time, _onFihishFade));
+        // StartCoroutine(FadeMosic(m_Mosic.GetFloat("_FadeOut"),_result, _time, _onFihishFade));
+        m_renderer.CrossFadeAlpha(_result, _time, false);
+        StartCoroutine(OnFinishDelay(_time, _onFihishFade));
     }
+
+    IEnumerator OnFinishDelay(float _time, UnityAction _onFihishFade = null)
+    {
+        yield return new WaitForSeconds(_time);
+        if (_onFihishFade != null)
+            _onFihishFade.Invoke();
+    }
+
 
     IEnumerator FadeMosic(float _start, float _end, float _fadeTime = 0.5f, UnityAction _onFihishFade = null)
     {
@@ -41,7 +51,7 @@ public class MosicFader : MonoBehaviour
 
             yield return new WaitForEndOfFrame();
         }
-        if (_onFihishFade!=null)
+        if (_onFihishFade != null)
             _onFihishFade.Invoke();
 
     }
