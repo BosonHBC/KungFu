@@ -27,7 +27,7 @@ public class InputNameControl : MonoBehaviour
     private void Awake()
     {
         inputDelay = 0;
-        delayTime = 1.0f;
+        delayTime = .75f;
         canRegister = true;
         canEnterName = true;
     }
@@ -134,7 +134,7 @@ public class InputNameControl : MonoBehaviour
 
     public void ControllerInputs()
     {
-        if(charCounter == 3)
+        if(charCounter == 4)
         {
             canEnterName = true;
         }
