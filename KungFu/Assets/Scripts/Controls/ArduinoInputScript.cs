@@ -20,9 +20,9 @@ public class ArduinoInputScript : MonoBehaviour
         }
     }
 
-    internal bool[] buttons = new bool[11];
-    private int NUMBUTTONS = 11;
-    private string outputString = "00000000000";
+    internal bool[] buttons = new bool[7]; //Needs to be the number of inputs
+    private int NUMBUTTONS = 7; //Needs to be the number of inputs
+    private string outputString = "0000000"; //Needs to be the number of inputs
 
     [SerializeField] bool bDebugPrintInput;
 
@@ -62,7 +62,7 @@ public class ArduinoInputScript : MonoBehaviour
         //Arduino having issues not sending all 11 buttons sometimes(once every few seconds but sends info every 5 ms shouldnt have any issues in human timescales lol)
         if (input.Length < NUMBUTTONS)
         {
-            input = "00000000000";
+            input = "0000000";
         }
 
         for (int i = 0; i < NUMBUTTONS; i++)
