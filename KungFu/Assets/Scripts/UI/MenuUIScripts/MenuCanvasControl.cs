@@ -16,6 +16,7 @@ public class MenuCanvasControl : MonoBehaviour
     AudioSource audioSource;
     //0 Main, 1 Character Select, 2 Song Select, 3 Credits
     public int CurrentCanvas = 1;
+    public UIImageBlink GameStartBlink;
     public AudioClip CanvasChange;
     public AudioClip OptionSwitch;
     public AudioClip GameStart;
@@ -27,6 +28,8 @@ public class MenuCanvasControl : MonoBehaviour
 
     float ArduinoCoolDownTimer = 0.0f;
     float ArduinoCoolDownTime = 0.5f;
+    bool [] MenuVisited;
+    bool canStartGame = false;
     bool isInCoolDown = false;
     Dictionary<MenuCanvas, string[]> CanvasText;
     // Start is called before the first frame update
@@ -41,6 +44,8 @@ public class MenuCanvasControl : MonoBehaviour
             {MenuCanvas.SongSelect, new string[] {"CHARACTERS", "CREDITS" } },
             {MenuCanvas.Credits, new string[] {"SONGS", "TUTORIAL" } },
         };
+        MenuVisited = new bool[CanvasText.Count];
+
     }
 
     // Update is called once per frame
@@ -71,7 +76,7 @@ public class MenuCanvasControl : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            if (CurrentCanvas == (int)MenuCanvas.CharacterSelect || CurrentCanvas == (int)MenuCanvas.SongSelect)
+            if (canStartGame)
             {
                 audioSource.PlayOneShot(GameStart);
                 Camera.main.GetComponent<AudioSource>().Pause();
@@ -103,7 +108,7 @@ public class MenuCanvasControl : MonoBehaviour
                     switch (i)
                     {
                         case 0:
-                            if(CurrentCanvas == (int)MenuCanvas.CharacterSelect || CurrentCanvas == (int)MenuCanvas.SongSelect)
+                            if(canStartGame)
                             {
                                 audioSource.PlayOneShot(GameStart);
                                 Camera.main.GetComponent<AudioSource>().Pause();
@@ -113,7 +118,7 @@ public class MenuCanvasControl : MonoBehaviour
                         case 1:
                             PageLeft();
                             break;
-                        case 3:
+                        case 4:
                             OnSelectLeft?.Invoke((MenuCanvas)CurrentCanvas);
                             audioSource.PlayOneShot(OptionSwitch);
                             break;
@@ -121,7 +126,7 @@ public class MenuCanvasControl : MonoBehaviour
                             OnSelectRight?.Invoke((MenuCanvas)CurrentCanvas);
                             audioSource.PlayOneShot(OptionSwitch);
                             break;
-                        case 7:
+                        case 2:
                             PageRight();
                             break;
                         default:
@@ -152,9 +157,21 @@ public class MenuCanvasControl : MonoBehaviour
         CanvasMove.MoveMenu(1);
         CurrentCanvas = (CurrentCanvas + 1) % 4;
 
+        MenuVisited[CurrentCanvas] = true;
+        if (DataUtility.AllTrue(MenuVisited))
+            CanStartGame();
         audioSource.PlayOneShot(CanvasChange);
         TopMenuText[0].text = CanvasText[(MenuCanvas)CurrentCanvas][0];
         TopMenuText[1].text = CanvasText[(MenuCanvas)CurrentCanvas][1];
         OnCanvasChange?.Invoke((MenuCanvas)CurrentCanvas);
+    }
+
+    void CanStartGame()
+    {
+        if(!GameStartBlink.enabled)
+        {
+            GameStartBlink.enabled = true;
+            canStartGame = true;
+        }
     }
 }

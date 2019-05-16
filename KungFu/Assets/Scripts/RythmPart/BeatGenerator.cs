@@ -58,15 +58,11 @@ public class BeatGenerator : MonoBehaviour
         {
             {0, KeyCode.Y },
             {1, KeyCode.Q },
-            {2, KeyCode.S },
-            {3, KeyCode.E },
-            {4, KeyCode.N },
-            {5, KeyCode.U },
-            {6, KeyCode.K },
-            {7, KeyCode.O },
-            {8, KeyCode.V },
-            {9, KeyCode.B },
-            {10, KeyCode.G }
+            {2, KeyCode.P },
+            {3, KeyCode.G },
+            {4, KeyCode.Z },
+            {5, KeyCode.M },
+            {6, KeyCode.B }
         };
 
         beatQueue = new Queue<BeatHitObject>();
