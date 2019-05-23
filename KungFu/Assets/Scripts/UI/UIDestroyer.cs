@@ -13,7 +13,7 @@ public class UIDestroyer : MonoBehaviour
     private void Start()
     {
         fader = GetComponent<MosicFader>();
-        particle = transform.GetChild(12).GetComponent<DestroyParticle>();
+        particle = GetComponentInChildren<DestroyParticle>();
 
     }
 
