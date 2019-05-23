@@ -25,7 +25,7 @@ void loop(void) {
   String myString = "";
 
   // the analog reading from the FSR resistor divider
-  if (analogRead(button01) >= ThreshHold-75) {
+  if (analogRead(button01) >= ThreshHold-100) {
     myString += "1";
   }
   else
@@ -33,7 +33,7 @@ void loop(void) {
     myString += "0";
   }
 
-  if (analogRead(button02) >= ThreshHold || analogRead(button03) >= ThreshHold || analogRead(button04) >= ThreshHold-50) {
+  if (analogRead(button02) >= ThreshHold || analogRead(button03) >= ThreshHold||analogRead(button04) >= ThreshHold+75) {
     myString += "1";
   }
   else
@@ -41,7 +41,7 @@ void loop(void) {
     myString += "0";
   }
 
-  if (analogRead(button05) >= ThreshHold+50||analogRead(button06) >= ThreshHold+50||analogRead(button07) >= ThreshHold) {
+  if (analogRead(button05) >= ThreshHold+50||analogRead(button06) >= ThreshHold+50||analogRead(button07) >= ThreshHold+50) {
     myString += "1";
   }
   else
@@ -73,7 +73,7 @@ void loop(void) {
     myString += "0";
   }
 
-  if (analogRead(button11) >= ThreshHold||analogRead(button12) >= ThreshHold||analogRead(button13) >= ThreshHold) {
+  if (analogRead(button11) >= ThreshHold||analogRead(button12) >= ThreshHold-50||analogRead(button13) >= ThreshHold) {
     myString += "1";
   }
   else
