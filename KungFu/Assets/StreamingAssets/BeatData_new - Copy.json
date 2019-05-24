@@ -1,0 +1,178 @@
+{
+  "BeatData": [
+    {
+      "BeatID": 0,
+      "ButtonID": [
+        0
+      ],
+      "JointID": [
+        0
+      ],
+      "Mode": "Attack",
+      "IsCombo": false,
+      "OKStart": 0.417,
+      "OKDuration": 0.267,
+      "PerfectStart": 0.5,
+      "PerfectDuration": 0.1,
+      "KnockBack_H": 0.0,
+      "KnockBack_V": 1.0
+    },
+    {
+      "BeatID": 1,
+      "ButtonID": [
+        3
+      ],
+      "JointID": [
+        1
+      ],
+      "Mode": "Attack",
+      "IsCombo": false,
+      "OKStart": 0.167,
+      "OKDuration": 0.433,
+      "PerfectStart": 0.333,
+      "PerfectDuration": 0.1,
+      "KnockBack_H": -0.5,
+      "KnockBack_V": 1.0
+    },
+    {
+      "BeatID": 2,
+      "ButtonID": [
+        4
+      ],
+      "JointID": [
+        4
+      ],
+      "Mode": "Attack",
+      "IsCombo": false,
+      "OKStart": 0.5,
+      "OKDuration": 0.467,
+      "PerfectStart": 0.683,
+      "PerfectDuration": 0.1,
+      "KnockBack_H": 0.0,
+      "KnockBack_V": 1.0
+    },
+    {
+      "BeatID": 3,
+      "ButtonID": [
+        5
+      ],
+      "JointID": [
+        2
+      ],
+      "Mode": "Attack",
+      "IsCombo": false,
+      "OKStart": 0.167,
+      "OKDuration": 0.433,
+      "PerfectStart": 0.333,
+      "PerfectDuration": 0.1,
+      "KnockBack_H": 0.5,
+      "KnockBack_V": 1.0
+    },
+    {
+      "BeatID": 4,
+      "ButtonID": [
+        0,
+        3
+      ],
+      "JointID": [
+        0,
+        4
+      ],
+      "Mode": "Attack",
+      "IsCombo": false,
+      "OKStart": 0.417,
+      "OKDuration": 0.366,
+      "PerfectStart": 0.5,
+      "PerfectDuration": 0.2,
+      "KnockBack_H": -1.0,
+      "KnockBack_V": -1.0
+    },
+    {
+      "BeatID": 5,
+      "ButtonID": [
+        1
+      ],
+      "JointID": [
+        1
+      ],
+      "Mode": "Defend",
+      "IsCombo": false,
+      "OKStart": 0.417,
+      "OKDuration": 0.333,
+      "PerfectStart": 0.533,
+      "PerfectDuration": 0.1,
+      "KnockBack_H": -1.0,
+      "KnockBack_V": 0.0
+    },
+    {
+      "BeatID": 6,
+      "ButtonID": [
+        2
+      ],
+      "JointID": [
+        1
+      ],
+      "Mode": "Defend",
+      "IsCombo": false,
+      "OKStart": 0.2,
+      "OKDuration": 0.3,
+      "PerfectStart": 0.3,
+      "PerfectDuration": 0.1,
+      "KnockBack_H": -1.0,
+      "KnockBack_V": 0.65
+    },
+    {
+      "BeatID": 7,
+      "ButtonID": [
+        6
+      ],
+      "JointID": [
+        2
+      ],
+      "Mode": "Defend",
+      "IsCombo": false,
+      "OKStart": 0.2,
+      "OKDuration": 0.3,
+      "PerfectStart": 0.3,
+      "PerfectDuration": 0.1,
+      "KnockBack_H": 0.67,
+      "KnockBack_V": 1.0
+    },
+    {
+      "BeatID": 8,
+      "ButtonID": [
+        1,
+        2
+      ],
+      "JointID": [
+        1,
+        2
+      ],
+      "Mode": "Defend",
+      "IsCombo": false,
+      "OKStart": 0.55,
+      "OKDuration": 0.5,
+      "PerfectStart": 0.75,
+      "PerfectDuration": 0.1,
+      "KnockBack_H": -1.0,
+      "KnockBack_V": -1.0
+    },
+    {
+      "BeatID": 9,
+      "ButtonID": [
+        10
+      ],
+      "JointID": [
+        3
+      ],
+      "Mode": "Attack",
+      "IsCombo": true,
+      "OKStart": 0.0,
+      "OKDuration": 2.0,
+      "PerfectStart": 0.0,
+      "PerfectDuration": 2.0,
+      "KnockBack_H": 0.0,
+      "KnockBack_V": -1.0
+    }
+  ]
+}
