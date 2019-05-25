@@ -109,6 +109,8 @@ public class MyGameInstance : MonoBehaviour
     }
     public bool[] GetArduinoInput()
     {
+        if (buttonInput == null)
+            return new bool[7] { false, false, false, false, false, false, false };
         return buttonInput;
     }
 

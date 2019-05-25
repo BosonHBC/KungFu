@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class InputNameControl : MonoBehaviour
 {
-    private GameObject input;
     private int charCounter = 1;
     public bool bCanShoose;
     private int iMaxIndex = 3;
@@ -13,9 +12,9 @@ public class InputNameControl : MonoBehaviour
     private int[] initials = { 0, 0, 0 };
     char[] alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
 
-    private int enterID = 10;
+    private int enterID = 6;
     private int prevID = 0;
-    private int nextID = 4;
+    private int nextID = 3;
 
     private bool canRegister;
     private bool canEnterName;
@@ -35,7 +34,6 @@ public class InputNameControl : MonoBehaviour
         // Start is called before the first frame update
         void Start()
     {
-        input = GameObject.Find("UduinoManager");
         childs = new Text[] {
             transform.GetChild(1).GetChild(2).GetComponent<Text >(),
             transform.GetChild(2).GetChild(2).GetComponent<Text >(),
@@ -141,25 +139,26 @@ public class InputNameControl : MonoBehaviour
 
         if (canRegister)
         {
-            if (input.GetComponent<ArduinoInputScript>().buttons[nextID])
+            bool[] buttons = MyGameInstance.instance.GetArduinoInput();
+            if (buttons[nextID])
             {
                 NextCharacter();
                 canRegister = false;
             }
 
-            if (input.GetComponent<ArduinoInputScript>().buttons[prevID])
+            if (buttons[prevID])
             {
                 PreviousCharacter();
                 canRegister = false;
             }
 
-            if (input.GetComponent<ArduinoInputScript>().buttons[enterID] && !canEnterName)
+            if (buttons[enterID] && !canEnterName)
             {
                 NextIndex();
                 canRegister = false;
             }
 
-            if (input.GetComponent<ArduinoInputScript>().buttons[enterID] && canEnterName)
+            if (buttons[enterID] && canEnterName)
             {
                 string playerName = "" + alpha[initials[0]] + alpha[initials[1]] + alpha[initials[2]];
 
