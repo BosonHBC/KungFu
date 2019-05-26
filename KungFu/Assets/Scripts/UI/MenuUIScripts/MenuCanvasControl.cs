@@ -17,6 +17,8 @@ public class MenuCanvasControl : MonoBehaviour
     //0 Main, 1 Character Select, 2 Song Select, 3 Credits
     public int CurrentCanvas = 1;
     public UIImageBlink GameStartBlink;
+    public UIImageBlink[] SwitchBlink;
+    public UIImageBlink[] SelectBlink;
     public AudioClip CanvasChange;
     public AudioClip OptionSwitch;
     public AudioClip GameStart;
@@ -30,6 +32,7 @@ public class MenuCanvasControl : MonoBehaviour
     float ArduinoCoolDownTime = 0.5f;
     bool [] MenuVisited;
     bool canStartGame = false;
+    bool canSwitchBlink = true;
     bool isInCoolDown = false;
     Dictionary<MenuCanvas, string[]> CanvasText;
     // Start is called before the first frame update
@@ -140,10 +143,30 @@ public class MenuCanvasControl : MonoBehaviour
     {
         if (CanvasMove.bMoving)
             return;
+        //disable switch blink after first use
+        if (canSwitchBlink)
+        {
+            SwitchMenuBlink(false);
+            canSwitchBlink = false;
+        }
+        
+
         CanvasMove.MoveMenu(-1);
         CurrentCanvas -= 1;
         if (CurrentCanvas < 0)
             CurrentCanvas = 3;
+
+        //can start game only in select character and song menu.
+        if (CurrentCanvas == (int)MenuCanvas.CharacterSelect || CurrentCanvas == (int)MenuCanvas.SongSelect)
+        {
+            CanStartGame(true);
+            SelectButtonBlink(true);
+        }
+        else
+        {
+            CanStartGame(false);
+            SelectButtonBlink(false);
+        }
         audioSource.PlayOneShot(CanvasChange);
         TopMenuText[0].text = CanvasText[(MenuCanvas)CurrentCanvas][0];
         TopMenuText[1].text = CanvasText[(MenuCanvas)CurrentCanvas][1];
@@ -154,24 +177,55 @@ public class MenuCanvasControl : MonoBehaviour
     {
         if (CanvasMove.bMoving)
             return;
+
+        if(canSwitchBlink)
+        {
+            SwitchMenuBlink(false);
+            canSwitchBlink = false;
+        }
         CanvasMove.MoveMenu(1);
         CurrentCanvas = (CurrentCanvas + 1) % 4;
+        //can start game only in select character and song menu.
+        if (CurrentCanvas == (int)MenuCanvas.CharacterSelect || CurrentCanvas == (int)MenuCanvas.SongSelect)
+        {
+            CanStartGame(true);
+            SelectButtonBlink(true);
+        }
+        else
+        {
+            CanStartGame(false);
+            SelectButtonBlink(false);
+        }
 
-        MenuVisited[CurrentCanvas] = true;
-        if (DataUtility.AllTrue(MenuVisited))
-            CanStartGame();
+        //MenuVisited[CurrentCanvas] = true;
+        //if (DataUtility.AllTrue(MenuVisited))
+        //    CanStartGame(true);
         audioSource.PlayOneShot(CanvasChange);
         TopMenuText[0].text = CanvasText[(MenuCanvas)CurrentCanvas][0];
         TopMenuText[1].text = CanvasText[(MenuCanvas)CurrentCanvas][1];
         OnCanvasChange?.Invoke((MenuCanvas)CurrentCanvas);
     }
 
-    void CanStartGame()
+    void CanStartGame(bool i_start)
     {
-        if(!GameStartBlink.enabled)
+        GameStartBlink.Blink(i_start);
+        canStartGame = i_start;
+    }
+
+
+
+    void SwitchMenuBlink(bool blink)
+    {
+        foreach(var s in SwitchBlink)
         {
-            GameStartBlink.enabled = true;
-            canStartGame = true;
+            s.Blink(blink);
+        }
+    }
+    void SelectButtonBlink(bool blink)
+    {
+        foreach (var s in SelectBlink)
+        {
+            s.Blink(blink);
         }
     }
 }

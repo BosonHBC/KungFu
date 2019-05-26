@@ -5,28 +5,47 @@ using UnityEngine.UI;
 
 public class UIImageBlink : MonoBehaviour
 {
-    public Image ImageToBlink;
+    public Graphic GraphicToBlink;
     public float BlinkInterval;
     [Range(0.0f, 1.0f)]
     public float MinAlpha;
     [Range(0.5f, 1.0f)]
     public float MaxAlpha;
+    public bool BlinkOnStart = true;
+    bool canBlink;
+    
     // Start is called before the first frame update
     void Start()
     {
-        ImageToBlink.canvasRenderer.SetAlpha(MaxAlpha);
+        if (GraphicToBlink == null)
+            GraphicToBlink = GetComponent<Graphic>();
+        GraphicToBlink.canvasRenderer.SetAlpha(MaxAlpha);
+        
+        canBlink = BlinkOnStart;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(ImageToBlink.canvasRenderer.GetAlpha() >= MaxAlpha)
+        if(canBlink)
         {
-            ImageToBlink.CrossFadeAlpha(MinAlpha, BlinkInterval, false);
+            if (GraphicToBlink.canvasRenderer.GetAlpha() >= MaxAlpha)
+            {
+                GraphicToBlink.CrossFadeAlpha(MinAlpha, BlinkInterval, false);
+            }
+            else if (GraphicToBlink.canvasRenderer.GetAlpha() <= MinAlpha)
+            {
+                GraphicToBlink.CrossFadeAlpha(MaxAlpha, BlinkInterval, false);
+            }
         }
-        else if(ImageToBlink.canvasRenderer.GetAlpha() <= MinAlpha)
+    }
+
+    public void Blink(bool i_blink)
+    {
+        if(canBlink != i_blink)
         {
-            ImageToBlink.CrossFadeAlpha(MaxAlpha, BlinkInterval, false);
+            GraphicToBlink.canvasRenderer.SetAlpha(MaxAlpha);
+            canBlink = i_blink;
         }
     }
 }
