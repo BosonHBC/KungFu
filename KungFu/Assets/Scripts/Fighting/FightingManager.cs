@@ -358,7 +358,7 @@ public class FightingManager : MonoBehaviour
                 {
                     int _buttonID = (int)_attackAnimationID;
                     // Play Player Attack animation
-                    characters[0].GetComponent<PlayerAnimController>().PlayPlayerAttackAnimation(_attackAnimationID / 10f);
+                    characters[0].GetComponent<PlayerAnimController>().PlayPlayerAttackAnimation(_attackAnimationID);
                     // Give Damage to Enemy when damage was given to enemy
                     StartCoroutine(ie_DelayAttackScore(_buttonID));
                 }

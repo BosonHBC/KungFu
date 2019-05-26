@@ -10,6 +10,7 @@ public class PrepareSmb : BaseSmb
         BaseAnimController baseAnim =
 animator.gameObject.GetComponent<BaseAnimController>();
         baseAnim.LerpFromPrepareToFight();
+        animator.SetFloat("AttackID_f", -1f);
     }
 
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

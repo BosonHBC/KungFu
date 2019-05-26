@@ -14,7 +14,13 @@ public class BaseAnimController : MonoBehaviour
     }
     public void PlayPrepareFight()
     {
-        anim.SetFloat("AttackID_i", -0.5f);
+        anim.SetFloat("AttackID_f", -0.5f);
+    }
+
+    public void StopPlayPrepareFight()
+    {
+        anim.SetFloat("AttackID_f", -1f);
+
     }
     public void LerpFromPrepareToFight()
     {

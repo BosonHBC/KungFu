@@ -6,7 +6,8 @@ public class CleanIDSmb : BaseSmb
 {
     public override void OnStateEnter(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
-        animator.SetFloat("AttackID_i", -1);
+        animator.SetFloat("AttackID_f", -1);
+        animator.SetInteger("AttackID_i", -1);
         animator.SetInteger("DefenseID_i", -1);
     }
 }

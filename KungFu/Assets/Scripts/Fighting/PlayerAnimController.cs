@@ -26,13 +26,13 @@ public class PlayerAnimController : BaseAnimController
         {
             if (Input.GetKeyDown((KeyCode)(i + 48)))
             {
-                anim.SetFloat("Attack_Anim_ID", (i / 10f));
-                anim.SetFloat("AttackID_i", (i / 10f));
+               // anim.SetFloat("Attack_Anim_ID", (i / 10f));
+                anim.SetFloat("AttackID_i", (i / 3));
             }
             if (Input.GetKeyDown(KeyCode.Alpha0))
             {
-                anim.SetFloat("Attack_Anim_ID",0f);
-                anim.SetFloat("AttackID_i", (i / 10f));
+                //anim.SetFloat("Attack_Anim_ID",0f);
+                anim.SetFloat("AttackID_i", (i / 3));
             }
 
         }
@@ -41,8 +41,8 @@ public class PlayerAnimController : BaseAnimController
     public void PlayPlayerAttackAnimation(float _AttackID)
     {
         //Debug.Log("Anim ID: " + _AttackID);
-        anim.SetFloat("AttackID_i", _AttackID);
-        anim.SetFloat("Attack_Anim_ID", _AttackID);
+        anim.SetInteger("AttackID_i", (int)_AttackID);
+        anim.SetFloat("AttackID_f", _AttackID/3f);
     }
 
     public void PlayGuardAnimation(int _releativeAttackID)
@@ -55,7 +55,7 @@ public class PlayerAnimController : BaseAnimController
     {
         if (!bCombing)
         {
-            anim.SetFloat("AttackID_i", -2);
+            anim.SetFloat("AttackID_f", -2);
             bCombing = true;
             StartCoroutine(finishCombo(_combTime));
         }
