@@ -51,7 +51,7 @@ public class EndUIController : MonoBehaviour
             comboAwardScore += i * _comboAward;
         }
         Debug.Log("Combo Award Score: " + comboAwardScore);
-        iMaxScore = _numOfBeat * _PerfectScore + comboAwardScore;
+        iMaxScore = _numOfBeat * _PerfectScore;
         Debug.Log("ComboScore: " + _comboAllScore);
         //iMaxScore += _comboAllScore;
         finalScore = (_currentScore); //+ _comboAllScore);

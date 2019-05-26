@@ -26,8 +26,8 @@ public class Player : Character
     {
         base.Update();
         //DebugMovement();
-        if (Input.GetKeyDown(KeyCode.Z))
-            SwitchPerspectiveView();
+        //if (Input.GetKeyDown(KeyCode.Z))
+        //    SwitchPerspectiveView();
     }
     public void SwitchPerspectiveView()
     {

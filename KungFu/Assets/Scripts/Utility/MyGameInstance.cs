@@ -71,13 +71,13 @@ public class MyGameInstance : MonoBehaviour
             case HitResult.Perfect:
                 if (++iCombo >= iMaxCombo)
                     iMaxCombo = iCombo;
-                scores += (int)(iCombo * fComboAward + iPerfectScore);
+                scores += (int)(/*iCombo * fComboAward*/ + iPerfectScore);
                 perfectCount++;
                 break;
             case HitResult.Good:
                 if (++iCombo >= iMaxCombo)
                     iMaxCombo = iCombo;
-                scores += (int)(iCombo * fComboAward + iOkScore);
+                scores += (int)(/*iCombo * fComboAward*/ + iOkScore);
                 okCount++;
                 break;
             case HitResult.Combo:

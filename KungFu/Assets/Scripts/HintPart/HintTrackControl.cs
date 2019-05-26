@@ -165,19 +165,7 @@ public class HintTrackControl : MonoBehaviour
 
                     #region PlayParticle By triggering order
                     // Play particles
-                    int generatePosID = 0;
-                    if (butID == 0)
-                        generatePosID = 0;
-                    else if (butID > 0 && butID < 4)
-                        generatePosID = 3;
-                    else if (butID == 4)
-                        generatePosID = 2;
-                    else if (butID > 4 && butID < 8)
-                        generatePosID = 1;
-                    else if (butID >= 8 && butID <= 10)
-                        generatePosID = 4;
-
-                    PlayPerfectParticle(hintState, generatePosID);
+                    PlayPerfectParticle(hintState, butID);
                     #endregion
                     //Show Too early or late
                     if (hintState == HitResult.Good)
