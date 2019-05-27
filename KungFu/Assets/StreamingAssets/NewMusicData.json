@@ -4,8 +4,8 @@
             "charName": "Girl",
             "name": "BattleGirl_H",
             "lengthInSeconds": 152.00,
-            "numOfAnim": 105,
-            "numOfAttack": 44,
+            "numOfAnim": 120,
+            "numOfAttack": 54,
             "animArray": [
                 {
                     "timeToHit": 13.890,
@@ -168,7 +168,7 @@
                     "BeatID": 8
                 },
                 {
-                    "timeToHit": 65.200,
+                    "timeToHit": 66.200,
                     "BeatID": 9
                 },
                 {

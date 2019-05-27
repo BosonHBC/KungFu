@@ -330,7 +330,7 @@ public class FightingManager : MonoBehaviour
     {
         // 0 -> player, 1 -> enemy
         characters[_characterID].GetDamage(_dmgAmount, _attackDir);
-        Debug.Log(characters[_characterID].gameObject.name + " get hit.");
+        //Debug.Log(characters[_characterID].gameObject.name + " get hit.");
     }
 
     public void PlayerGuard(int releativeAttackID)

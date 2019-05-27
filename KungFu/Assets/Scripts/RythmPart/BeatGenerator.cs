@@ -67,7 +67,7 @@ public class BeatGenerator : MonoBehaviour
 
         beatQueue = new Queue<BeatHitObject>();
         levelLoader = FindObjectOfType<LevelLoader>();
-        
+
     }
 
     public void SetData(Transform _enemy, HintGenerator _generator, ResultControl _control, string songName = "BattleGirl_H")
@@ -135,6 +135,7 @@ public class BeatGenerator : MonoBehaviour
                         {
                             matchedButtons.Add(i, false);
                         }
+
                         beatQueue.Enqueue(
                             new BeatHitObject()
                             {
@@ -214,7 +215,18 @@ public class BeatGenerator : MonoBehaviour
                 if (DataUtility.DictionaryAllTrue(beatHitObject.MatchedButtons))
                 {
                     if (beatQueue.Count > 0)
-                        beatQueue.Dequeue();
+                    {
+                        if (beatHitObject == beatQueue.Peek())
+                        {
+                            //Debug.Log("aaaaaaaaaaa");
+                            //Debug.Log(beatTimer);
+                            //Debug.Log("match all dequeue supposed time:" + (beatHitObject.TimeToHit - beatHitObject.BeatTime.PerfectStart + beatHitObject.BeatTime.OKStart + beatHitObject.BeatTime.OKDuration));
+                            beatQueue.Dequeue();
+
+                        }
+                        else
+                            Debug.Log("asdsadsa");
+                    }
                 }
             }
         }
@@ -231,6 +243,7 @@ public class BeatGenerator : MonoBehaviour
             if (beatHitObject.BeatTime.IsCombo)
             {
                 resultControl.ShowCombo(beatHitObject.comboCount);
+                Debug.Log("Combo End");
             }
             else
             {
@@ -246,6 +259,8 @@ public class BeatGenerator : MonoBehaviour
                     }
                 }
             }
+            //Debug.Log(beatTimer);
+            //Debug.Log("miss check dequeue supposed time:" + (beatHitObject.TimeToHit - beatHitObject.BeatTime.PerfectStart + beatHitObject.BeatTime.OKStart + beatHitObject.BeatTime.OKDuration));
             beatQueue.Dequeue();
         }
     }
@@ -285,7 +300,10 @@ public class BeatGenerator : MonoBehaviour
         if (beatQueue.Count != 0)
         {
             var butInfo = beatQueue.Peek();
-            //Debug.Log(beatTimer);
+
+            //Debug.Log(butInfo.TimeToHit - butInfo.BeatTime.PerfectStart + butInfo.BeatTime.OKStart);
+            //Debug.Log(butInfo.TimeToHit - butInfo.BeatTime.PerfectStart + butInfo.BeatTime.OKStart + butInfo.BeatTime.OKDuration);
+
             foreach (var k in buttonMapping)
             {
                 if (beatTimer >= butInfo.TimeToHit - butInfo.BeatTime.PerfectStart + butInfo.BeatTime.OKStart && beatTimer <= butInfo.TimeToHit - butInfo.BeatTime.PerfectStart + butInfo.BeatTime.OKStart + butInfo.BeatTime.OKDuration)
@@ -311,6 +329,7 @@ public class BeatGenerator : MonoBehaviour
                             if (Input.GetKeyDown(k.Value))
                             {
                                 sfxControl.PlayRandomImpactSFX();
+
                                 matchButton(k.Key, butInfo);
                             }
                         }
@@ -325,6 +344,10 @@ public class BeatGenerator : MonoBehaviour
                     }
                 }
             }
+        }
+        else
+        {
+
         }
 
     }
