@@ -33,7 +33,7 @@ public class ArduinoInputScript : MonoBehaviour
     {
         //opens the port and sets the read timeout. The timeout should match the write timeout in the arduino sketch to remove data stream lag.
         com7.Open();
-        com7.ReadTimeout = 15;
+        com7.ReadTimeout = 10;
     }
 
     // Update is called once per frame
