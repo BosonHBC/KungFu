@@ -83,5 +83,5 @@ void loop(void) {
 
   Serial.println(myString);
   Serial.flush();
-  delay(5);
+  delay(10);
 }
