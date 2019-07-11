@@ -16,7 +16,7 @@ public class EndUIController : MonoBehaviour
     Animator anim;
     AnimationClip clip;
     AnimationEvent fillEvent;
-    float[] gradeOfScore = { 0.25f, 0.50f, 0.75f };
+    float[] gradeOfScore = { 0.33f, 0.75f };
     int iMaxScore;
     [SerializeField] Sprite[] gradeImgs;
     [SerializeField] Image fillImg;
@@ -24,7 +24,7 @@ public class EndUIController : MonoBehaviour
     [SerializeField] Image gradeImg;
     private float fillDuration = 1f;
     private float percentage;
-
+    
     [Header("Detail Score Field")]
     [SerializeField] private Text tx_PerfectCount;
     [SerializeField] private Text tx_OkCount;
@@ -44,17 +44,8 @@ public class EndUIController : MonoBehaviour
     {
         GetComponent<CanvasGroup>().alpha = 1;
 
-        // Calculate Max score
-        int comboAwardScore = 0;
-        for (int i = 0; i < _numOfBeat; i++)
-        {
-            comboAwardScore += i * _comboAward;
-        }
-        Debug.Log("Combo Award Score: " + comboAwardScore);
-        iMaxScore = _numOfBeat * _PerfectScore;
-        Debug.Log("ComboScore: " + _comboAllScore);
-        //iMaxScore += _comboAllScore;
-        finalScore = (_currentScore); //+ _comboAllScore);
+        iMaxScore = _numOfBeat * _PerfectScore + _comboAllScore/2;
+        finalScore = (_currentScore) + _comboAllScore;
         Debug.Log("Max Score: " + iMaxScore + " currentScore: " + finalScore);
 
         percentage = finalScore / (float)iMaxScore;
@@ -87,13 +78,9 @@ public class EndUIController : MonoBehaviour
         {
             gradeImg.sprite = gradeImgs[1];
         }
-        else if (percentage >= gradeOfScore[1] && percentage < gradeOfScore[2])
+        else if (percentage >= gradeOfScore[1])
         {
             gradeImg.sprite = gradeImgs[2];
-        }
-        else if (percentage >= gradeOfScore[2])
-        {
-            gradeImg.sprite = gradeImgs[3];
         }
     }
 

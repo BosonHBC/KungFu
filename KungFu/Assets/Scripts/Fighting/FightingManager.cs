@@ -53,6 +53,7 @@ public class FightingManager : MonoBehaviour
 
     private float fDmgToEnemyPerAttack;
     private int iAllowAttackCount = 30;
+    private AudioClip endSongClip;
     // Mapping, should be written in json data
     class AnimationData
     {
@@ -99,6 +100,8 @@ public class FightingManager : MonoBehaviour
         };
 
         fDmgToEnemyPerAttack = 200f / MyGameInstance.instance.GetComponent<DataLoader>().GetNumOfAttackByName(songNameData[MyGameInstance.instance.SongIndex]);
+
+        endSongClip = Resources.Load<AudioClip>("BGM/GameEnd");
 
         CreateObjects();
 
@@ -282,6 +285,10 @@ public class FightingManager : MonoBehaviour
         bFightOver = true;
         // Stop playing beat;
         GetComponent<BeatGenerator>().bCanPlay = false;
+        AudioSource _source = Camera.main.GetComponent<AudioSource>();
+        _source.Stop();
+        _source.clip = endSongClip;
+        _source.Play();
         // Switch to side view
         SwitchCamera(0);
         // Start play KO UI animation

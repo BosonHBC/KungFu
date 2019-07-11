@@ -6702,6 +6702,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 125
       objectReference: {fileID: 0}
+    - target: {fileID: 6536141363814868676, guid: 9aca687c7672c764cb78a7479210d6b4,
+        type: 3}
+      propertyPath: resetSongScores
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1943512973097041470, guid: 9aca687c7672c764cb78a7479210d6b4,
+        type: 3}
+      propertyPath: resetSongScores
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9aca687c7672c764cb78a7479210d6b4, type: 3}
 --- !u!224 &1073924385 stripped

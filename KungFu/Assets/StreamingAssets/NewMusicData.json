@@ -4,8 +4,8 @@
             "charName": "Girl",
             "name": "BattleGirl_H",
             "lengthInSeconds": 152.00,
-            "numOfAnim": 120,
-            "numOfAttack": 54,
+            "numOfAnim": 117,
+            "numOfAttack": 53,
             "animArray": [
                 {
                     "timeToHit": 13.890,

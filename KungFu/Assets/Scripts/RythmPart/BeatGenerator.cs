@@ -81,6 +81,8 @@ public class BeatGenerator : MonoBehaviour
         playerAnimCtrl = FightingManager.instance.characters[0].GetComponent<PlayerAnimController>();
         // Debug
         fSongLengthInSec = MyGameInstance.instance.GetComponent<DataLoader>().GetLenghOfSongByName(songName);
+        beatTimer = 0;
+
     }
 
     public void StartGenerateBeat()

@@ -33,7 +33,7 @@ void loop(void) {
     myString += "0";
   }
 
-  if (analogRead(button02) >= ThreshHold || analogRead(button03) >= ThreshHold||analogRead(button04) >= ThreshHold+75) {
+  if (analogRead(button02) >= ThreshHold -25|| analogRead(button03) >= ThreshHold-25||analogRead(button04) >= ThreshHold-15) {
     myString += "1";
   }
   else
@@ -41,7 +41,7 @@ void loop(void) {
     myString += "0";
   }
 
-  if (analogRead(button05) >= ThreshHold+50||analogRead(button06) >= ThreshHold+50||analogRead(button07) >= ThreshHold+50) {
+  if (analogRead(button05) >= ThreshHold||analogRead(button06) >= ThreshHold||analogRead(button07) >= ThreshHold) {
     myString += "1";
   }
   else
@@ -73,7 +73,7 @@ void loop(void) {
     myString += "0";
   }
 
-  if (analogRead(button11) >= ThreshHold||analogRead(button12) >= ThreshHold-50||analogRead(button13) >= ThreshHold) {
+  if (analogRead(button11) >= ThreshHold -125||analogRead(button12) >= ThreshHold-125||analogRead(button13) >= ThreshHold -125) {
     myString += "1";
   }
   else

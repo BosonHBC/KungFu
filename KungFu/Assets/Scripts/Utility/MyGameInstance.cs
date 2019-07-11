@@ -24,13 +24,15 @@ public class MyGameInstance : MonoBehaviour
     [SerializeField] private int iPerfectScore = 1000;
     [SerializeField] private int iOkScore = 800;
     [SerializeField] private int fComboAward;
-    [SerializeField] private int iComboFightScore = 500;
+    //[SerializeField] private int iComboFightScore = 500;
     [SerializeField] private ComboController comboText;
     [SerializeField] private Text scoreText;
     DataLoader loader;
     private int iComboFightCount;
     private int perfectCount;
     private int okCount;
+    // The extra scores that higher combo earns
+    private int comboAward;
 
     //Menu Select Data
     //[HideInInspector]
@@ -71,13 +73,16 @@ public class MyGameInstance : MonoBehaviour
             case HitResult.Perfect:
                 if (++iCombo >= iMaxCombo)
                     iMaxCombo = iCombo;
-                scores += (int)(/*iCombo * fComboAward*/ + iPerfectScore);
+                scores += iPerfectScore + iCombo * fComboAward;
                 perfectCount++;
+
+                comboAward += iCombo * fComboAward;
                 break;
             case HitResult.Good:
                 if (++iCombo >= iMaxCombo)
                     iMaxCombo = iCombo;
-                scores += (int)(/*iCombo * fComboAward*/ + iOkScore);
+                scores +=  iOkScore + iCombo * fComboAward;
+                comboAward += iCombo * fComboAward;
                 okCount++;
                 break;
             case HitResult.Combo:
@@ -120,7 +125,7 @@ public class MyGameInstance : MonoBehaviour
         misses = 0;
         iCombo = 0;
         iMaxCombo = 0;
-
+        comboAward = 0;
         perfectCount = 0;
         okCount = 0;
         PlayerCharacterIndex = 0;
@@ -143,8 +148,7 @@ public class MyGameInstance : MonoBehaviour
     public void CalcualteScore()
     {
         Debug.Log("Max Combo: " + iMaxCombo);
-        int overallComboFightScore = iComboFightScore * iComboFightCount;
-        EndUIController.instance.StartEndSession(loader.GetBeatNumByName("BattleGirl_H"), scores, iPerfectScore, fComboAward, iMaxCombo, overallComboFightScore);
+        EndUIController.instance.StartEndSession(loader.GetBeatNumByName("BattleGirl_H"), scores, iPerfectScore, fComboAward, iMaxCombo, comboAward);
         EndUIController.instance.SetData(scores, perfectCount, okCount, misses);
     }
 }

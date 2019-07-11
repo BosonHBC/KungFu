@@ -45,11 +45,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iPerfectScore: 1000
-  iOkScore: 500
-  fComboAward: 5
-  iComboFightScore: 500
+  iOkScore: 700
+  fComboAward: 6
   comboText: {fileID: 0}
   scoreText: {fileID: 0}
+  PlayerCharacterIndex: 0
+  SongIndex: 0
 --- !u!114 &764
 MonoBehaviour:
   m_ObjectHideFlags: 0
