@@ -1,16 +1,33 @@
 fileFormatVersion: 2
 guid: 77ae74d9becde754d8224ffdd6efdcf1
 ScriptedImporter:
-  fileIDToRecycleName:
-    2100000: Ground
-    2800000: Ground - baseColor
-    2800002: Ground - normal
-    2800004: Ground - metallic
-    2800006: Ground - ambientOcclusion
-    2800008: Ground - height
-    11400000: sbsar
-    11400002: graph0
+  internalIDToNameTable:
+  - first:
+      21: 2100000
+    second: Ground
+  - first:
+      28: 2800000
+    second: Ground - baseColor
+  - first:
+      28: 2800002
+    second: Ground - normal
+  - first:
+      28: 2800004
+    second: Ground - metallic
+  - first:
+      28: 2800006
+    second: Ground - ambientOcclusion
+  - first:
+      28: 2800008
+    second: Ground - height
+  - first:
+      114: 11400000
+    second: sbsar
+  - first:
+      114: 11400002
+    second: graph0
   externalObjects: {}
+  serializedVersion: 2
   userData: 
   assetBundleName: 
   assetBundleVariant: 
