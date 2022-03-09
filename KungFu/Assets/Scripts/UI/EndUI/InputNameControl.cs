@@ -20,6 +20,8 @@ public class InputNameControl : MonoBehaviour
     private bool canEnterName;
     private float inputDelay;
     private float delayTime;
+    public AudioClip onSaveClip;
+    private AudioSource source;
 
     Text[] childs;
 
@@ -31,14 +33,16 @@ public class InputNameControl : MonoBehaviour
         canEnterName = true;
     }
 
-        // Start is called before the first frame update
-        void Start()
+    // Start is called before the first frame update
+    void Start()
     {
         childs = new Text[] {
             transform.GetChild(1).GetChild(2).GetComponent<Text >(),
             transform.GetChild(2).GetChild(2).GetComponent<Text >(),
             transform.GetChild(3).GetChild(2).GetComponent<Text >()
         };
+
+        source = Camera.main.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -78,6 +82,7 @@ public class InputNameControl : MonoBehaviour
             }
 
             HighScoreManager._instance.CheckIfHighScore(MyGameInstance.instance.SongIndex, playerName, EndUIController.instance.finalScore);
+            source.PlayOneShot(onSaveClip);
             charCounter = 1;
             canEnterName = false;
         }
@@ -104,7 +109,7 @@ public class InputNameControl : MonoBehaviour
             }
             charCounter++;
         }
-       
+
     }
 
     public void NextCharacter()
@@ -132,7 +137,7 @@ public class InputNameControl : MonoBehaviour
 
     public void ControllerInputs()
     {
-        if(charCounter == 4)
+        if (charCounter == 4)
         {
             canEnterName = true;
         }
@@ -168,6 +173,7 @@ public class InputNameControl : MonoBehaviour
                 }
 
                 HighScoreManager._instance.CheckIfHighScore(MyGameInstance.instance.SongIndex, playerName, EndUIController.instance.finalScore);
+                source.PlayOneShot(onSaveClip);
                 charCounter = 1;
                 canRegister = false;
                 canEnterName = false;

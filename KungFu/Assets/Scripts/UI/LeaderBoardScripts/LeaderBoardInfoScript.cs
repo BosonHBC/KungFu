@@ -8,18 +8,13 @@ public class LeaderBoardInfoScript : MonoBehaviour
 
     public int songID;
     public GameObject[] scoreTextBoxes;
-    public bool resetSongScores;
 
     // Start is called before the first frame update
     void Awake()
     {
         UpdateScore();
-
-        if(resetSongScores)
-        {
-            HighScoreManager._instance.ClearLeaderBoard(songID);
-        }
     }
+
     public void UpdateScore()
     {
         int i = 0;
@@ -27,6 +22,15 @@ public class LeaderBoardInfoScript : MonoBehaviour
         {
             scoreTextBoxes[i].GetComponent<Text>().text = highScore.name + " - " + highScore.score;
             i++;
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F7))
+        {
+            Debug.Log("Cleared song: " + songID);
+            HighScoreManager._instance.ClearLeaderBoard(songID);
         }
     }
 

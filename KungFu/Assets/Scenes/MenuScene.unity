@@ -5019,7 +5019,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &764936096
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5365,7 +5365,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &861585846
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9883,6 +9883,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4137187703901433418, guid: 597da2383b61218438a0a0613387f64e,
+        type: 3}
+      propertyPath: m_Text
+      value: 'Tips: Focus on precision not strength. Don''t hurt yourself or the controller
+        :)'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 597da2383b61218438a0a0613387f64e, type: 3}
@@ -18743,7 +18749,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1793214520
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19396,7 +19402,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1848480184
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19596,7 +19602,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1862092174
 RectTransform:
   m_ObjectHideFlags: 0
@@ -31509,7 +31515,7 @@ MonoBehaviour:
   BlinkInterval: 0.8
   MinAlpha: 0.7
   MaxAlpha: 1
-  BlinkOnStart: 0
+  BlinkOnStart: 1
 --- !u!4 &6385829802254818700
 Transform:
   m_ObjectHideFlags: 0

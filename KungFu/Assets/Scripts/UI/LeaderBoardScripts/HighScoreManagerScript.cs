@@ -17,7 +17,7 @@ public class HighScoreManager : MonoBehaviour
 
     private static HighScoreManager m_instance;
     private bool isLarger;
-    private string[] songs = {"BattleGirl_H","Sailor_H"};
+    private string[] songs = { "BattleGirl_H", "Sailor_H" };
     private const int LeaderboardLength = 5;
 
     public static HighScoreManager _instance
@@ -43,8 +43,11 @@ public class HighScoreManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
-        HighScoreManager._instance.SaveHighScore("", 0, songs[0]);
-        HighScoreManager._instance.SaveHighScore("", 0, songs[1]);
+        for (int i = 0; i < 5; i++)
+        {
+            HighScoreManager._instance.SaveHighScore("", 0, songs[0]);
+            HighScoreManager._instance.SaveHighScore("", 0, songs[1]);
+        }
 
         isLarger = false;
     }
@@ -140,10 +143,10 @@ public class HighScoreManager : MonoBehaviour
     {
         foreach (Scores highScore in GetHighScore(songID))
         {
-             if (score >= highScore.score)
+            if (score >= highScore.score)
             {
-              isLarger = true;
-              break;
+                isLarger = true;
+                break;
             }
         }
 
